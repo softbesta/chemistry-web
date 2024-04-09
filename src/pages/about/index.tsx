@@ -1,5 +1,5 @@
 import useAppData from "../../hooks/useAppData"
-import './index.scss'
+import './styles.module.scss'
 
 const AboutPage = () => {
   const { count } = useAppData()

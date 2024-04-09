@@ -10,10 +10,13 @@
     "@types/node": "^16.18.93",
     "@types/react": "^18.2.73",
     "@types/react-dom": "^18.2.23",
+    "@types/sass": "^1.45.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
+    "react-interactive-tutorials": "^0.1.11",
     "react-router-dom": "^6.22.3",
+    "react-scripts": "5.0.1",
+    "typed-scss-modules": "^8.0.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -42,6 +45,9 @@
     ]
   },
   "devDependencies": {
-    "sass": "^1.74.1"
+    "css-loader": "^7.1.0",
+    "sass": "^1.74.1",
+    "sass-loader": "^14.1.1",
+    "style-loader": "^4.0.0"
   }
 }
