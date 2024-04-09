@@ -6,6 +6,7 @@ import ReactionZero from './pages/ReactionRates/zero';
 import ReactionFirst from './pages/ReactionRates/first';
 import { routes } from './constants';
 import CommonLayout from './layout/CommonLayout';
+import './App.css'
 
 function App() {
   return (
