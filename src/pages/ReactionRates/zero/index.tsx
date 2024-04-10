@@ -10,6 +10,7 @@ import { useEffect, useState } from "react"
 import ReactSlider from 'react-slider'
 import EnergyProfile from "../../../components/energyProfile"
 import { generateEnergyArray } from "../../../helper/functions"
+import ChartTime from "../../../components/chartTime"
 
 const totalDots = 190
 
@@ -41,15 +42,7 @@ const ReactionZero = () => {
     <button onClick={() => handletest1()}>Test222</button>
     <div className={styles.reactionContainer}>
       <EnergyProfile energyDots={energyDots} />
-      <div className={styles.timeContainer}>
-        <img
-          className={styles.timeImg}
-          src={ImgTime}
-          alt='Time'
-          height={180}
-          width={180}
-        />
-      </div>
+      <ChartTime />
       <div className={styles.barContainer}>
         <img
           className={styles.barImg}

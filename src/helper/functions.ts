@@ -5,7 +5,7 @@
 // count: array item count to be converted.
 // value: array item value to be converted.
 // count = 2, value = true, then result : example - [false, true, true, false, false, true]
-export const generateEnergyArray = (arr: any, count: any, value: boolean = true) => {
+export const generateEnergyArray = (arr: any, count: any) => {
   const arrNum: number[] = []
   const res = [...arr]
   let originCount = 0

@@ -1,0 +1,67 @@
+.chartTimeContainer {
+  display: flex;
+  background-color: aqua;
+  width: 240px;
+  height: 240px;
+  position: relative;
+
+  .timeImg {
+    position: absolute;
+    right: 0;
+  }
+}
+
+.chartTime {
+  position: absolute;
+  right: 0;
+}
+
+.sliceVertical {
+  position: absolute;
+  right: 190;
+  .vertical-slider {
+    height: 100px; // control this for vert length
+    width: 50px;
+    .example-track {
+      left: 22px;
+      width: 4px;
+    }
+    .example-thumb {
+      left: 1px;
+      width: 48px;
+      height: 20px;
+    }
+  }
+}
+.sliceHorizontal {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  .horizontal-slider {
+    width: 160px; // control this for horiz length
+    height: 50px;
+    .example-track {
+      top: 22px;
+      height: 4px;
+    }
+    .example-thumb {
+      width: 20px;
+      height: 50px;
+    }
+  }
+}
+
+.example-track {
+  position: relative;
+  background: black;
+}
+.example-thumb {
+  background-color: rgb(220, 84, 59);
+  cursor: pointer;
+  box-sizing: border-box;
+  border-radius: 8px;
+  &:focus-visible {
+    outline: 0;
+  }
+}
+

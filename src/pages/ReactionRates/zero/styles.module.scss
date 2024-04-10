@@ -8,32 +8,6 @@
   width: 100%;
 }
 
-.aqueousBox {
-  height: 200px;
-}
-
-.energyContainer {
-  display: flex;
-  position: relative;
-  background-color: chocolate;
-  width: 220px;
-
-  .energyImg {
-    position: absolute;
-  }
-}
-
-.timeContainer {
-  display: flex;
-  position: relative;
-  background-color: aqua;
-  width: 220px;
-
-  .timeImg {
-    position: absolute;
-  }
-}
-
 .barContainer {
   display: flex;
   position: relative;

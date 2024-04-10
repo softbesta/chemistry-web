@@ -5,14 +5,17 @@ import ImgEnergyOut from '../assets/ReactionRates/reaction_boxes/energy_out.png'
 import ImgEnergyDot from '../assets/ReactionRates/reaction_boxes/energyDot3.png'
 import styles from './energyProfile.module.scss'
 
-const EnergyDot = ({ value }: { value: number }) => {
-  return <img
-    className={styles.energyDot}
-    src={ImgEnergyDot}
-    alt='dot'
-    width={10}
-    height={10}
-  />
+const EnergyDot = ({ value }: { value: boolean }) => {
+  return value ?
+    <img
+      className={styles.energyDot}
+      src={ImgEnergyDot}
+      alt='dot'
+      width={10}
+      height={10}
+    />
+    :
+    <div className={styles.energyDot} />
 }
 
 const EnergyProfile = ({ energyDots }: { energyDots: boolean[] }) => {
@@ -28,17 +31,7 @@ const EnergyProfile = ({ energyDots }: { energyDots: boolean[] }) => {
       />
       <div className={styles.energyDotsContainer}>
         <div className={styles.energyDotsGrid}>
-          {energyDots.map((energy, index) => {
-            if (!energy) return <div className={styles.energyDot} key={index} />
-            return (<img
-              key={index}
-              className={styles.energyDot}
-              src={ImgEnergyDot}
-              alt='dot'
-              width={10}
-              height={10}
-            />)
-          })}
+          {energyDots.map((energy, index) => <EnergyDot key={index} value={energy} />)}
         </div>
       </div>
       <img
