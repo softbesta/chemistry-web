@@ -10,12 +10,12 @@ const ChartTime = () => {
   const [lockA, setLockA] = useState(false)
 
   const handleChangeA = (values: number[]) => {
-    // console.log({ value })
+    console.log({ values })
     !lockA && setConcentration(values[0])
   }
-  const handleChangeTime = (value: number[]) => {
-    // console.log({ time: value })
-    !lockA && setReactionTime(value[0])
+  const handleChangeTime = (values: number[]) => {
+    console.log({ time: values })
+    !lockA && setReactionTime(parseInt(values[0].toFixed(0)) / 10)
   }
 
   const drawChartTime = (ctx: CanvasRenderingContext2D) => {
@@ -58,7 +58,7 @@ const ChartTime = () => {
           thumbClassName={styles['example-thumb']}
           trackClassName={styles['example-track']}
           orientation="vertical"
-          value={[concentration, 50]}
+          value={[concentration, 100]}
           onChange={(values) => handleChangeA(values)}
           invert
           renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
@@ -75,13 +75,16 @@ const ChartTime = () => {
           className={styles['horizontal-slider']}
           thumbClassName={styles['example-thumb']}
           trackClassName={styles['example-track']}
-          value={[reactionTime, 50]}
+          value={[reactionTime * 10, 200]}
+          min={0}
+          max={200}
+          step={0.1}
           onChange={(values) => handleChangeTime(values)}
         // renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
         />
       </div>
       <div className={styles.textHoriz}>
-        <p>{`Time:`} {(reactionTime / 10).toFixed(2)}</p>
+        <p>{`Time:`} {reactionTime.toFixed(1)}</p>
       </div>
 
       <div className={styles.chartTime}>

@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import './styles.module.scss'
+import styles from './styles.module.scss'
 
 interface CommonLayoutProps {
   children: ReactNode,
@@ -8,8 +8,8 @@ interface CommonLayoutProps {
 const CommonLayout = ({
   children,
 }: CommonLayoutProps) => {
-  return <div>
-    <p>This is CommonLayout</p>
+  return <div className={styles.layout}>
+    {/* <p>This is CommonLayout</p> */}
     {children}
   </div>
 }

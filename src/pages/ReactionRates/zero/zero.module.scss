@@ -1,14 +1,19 @@
 .container {
-  color: red;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 150px;
 }
 
 .reactionDrawContainer {
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   flex-wrap: wrap;
   width: 100%;
   gap: 30px;
 }
+
 .reactionMathContainer {
   display: flex;
   flex-wrap: wrap;
