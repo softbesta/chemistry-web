@@ -10,8 +10,8 @@ import TutorialControl from "../../../components/tutorialControl"
 
 const ReactionZero = () => {
   const {
-    stepZero,
-    setStepZero,
+    stepPlay,
+    setStepPlay,
     concentration,
     setConcentration,
     reactionTime
@@ -39,17 +39,14 @@ const ReactionZero = () => {
   const exp4 = `\\[ 0.07 = 0.073(0.60)^0 \\]`
 
   return <div className={styles.container}>
-    This is ReactionZero
-    <button onClick={() => handletest()}>Test Energy</button>
-    <button onClick={() => handletest1()}>Test222</button>
-    <p>step: {stepZero}</p>
+    <p>step: {stepPlay}</p>
 
     <div className={styles.reactionDrawContainer}>
       <EnergyProfile />
       <ChartTime />
       <ChartBar />
     </div>
-    <div className={styles.reactionMathContainer}>
+    <div className={styles.reactionContentContainer}>
       <MathContent
         exp0={exp0} exp1={exp1} exp2={exp2} exp3={exp3} exp4={exp4}
       />

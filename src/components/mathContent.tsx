@@ -25,12 +25,11 @@ interface MathContentProps {
   exp4: string,
 }
 const MathContent = ({ exp0, exp1, exp2, exp3, exp4 }: MathContentProps) => {
-  // const num = 123
   const [num, setNum] = useState(10)
   const handleTest = () => {
     setNum(v => v + 10)
   }
-  return <div>
+  return <div className={styles.mathContentContainer}>
     <MathJaxContext config={config}>
       <MathJax
         className={styles.mathjax}

@@ -14,11 +14,11 @@
   gap: 30px;
 }
 
-.reactionMathContainer {
+.reactionContentContainer {
   display: flex;
-  flex-wrap: wrap;
   width: 100%;
   gap: 30px;
+  justify-content: space-around;
 }
 
 
