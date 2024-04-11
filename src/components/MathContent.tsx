@@ -28,19 +28,24 @@ const MathContent = ({ exp0, exp1, exp2, exp3, exp4 }: MathContentProps) => {
   return <div className={styles.mathContentContainer}>
     <MathJaxContext config={config}>
       <MathJax
+        id='tur_math1'
         className={styles.mathjax}
         dynamic
       >
         {`\\[ Rate = k = -\\frac{△c}{△t} = -\\frac{c_2 - c_1}{t_2 - t_1}\\]`}
       </MathJax>
       <MathJax
+        id='tur_math2'
         className={styles.mathjax}
         dynamic
       >
         {exp0}
         {/* {`\\[ Rate = 0.07 = -\\frac{-0.53}{7.28} = -\\frac{0.26 - 0.79}{19.40 - 12.12}\\]`} */}
       </MathJax>
-      <div className={styles.mathjaxRow1}>
+      <div
+        id='tur_math3'
+        className={styles.mathjaxRow1}
+      >
         <MathJax
           className={styles.mathjax}
           dynamic
@@ -56,7 +61,10 @@ const MathContent = ({ exp0, exp1, exp2, exp3, exp4 }: MathContentProps) => {
           {/* {`\\[ 11.46 = 1.68 / (2 x 0.07) \\]`} */}
         </MathJax>
       </div>
-      <div className={styles.mathjaxRow2}>
+      <div
+        id='tur_math4'
+        className={styles.mathjaxRow2}
+      >
         <MathJax
           className={styles.mathjax}
           dynamic

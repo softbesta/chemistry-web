@@ -1,7 +1,9 @@
 .menuContainer {
   position: absolute;
-  top: 0px;
-  left: -55px;
+  top: 30px;
+  left: 0px;
+  background: white;
+  z-index: 200;
 
   .menuIcon {
     // background-color: blueviolet;
@@ -22,18 +24,82 @@
 
     &.active {
       border-color: rgb(150, 150, 150);
+
       div {
         background-color: rgb(150, 150, 150);
       }
     }
   }
 
-  .menus {
-    opacity: 0;
+  .closeIcon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     transition: all 200ms;
+
+    div {
+      margin-top: 8px;
+      width: 25px;
+      height: 2px;
+      background-color: black;
+    }
+
+    &.active {
+      border-color: rgb(150, 150, 150);
+
+      div {
+        background-color: rgb(150, 150, 150);
+      }
+    }
+  }
+
+  .navPanel {
+    opacity: 0;
+    transition: all 500ms;
+    background-color: white;
+    width: 400px;
+    margin-left: -400px;
+    margin-top: -40px;
+    position: absolute;
+    border-top: 2px solid black;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
 
     &.active {
       opacity: 1;
+      margin-left: -50px;
+      margin-top: -40px;
+    }
+
+    .navContent {
+      display: flex;
+      padding: 10px 50px 10px 50px;
+
+      .navLinks {
+        width: 50px;
+        background-color: gray;
+      }
+
+      .navMenus {
+        padding-left: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .navMenuItem {
+          display: flex;
+          align-items: flex-end;
+
+          .imgChapter {
+            width: 50px;
+          }
+        }
+      }
     }
   }
 }

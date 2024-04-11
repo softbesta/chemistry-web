@@ -49,7 +49,7 @@ const ChartTime = () => {
 
   return (
     <div className={styles.chartTimeContainer}>
-      <button onClick={() => handleTest()}>TESTS</button>
+      {/* <button onClick={() => handleTest()}>TESTS</button> */}
 
       <div className={styles.sliceVerticalBar} />
       <div className={styles.sliceVertical}>
@@ -87,7 +87,10 @@ const ChartTime = () => {
         <p>{`Time:`} {reactionTime.toFixed(1)}</p>
       </div>
 
-      <div className={styles.chartTime}>
+      <div
+        id='tur_chartTime'
+        className={styles.chartTime}
+      >
         <Canvas draw={drawChartTime} height={222} width={222} />
       </div>
     </div>

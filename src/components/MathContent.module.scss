@@ -5,17 +5,20 @@
     display: flex;
     // gap: 20px;
     justify-content: space-around;
+    background: white;
   }
 
   .mathjaxRow2 {
     display: flex;
     // gap: 50px;
     justify-content: space-around;
+    background: white;
   }
 
   .mathjax {
     text-align: left;
-    margin: 10px 0;
+    padding: 10px 0;
+    background: white;
 
     mjx-container {
       text-align: left !important;

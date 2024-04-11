@@ -12,8 +12,8 @@ function App() {
   return (
     <CommonLayout>
       <Routes>
-        <Route path={routes.ch1_zero.path} index element={<ReactionZero />} />
-        <Route path={routes.ch1_first.path} element={<ReactionFirst />} />
+        <Route path={routes.zero.path} index element={<ReactionZero />} />
+        <Route path={routes.first.path} element={<ReactionFirst />} />
         <Route path='about' element={<AboutPage />} />
       </Routes>
     </CommonLayout>

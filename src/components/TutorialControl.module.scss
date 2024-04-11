@@ -14,6 +14,7 @@
       flex-direction: column;
       justify-content: space-between;
       max-width: 280px;
+      height: 250px;
 
       div:last-child {
         margin-top: 30px;
@@ -21,6 +22,9 @@
 
       span {
         color: rgb(220, 84, 59);
+      }
+      p {
+        margin: 0;
       }
     }
 
@@ -39,6 +43,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 4px;
+    position: relative;
 
     .prevBtn {
       border: none;

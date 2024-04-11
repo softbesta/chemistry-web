@@ -10,8 +10,8 @@ import TutorialControl from "../../../components/TutorialControl"
 
 const ReactionZero = () => {
   const {
-    stepPlay,
-    setStepPlay,
+    curStep: stepPlay,
+    setCurStep: setStepPlay,
     concentration,
     setConcentration,
     reactionTime
