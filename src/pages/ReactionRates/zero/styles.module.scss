@@ -2,11 +2,20 @@
   color: red;
 }
 
-.reactionContainer {
+.reactionDrawContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 30px;
+}
+.reactionMathContainer {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  gap: 30px;
 }
+
 
 .barContainer {
   display: flex;

@@ -1,0 +1,12 @@
+.chartBarContainer {
+  display: flex;
+  position: relative;
+  background-color: aquamarine;
+  width: 240px;
+  height: 240px;
+
+  .barImg {
+    position: absolute;
+    right: 0;
+  }
+}

@@ -1,46 +1,86 @@
 
-import ImgEnergy from '../assets/ReactionRates/reaction_boxes/energy.png'
-import ImgEnergyIn from '../assets/ReactionRates/reaction_boxes/energy_in.png'
-import ImgEnergyOut from '../assets/ReactionRates/reaction_boxes/energy_out.png'
-import ImgEnergyDot from '../assets/ReactionRates/reaction_boxes/energyDot3.png'
+import { useEffect, useState } from 'react'
+import { generateEnergyArray } from '../helper/functions'
+import Canvas from './Canvas'
 import styles from './energyProfile.module.scss'
+import useAppData from '../hooks/useAppData'
 
-const EnergyDot = ({ value }: { value: boolean }) => {
-  return value ?
-    <img
-      className={styles.energyDot}
-      src={ImgEnergyDot}
-      alt='dot'
-      width={10}
-      height={10}
-    />
-    :
-    <div className={styles.energyDot} />
+const dotColors = [
+  "rgba(0,0,255,0.1)",
+  "rgba(0,0,255,0.5)",
+  "rgba(255,0,0,0.5)",
+  "rgba(0,255,0,0.5)",
+]
+
+function beaker(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, radius: number, fillStyle: string, strokeStyle: string, lineWidth: number, offset: number) {
+  ctx.beginPath();
+  ctx.moveTo(x, y + radius);
+  ctx.arcTo(x, y + height, x + radius, y + height, radius);
+  ctx.arcTo(x + width - offset, y + height, x + width - offset, y + height - radius, radius);
+  ctx.lineTo(x + width - offset, y + radius);
+  ctx.lineTo(x + width, y + radius);
+  ctx.bezierCurveTo(width + 25, 30, width + 25, x, x + width, y);
+  ctx.lineTo(x, y);
+  ctx.bezierCurveTo(0, x, 0, 30, x, y + radius);
+  ctx.lineWidth = lineWidth;
+  ctx.lineTo(x, height);
+  ctx.strokeStyle = strokeStyle;
+  ctx.stroke();
+  ctx.fillStyle = fillStyle;
+  ctx.fill();
 }
 
-const EnergyProfile = ({ energyDots }: { energyDots: boolean[] }) => {
-  console.log({ energyDots })
+const EnergyProfile = () => {
+  const totalDots = 144
+  const [energyDots, setEnergyDots] = useState(Array.from({ length: totalDots }, () => Math.floor(Math.random() * 3)))
+  const { concentration } = useAppData()
+  // console.log({ concentration, energyDots })
+  useEffect(() => {
+    const update = generateEnergyArray(energyDots, concentration, 1, 2)
+    setEnergyDots(update)
+    // console.log({ update })
+  }, [concentration])
+
+  const drawBeaker = (ctx: CanvasRenderingContext2D) => {
+    const width = 206, height = 248
+    // parent beaker
+    beaker(ctx, 12, 12, width, height, 15, "lightgray", "black", 3, 0)
+    ctx.clip()
+    beaker(ctx, 12, 12, width - 10, height - 10, 15, "rgba(255,255,255,0.5)", "rgba(255,255,255,0.5)", 0.1, 15)
+    beaker(ctx, 12, 12, width - 20, height - 20, 15, "white", "white", 0.1, 20)
+    ctx.beginPath()
+    ctx.rect(12, 142, 210, 122)
+    ctx.fillStyle = "rgba(0,0,255,0.2)"
+    ctx.fill()
+    ctx.beginPath()
+    const delta = 15
+    const startPoint = 40
+    for (let y = startPoint; y < 140; y += delta) {
+      y === startPoint + delta * 3 ? ctx.moveTo(160, y) : ctx.moveTo(175, y)
+      ctx.lineTo(193, y)
+    }
+    ctx.strokeStyle = "black"
+    ctx.lineWidth = 0.5
+    ctx.stroke()
+    let count = 0
+    const startX = 17, startY = 150, t = 13
+    for (let i = 0; i < 9; i++) {
+      const yy = startY + i * t
+      for (let j = 0; j < 16; j++) {
+        ctx.beginPath()
+        const xx = startX + j * t
+        ctx.moveTo(xx, yy)
+        ctx.arc(xx, yy, 6, 0, 2 * Math.PI);
+        ctx.fillStyle = dotColors[energyDots[count]]
+        ctx.fill()
+        count++
+      }
+    }
+  };
+
   return (
     <div className={styles.energyContainer}>
-      <img
-        className={styles.energyImg}
-        src={ImgEnergyIn}
-        alt="Aqueous"
-        height={240}
-        width={220}
-      />
-      <div className={styles.energyDotsContainer}>
-        <div className={styles.energyDotsGrid}>
-          {energyDots.map((energy, index) => <EnergyDot key={index} value={energy} />)}
-        </div>
-      </div>
-      <img
-        className={styles.energyImg}
-        src={ImgEnergyOut}
-        alt="Aqueous"
-        height={240}
-        width={220}
-      />
+      <Canvas draw={drawBeaker} height={270} width={250} />
     </div>
   )
 }

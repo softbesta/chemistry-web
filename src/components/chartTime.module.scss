@@ -1,14 +1,9 @@
 .chartTimeContainer {
   display: flex;
-  background-color: aqua;
-  width: 240px;
-  height: 240px;
   position: relative;
-
-  .timeImg {
-    position: absolute;
-    right: 0;
-  }
+  background-color: aqua;
+  width: 270px;
+  height: 240px;
 }
 
 .chartTime {
@@ -16,37 +11,42 @@
   right: 0;
 }
 
+// A value slider
 .sliceVertical {
   position: absolute;
-  right: 190;
+  top: 55px;         // position
+  right: 200px;
   .vertical-slider {
-    height: 100px; // control this for vert length
+    height: 165px;   // control this for length of vert
     width: 50px;
-    .example-track {
-      left: 22px;
-      width: 4px;
+    .example-track { // line
+      left: 14px;
+      // width: 3px;
+      width: 0px;
     }
-    .example-thumb {
-      left: 1px;
-      width: 48px;
-      height: 20px;
+    .example-thumb { // dot
+      width: 30px;
+      height: 15px;
     }
   }
 }
+
+// Time value slider
 .sliceHorizontal {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  top: 220px;         // position
+  right: 3px;
   .horizontal-slider {
-    width: 160px; // control this for horiz length
+    width: 215px;    // control this for length of horiz
     height: 50px;
     .example-track {
-      top: 22px;
-      height: 4px;
+      top: 13px;
+      // height: 3px;
+      height: 0px;
     }
     .example-thumb {
-      width: 20px;
-      height: 50px;
+      width: 15px;
+      height: 30px;
     }
   }
 }
@@ -59,9 +59,44 @@
   background-color: rgb(220, 84, 59);
   cursor: pointer;
   box-sizing: border-box;
-  border-radius: 8px;
+  border-radius: 4px;
   &:focus-visible {
     outline: 0;
   }
 }
 
+.sliceVerticalBar {
+  position: absolute;
+  top: 12px;
+  right: 234px;
+  height: 200px;
+  width: 3px;
+  background-color: black;
+}
+.sliceHorizontalBar {
+  position: absolute;
+  top: 233px;
+  right: 10px;
+  height: 3px;
+  width: 200px;
+  background-color: black;
+}
+.textVert {
+  position: absolute;
+  top: 100px;
+  right: 255px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    margin: 0;
+  }
+}
+.textHoriz {
+  position: absolute;
+  top: 250px;
+  right: 80px;
+  p {
+    margin: 0;
+  }
+}
