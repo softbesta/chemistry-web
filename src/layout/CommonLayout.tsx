@@ -10,8 +10,8 @@ const CommonLayout = ({
   children,
 }: CommonLayoutProps) => {
   return <div className={styles.layout}>
-    <Menu />
     <div className={styles.container}>
+    <Menu />
       {/* <p>This is CommonLayout</p> */}
       {children}
     </div>

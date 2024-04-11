@@ -39,7 +39,7 @@ const ReactionZero = () => {
   const exp4 = `\\[ 0.07 = 0.073(0.60)^0 \\]`
 
   return <div className={styles.container}>
-    <p>step: {stepPlay}</p>
+    {/* <p>step: {stepPlay}</p> */}
 
     <div className={styles.reactionDrawContainer}>
       <EnergyProfile />
