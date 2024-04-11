@@ -1,5 +1,5 @@
 import ReactSlider from "react-slider"
-import styles from './chartTime.module.scss'
+import styles from './ChartTime.module.scss'
 import ImgTime from '../assets/ReactionRates/reaction_boxes/time.png'
 import Canvas from "./Canvas"
 import { useRef, useState } from "react"

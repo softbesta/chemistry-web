@@ -1,0 +1,12 @@
+.layout {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 150px;
+}

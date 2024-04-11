@@ -1,6 +1,6 @@
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 import { useState } from "react";
-import styles from './mathContent.module.scss'
+import styles from './MathContent.module.scss'
 
 const config = {
   loader: { load: ["[tex]/html"] },
@@ -25,10 +25,6 @@ interface MathContentProps {
   exp4: string,
 }
 const MathContent = ({ exp0, exp1, exp2, exp3, exp4 }: MathContentProps) => {
-  const [num, setNum] = useState(10)
-  const handleTest = () => {
-    setNum(v => v + 10)
-  }
   return <div className={styles.mathContentContainer}>
     <MathJaxContext config={config}>
       <MathJax
@@ -78,8 +74,7 @@ const MathContent = ({ exp0, exp1, exp2, exp3, exp4 }: MathContentProps) => {
         </MathJax>
       </div>
     </MathJaxContext>
-    <p>{exp0}</p>
-    <button onClick={() => handleTest()}>TEST</button>
+    {/* <p>{exp0}</p> */}
   </div>
 }
 export default MathContent

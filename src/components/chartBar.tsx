@@ -1,4 +1,4 @@
-import styles from './chartBar.module.scss'
+import styles from './ChartBar.module.scss'
 import ImgBar from '../assets/ReactionRates/reaction_boxes/bar.png'
 
 const ChartBar = () => {

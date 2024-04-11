@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import { generateEnergyArray } from '../helper/functions'
 import Canvas from './Canvas'
-import styles from './energyProfile.module.scss'
+import styles from './EnergyProfile.module.scss'
 import useAppData from '../hooks/useAppData'
 
 const dotColors = [

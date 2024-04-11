@@ -1,5 +1,5 @@
 import { tutorialSteps } from '../constants'
-import styles from './tutorialControl.module.scss'
+import styles from './TutorialControl.module.scss'
 import ImgBeacky from '../assets/ReactionRates/reaction_boxes/beaky.png'
 import useAppData from '../hooks/useAppData'
 

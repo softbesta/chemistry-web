@@ -1,12 +1,12 @@
 import useAppData from "../../../hooks/useAppData"
 import styles from './zero.module.scss'
 import { useEffect, useState } from "react"
-import EnergyProfile from "../../../components/energyProfile"
+import EnergyProfile from "../../../components/EnergyProfile"
 import { generateEnergyArray } from "../../../helper/functions"
-import ChartTime from "../../../components/chartTime"
-import ChartBar from "../../../components/chartBar"
-import MathContent from "../../../components/mathContent"
-import TutorialControl from "../../../components/tutorialControl"
+import ChartTime from "../../../components/ChartTime"
+import ChartBar from "../../../components/ChartBar"
+import MathContent from "../../../components/MathContent"
+import TutorialControl from "../../../components/TutorialControl"
 
 const ReactionZero = () => {
   const {
