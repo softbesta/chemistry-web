@@ -1,5 +1,7 @@
+import styles from './ReactionRates/first/styles.module.scss'
+
 const PageError = () => {
-  return <div>
+  return <div className={styles.container}>
     No Page
   </div>
 }
