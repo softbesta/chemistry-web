@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import styles from './Menu.module.scss'
+import styles from './NavMenu.module.scss'
 import IconZeroOrder from '../assets/ReactionRates/navpanel/zeroordericon@3x.png'
 import IconZeroOrderPressed from '../assets/ReactionRates/navpanel/zeroordericon-pressed@3x.png'
 import IconFirstOrder from '../assets/ReactionRates/navpanel/firstordericon@3x.png'
@@ -16,7 +16,7 @@ import SvgQuiz from '../components/SVGIcons/SvgQuiz'
 import SvgArchive from '../components/SVGIcons/SvgArchive'
 import useAppData from '../hooks/useAppData'
 
-const Menu = () => {
+const NavMenu = () => {
   const [showMenu, setShowMenu] = useState(false)
   const toggleMenu = () => {
     console.log({ showMenu })
@@ -33,7 +33,7 @@ const Menu = () => {
     <NavPanel visible={showMenu} onClose={() => setShowMenu(false)} />
   </div>
 }
-export default Menu
+export default NavMenu
 
 
 interface NavPanelProps {
@@ -162,7 +162,7 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
       </div>
     </div>
 
-    <button onClick={() => handleTEST()}>TEST HERE</button>
+    {/* <button onClick={() => handleTEST()}>TEST HERE</button> */}
 
   </div>
 }

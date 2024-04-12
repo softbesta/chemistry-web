@@ -2,7 +2,6 @@ import { tutorialSteps } from '../constants'
 import styles from './TutorialControl.module.scss'
 import ImgBeacky from '../assets/ReactionRates/reaction_boxes/beaky.png'
 import useAppData from '../hooks/useAppData'
-import { startTutorials } from './Tutorial'
 import { useHighLight } from '../hooks/useHighlight'
 
 const stepHightlights = [
