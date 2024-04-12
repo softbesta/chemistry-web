@@ -7,7 +7,10 @@ const WatchMenu = () => {
   const handleShowChapterList = () => {
     setIsActive(!isActive)
   }
-  return <div className={styles.WatchMenuContainer}>
+  return <div
+    id='tur_watchMenuIcon'
+    className={styles.WatchMenuContainer}
+  >
     <button
       className={`${styles.closeIcon} ${isActive ? styles.active : ''}`}
       onClick={() => handleShowChapterList()}

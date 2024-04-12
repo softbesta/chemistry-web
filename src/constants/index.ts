@@ -145,13 +145,8 @@ export const enum MenuList {
   introduction = 'introduction',
   balanced = 'balanced',
 }
-// export const stepPlayCount = {
-//   zero: 9,
-//   first: 9,
-//   second: 9,
-//   comparison: 9,
-//   kinetics: 9,
-// }
+
+// tutorial steps
 
 export const tutorialSteps = [
   [ // 0
@@ -237,47 +232,58 @@ export const tutorialSteps = [
 ]
 
 export const stepHightlights = [
-  // 0
+  // 0   This is zero...
   [],
 
-  // 1
+  // 1   Great! Now you ...
   [],
 
-  // 2
+  // 2   The order of a ...
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math1', 'tur_math2'],
 
-  // 3
+  // 3   Half-lie (t12) ...
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math3'],
 
-  // 4
+  // 4   Let's watch how all...
   [],
 
-  // 5
+  // 5   For this zero order ...
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'], // +
 
-  // 6
+  // 6   You can click the....
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_watchMenuIcon'], // Choose reaction 'C to D'
+
+  // 7   Amazing! Let's take...
   [],
 
-  // 7
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton'], // Choose reaction 'C to D'
+  // 8   Now, let's try choosing...
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_chooseMenuIcon'],
 
-  // 8
+  // 9   Great! You picked a...
   [],
 
-  // 9
+  // 10   Awesome! Now set ...
   [],
 
-  // 10
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton'], // Choose reaction 'E to F'
-
-  // 11
+  // 11   Let's watch how all the...
   [],
 
-  // 12
+  // 12   Amazing, let's take...
   [],
 
-  //13
+  // 13   Now, let's try choosing... EF
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_chooseMenuIcon'],
+
+  // 14   Great! You picked a ...
   [],
+
+  // 15   Awesome! Now set the ...
+  [],
+
+  // 16   Let's watch how all ...
+  [],
+
+  // here goes to Quiz
 ]
 
 export const Colors = {

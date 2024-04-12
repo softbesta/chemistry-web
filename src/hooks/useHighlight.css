@@ -1,5 +1,5 @@
 .overlayActive {
-  z-index: 101;
+  z-index: 101 !important;
   position: relative;
 }
 

@@ -19,7 +19,10 @@ const ChooseMenu = () => {
   const handleShowChapterList = () => {
     setIsActive(!isActive)
   }
-  return <div className={styles.ChooseMenuContainer}>
+  return <div
+    id='tur_chooseMenuIcon'
+    className={styles.ChooseMenuContainer}
+  >
     <div
       className={`${styles.chooseDropDownBtn} ${isActive ? styles.active : ''}`}
       onClick={() => handleShowChapterList()}
@@ -49,7 +52,7 @@ const ChooseMenuPanel = ({ visible, items, activeItemIndex }: ChooseMenuPanelPro
     <div className={styles.ChooseMenuItemContainer}>
       {items.map((item, index) => {
         const isActiveItem = index === activeItemIndex
-        console.log({isActiveItem, index, activeItemIndex})
+        console.log({ isActiveItem, index, activeItemIndex })
         return <div
           key={index}
           className={`${styles.ChooseMenuItem} ${isActiveItem ? styles.activated : ''} ${item.disabled ? styles.disable : ''}`}
