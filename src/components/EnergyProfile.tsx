@@ -4,13 +4,14 @@ import { generateEnergyArray } from '../helper/functions'
 import Canvas from './Canvas'
 import styles from './EnergyProfile.module.scss'
 import useAppData from '../hooks/useAppData'
+import { Colors, colorsArr } from '../constants'
 
-const dotColors = [
-  "rgba(0,0,255,0.1)",
-  "rgba(0,0,255,0.5)",
-  "rgba(255,0,0,0.5)",
-  "rgba(0,255,0,0.5)",
-]
+// const dotColors = [
+//   "rgba(0,0,255,0.1)",
+//   "rgba(0,0,255,0.5)",
+//   "rgba(255,0,0,0.5)",
+//   "rgba(0,255,0,0.5)",
+// ]
 
 function beaker(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, radius: number, fillStyle: string, strokeStyle: string, lineWidth: number, offset: number) {
   ctx.beginPath();
@@ -48,8 +49,8 @@ const EnergyProfile = () => {
   }, [concentrationAB[0]])
   useEffect(() => {
     console.log('BBB: ', { concentrationAB })
-    // const update = generateEnergyArray(energyDots, concentrationAB[1], 2, 1)
-    // setEnergyDots(update)
+    const update = generateEnergyArray(energyDots, concentrationAB[1], 2, 1)
+    setEnergyDots(update)
   }, [concentrationAB[1]])
 
   const drawBeaker = (ctx: CanvasRenderingContext2D) => {
@@ -61,7 +62,7 @@ const EnergyProfile = () => {
     beaker(ctx, 12, 12, width - 20, height - 20, 15, "white", "white", 0.1, 20)
     ctx.beginPath()
     ctx.rect(12, 142, 210, 122)
-    ctx.fillStyle = "rgba(0,0,255,0.2)"
+    ctx.fillStyle = Colors.bg
     ctx.fill()
     ctx.beginPath()
     const delta = 15
@@ -82,7 +83,7 @@ const EnergyProfile = () => {
         const xx = startX + j * t
         ctx.moveTo(xx, yy)
         ctx.arc(xx, yy, 6, 0, 2 * Math.PI);
-        ctx.fillStyle = dotColors[energyDots[count]]
+        ctx.fillStyle = colorsArr[energyDots[count]]
         ctx.fill()
         count++
       }

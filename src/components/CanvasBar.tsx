@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+import { Colors } from "../constants"
 
 
 interface BarChartCanvasProps {
@@ -9,9 +10,11 @@ interface BarChartCanvasProps {
   t1: number
   height: number
   width: number
+  colorA: string
+  colorB: string
 }
 
-const BarChartCanvas = ({ play, c2, c1, t2, t1, height, width }: BarChartCanvasProps) => {
+const BarChartCanvas = ({ play, c2, c1, t2, t1, height, width, colorA, colorB }: BarChartCanvasProps) => {
   const canvas = useRef<HTMLCanvasElement>(null);
   const [sX, setSX] = useState<number>(0);
   const [sY, setSY] = useState<number>(0);
@@ -66,17 +69,17 @@ const BarChartCanvas = ({ play, c2, c1, t2, t1, height, width }: BarChartCanvasP
 
       ctx.beginPath();
       ctx.rect(40, 194 - 194 * c2, 30, 194 * c2);
-      ctx.fillStyle = "rgba(0,0,0,0.3)";
+      ctx.fillStyle = Colors.grey;
       ctx.fill();
       ctx.beginPath();
       ctx.rect(40, 194 - 194 * startY1, 30, 194 * startY1);
-      ctx.fillStyle = "blue";
+      ctx.fillStyle = colorA;
       ctx.fill();
       startY1 -= yStep;
 
       ctx.beginPath();
       ctx.rect(140, 194 - 194 * startY2, 30, 194 * startY2);
-      ctx.fillStyle = "red";
+      ctx.fillStyle = colorB;
       ctx.fill();
       startY2 += yStep;
       if (c1 < startY1) {

@@ -243,3 +243,18 @@ export const stepHightlights = [
   [],
   // open Quiz
 ]
+
+export const Colors = {
+  none: "rgba(8, 168, 232,0.2)",
+  A: 'rgba(8, 168, 232, 0.8)',
+  B: 'rgba(255, 19, 19, 0.8)',
+  C: 'rgba(213, 111, 62, 0.8)',
+  D: 'rgba(99, 105, 209, 0.8)',
+  E: 'rgba(156, 109, 138, 0.8)',
+  F: 'rgba(27, 153, 139, 0.8)',
+  bg: 'rgba(8, 168, 232, 0.05)',
+  grey: 'rgba(209, 209, 214, 0.8)',
+}
+export const colorsArr = [
+  Colors.none, Colors.A, Colors.B, Colors.C, Colors.D, Colors.E, Colors.F
+]

@@ -20,15 +20,15 @@
 // A value slider
 .sliceVertical {
   position: absolute;
-  top: 55px;         // position
+  top: -7px;         // position
   right: 200px;
   .vertical-slider {
-    height: 165px;   // control this for length of vert
+    height: 225px;   // control this for length of vert
     width: 50px;
     .example-track { // line
       left: 14px;
-      // width: 3px;
       width: 0px;
+      // width: 3px;
     }
     .example-thumb { // dot
       width: 30px;
@@ -41,14 +41,14 @@
 .sliceHorizontal {
   position: absolute;
   top: 220px;         // position
-  right: 3px;
+  right: -7px;
   .horizontal-slider {
-    width: 215px;    // control this for length of horiz
+    width: 225px;    // control this for length of horiz
     height: 50px;
     .example-track {
       top: 13px;
-      // height: 3px;
       height: 0px;
+      // height: 3px;
     }
     .example-thumb {
       width: 15px;
@@ -73,18 +73,18 @@
 
 .sliceVerticalBar {
   position: absolute;
-  top: 12px;
+  top: 0px;
   right: 234px;
-  height: 200px;
+  height: 212px;
   width: 3px;
   background-color: black;
 }
 .sliceHorizontalBar {
   position: absolute;
   top: 233px;
-  right: 10px;
+  right: 0px;
   height: 3px;
-  width: 200px;
+  width: 212px;
   background-color: black;
 }
 .textVert {

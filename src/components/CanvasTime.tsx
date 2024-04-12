@@ -9,8 +9,11 @@ interface CanvasTimeProps {
   t1: number
   height: number
   width: number
+  colorA: string
+  colorB: string
+  colorA_blur: string
 }
-const CanvasTime = ({ play, c2, c1, t2, t1, height, width }: CanvasTimeProps) => {
+const CanvasTime = ({ play, c2, c1, t2, t1, height, width, colorA, colorB, colorA_blur }: CanvasTimeProps) => {
   const canvas = useRef<HTMLCanvasElement>(null);
   const [sX, setSX] = useState<number>(0);
   const [sY, setSY] = useState<number>(0);
@@ -68,22 +71,22 @@ const CanvasTime = ({ play, c2, c1, t2, t1, height, width }: CanvasTimeProps) =>
       ctx.beginPath();
       ctx.moveTo(sX, sY);
       ctx.lineTo(startX + xStep, startY1 + yStep);
-      ctx.strokeStyle = "rgba(0,0,255)";
+      ctx.strokeStyle = colorA;
       ctx.stroke();
       ctx.moveTo(startX + xStep, startY1 + yStep)
       ctx.arc(startX + xStep, startY1 + yStep, 15, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(0,0,255,0.2)"
+      ctx.fillStyle = colorA_blur
       ctx.fill();
       ctx.beginPath();
       ctx.arc(startX + xStep, startY1 + yStep, 4, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(0,0,255)"
+      ctx.fillStyle = colorA
       ctx.fill();
       ctx.beginPath();
       ctx.moveTo(sX, height);
       ctx.lineTo(startX + xStep, height - startY2 + yStep);
       ctx.moveTo(startX + xStep, height - startY2 + yStep);
       ctx.arc(startX + xStep, height - startY2 + yStep, 2, 0, Math.PI * 2);
-      ctx.strokeStyle = "red";
+      ctx.strokeStyle = colorB;
       ctx.stroke();
       startX += xStep;
       startY1 += yStep;

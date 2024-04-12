@@ -1,7 +1,8 @@
 import useAppData from "../../../hooks/useAppData"
+import styles from './styles.module.scss'
 
 const ReactionFirst = () => {
-  return <div className="container">
+  return <div className={styles.container}>
     This is ReactionFirst
   </div>
 }

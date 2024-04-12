@@ -5,6 +5,7 @@ import Canvas from "./Canvas"
 import { useRef, useState } from "react"
 import useAppData from "../hooks/useAppData"
 import CanvasTime from "./CanvasTime"
+import { Colors } from "../constants"
 
 const ChartTime = () => {
   const { curStep, concentrationAB, setConcentrationAB, reactionTime, setReactionTime } = useAppData()
@@ -95,15 +96,21 @@ const ChartTime = () => {
         className={styles.chartTime}
       >
         {/* <Canvas draw={drawChartTime} height={222} width={222} /> */}
-
         <CanvasTime
           play={curStep === 4}
-          c2={0.8}
-          c1={0.5}
-          t2={3.2}
-          t1={16}
+          // c1={0.5}
+          // c2={0.8}
+          // t1={16}
+          // t2={3.2}
+          c1={concentrationAB[1]/100}
+          c2={concentrationAB[0]/100}
+          t1={reactionTime[1]}
+          t2={reactionTime[0]}
           height={212}
           width={212}
+          colorA={Colors.A}
+          colorB={Colors.B}
+          colorA_blur={Colors.none}
         />
       </div>
     </div>

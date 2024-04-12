@@ -11,8 +11,8 @@ interface IAppContext {
 
   // concentrationAB; minValue = 0, maxValue = 100
   // A: concentrationAB[0],  B: concentrationAB[1]    A > B
-  concentrationAB: (number | undefined)[],
-  setConcentrationAB: React.Dispatch<React.SetStateAction<(number | undefined)[]>>,
+  concentrationAB: (number)[],
+  setConcentrationAB: React.Dispatch<React.SetStateAction<(number)[]>>,
 
   // reactionTime; minValue = 0, maxValue = 20
   // A: reactionTime[0],     B: reactionTime[1]       A < B
@@ -26,7 +26,7 @@ const initialState = {
   count: 0,
 
   stepPlay: 0,
-  concentration: [100, 70],
+  concentration: [70, 35],
   reactionTime: [10, 15],
 }
 
@@ -38,7 +38,7 @@ export const AppDataProvider = (props: any) => {
 
   const [curMenu, setCurMenu] = useState<PageMenuType>(MenuList.zero)
   const [curStep, setCurStep] = useState(props.stepMotion || initialState.stepPlay || 0)
-  const [concentrationAB, setConcentrationAB] = useState<(number | undefined)[]>(initialState.concentration)
+  const [concentrationAB, setConcentrationAB] = useState<(number)[]>(initialState.concentration)
   const [concentrationCD, setConcentrationCD] = useState(initialState.concentration)
   const [concentrationEF, setConcentrationEF] = useState(initialState.concentration)
   const [reactionTime, setReactionTime] = useState<number[]>(initialState.reactionTime);
