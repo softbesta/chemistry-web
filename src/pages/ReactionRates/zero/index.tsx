@@ -44,6 +44,8 @@ const ReactionZero = () => {
   const exp2 = `\\[ 11.46 = 1.68 / (2 * ${k.toFixed(2)}) \\]`
   const exp3 = `\\[ Rate = k[A]^0 \\]`
   const exp4 = `\\[ 0.07 = 0.073(0.60)^0 \\]`
+  // const blanks = [[true, true, true, true, true], [true]]
+  const blanks = [[]]
 
   return <div className={styles.container}>
     {/* <p>step: {stepPlay}</p> */}
@@ -56,6 +58,7 @@ const ReactionZero = () => {
     <div className={styles.reactionContentContainer}>
       <MathContent
         exp0={exp0} exp1={exp1} exp2={exp2} exp3={exp3} exp4={exp4}
+        blanks={blanks}
       />
       <TutorialControl />
     </div>

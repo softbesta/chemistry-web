@@ -4,9 +4,10 @@ import ImgTime from '../assets/ReactionRates/reaction_boxes/time.png'
 import Canvas from "./Canvas"
 import { useRef, useState } from "react"
 import useAppData from "../hooks/useAppData"
+import CanvasTime from "./CanvasTime"
 
 const ChartTime = () => {
-  const { concentrationAB, setConcentrationAB, reactionTime, setReactionTime } = useAppData()
+  const { curStep, concentrationAB, setConcentrationAB, reactionTime, setReactionTime } = useAppData()
   const [lockIndex, setLockIndex] = useState(false)
 
   const handleChangeAB = (values: number[]) => {
@@ -15,9 +16,10 @@ const ChartTime = () => {
   }
   const handleChangeTime = (values: number[]) => {
     console.log({ time: values })
-    console.log({reactionTime})
+    console.log({ reactionTime })
     !lockIndex && setReactionTime([parseInt(values[0].toFixed(0)) / 10, parseInt(values[1].toFixed(0)) / 10])
   }
+  console.log({curStep})
 
   const drawChartTime = (ctx: CanvasRenderingContext2D) => {
     ctx.beginPath();
@@ -89,10 +91,20 @@ const ChartTime = () => {
       </div>
 
       <div
-        id='tur_chartTime'
+        // id='tur_chartTime'
         className={styles.chartTime}
       >
-        <Canvas draw={drawChartTime} height={222} width={222} />
+        {/* <Canvas draw={drawChartTime} height={222} width={222} /> */}
+
+        <CanvasTime
+          play={curStep === 4}
+          c2={0.8}
+          c1={0.5}
+          t2={3.2}
+          t1={16}
+          height={212}
+          width={212}
+        />
       </div>
     </div>
   )

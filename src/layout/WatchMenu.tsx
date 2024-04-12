@@ -29,7 +29,7 @@ const WatchMenuPanel = ({ visible }: WatchMenuPanelProps) => {
     <div className={styles.WatchMenuGridItem}>{concentrationAB[1] ? (concentrationAB[1] / 100).toFixed(2) : '-'}</div>
 
     <div className={styles.WatchMenuGridItem}>t</div>
-    <div className={styles.WatchMenuGridItem}>{reactionTime[0] ? (reactionTime[0]).toFixed(2) : '-'}</div>
+    <div className={styles.WatchMenuGridItem}>{reactionTime[0] ? reactionTime[0].toFixed(2) : '-'}</div>
     <div className={styles.WatchMenuGridItem}>{reactionTime[1] ? reactionTime[0].toFixed(1) : '-'}</div>
     {/* <p>This is Watch Menu Panel</p> */}
   </div>

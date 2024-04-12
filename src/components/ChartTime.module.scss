@@ -5,11 +5,16 @@
   // background-color: aqua;
   width: 270px;
   height: 240px;
+  margin-top: 15px;
 }
 
 .chartTime {
-  position: absolute;
+  // position: absolute;
   right: 0;
+}
+
+.canvasTime {
+  background-color: white;
 }
 
 // A value slider

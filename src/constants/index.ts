@@ -226,3 +226,20 @@ export const tutorialSteps = [
     `Then, let's take a quiz to review what we've learnt.`,
   ],
 ]
+
+export const stepHightlights = [
+  [],
+  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math1', 'tur_math2'],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math3'],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton'], // +
+  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton'], // Choose reaction 'C to D'
+  [],
+  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton'], // Choose reaction 'E to F'
+  [],
+  [],
+  // open Quiz
+]

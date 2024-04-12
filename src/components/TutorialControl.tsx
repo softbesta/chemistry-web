@@ -1,25 +1,8 @@
-import { tutorialSteps } from '../constants'
+import { stepHightlights, tutorialSteps } from '../constants'
 import styles from './TutorialControl.module.scss'
 import ImgBeacky from '../assets/ReactionRates/reaction_boxes/beaky.png'
 import useAppData from '../hooks/useAppData'
 import { useHighLight } from '../hooks/useHighlight'
-
-const stepHightlights = [
-  [],
-  [],
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math1', 'tur_math2'],
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math3'],
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_chartTime'],
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton'], // +
-  [],
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton'], // Choose reaction 'C to D'
-  [],
-  [],
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton'], // Choose reaction 'E to F'
-  [],
-  [],
-  // open Quiz
-]
 
 const TutorialControl = () => {
   const {
@@ -77,7 +60,8 @@ const TutorialControl = () => {
       className={styles.tutorialTextContainer}
     >
       <div className={styles.tutorialText}>
-        {tutorialHints[curStep].map(val => <div
+        {tutorialHints[curStep].map((val, index) => <div
+          key={index}
           className={styles.tutorialTextItem}
           dangerouslySetInnerHTML={{ __html: val || ''}}
         />)}
