@@ -49,6 +49,7 @@ const MathContent = ({ exp0, exp1, exp2, exp3, exp4 }: MathContentProps) => {
           {exp0}
           {/* {`\\[ Rate = 0.07 = -\\frac{-0.53}{7.28} = -\\frac{0.26 - 0.79}{19.40 - 12.12}\\]`} */}
         </MathJax>
+        <div className={styles.blank} />
       </div>
       <div
         id='tur_math3'

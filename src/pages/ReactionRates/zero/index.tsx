@@ -31,9 +31,17 @@ const ReactionZero = () => {
     `\\[ 0.07 = 0.073(0.60)^0 \\]`,
   ]
 
-  const exp0 = `\\[ Rate = 0.07 = -\\frac{-0.53}{7.28} = -\\frac{${((concentrationAB[1] ?? 0) / 100).toFixed(2)} - ${((concentrationAB[0] ?? 0) / 100).toFixed(2)}}{${(reactionTime[1] ?? 0).toFixed(2)} - ${(reactionTime[0] ?? 0).toFixed(2)}}\\]`
+  const c1 = (concentrationAB[0] ?? 0) / 100
+  const c2 = (concentrationAB[1] ?? 0) / 100
+  const t1 = reactionTime[0]
+  const t2 = reactionTime[1]
+  const c = c2 - c1
+  const t = t2 - t1
+  const k = -(c / t)
+
+  const exp0 = `\\[ Rate = ${k.toFixed(2)} = -\\frac{${c.toFixed(2)}}{${t.toFixed(2)}} = -\\frac{${c2.toFixed(2)} - ${c1.toFixed(2)}}{${t2.toFixed(2)} - ${t1.toFixed(2)}}\\]`
   const exp1 = `\\[ t_{1/2} = [A_0]/(2k) \\]`
-  const exp2 = `\\[ 11.46 = 1.68 / (2 x 0.07) \\]`
+  const exp2 = `\\[ 11.46 = 1.68 / (2 * ${k.toFixed(2)}) \\]`
   const exp3 = `\\[ Rate = k[A]^0 \\]`
   const exp4 = `\\[ 0.07 = 0.073(0.60)^0 \\]`
 
