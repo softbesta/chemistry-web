@@ -3,7 +3,7 @@ import styles from './CommonLayout.module.scss'
 import NavMenu from "./NavMenu"
 import ChapterMenu from "./ChapterMenu"
 import WatchMenu from "./WatchMenu"
-import OrderMenu from "./OrderMenu"
+import ChooseMenu from "./ChooseMenu"
 
 interface CommonLayoutProps {
   children: ReactNode,
@@ -16,7 +16,7 @@ const CommonLayout = ({
     <div className={styles.container}>
       <NavMenu />
       <ChapterMenu />
-      <OrderMenu />
+      <ChooseMenu />
       <WatchMenu />
       {/* <p>This is CommonLayout</p> */}
       {children}

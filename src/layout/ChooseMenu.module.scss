@@ -1,4 +1,4 @@
-.OrderMenuContainer {
+.ChooseMenuContainer {
   position: absolute;
   top: 80px;
   right: 50px;
@@ -52,7 +52,7 @@
     }
   }
 
-  .OrderMenuPanel {
+  .ChooseMenuPanel {
     transition: all 500ms;
     opacity: 1; // animation
     height: 0; // animation
