@@ -250,10 +250,10 @@ export const stepHightlights = [
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math3'],
 
   // 4
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
+  [],
 
   // 5
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton'], // +
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'], // +
 
   // 6
   [],
