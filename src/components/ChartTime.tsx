@@ -6,16 +6,17 @@ import { useRef, useState } from "react"
 import useAppData from "../hooks/useAppData"
 
 const ChartTime = () => {
-  const { concentration, setConcentration, reactionTime, setReactionTime } = useAppData()
-  const [lockA, setLockA] = useState(false)
+  const { concentrationAB, setConcentrationAB, reactionTime, setReactionTime } = useAppData()
+  const [lockIndex, setLockIndex] = useState(false)
 
-  const handleChangeA = (values: number[]) => {
+  const handleChangeAB = (values: number[]) => {
     console.log({ values })
-    !lockA && setConcentration(values[0])
+    !lockIndex && setConcentrationAB([values[1], values[0]])
   }
   const handleChangeTime = (values: number[]) => {
     console.log({ time: values })
-    !lockA && setReactionTime(parseInt(values[0].toFixed(0)) / 10)
+    console.log({reactionTime})
+    !lockIndex && setReactionTime([parseInt(values[0].toFixed(0)) / 10, parseInt(values[1].toFixed(0)) / 10])
   }
 
   const drawChartTime = (ctx: CanvasRenderingContext2D) => {
@@ -35,16 +36,16 @@ const ChartTime = () => {
       ctx.lineTo(x, 204);
       x += 15;
     }
-    ctx.moveTo(12, 200 * (100 - (concentration ?? 0)) / 100 + 12);
-    ctx.lineTo(212, 200 * (100 - (concentration ?? 0)) / 100 + 12);
-    ctx.moveTo(200 * (reactionTime ?? 0) / 100 + 12, 12);
-    ctx.lineTo(200 * (reactionTime ?? 0) / 100 + 12, 212);
+    ctx.moveTo(12, 200 * (100 - (concentrationAB[0] ?? 0)) / 100 + 12);
+    ctx.lineTo(212, 200 * (100 - (concentrationAB[0] ?? 0)) / 100 + 12);
+    ctx.moveTo(200 * (reactionTime[0] ?? 0) / 20 + 12, 12);
+    ctx.lineTo(200 * (reactionTime[0] ?? 0) / 20 + 12, 212);
     ctx.stroke();
     ctx.closePath();
   }
 
   const handleTest = () => {
-    setLockA(true)
+    setLockIndex(true)
   }
 
   return (
@@ -58,15 +59,15 @@ const ChartTime = () => {
           thumbClassName={styles['example-thumb']}
           trackClassName={styles['example-track']}
           orientation="vertical"
-          value={[concentration ?? 0, 100]}
-          onChange={(values) => handleChangeA(values)}
+          value={[concentrationAB[1] ?? 0, concentrationAB[0] ?? 0]}
+          onChange={(values) => handleChangeAB(values)}
           invert
-          renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+          renderThumb={(props, state) => <div {...props}></div>}
         />
       </div>
       <div className={styles.textVert}>
         <p>{`[A]`}</p>
-        <p>{((concentration ?? 0) / 100).toFixed(2)}</p>
+        <p>{((concentrationAB[0] ?? 0) / 100).toFixed(2)}</p>
       </div>
 
       <div className={styles.sliceHorizontalBar} />
@@ -75,16 +76,16 @@ const ChartTime = () => {
           className={styles['horizontal-slider']}
           thumbClassName={styles['example-thumb']}
           trackClassName={styles['example-track']}
-          value={[(reactionTime ?? 0) * 10, 200]}
+          value={[(reactionTime[0] ?? 0) * 10, (reactionTime[1] ?? 0) * 10]}
           min={0}
           max={200}
-          step={0.1}
+          step={1}
           onChange={(values) => handleChangeTime(values)}
         // renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
         />
       </div>
       <div className={styles.textHoriz}>
-        <p>{`Time:`} {(reactionTime ?? 0).toFixed(1)}</p>
+        <p>{`Time:`} {(reactionTime[0] ?? 0).toFixed(1)}</p>
       </div>
 
       <div

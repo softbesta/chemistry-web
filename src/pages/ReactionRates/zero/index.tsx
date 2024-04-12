@@ -2,7 +2,6 @@ import useAppData from "../../../hooks/useAppData"
 import styles from './zero.module.scss'
 import { useEffect, useState } from "react"
 import EnergyProfile from "../../../components/EnergyProfile"
-import { generateEnergyArray } from "../../../helper/functions"
 import ChartTime from "../../../components/ChartTime"
 import ChartBar from "../../../components/ChartBar"
 import MathContent from "../../../components/MathContent"
@@ -12,17 +11,17 @@ const ReactionZero = () => {
   const {
     curStep,
     setCurStep,
-    concentration,
-    setConcentration,
+    concentrationAB,
+    setConcentrationAB,
     reactionTime
   } = useAppData()
 
-  const handletest = () => {
-    setConcentration(v => (v + 3) > 100 ? 100 : v + 3)
-  }
-  const handletest1 = () => {
-    setConcentration(v => (v - 3) < 0 ? 0 : v - 3)
-  }
+  // const handletest = () => {
+  //   setConcentrationAB(v => (v + 3) > 100 ? 100 : v + 3)
+  // }
+  // const handletest1 = () => {
+  //   setConcentrationAB(v => (v - 3) < 0 ? 0 : v - 3)
+  // }
 
   const expressions = [
     `\\[ Rate = 0.07 = -\\frac{-0.53}{7.28} = -\\frac{0.26 - 0.79}{19.40 - 12.12}\\]`,
@@ -32,7 +31,7 @@ const ReactionZero = () => {
     `\\[ 0.07 = 0.073(0.60)^0 \\]`,
   ]
 
-  const exp0 = `\\[ Rate = 0.07 = -\\frac{-0.53}{7.28} = -\\frac{0.26 - ${((concentration ?? 0) / 100).toFixed(2)}}{19.40 - ${(reactionTime ?? 0).toFixed(2)}}\\]`
+  const exp0 = `\\[ Rate = 0.07 = -\\frac{-0.53}{7.28} = -\\frac{${((concentrationAB[1] ?? 0) / 100).toFixed(2)} - ${((concentrationAB[0] ?? 0) / 100).toFixed(2)}}{${(reactionTime[1] ?? 0).toFixed(2)} - ${(reactionTime[0] ?? 0).toFixed(2)}}\\]`
   const exp1 = `\\[ t_{1/2} = [A_0]/(2k) \\]`
   const exp2 = `\\[ 11.46 = 1.68 / (2 x 0.07) \\]`
   const exp3 = `\\[ Rate = k[A]^0 \\]`

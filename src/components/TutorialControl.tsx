@@ -77,8 +77,10 @@ const TutorialControl = () => {
       className={styles.tutorialTextContainer}
     >
       <div className={styles.tutorialText}>
-        <div dangerouslySetInnerHTML={{ __html: tutorialHints[curStep]?.text || '' }} />
-        <div dangerouslySetInnerHTML={{ __html: tutorialHints[curStep]?.desc || '' }} />
+        {tutorialHints[curStep].map(val => <div
+          className={styles.tutorialTextItem}
+          dangerouslySetInnerHTML={{ __html: val || ''}}
+        />)}
       </div>
       <div className={styles.beakyIcon}>
         <img src={ImgBeacky} alt='beacky' />

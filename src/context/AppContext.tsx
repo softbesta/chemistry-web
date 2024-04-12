@@ -8,10 +8,16 @@ interface IAppContext {
   setCurMenu: React.Dispatch<React.SetStateAction<PageMenuType>>,
   curStep: number,
   setCurStep: React.Dispatch<React.SetStateAction<number>>,
-  concentration: number | undefined,
-  setConcentration: React.Dispatch<React.SetStateAction<number>>,
-  reactionTime: number | undefined,
-  setReactionTime: React.Dispatch<React.SetStateAction<number>>,
+
+  // concentrationAB; minValue = 0, maxValue = 100
+  // A: concentrationAB[0],  B: concentrationAB[1]    A > B
+  concentrationAB: (number | undefined)[],
+  setConcentrationAB: React.Dispatch<React.SetStateAction<(number | undefined)[]>>,
+
+  // reactionTime; minValue = 0, maxValue = 20
+  // A: reactionTime[0],     B: reactionTime[1]       A < B
+  reactionTime: number[],
+  setReactionTime: React.Dispatch<React.SetStateAction<number[]>>,
 
   updateStepPlay: (step: number) => void
 }
@@ -20,8 +26,8 @@ const initialState = {
   count: 0,
 
   stepPlay: 0,
-  concentration: 70,
-  reactionTime: 10,
+  concentration: [100, 70],
+  reactionTime: [10, 15],
 }
 
 const AppContext = createContext({} as IAppContext)
@@ -32,8 +38,10 @@ export const AppDataProvider = (props: any) => {
 
   const [curMenu, setCurMenu] = useState<PageMenuType>(MenuList.zero)
   const [curStep, setCurStep] = useState(props.stepMotion || initialState.stepPlay || 0)
-  const [concentration, setConcentration] = useState(initialState.concentration)
-  const [reactionTime, setReactionTime] = useState<number>(initialState.reactionTime);
+  const [concentrationAB, setConcentrationAB] = useState<(number | undefined)[]>(initialState.concentration)
+  const [concentrationCD, setConcentrationCD] = useState(initialState.concentration)
+  const [concentrationEF, setConcentrationEF] = useState(initialState.concentration)
+  const [reactionTime, setReactionTime] = useState<number[]>(initialState.reactionTime);
 
   // need update, don't use yet
   const updateStepPlay = (step: number) => {
@@ -46,13 +54,13 @@ export const AppDataProvider = (props: any) => {
   return (
     <AppContext.Provider
       value={{
-        curMenu: curMenu,
+        curMenu,
         setCurMenu,
         curStep,
         setCurStep,
         updateStepPlay,
-        concentration,
-        setConcentration,
+        concentrationAB,
+        setConcentrationAB,
         reactionTime,
         setReactionTime,
       }}

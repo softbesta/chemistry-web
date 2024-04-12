@@ -32,14 +32,25 @@ function beaker(ctx: CanvasRenderingContext2D, x: number, y: number, width: numb
 
 const EnergyProfile = () => {
   const totalDots = 144
-  const [energyDots, setEnergyDots] = useState(Array.from({ length: totalDots }, () => Math.floor(Math.random() * 3)))
-  const { concentration } = useAppData()
+  const [energyDots, setEnergyDots] = useState(Array.from({ length: totalDots }, () => Math.floor(Math.random() * 2)))
+  const { concentrationAB } = useAppData()
   // console.log({ concentration, energyDots })
+  // useEffect(() => {
+  //   const update = generateEnergyArray(energyDots, concentrationAB[0], 1, 2)
+  //   setEnergyDots(update)
+  //   // console.log({ update })
+  // }, [concentrationAB])
+
   useEffect(() => {
-    const update = generateEnergyArray(energyDots, concentration, 1, 2)
+    console.log('AAA: ', { concentrationAB })
+    const update = generateEnergyArray(energyDots, concentrationAB[0], 1, 0)
     setEnergyDots(update)
-    // console.log({ update })
-  }, [concentration])
+  }, [concentrationAB[0]])
+  useEffect(() => {
+    console.log('BBB: ', { concentrationAB })
+    // const update = generateEnergyArray(energyDots, concentrationAB[1], 2, 1)
+    // setEnergyDots(update)
+  }, [concentrationAB[1]])
 
   const drawBeaker = (ctx: CanvasRenderingContext2D) => {
     const width = 206, height = 248
