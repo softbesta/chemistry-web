@@ -5,7 +5,7 @@
   background: white;
   z-index: 204;
 
-  .dropDownBtn {
+  .chooseDropDownBtn {
     width: 30px;
     height: 30px;
     display: inline-block;
@@ -55,15 +55,47 @@
   .ChooseMenuPanel {
     transition: all 500ms;
     opacity: 1; // animation
-    height: 0; // animation
-    background-color: aquamarine;
+    max-height: 0; // animation
+    background-color: white;
     overflow: hidden;
     position: absolute;
-    right: 0;
+    right: 28px;
+    top: 5px;
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
 
     &.active {
       opacity: 1; // animation
-      height: 100px; // animation
+      max-height: 200px; // animation
+    }
+
+    .ChooseMenuHeader {
+      display: flex;
+      align-items: center;
+      border: 2px solid black;
+      height: 30px;
+      padding: 0px 10px;
+    }
+
+    .ChooseMenuItemContainer {
+      border: 2px solid black;
+      margin-top: -2px;
+
+      .ChooseMenuItem {
+        display: flex;
+        align-items: center;
+        height: 30px;
+        padding: 0px 10px;
+
+        &.disable {
+          color: grey;
+        }
+        &.activated {
+          background-color: grey;
+          color: white;
+        }
+      }
     }
   }
 }

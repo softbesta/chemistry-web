@@ -8,9 +8,9 @@ interface IAppContext {
   setCurMenu: React.Dispatch<React.SetStateAction<PageMenuType>>,
   curStep: number,
   setCurStep: React.Dispatch<React.SetStateAction<number>>,
-  concentration: number,
+  concentration: number | undefined,
   setConcentration: React.Dispatch<React.SetStateAction<number>>,
-  reactionTime: number,
+  reactionTime: number | undefined,
   setReactionTime: React.Dispatch<React.SetStateAction<number>>,
 
   updateStepPlay: (step: number) => void

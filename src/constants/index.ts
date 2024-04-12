@@ -133,6 +133,9 @@ export const enum MenuList {
   secondQuiz = 'secondQuiz',
   comparisonQuiz = 'comparisonQuiz',
   kineticsQuiz = 'kineticsQuiz',
+  aqueous = 'aqueous',
+  introduction = 'introduction',
+  balanced = 'balanced',
 }
 // export const stepPlayCount = {
 //   zero: 9,

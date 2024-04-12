@@ -4,22 +4,27 @@
   right: 50px;
   background: white;
   z-index: 205;
+  font-size: 16px;
+  font-weight: 700;
 
   .chapterMenuPanel {
     transition: all 500ms;
-    opacity: 1;     // animation
-    max-height: 0;  // animation
+    opacity: 1; // animation
+    max-height: 0; // animation
     padding: 0px 50px; //animation
-    background-color: aquamarine;
+    background-color: white;
     overflow: hidden;
     position: absolute;
     right: 0;
+    top: 40px;
 
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    border-radius: 20px;
 
-    &::after {    // draw Line for tree structure
+    &::after {
+      // draw Line for tree structure
       content: '';
       position: absolute;
       display: inline-block;
@@ -32,9 +37,10 @@
 
     &.activeChapterPanel {
       transition: all 500ms;
-      opacity: 1;   // animation
+      opacity: 1; // animation
       max-height: 400px; // animation
       padding: 10px 50px; //animation
+      box-shadow: 1px 2px 3px 4px rgba(12, 12, 12, 0.2);
     }
 
     .menuItem {
@@ -59,12 +65,14 @@
         transition: all 500ms;
         opacity: 0;
         max-height: 0px;
+
         &.activeMenuItemPane {
           opacity: 1;
           max-height: 200px;
         }
 
-        &::after {    // draw Line for tree structure
+        &::after {
+          // draw Line for tree structure
           content: '';
           position: absolute;
           display: inline-block;
@@ -77,11 +85,12 @@
       }
 
       .subItem {
-        opacity: 0;
-        max-height: 0px;
+        // opacity: 0;
+        // max-height: 0px;
         margin: 10px 40px 10px 10px;
         cursor: pointer;
         position: relative;
+
         &::after {
           content: '';
           position: absolute;
@@ -92,9 +101,9 @@
           right: -27px;
           top: 12px;
         }
+
         &.activeSubItem {
-          opacity: 1;
-          max-height: 200px;
+          color: rgb(220, 84, 59);
         }
       }
     }

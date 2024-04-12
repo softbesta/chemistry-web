@@ -10,8 +10,8 @@ import TutorialControl from "../../../components/TutorialControl"
 
 const ReactionZero = () => {
   const {
-    curStep: stepPlay,
-    setCurStep: setStepPlay,
+    curStep,
+    setCurStep,
     concentration,
     setConcentration,
     reactionTime
@@ -32,7 +32,7 @@ const ReactionZero = () => {
     `\\[ 0.07 = 0.073(0.60)^0 \\]`,
   ]
 
-  const exp0 = `\\[ Rate = 0.07 = -\\frac{-0.53}{7.28} = -\\frac{0.26 - ${(concentration / 100).toFixed(2)}}{19.40 - ${reactionTime.toFixed(2)}}\\]`
+  const exp0 = `\\[ Rate = 0.07 = -\\frac{-0.53}{7.28} = -\\frac{0.26 - ${((concentration ?? 0) / 100).toFixed(2)}}{19.40 - ${(reactionTime ?? 0).toFixed(2)}}\\]`
   const exp1 = `\\[ t_{1/2} = [A_0]/(2k) \\]`
   const exp2 = `\\[ 11.46 = 1.68 / (2 x 0.07) \\]`
   const exp3 = `\\[ Rate = k[A]^0 \\]`

@@ -64,9 +64,10 @@ const ChapterMenuPanel = ({ visible }: ChapterMenuPanelProps) => {
 
         <div className={`${styles.menuItemPanel} ${openedMenuIndex === menuIndex ? styles.activeMenuItemPane : ''}`}>
           {menuItem.subItems?.map(subItem => {
+            const isActiveSubItem = curMenu === subItem.value
             return <div
               key={subItem.value}
-              className={`${styles.subItem} ${styles.activeSubItem}`}
+              className={`${styles.subItem} ${isActiveSubItem ? styles.activeSubItem : ''}`}
               onClick={() => handleSubItemClick(subItem)}
             >
               {subItem.title}

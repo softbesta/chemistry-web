@@ -35,10 +35,10 @@ const ChartTime = () => {
       ctx.lineTo(x, 204);
       x += 15;
     }
-    ctx.moveTo(12, 200 * (100 - concentration) / 100 + 12);
-    ctx.lineTo(212, 200 * (100 - concentration) / 100 + 12);
-    ctx.moveTo(200 * reactionTime / 100 + 12, 12);
-    ctx.lineTo(200 * reactionTime / 100 + 12, 212);
+    ctx.moveTo(12, 200 * (100 - (concentration ?? 0)) / 100 + 12);
+    ctx.lineTo(212, 200 * (100 - (concentration ?? 0)) / 100 + 12);
+    ctx.moveTo(200 * (reactionTime ?? 0) / 100 + 12, 12);
+    ctx.lineTo(200 * (reactionTime ?? 0) / 100 + 12, 212);
     ctx.stroke();
     ctx.closePath();
   }
@@ -58,7 +58,7 @@ const ChartTime = () => {
           thumbClassName={styles['example-thumb']}
           trackClassName={styles['example-track']}
           orientation="vertical"
-          value={[concentration, 100]}
+          value={[concentration ?? 0, 100]}
           onChange={(values) => handleChangeA(values)}
           invert
           renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
@@ -66,7 +66,7 @@ const ChartTime = () => {
       </div>
       <div className={styles.textVert}>
         <p>{`[A]`}</p>
-        <p>{(concentration / 100).toFixed(2)}</p>
+        <p>{((concentration ?? 0) / 100).toFixed(2)}</p>
       </div>
 
       <div className={styles.sliceHorizontalBar} />
@@ -75,7 +75,7 @@ const ChartTime = () => {
           className={styles['horizontal-slider']}
           thumbClassName={styles['example-thumb']}
           trackClassName={styles['example-track']}
-          value={[reactionTime * 10, 200]}
+          value={[(reactionTime ?? 0) * 10, 200]}
           min={0}
           max={200}
           step={0.1}
@@ -84,7 +84,7 @@ const ChartTime = () => {
         />
       </div>
       <div className={styles.textHoriz}>
-        <p>{`Time:`} {reactionTime.toFixed(1)}</p>
+        <p>{`Time:`} {(reactionTime ?? 0).toFixed(1)}</p>
       </div>
 
       <div

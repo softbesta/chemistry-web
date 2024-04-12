@@ -54,16 +54,39 @@
 
   .WatchMenuPanel {
     transition: all 500ms;
-    opacity: 1;     // animation
-    height: 0;      // animation
-    background-color: aquamarine;
+    opacity: 1; // animation
+    max-height: 0; // animation
+    background-color: white;
     overflow: hidden;
     position: absolute;
     right: 0;
+    top: 30px;
+    width: 200px;
+    display: grid;
+    grid-template: repeat(2, minmax(50px, 1fr)) /repeat(3, minmax(50px, 1fr));
+    font-size: 18px;
+    font-weight: 600;
 
     &.active {
-      opacity: 1;   // animation
-      height: 100px; // animation
+      opacity: 1; // animation
+      max-height: 200px; // animation
+      border-bottom: 2px solid black;
+      border-right: 2px solid black;
+    }
+
+    .WatchMenuGridItem {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid black;
+      margin-right: -2px;
+      margin-bottom: -2px;
+      // margin: -1px;
+
+      // &:nth-child(2),
+      // &:nth-child(2) {
+      //   border-left: solid 2px red;
+      // }
     }
   }
 }
