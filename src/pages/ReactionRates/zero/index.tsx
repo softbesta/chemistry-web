@@ -56,10 +56,10 @@ const ReactionZero = () => {
   return <div className={styles.container}>
     {/* <p>step: {stepPlay}</p> */}
 
-    <button onClick={() => {
+    {/* <button onClick={() => {
         console.log('reactionTime: ', reactionTime)
         console.log('concentrationAB: ', concentrationAB)
-      }}>TEST</button>
+      }}>TEST</button> */}
     <div className={styles.reactionDrawContainer}>
       <EnergyProfile />
       <ChartTime />
