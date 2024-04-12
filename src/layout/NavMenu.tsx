@@ -154,7 +154,7 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
               updatePageFromMenu(MenuList.kinetics)
             }}
           />
-          <div onClick={() => navigate(MenuList.kineticsQuiz)}>
+          <div onClick={() => updatePageFromMenu(MenuList.kineticsQuiz)}>
             <SvgQuiz fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
           </div>
           <div>
