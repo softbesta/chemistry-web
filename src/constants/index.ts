@@ -3,30 +3,124 @@ export const routes = {
   zero: {
     title: 'Zero order reaction',
     path: '/',
-    quizPath: '/quiz',
+    type: 'reaction',
     // path: 'reaction/zero',
   },
   first: {
     title: 'First order reaction',
     path: '/reaction/first',
-    quizPath: '/reaction/first/quiz',
+    type: 'reaction',
   },
   second: {
     title: 'Second order reaction',
     path: '/reaction/second',
-    quizPath: '/reaction/second/quiz',
+    type: 'reaction',
   },
   comparison: {
     title: 'Reaction comparison',
     path: '/reaction/comparison',
-    quizPath: '/reaction/comparison/quiz',
+    type: 'reaction',
   },
   kinetics: {
     title: 'Kinetics',
     path: '/reaction/kinetics',
-    quizPath: '/reaction/kinetics/quiz',
+    type: 'reaction',
+  },
+  zeroQuiz: {
+    title: 'Quiz for Zero order reaction',
+    path: '/quiz',
+    type: 'reaction',
+  },
+  firstQuiz: {
+    title: 'Quiz for First order reaction',
+    path: '/reaction/first/quiz',
+    type: 'reaction',
+  },
+  secondQuiz: {
+    title: 'Quiz for Second order reaction',
+    path: '/reaction/second/quiz',
+    type: 'reaction',
+  },
+  comparisonQuiz: {
+    title: 'Quiz for Reaction comparison',
+    path: '/reaction/comparison/quiz',
+    type: 'reaction',
+  },
+  kineticsQuiz: {
+    title: 'Quiz for Kinetics',
+    path: '/reaction/kinetics/quiz',
+    type: 'reaction',
   },
 }
+
+export const chaptersMenuList = [
+  {
+    title: 'Reaction rates',
+    subItems: [
+      {
+        title: 'Zero order reaction',
+        value: 'zero',
+      }, {
+        title: 'First order reaction',
+        value: 'first',
+      }, {
+        title: 'Second order reaction',
+        value: 'second',
+      }, {
+        title: 'Reaction comparison',
+        value: 'comparison',
+      }, {
+        title: 'Energy profile',
+        value: 'kinetics',
+      }
+    ],
+  },
+  {
+    title: 'Equilibrium',
+    subItems: [
+      {
+        title: 'Aqueous reaction',
+        value: 'aqueous',
+      }, {
+        title: 'Gaseous reaction',
+        value: 'gaseous',
+      }, {
+        title: 'Solubility',
+        value: 'solubility',
+      }
+    ],
+  },
+  {
+    title: 'Acids & bases',
+    subItems: [
+      {
+        title: 'Introduction',
+        value: 'introduction',
+      }, {
+        title: 'Buffers',
+        value: 'buffers',
+      }, {
+        title: 'Titration',
+        value: 'titration',
+      }
+    ],
+  },
+  {
+    title: 'Chemical reactions',
+    subItems: [
+      {
+        title: 'Balanced reactions',
+        value: 'balanced',
+      }, {
+        title: 'Limiting reagent',
+        value: 'limiting',
+      }, {
+        title: 'Precipitation',
+        value: 'precipitation',
+      }
+    ],
+  },
+]
 
 export const enum MenuList {
   zero = 'zero',
@@ -34,6 +128,11 @@ export const enum MenuList {
   second = 'second',
   comparison = 'comparison',
   kinetics = 'kinetics',
+  zeroQuiz = 'zeroQuiz',
+  firstQuiz = 'firstQuiz',
+  secondQuiz = 'secondQuiz',
+  comparisonQuiz = 'comparisonQuiz',
+  kineticsQuiz = 'kineticsQuiz',
 }
 // export const stepPlayCount = {
 //   zero: 9,

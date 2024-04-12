@@ -23,7 +23,7 @@ const stepHightlights = [
 
 const TutorialControl = () => {
   const {
-    activeMenu,
+    curMenu,
     curStep,
     setCurStep,
   } = useAppData()

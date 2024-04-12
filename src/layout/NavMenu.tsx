@@ -15,6 +15,7 @@ import { MenuList, routes } from '../constants'
 import SvgQuiz from '../components/SVGIcons/SvgQuiz'
 import SvgArchive from '../components/SVGIcons/SvgArchive'
 import useAppData from '../hooks/useAppData'
+import useFunctions from '../hooks/useFunctions'
 
 const NavMenu = () => {
   const [showMenu, setShowMenu] = useState(false)
@@ -41,28 +42,29 @@ interface NavPanelProps {
   onClose: () => void
 }
 const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
-  const isActiveMenu = ''
+  const isCurMenu = ''
   const navigate = useNavigate();
   let location = useLocation()
-  const { activeMenu, setActiveMenu } = useAppData()
+  const { updatePageFromMenu } = useFunctions()
+  const { curMenu, setCurMenu } = useAppData()
 
   const handleTEST = () => {
-    console.log({ activeMenu })
+    console.log({ curMenu })
   }
 
   useEffect(() => {
     console.log({ location })
 
     if (location.pathname === routes[MenuList.zero].path) {
-      setActiveMenu(MenuList.zero)
+      setCurMenu(MenuList.zero)
     } else if (location.pathname === routes[MenuList.first].path) {
-      setActiveMenu(MenuList.first)
+      setCurMenu(MenuList.first)
     } else if (location.pathname === routes[MenuList.second].path) {
-      setActiveMenu(MenuList.second)
+      setCurMenu(MenuList.second)
     } else if (location.pathname === routes[MenuList.comparison].path) {
-      setActiveMenu(MenuList.comparison)
+      setCurMenu(MenuList.comparison)
     } else if (location.pathname === routes[MenuList.kinetics].path) {
-      setActiveMenu(MenuList.kinetics)
+      setCurMenu(MenuList.kinetics)
     }
   }, [location.pathname])
 
@@ -82,13 +84,13 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
         <div className={styles.navMenuItem}>
           <img
             className={styles.imgChapter}
-            src={activeMenu === MenuList.zero ? IconZeroOrderPressed : IconZeroOrder}
+            src={curMenu === MenuList.zero ? IconZeroOrderPressed : IconZeroOrder}
             alt='IconZero'
             onClick={() => {
-              navigate(routes[MenuList.zero].path)
+              updatePageFromMenu(MenuList.zero)
             }}
           />
-          <div onClick={() => navigate(routes[MenuList.zero].quizPath)}>
+          <div onClick={() => updatePageFromMenu(MenuList.zeroQuiz)}>
             <SvgQuiz fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
           </div>
           <div>
@@ -98,13 +100,13 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
         <div className={styles.navMenuItem}>
           <img
             className={styles.imgChapter}
-            src={activeMenu === MenuList.first ? IconFirstOrderPressed : IconFirstOrder}
+            src={curMenu === MenuList.first ? IconFirstOrderPressed : IconFirstOrder}
             alt='IconFirst'
             onClick={() => {
-              navigate(routes[MenuList.first].path)
+              updatePageFromMenu(MenuList.first)
             }}
           />
-          <div onClick={() => navigate(routes[MenuList.first].quizPath)}>
+          <div onClick={() => updatePageFromMenu(MenuList.firstQuiz)}>
             <SvgQuiz fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
           </div>
           <div>
@@ -114,13 +116,13 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
         <div className={styles.navMenuItem}>
           <img
             className={styles.imgChapter}
-            src={activeMenu === MenuList.second ? IconSecondOrderPressed : IconSecondOrder}
+            src={curMenu === MenuList.second ? IconSecondOrderPressed : IconSecondOrder}
             alt='IconSecond'
             onClick={() => {
-              navigate(routes[MenuList.second].path)
+              updatePageFromMenu(MenuList.second)
             }}
           />
-          <div onClick={() => navigate(routes[MenuList.second].quizPath)}>
+          <div onClick={() => updatePageFromMenu(MenuList.secondQuiz)}>
             <SvgQuiz fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
           </div>
           <div>
@@ -130,13 +132,13 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
         <div className={styles.navMenuItem}>
           <img
             className={styles.imgChapter}
-            src={activeMenu === MenuList.comparison ? IconComparisonPressed : IconComparison}
+            src={curMenu === MenuList.comparison ? IconComparisonPressed : IconComparison}
             alt='IconComparison'
             onClick={() => {
-              navigate(routes[MenuList.comparison].path)
+              updatePageFromMenu(MenuList.comparison)
             }}
           />
-          <div onClick={() => navigate(routes[MenuList.comparison].quizPath)}>
+          <div onClick={() => updatePageFromMenu(MenuList.comparisonQuiz)}>
             <SvgQuiz fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
           </div>
           <div>
@@ -146,13 +148,13 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
         <div className={styles.navMenuItem}>
           <img
             className={styles.imgChapter}
-            src={activeMenu === MenuList.kinetics ? IconKineticsPressed : IconKinetics}
+            src={curMenu === MenuList.kinetics ? IconKineticsPressed : IconKinetics}
             alt='IconKinetics'
             onClick={() => {
-              navigate(routes[MenuList.kinetics].path)
+              updatePageFromMenu(MenuList.kinetics)
             }}
           />
-          <div onClick={() => navigate(routes[MenuList.kinetics].quizPath)}>
+          <div onClick={() => navigate(MenuList.kineticsQuiz)}>
             <SvgQuiz fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
           </div>
           <div>

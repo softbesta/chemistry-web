@@ -7,6 +7,7 @@ import ReactionFirst from './pages/ReactionRates/first';
 import { routes } from './constants';
 import CommonLayout from './layout/CommonLayout';
 import './App.css'
+import PageError from './pages/404page';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path={routes.zero.path} index element={<ReactionZero />} />
         <Route path={routes.first.path} element={<ReactionFirst />} />
         <Route path='about' element={<AboutPage />} />
+        <Route path='nopage' element={<PageError />} />
       </Routes>
     </CommonLayout>
   );

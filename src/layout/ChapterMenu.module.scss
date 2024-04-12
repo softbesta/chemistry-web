@@ -3,78 +3,100 @@
   top: 30px;
   right: 50px;
   background: white;
-  z-index: 200;
-
-  .dropDownBtn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    font-weight: 700;
-
-    text-decoration: none;
-    background: transparent;
-    box-shadow: none;
-    border: none;
-    box-sizing: border-box;
-    cursor: pointer;
-    padding: 0px 0px 0px 0px;
-  }
-
-  .dropDownIcon {
-    width: 26px;
-    height: 26px;
-    display: inline-block;
-    position: relative;
-    transition: 0.4s ease;
-    // transform: rotate(45deg);
-
-    &:before {
-      position: absolute;
-      content: "";
-      display: inline-block;
-      width: 12px;
-      height: 2px;
-      background-color: black;
-      transition: 0.4s ease;
-      transform: rotate(45deg) translate(14px, 0px);
-    }
-
-    &:after {
-      position: absolute;
-      content: "";
-      display: inline-block;
-      width: 12px;
-      height: 2px;
-      background-color: black;
-      transition: 0.4s ease;
-      transform: rotate(135deg) translate(5px, -19px);
-    }
-
-    &.active {
-
-      &:before {
-        transform: rotate(135deg) translate(2px, -17px);
-      }
-
-      &:after {
-        transform: rotate(225deg) translate(-12px, -7px);
-      }
-    }
-  }
+  z-index: 205;
 
   .chapterMenuPanel {
     transition: all 500ms;
-    opacity: 1; // animation
-    height: 0; // animation
+    opacity: 1;     // animation
+    max-height: 0;  // animation
+    padding: 0px 50px; //animation
     background-color: aquamarine;
     overflow: hidden;
     position: absolute;
     right: 0;
 
-    &.active {
-      opacity: 1; // animation
-      height: 100px; // animation
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    &::after {    // draw Line for tree structure
+      content: '';
+      position: absolute;
+      display: inline-block;
+      background-color: black;
+      width: 2px;
+      height: calc(100% - 30px);
+      right: 15px;
+      top: 10px;
+    }
+
+    &.activeChapterPanel {
+      transition: all 500ms;
+      opacity: 1;   // animation
+      max-height: 400px; // animation
+      padding: 10px 50px; //animation
+    }
+
+    .menuItem {
+      display: flex;
+      width: max-content;
+      flex-direction: column;
+      align-items: flex-end;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        display: inline-block;
+        background-color: black;
+        width: 30px;
+        height: 2px;
+        right: -33px;
+        top: 14px;
+      }
+
+      .menuItemPanel {
+        transition: all 500ms;
+        opacity: 0;
+        max-height: 0px;
+        &.activeMenuItemPane {
+          opacity: 1;
+          max-height: 200px;
+        }
+
+        &::after {    // draw Line for tree structure
+          content: '';
+          position: absolute;
+          display: inline-block;
+          background-color: black;
+          width: 2px;
+          height: calc(100% - 43px);
+          right: 12px;
+          top: 26px;
+        }
+      }
+
+      .subItem {
+        opacity: 0;
+        max-height: 0px;
+        margin: 10px 40px 10px 10px;
+        cursor: pointer;
+        position: relative;
+        &::after {
+          content: '';
+          position: absolute;
+          display: inline-block;
+          background-color: black;
+          width: 22px;
+          height: 2px;
+          right: -27px;
+          top: 12px;
+        }
+        &.activeSubItem {
+          opacity: 1;
+          max-height: 200px;
+        }
+      }
     }
   }
 }
