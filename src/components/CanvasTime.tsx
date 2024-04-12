@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react"
 import styles from './ChartTime.module.scss'
+import useAppData from "../hooks/useAppData"
 
 interface CanvasTimeProps {
   play: boolean
+  show: boolean
   c2: number
   c1: number
   t2: number
@@ -12,18 +14,20 @@ interface CanvasTimeProps {
   colorA: string
   colorB: string
   colorA_blur: string
+  onEndPlay: () => void
 }
-const CanvasTime = ({ play, c2, c1, t2, t1, height, width, colorA, colorB, colorA_blur }: CanvasTimeProps) => {
+const CanvasTime = ({ play, show, c2, c1, t2, t1, height, width, colorA, colorB, colorA_blur, onEndPlay }: CanvasTimeProps) => {
   const canvas = useRef<HTMLCanvasElement>(null);
   const [sX, setSX] = useState<number>(0);
   const [sY, setSY] = useState<number>(0);
   const [eX, setEX] = useState<number>(0);
   const [eY, setEY] = useState<number>(0);
   const requestAnimationFrame = window.requestAnimationFrame
-
   const cancelAnimationFrame = window.cancelAnimationFrame
 
-  useEffect(() => {
+  const { concentrationAB, reactionTime } = useAppData()
+
+  const animate = () => {
     if (!canvas.current) return
     const ctx = canvas.current.getContext('2d');
     let startX: number, startY1: number, startY2: number, xStep: number, yStep: number, duration, endX: number, otherReq: number;
@@ -41,7 +45,7 @@ const CanvasTime = ({ play, c2, c1, t2, t1, height, width, colorA, colorB, color
     xStep = (Math.abs(t1 - t2) / 20 * width) / duration;
     yStep = (Math.abs(c2 - c1) * height) / duration;
 
-    function step() {
+    function drawFrame() {
       if (!ctx) return
       ctx.beginPath();
       ctx.clearRect(0, 0, width, height);
@@ -50,6 +54,13 @@ const CanvasTime = ({ play, c2, c1, t2, t1, height, width, colorA, colorB, color
       ctx.strokeStyle = "black";
       ctx.lineWidth = 4;
       ctx.stroke();
+    }
+
+    function step() {
+      if (!ctx) return
+      drawFrame()
+      if (!show) return
+
       ctx.lineWidth = 1;
       ctx.moveTo(sX, 0);
       ctx.lineTo(sX, height);
@@ -91,22 +102,34 @@ const CanvasTime = ({ play, c2, c1, t2, t1, height, width, colorA, colorB, color
       startX += xStep;
       startY1 += yStep;
       startY2 += yStep;
-      if (endX > startX) {
+      if (endX > startX && play) {
         otherReq && requestAnimationFrame(step);
-      } else cancelAnimationFrame(otherReq);
+      } else {
+        cancelAnimationFrame(otherReq);
+        onEndPlay()
+      }
     }
 
     otherReq = requestAnimationFrame(step);
+  }
 
-  }, [play, sX, sY, eX, eY])
+  useEffect(() => {
+    console.log('canvasTime useEffect -', { play }, sX, sY, eX, eY)
+    animate()
+  }, [play, c1, c2, t1, t2, sX, sY, eX, eY])
   return (
-    <canvas
-      id='tur_canvasTime'
-      className={styles.canvasTime}
-      ref={canvas}
-      height={height}
-      width={width}
-    />
+    <>
+      <canvas
+        id='tur_canvasTime'
+        className={styles.canvasTime}
+        ref={canvas}
+        height={height}
+        width={width}
+      />
+      <button onClick={() => {
+        console.log({ c1, c2, t1, t2 })
+      }}>GGG</button>
+    </>
   );
 };
 

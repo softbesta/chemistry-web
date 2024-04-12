@@ -19,7 +19,13 @@ interface IAppContext {
   reactionTime: number[],
   setReactionTime: React.Dispatch<React.SetStateAction<number[]>>,
 
-  updateStepPlay: (step: number) => void
+  playAnimation: boolean,
+  setPlayAnimation: React.Dispatch<React.SetStateAction<boolean>>,
+  showCanvasTime: boolean,
+  setShowCanvasTime: React.Dispatch<React.SetStateAction<boolean>>,
+  showIndexAB: boolean[]
+  setShowIndexAB: React.Dispatch<React.SetStateAction<boolean[]>>,
+  // updateStepPlay: (step: number) => void
 }
 
 const initialState = {
@@ -28,6 +34,11 @@ const initialState = {
   stepPlay: 0,
   concentration: [70, 35],
   reactionTime: [10, 15],
+  // showA: false,
+  // showB: false,
+  playAnimation: false,
+  showCanvasTime: false,
+  showIndexAB: [true, false]
 }
 
 const AppContext = createContext({} as IAppContext)
@@ -42,6 +53,10 @@ export const AppDataProvider = (props: any) => {
   const [concentrationCD, setConcentrationCD] = useState(initialState.concentration)
   const [concentrationEF, setConcentrationEF] = useState(initialState.concentration)
   const [reactionTime, setReactionTime] = useState<number[]>(initialState.reactionTime);
+  const [playAnimation, setPlayAnimation] = useState<boolean>(initialState.playAnimation)
+  const [showCanvasTime, setShowCanvasTime] = useState<boolean>(initialState.showCanvasTime)
+  const [showIndexAB, setShowIndexAB] = useState<boolean[]>(initialState.showIndexAB)
+  // const [showA, setShowA]
 
   // need update, don't use yet
   const updateStepPlay = (step: number) => {
@@ -58,11 +73,17 @@ export const AppDataProvider = (props: any) => {
         setCurMenu,
         curStep,
         setCurStep,
-        updateStepPlay,
+        // updateStepPlay,
         concentrationAB,
         setConcentrationAB,
         reactionTime,
         setReactionTime,
+        playAnimation,
+        setPlayAnimation,
+        showCanvasTime,
+        setShowCanvasTime,
+        showIndexAB,
+        setShowIndexAB,
       }}
     >
       {children}

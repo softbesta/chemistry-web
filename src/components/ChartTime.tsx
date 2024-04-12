@@ -8,7 +8,18 @@ import CanvasTime from "./CanvasTime"
 import { Colors } from "../constants"
 
 const ChartTime = () => {
-  const { curStep, concentrationAB, setConcentrationAB, reactionTime, setReactionTime } = useAppData()
+  const {
+    curStep,
+    concentrationAB,
+    setConcentrationAB,
+    reactionTime,
+    setReactionTime,
+    playAnimation,
+    setPlayAnimation,
+    showCanvasTime,
+    setShowCanvasTime,
+  } = useAppData()
+
   const [lockIndex, setLockIndex] = useState(false)
 
   const handleChangeAB = (values: number[]) => {
@@ -20,7 +31,6 @@ const ChartTime = () => {
     console.log({ reactionTime })
     !lockIndex && setReactionTime([parseInt(values[0].toFixed(0)) / 10, parseInt(values[1].toFixed(0)) / 10])
   }
-  console.log({curStep})
 
   const drawChartTime = (ctx: CanvasRenderingContext2D) => {
     ctx.beginPath();
@@ -97,13 +107,15 @@ const ChartTime = () => {
       >
         {/* <Canvas draw={drawChartTime} height={222} width={222} /> */}
         <CanvasTime
-          play={curStep === 4}
+          play={playAnimation}
+          show={showCanvasTime}
+          onEndPlay={() => setPlayAnimation(false)}
           // c1={0.5}
           // c2={0.8}
           // t1={16}
           // t2={3.2}
-          c1={concentrationAB[1]/100}
-          c2={concentrationAB[0]/100}
+          c1={concentrationAB[1] / 100}
+          c2={concentrationAB[0] / 100}
           t1={reactionTime[1]}
           t2={reactionTime[0]}
           height={212}

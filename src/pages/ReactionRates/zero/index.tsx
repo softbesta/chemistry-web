@@ -49,7 +49,7 @@ const ReactionZero = () => {
   const exp1 = `\\[ t_{1/2} = [A_0]/(2k) \\]`
   const exp2 = `\\[ ${t_12.toFixed(2)} = ${A0.toFixed(2)} / (2 x ${k.toFixed(2)}) \\]`
   const exp3 = `\\[ Rate = k[A]^0 \\]`
-  const exp4 = `\\[ ${k.toFixed(2)} = ${k.toFixed(3)}(${(k * 10).toFixed(2)})^0 \\]`
+  const exp4 = `\\[ ${k.toFixed(2)} = ${k.toFixed(3)}(${c1.toFixed(2)})^0 \\]`
   // const blanks = [[true, true, true, true, true], [true]]
   const blanks = [[]]
 
