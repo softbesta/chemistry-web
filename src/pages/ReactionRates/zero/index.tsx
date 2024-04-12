@@ -13,7 +13,9 @@ const ReactionZero = () => {
     setCurStep,
     concentrationAB,
     setConcentrationAB,
-    reactionTime
+    reactionTime,
+    setShowCanvasGraph,
+    setPlayAnimation,
   } = useAppData()
 
   // const handletest = () => {
@@ -22,6 +24,20 @@ const ReactionZero = () => {
   // const handletest1 = () => {
   //   setConcentrationAB(v => (v - 3) < 0 ? 0 : v - 3)
   // }
+
+  useEffect(() => {
+    console.log('zero page --- ', {curStep})
+    if (curStep > 2) {
+      setShowCanvasGraph(true)
+    } else {
+      setShowCanvasGraph(false)
+    }
+    if (curStep > 3) {
+      setPlayAnimation(true)
+    } else {
+      setPlayAnimation(false)
+    }
+  }, [curStep])
 
   const expressions = [
     `\\[ Rate = 0.07 = -\\frac{-0.53}{7.28} = -\\frac{0.26 - 0.79}{19.40 - 12.12}\\]`,

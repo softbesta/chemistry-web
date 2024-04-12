@@ -3,29 +3,33 @@ import { MenuList, routes } from "../constants"
 import { PageMenuType } from "../helper/types"
 
 interface IAppContext {
-  // menu name for currently opened page.
+  // --- Description --- curMenu
+  // menu name for opened page.
   curMenu: PageMenuType,
   setCurMenu: React.Dispatch<React.SetStateAction<PageMenuType>>,
+  // --- Description --- curStep
+  // current tutorial step for opened page.
   curStep: number,
   setCurStep: React.Dispatch<React.SetStateAction<number>>,
 
-  // concentrationAB; minValue = 0, maxValue = 100
+  // --- Description --- concentrationAB
+  // ; minValue = 0, maxValue = 100
   // A: concentrationAB[0],  B: concentrationAB[1]    A > B
   concentrationAB: (number)[],
   setConcentrationAB: React.Dispatch<React.SetStateAction<(number)[]>>,
 
-  // reactionTime; minValue = 0, maxValue = 20
+  // --- Description --- reactionTime
+  // ; minValue = 0, maxValue = 20
   // A: reactionTime[0],     B: reactionTime[1]       A < B
   reactionTime: number[],
   setReactionTime: React.Dispatch<React.SetStateAction<number[]>>,
 
   playAnimation: boolean,
   setPlayAnimation: React.Dispatch<React.SetStateAction<boolean>>,
-  showCanvasTime: boolean,
-  setShowCanvasTime: React.Dispatch<React.SetStateAction<boolean>>,
+  showCanvasGraph: boolean,
+  setShowCanvasGraph: React.Dispatch<React.SetStateAction<boolean>>,
   showIndexAB: boolean[]
   setShowIndexAB: React.Dispatch<React.SetStateAction<boolean[]>>,
-  // updateStepPlay: (step: number) => void
 }
 
 const initialState = {
@@ -34,10 +38,8 @@ const initialState = {
   stepPlay: 0,
   concentration: [70, 35],
   reactionTime: [10, 15],
-  // showA: false,
-  // showB: false,
   playAnimation: false,
-  showCanvasTime: false,
+  showCanvasGraph: false,
   showIndexAB: [true, false]
 }
 
@@ -54,9 +56,8 @@ export const AppDataProvider = (props: any) => {
   const [concentrationEF, setConcentrationEF] = useState(initialState.concentration)
   const [reactionTime, setReactionTime] = useState<number[]>(initialState.reactionTime);
   const [playAnimation, setPlayAnimation] = useState<boolean>(initialState.playAnimation)
-  const [showCanvasTime, setShowCanvasTime] = useState<boolean>(initialState.showCanvasTime)
+  const [showCanvasGraph, setShowCanvasGraph] = useState<boolean>(initialState.showCanvasGraph)
   const [showIndexAB, setShowIndexAB] = useState<boolean[]>(initialState.showIndexAB)
-  // const [showA, setShowA]
 
   // need update, don't use yet
   const updateStepPlay = (step: number) => {
@@ -80,8 +81,8 @@ export const AppDataProvider = (props: any) => {
         setReactionTime,
         playAnimation,
         setPlayAnimation,
-        showCanvasTime,
-        setShowCanvasTime,
+        showCanvasGraph,
+        setShowCanvasGraph,
         showIndexAB,
         setShowIndexAB,
       }}

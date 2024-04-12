@@ -6,13 +6,6 @@ import styles from './EnergyProfile.module.scss'
 import useAppData from '../hooks/useAppData'
 import { Colors, colorsArr } from '../constants'
 
-// const dotColors = [
-//   "rgba(0,0,255,0.1)",
-//   "rgba(0,0,255,0.5)",
-//   "rgba(255,0,0,0.5)",
-//   "rgba(0,255,0,0.5)",
-// ]
-
 function beaker(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, radius: number, fillStyle: string, strokeStyle: string, lineWidth: number, offset: number) {
   ctx.beginPath();
   ctx.moveTo(x, y + radius);

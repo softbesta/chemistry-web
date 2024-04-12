@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import styles from './ChartTime.module.scss'
 import useAppData from "../hooks/useAppData"
+import { Colors } from "../constants"
 
 interface CanvasTimeProps {
   play: boolean
@@ -9,6 +10,8 @@ interface CanvasTimeProps {
   c1: number
   t2: number
   t1: number
+  pointerC: number
+  pointerT: number
   height: number
   width: number
   colorA: string
@@ -16,7 +19,7 @@ interface CanvasTimeProps {
   colorA_blur: string
   onEndPlay: () => void
 }
-const CanvasTime = ({ play, show, c2, c1, t2, t1, height, width, colorA, colorB, colorA_blur, onEndPlay }: CanvasTimeProps) => {
+const CanvasTime = ({ play, show, c2, c1, t2, t1, pointerC, pointerT, height, width, colorA, colorB, colorA_blur, onEndPlay }: CanvasTimeProps) => {
   const canvas = useRef<HTMLCanvasElement>(null);
   const [sX, setSX] = useState<number>(0);
   const [sY, setSY] = useState<number>(0);
@@ -24,8 +27,6 @@ const CanvasTime = ({ play, show, c2, c1, t2, t1, height, width, colorA, colorB,
   const [eY, setEY] = useState<number>(0);
   const requestAnimationFrame = window.requestAnimationFrame
   const cancelAnimationFrame = window.cancelAnimationFrame
-
-  const { concentrationAB, reactionTime } = useAppData()
 
   const animate = () => {
     if (!canvas.current) return
@@ -54,6 +55,38 @@ const CanvasTime = ({ play, show, c2, c1, t2, t1, height, width, colorA, colorB,
       ctx.strokeStyle = "black";
       ctx.lineWidth = 4;
       ctx.stroke();
+
+      // draw rulers
+      ctx.beginPath()
+      ctx.lineWidth = 1;
+      const yy = height / 10
+      for (let ty = height - yy; ty > 0; ty -= yy) {
+        ctx.moveTo(0, ty)
+        ctx.lineTo(10, ty)
+      }
+      const xx = height / 10
+      for (let tx = height - xx; tx > 0; tx -= xx) {
+        ctx.moveTo(tx, height)
+        ctx.lineTo(tx, height - 10)
+      }
+      ctx.stroke()
+
+      // draw pointers
+      ctx.beginPath()
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = Colors.C;
+      if (pointerC > 0) {
+        const pC = Math.abs(1 - pointerC / 100) * height
+        ctx.moveTo(0, pC)
+        ctx.lineTo(20, pC)
+      }
+      if (pointerT > 0) {
+        const pT = (pointerT / 20) * width
+        ctx.moveTo(pT, height)
+        ctx.lineTo(pT, height - 20)
+      }
+      console.log('here - ', { pointerC, pointerT })
+      ctx.stroke()
     }
 
     function step() {
@@ -116,7 +149,7 @@ const CanvasTime = ({ play, show, c2, c1, t2, t1, height, width, colorA, colorB,
   useEffect(() => {
     console.log('canvasTime useEffect -', { play }, sX, sY, eX, eY)
     animate()
-  }, [play, c1, c2, t1, t2, sX, sY, eX, eY])
+  }, [play, c1, c2, t1, t2, sX, sY, eX, eY, show])
   return (
     <>
       <canvas
@@ -126,9 +159,6 @@ const CanvasTime = ({ play, show, c2, c1, t2, t1, height, width, colorA, colorB,
         height={height}
         width={width}
       />
-      <button onClick={() => {
-        console.log({ c1, c2, t1, t2 })
-      }}>GGG</button>
     </>
   );
 };

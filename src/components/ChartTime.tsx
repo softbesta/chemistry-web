@@ -16,8 +16,9 @@ const ChartTime = () => {
     setReactionTime,
     playAnimation,
     setPlayAnimation,
-    showCanvasTime,
-    setShowCanvasTime,
+    showCanvasGraph,
+    setShowCanvasGraph,
+    showIndexAB,
   } = useAppData()
 
   const [lockIndex, setLockIndex] = useState(false)
@@ -108,7 +109,7 @@ const ChartTime = () => {
         {/* <Canvas draw={drawChartTime} height={222} width={222} /> */}
         <CanvasTime
           play={playAnimation}
-          show={showCanvasTime}
+          show={showCanvasGraph}
           onEndPlay={() => setPlayAnimation(false)}
           // c1={0.5}
           // c2={0.8}
@@ -118,6 +119,8 @@ const ChartTime = () => {
           c2={concentrationAB[0] / 100}
           t1={reactionTime[1]}
           t2={reactionTime[0]}
+          pointerC={concentrationAB[0]}
+          pointerT={reactionTime[0]}
           height={212}
           width={212}
           colorA={Colors.A}
