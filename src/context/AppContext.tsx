@@ -24,10 +24,10 @@ interface IAppContext {
   reactionTime: number[],
   setReactionTime: React.Dispatch<React.SetStateAction<number[]>>,
 
-  playAnimation: boolean,
-  setPlayAnimation: React.Dispatch<React.SetStateAction<boolean>>,
-  showTimeGraph: boolean,
-  setShowTimeGraph: React.Dispatch<React.SetStateAction<boolean>>,
+  // playAnimation: boolean,
+  // setPlayAnimation: React.Dispatch<React.SetStateAction<boolean>>,
+  showTimeGraph: number,
+  setShowTimeGraph: React.Dispatch<React.SetStateAction<number>>,
   showIndexT: number[]
   setShowIndexT: React.Dispatch<React.SetStateAction<number[]>>,
   showIndexC: number[]
@@ -40,8 +40,8 @@ const initialState = {
   stepPlay: 0,
   concentration: [70, 35],
   reactionTime: [10, 15],
-  playAnimation: false,
-  showTimeGraph: false,
+  // playAnimation: false,
+  showTimeGraph: 0,
 
   // 0: hidden, 1: disabled, 2: active
   showIndexC: [2, 0],
@@ -60,10 +60,10 @@ export const AppDataProvider = (props: any) => {
   const [concentrationCD, setConcentrationCD] = useState(initialState.concentration)
   const [concentrationEF, setConcentrationEF] = useState(initialState.concentration)
   const [reactionTime, setReactionTime] = useState<number[]>(initialState.reactionTime);
-  const [playAnimation, setPlayAnimation] = useState<boolean>(initialState.playAnimation)
+  // const [playAnimation, setPlayAnimation] = useState<boolean>(initialState.playAnimation)
   const [curConcentrationAB, setCurConcentrationAB] = useState<number[]>([])
 
-  const [showTimeGraph, setShowTimeGraph] = useState<boolean>(initialState.showTimeGraph)
+  const [showTimeGraph, setShowTimeGraph] = useState<number>(initialState.showTimeGraph) //  0; show Frame,  1; show Graph, 2; show Animation, 3; show end of Animation
   const [showIndexC, setShowIndexC] = useState<number[]>(initialState.showIndexC)
   const [showIndexT, setShowIndexT] = useState<number[]>(initialState.showIndexT)
 
@@ -87,8 +87,8 @@ export const AppDataProvider = (props: any) => {
         setConcentrationAB,
         reactionTime,
         setReactionTime,
-        playAnimation,
-        setPlayAnimation,
+        // playAnimation,
+        // setPlayAnimation,
         showTimeGraph,
         setShowTimeGraph,
         showIndexT,

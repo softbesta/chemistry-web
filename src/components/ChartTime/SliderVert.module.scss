@@ -1,0 +1,72 @@
+.container {
+  width: 270px;
+  height: 240px;
+}
+
+// A value slider
+.sliceVertical {
+  position: absolute;
+  top: -7px; // position
+  right: 200px;
+
+  .vertical-slider {
+    height: 225px; // control this for length of vert
+    width: 50px;
+
+    .example-track {
+      // line
+      left: 14px;
+      width: 0px;
+      // width: 3px;
+    }
+
+    .example-thumb {
+      // dot
+      width: 30px;
+      height: 15px;
+
+      &.disabled {
+        background-color: grey;
+      }
+    }
+
+
+  }
+}
+.example-track {
+  position: relative;
+  background: black;
+}
+
+.example-thumb {
+  background-color: rgb(220, 84, 59);
+  cursor: pointer;
+  box-sizing: border-box;
+  border-radius: 4px;
+
+  &:focus-visible {
+    outline: 0;
+  }
+}
+
+.sliceVerticalBar {
+  position: absolute;
+  top: 0px;
+  right: 234px;
+  height: 212px;
+  width: 3px;
+  background-color: black;
+}
+
+.textVert {
+  position: absolute;
+  top: 100px;
+  right: 255px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    margin: 0;
+  }
+}

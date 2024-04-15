@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
-import styles from './ChartTime.module.scss'
-import { Colors } from "../constants"
+import styles from './CanvasTime.module.scss'
+import { Colors } from "../../constants"
 
 interface CanvasTimeProps {
   play: boolean
@@ -84,7 +84,7 @@ const CanvasTime = ({ play, show, c2, c1, t2, t1, pointerC, pointerT, height, wi
         ctx.moveTo(pT, height)
         ctx.lineTo(pT, height - 20)
       }
-      console.log('here - ', { pointerC, pointerT })
+      // console.log('here - ', { pointerC, pointerT })
       ctx.stroke()
     }
 
@@ -146,7 +146,7 @@ const CanvasTime = ({ play, show, c2, c1, t2, t1, pointerC, pointerT, height, wi
   }
 
   useEffect(() => {
-    console.log('canvasTime useEffect -', { play }, sX, sY, eX, eY)
+    // console.log('canvasTime useEffect -', { play }, sX, sY, eX, eY)
     animate()
   }, [play, c1, c2, t1, t2, sX, sY, eX, eY, show])
   return (
