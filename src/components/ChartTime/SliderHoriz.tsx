@@ -21,38 +21,52 @@ const SliderHoriz = ({ valuesT, setValuesT, showIndexT }: SliderHoriz) => {
     }
   }, [showIndexT])
   const getValueT = () => {
+    let update: number[] = []
     if (showIndexT[0] > 0 && showIndexT[1] > 0) {
       console.log('===getValueC===', valuesT)
-      return [valuesT[1], valuesT[0]]
+      update = [valuesT[0], valuesT[1]]
     } else if (showIndexT[0] > 0) {
       console.log('===getValueC===  000', valuesT[0])
-      return [valuesT[0]]
+      update = [valuesT[0]]
     } else if (showIndexT[1] > 0) {
       console.log('===getValueC===  111', valuesT[1])
-      return [valuesT[1]]
-    } else return []
+      update = [valuesT[1]]
+    } else update = []
+    return update.map(item => item * 10)
   }
-  const handleChangeTime = (values: number[] | number) => {
-    console.log('===handleChangeAB=== ', { values, valuesC: valuesT })
-    let update: number[] = valuesT
-    if (Array.isArray(values)) {
+  const handleChangeTime = (val: number[] | number) => {
+    console.log('===handleChangeAB=== ', { values: val, valuesT: valuesT })
+    let update: number[] = [valuesT[0] * 10, valuesT[1] * 10]
+    if (Array.isArray(val)) {
       if (showIndexT[0] === 2) {
-        update = [values[1], update[1]]
+        update = [val[0], update[1]]
       }
       if (showIndexT[1] === 2) {
-        update = [update[0], values[0]]
+        update = [update[0], val[1]]
       }
     } else {
       if (showIndexT[0] === 2) {
-        update = [values, update[1]]
+        update = [val, update[1]]
       }
       if (showIndexT[1] === 2) {
-        update = [update[0], values]
+        update = [update[0], val]
       }
     }
-    console.log({ update })
+    console.log('111 ', update)
+    if (update[1] <= update[0]) update[1] = update[0] <= 200 ? update[0] : 200
+    update = update.map(item => item / 10)
+    console.log('222 ', update)
+    // if (update[0] < 10) update[0] = 10
+    // if (update[0] < 27) update[0] = 27
     setValuesT(update)
   }
+  const textT = useMemo(() => {
+    const res = getValueT()[1] ?? getValueT()[0]
+    if (!Number.isFinite(res)) {
+      return undefined
+    }
+    return res / 10
+  }, [getValueT])
   return <div className={styles.container}>
     <div className={styles.sliceHorizontalBar} />
     <div className={styles.sliceHorizontal}>
@@ -64,17 +78,38 @@ const SliderHoriz = ({ valuesT, setValuesT, showIndexT }: SliderHoriz) => {
         min={0}
         max={200}
         step={1}
-        onChange={(values, index) => {
-          console.log({ values, index })
-          handleChangeTime(values)
+        onChange={(val, index) => {
+          console.log({ val, index })
+          handleChangeTime(val)
         }}
-        disabled
+        renderThumb={(props, state) => {
+          const { index } = state
+          let disabledclass = ''
+          if (index === 0 && showIndexT[0] === 1) {
+            disabledclass = styles.disabled
+          }
+          if (index === 1 && showIndexT[1] === 1) {
+            disabledclass = styles.disabled
+          }
+          return <div
+            {...props}
+            className={`${disabledclass} ${props.className}`}
+          ></div>
+        }}
+      // disabled
       // renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
       />}
     </div>
     <div className={styles.textHoriz}>
-      <p>{`Time:`} {(getValueT()[1] ?? getValueT()[0])?.toFixed(2)}</p>
+      <p>{`Time:`} {textT?.toFixed(1)}</p>
     </div>
+    {/* <button
+      className={styles.test1}
+      onClick={() => {
+        console.log(getValueT())
+        console.log({ valuesT, showIndexT, infoT })
+      }}
+    >555</button> */}
   </div>
 }
 export default SliderHoriz

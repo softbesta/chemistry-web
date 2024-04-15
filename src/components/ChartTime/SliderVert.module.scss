@@ -25,6 +25,10 @@
       width: 30px;
       height: 15px;
 
+      &:nth-last-child(1) {
+        z-index: 2 !important;
+      }
+
       &.disabled {
         background-color: grey;
       }
@@ -33,6 +37,7 @@
 
   }
 }
+
 .example-track {
   position: relative;
   background: black;

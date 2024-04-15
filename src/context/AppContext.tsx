@@ -56,6 +56,7 @@ export const AppDataProvider = (props: any) => {
 
   const [curMenu, setCurMenu] = useState<PageMenuType>(MenuList.zero)
   const [curStep, setCurStep] = useState(props.stepMotion || initialState.stepPlay || 0)
+  // const [curTurs, setCurTurs] = useState()
   const [concentrationAB, setConcentrationAB] = useState<(number)[]>(initialState.concentration)
   const [concentrationCD, setConcentrationCD] = useState(initialState.concentration)
   const [concentrationEF, setConcentrationEF] = useState(initialState.concentration)

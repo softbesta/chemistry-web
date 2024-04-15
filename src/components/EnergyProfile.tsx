@@ -24,10 +24,15 @@ function beaker(ctx: CanvasRenderingContext2D, x: number, y: number, width: numb
   ctx.fill();
 }
 
-const EnergyProfile = () => {
+interface EnergyProfileProps {
+  concentrationAB: number[],
+}
+
+const EnergyProfile = ({ concentrationAB }: EnergyProfileProps) => {
   const totalDots = 144
   const [energyDots, setEnergyDots] = useState(Array.from({ length: totalDots }, () => Math.floor(Math.random() * 2)))
-  const { concentrationAB } = useAppData()
+  // const { concentrationAB } = useAppData()
+
   // console.log({ concentration, energyDots })
   // useEffect(() => {
   //   const update = generateEnergyArray(energyDots, concentrationAB[0], 1, 2)

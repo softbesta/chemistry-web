@@ -5,6 +5,7 @@ import { Colors } from "../../constants"
 interface CanvasTimeProps {
   play: boolean
   show: boolean
+  showTimeGraph: number
   c2: number
   c1: number
   t2: number
@@ -18,7 +19,23 @@ interface CanvasTimeProps {
   colorA_blur: string
   onEndPlay: () => void
 }
-const CanvasTime = ({ play, show, c2, c1, t2, t1, pointerC, pointerT, height, width, colorA, colorB, colorA_blur, onEndPlay }: CanvasTimeProps) => {
+const CanvasTime = ({
+  play,
+  show,
+  showTimeGraph,
+  c2,
+  c1,
+  t2,
+  t1,
+  pointerC,
+  pointerT,
+  height,
+  width,
+  colorA,
+  colorB,
+  colorA_blur,
+  onEndPlay
+}: CanvasTimeProps) => {
   const canvas = useRef<HTMLCanvasElement>(null);
   const [sX, setSX] = useState<number>(0);
   const [sY, setSY] = useState<number>(0);
@@ -90,9 +107,11 @@ const CanvasTime = ({ play, show, c2, c1, t2, t1, pointerC, pointerT, height, wi
 
     function step() {
       if (!ctx) return
+// draw frame
       drawFrame()
-      if (!show) return
+      if (showTimeGraph < 1) return
 
+// show graph
       ctx.lineWidth = 1;
       ctx.moveTo(sX, 0);
       ctx.lineTo(sX, height);
@@ -134,7 +153,9 @@ const CanvasTime = ({ play, show, c2, c1, t2, t1, pointerC, pointerT, height, wi
       startX += xStep;
       startY1 += yStep;
       startY2 += yStep;
-      if (endX > startX && play) {
+
+// show animation
+      if (showTimeGraph === 3 && endX > startX) {
         otherReq && requestAnimationFrame(step);
       } else {
         cancelAnimationFrame(otherReq);
@@ -148,7 +169,7 @@ const CanvasTime = ({ play, show, c2, c1, t2, t1, pointerC, pointerT, height, wi
   useEffect(() => {
     // console.log('canvasTime useEffect -', { play }, sX, sY, eX, eY)
     animate()
-  }, [play, c1, c2, t1, t2, sX, sY, eX, eY, show])
+  }, [showTimeGraph, c1, c2, t1, t2, sX, sY, eX, eY, pointerC, pointerT])
   return (
     <>
       <canvas

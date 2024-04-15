@@ -29,26 +29,19 @@ const ChartTime = ({
   showTimeGraph,
   setShowTimeGraph,
 }: ChartTimeProps) => {
-  const {
-    // concentrationAB: valuesC,
-    // setConcentrationAB: setValuesC,
-    // reactionTime: valuesT,
-    // setReactionTime: setValuesT,
-    // playAnimation,
-    // setPlayAnimation,
-    // showTimeGraph,
-    // setShowTimeGraph,
-    // showIndexC,
-    // showIndexT,
-  } = useAppData()
 
   return (
     <div className={styles.chartTimeContainer}>
+      {/* <button onClick={() => {
+        const pointerC = showIndexC[1] > showIndexC[0] ? valuesC[1] : valuesC[0]
+        console.log({ pointerC })
+      }}>chartTest</button> */}
 
       <SliderVert
         valuesC={valuesC}
         setValuesC={setValuesC}
         showIndexC={showIndexC}
+        // minDistance={[13, 0]}
       />
 
       <SliderHoriz
@@ -67,7 +60,8 @@ const ChartTime = ({
           play={showTimeGraph > 1}
           // show={false}
           show={showTimeGraph > 0}
-          onEndPlay={() => {}}
+          showTimeGraph={showTimeGraph}
+          onEndPlay={() => { }}
           // c1={0.5}
           // c2={0.8}
           // t1={16}
@@ -76,8 +70,8 @@ const ChartTime = ({
           c2={valuesC[0] / 100}
           t1={valuesT[1]}
           t2={valuesT[0]}
-          pointerC={valuesC[0]}
-          pointerT={valuesT[0]}
+          pointerC={showIndexC[1] > showIndexC[0] ? valuesC[1] : valuesC[0]}
+          pointerT={showIndexT[0] > showIndexT[1] ? valuesT[0] : valuesT[1]}
           height={212}
           width={212}
           colorA={Colors.A}

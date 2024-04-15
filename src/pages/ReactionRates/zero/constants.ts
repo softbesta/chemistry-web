@@ -1,5 +1,6 @@
+export const maxStepCount_Zero = 18
 
-export const tutorialSteps = [
+export const tur_Text = [
   [ // 0
     `This is a zero order reaction in which a reactant A turns into the product B. But what does it mean? Let's find out!`,
     '',
@@ -82,7 +83,7 @@ export const tutorialSteps = [
   // open Quiz
 ]
 
-export const stepHightlights = [
+export const tur_Hightlights = [
   // 0   This is zero...
   [],
 
@@ -96,7 +97,7 @@ export const stepHightlights = [
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math3'],
 
   // 4   Let's watch how all...
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math3'],
 
   // 5   For this zero order ...
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'], // +
@@ -140,9 +141,28 @@ export const stepHightlights = [
 export const stepsActions = [
   // (A - 0, B - 1), (C - 2, D - 3), (E - 4, F - 5)
   {
-    showIndexAB: [2]
+    showIndexC: [2, 0],
+    showIndexT: [2, 0],
+    showTimeGraph: 0,
   },
   {
-    showIndexAB: [1, 2]
+    showIndexC: [1, 2],
+    showIndexT: [1, 2],
+    showTimeGraph: 0,
+  },
+  {
+    showIndexC: [1, 2],
+    showIndexT: [1, 2],
+    showTimeGraph: 1,
+  },
+  {
+    showIndexC: [1, 2],
+    showIndexT: [1, 2],
+    showTimeGraph: 1,
+  },
+  {
+    showIndexC: [1, 2],
+    showIndexT: [1, 2],
+    showTimeGraph: 2,
   },
 ]
