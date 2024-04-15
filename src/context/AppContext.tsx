@@ -26,10 +26,12 @@ interface IAppContext {
 
   playAnimation: boolean,
   setPlayAnimation: React.Dispatch<React.SetStateAction<boolean>>,
-  showCanvasGraph: boolean,
-  setShowCanvasGraph: React.Dispatch<React.SetStateAction<boolean>>,
-  showIndexAB: boolean[]
-  setShowIndexAB: React.Dispatch<React.SetStateAction<boolean[]>>,
+  showTimeGraph: boolean,
+  setShowTimeGraph: React.Dispatch<React.SetStateAction<boolean>>,
+  showIndexT: number[]
+  setShowIndexT: React.Dispatch<React.SetStateAction<number[]>>,
+  showIndexC: number[]
+  setShowIndexC: React.Dispatch<React.SetStateAction<number[]>>,
 }
 
 const initialState = {
@@ -39,8 +41,11 @@ const initialState = {
   concentration: [70, 35],
   reactionTime: [10, 15],
   playAnimation: false,
-  showCanvasGraph: false,
-  showIndexAB: [true, false]
+  showTimeGraph: false,
+
+  // 0: hidden, 1: disabled, 2: active
+  showIndexC: [2, 0],
+  showIndexT: [2, 0],
 }
 
 const AppContext = createContext({} as IAppContext)
@@ -56,8 +61,11 @@ export const AppDataProvider = (props: any) => {
   const [concentrationEF, setConcentrationEF] = useState(initialState.concentration)
   const [reactionTime, setReactionTime] = useState<number[]>(initialState.reactionTime);
   const [playAnimation, setPlayAnimation] = useState<boolean>(initialState.playAnimation)
-  const [showCanvasGraph, setShowCanvasGraph] = useState<boolean>(initialState.showCanvasGraph)
-  const [showIndexAB, setShowIndexAB] = useState<boolean[]>(initialState.showIndexAB)
+  const [curConcentrationAB, setCurConcentrationAB] = useState<number[]>([])
+
+  const [showTimeGraph, setShowTimeGraph] = useState<boolean>(initialState.showTimeGraph)
+  const [showIndexC, setShowIndexC] = useState<number[]>(initialState.showIndexC)
+  const [showIndexT, setShowIndexT] = useState<number[]>(initialState.showIndexT)
 
   // need update, don't use yet
   const updateStepPlay = (step: number) => {
@@ -81,10 +89,12 @@ export const AppDataProvider = (props: any) => {
         setReactionTime,
         playAnimation,
         setPlayAnimation,
-        showCanvasGraph,
-        setShowCanvasGraph,
-        showIndexAB,
-        setShowIndexAB,
+        showTimeGraph,
+        setShowTimeGraph,
+        showIndexT,
+        setShowIndexT,
+        showIndexC,
+        setShowIndexC,
       }}
     >
       {children}

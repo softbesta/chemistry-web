@@ -1,5 +1,4 @@
 import styles from './ChartBar.module.scss'
-import ImgBar from '../assets/ReactionRates/reaction_boxes/bar.png'
 import BarChartCanvas from './CanvasBar'
 import useAppData from '../hooks/useAppData'
 import { Colors } from '../constants'

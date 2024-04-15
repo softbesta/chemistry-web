@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react"
 import styles from './ChartTime.module.scss'
-import useAppData from "../hooks/useAppData"
 import { Colors } from "../constants"
 
 interface CanvasTimeProps {

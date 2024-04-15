@@ -42,15 +42,9 @@ interface NavPanelProps {
   onClose: () => void
 }
 const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
-  const isCurMenu = ''
-  const navigate = useNavigate();
   let location = useLocation()
   const { updatePageFromMenu } = useFunctions()
   const { curMenu, setCurMenu } = useAppData()
-
-  const handleTEST = () => {
-    console.log({ curMenu })
-  }
 
   useEffect(() => {
     console.log({ location })

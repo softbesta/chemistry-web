@@ -1,5 +1,4 @@
 import { MathJax, MathJaxContext } from "better-react-mathjax";
-import { useState } from "react";
 import styles from './MathContent.module.scss'
 
 const config = {

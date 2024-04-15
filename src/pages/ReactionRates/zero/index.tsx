@@ -1,6 +1,6 @@
 import useAppData from "../../../hooks/useAppData"
 import styles from './zero.module.scss'
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import EnergyProfile from "../../../components/EnergyProfile"
 import ChartTime from "../../../components/ChartTime"
 import ChartBar from "../../../components/ChartBar"
@@ -10,11 +10,11 @@ import TutorialControl from "../../../components/TutorialControl"
 const ReactionZero = () => {
   const {
     curStep,
-    setCurStep,
+    // setCurStep,
     concentrationAB,
-    setConcentrationAB,
+    // setConcentrationAB,
     reactionTime,
-    setShowCanvasGraph,
+    setShowTimeGraph: setShowCanvasGraph,
     setPlayAnimation,
   } = useAppData()
 
@@ -39,13 +39,13 @@ const ReactionZero = () => {
     }
   }, [curStep])
 
-  const expressions = [
-    `\\[ Rate = 0.07 = -\\frac{-0.53}{7.28} = -\\frac{0.26 - 0.79}{19.40 - 12.12}\\]`,
-    `\\[ t_{1/2} = [A_0]/(2k) \\]`,
-    `\\[ 11.46 = 1.68 / (2 x 0.07) \\]`,
-    `\\[ Rate = k[A]^0 \\]`,
-    `\\[ 0.07 = 0.073(0.60)^0 \\]`,
-  ]
+  // const expressions = [
+  //   `\\[ Rate = 0.07 = -\\frac{-0.53}{7.28} = -\\frac{0.26 - 0.79}{19.40 - 12.12}\\]`,
+  //   `\\[ t_{1/2} = [A_0]/(2k) \\]`,
+  //   `\\[ 11.46 = 1.68 / (2 x 0.07) \\]`,
+  //   `\\[ Rate = k[A]^0 \\]`,
+  //   `\\[ 0.07 = 0.073(0.60)^0 \\]`,
+  // ]
 
   const c1 = (concentrationAB[0] ?? 0) / 100
   const c2 = (concentrationAB[1] ?? 0) / 100
