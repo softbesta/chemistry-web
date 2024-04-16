@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { Colors } from "../constants"
+import { themeColors } from "../constants"
 
 
 interface BarChartCanvasProps {
@@ -69,7 +69,7 @@ const BarChartCanvas = ({ play, c2, c1, t2, t1, height, width, colorA, colorB }:
 
       ctx.beginPath();
       ctx.rect(40, 194 - 194 * c2, 30, 194 * c2);
-      ctx.fillStyle = Colors.grey;
+      ctx.fillStyle = themeColors.grey;
       ctx.fill();
       ctx.beginPath();
       ctx.rect(40, 194 - 194 * startY1, 30, 194 * startY1);

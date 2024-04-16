@@ -5,9 +5,18 @@
 // count: array item count to be converted.
 // value: array item value to be converted.
 // count = 2, value = true, then result : example - [false, true, true, false, false, true]
-export const generateEnergyArray = (arr: any, percentage: any, originVal: number = 0, toVal: number = 1) => {
+export const generateEnergyArray = (arr: any, percentage: any, originVal: number = 1, toVal: number = 0) => {
   const arrNum: number[] = []
   const res = [...arr]
+
+  // if toVal === 0 then fill other items with originVal(1).
+  if (toVal === 0) {
+    res.forEach((item, index) => {
+      if (item > 1) {
+        res[index] = originVal
+      }
+    })
+  }
 
   let toCount = 0
   let originCount = 0
@@ -61,7 +70,19 @@ export const generateEnergyArray = (arr: any, percentage: any, originVal: number
     })
   }
 
+  // updated index Array
   updatedArrIndexes.sort((a, b) => a - b)
   // console.log({ updatedArrIndexes })
+  return {
+    changedCount: updatedArrIndexes.length,
+    items: res
+  }
+}
+
+export const energyBeforeAnimation = (arr: number[], percentage: number, originVal: number = 1) => {
+  const res = [...arr]
+  res.forEach((item, index) => {
+    if (item > 0) res[index] = originVal
+  })
   return res
 }

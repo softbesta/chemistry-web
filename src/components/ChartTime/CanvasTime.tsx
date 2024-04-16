@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import styles from './CanvasTime.module.scss'
-import { Colors } from "../../constants"
+import { themeColors } from "../../constants"
 
 interface CanvasTimeProps {
   showTimeGraph: number
@@ -15,7 +15,7 @@ interface CanvasTimeProps {
   colorA: string
   colorB: string
   colorA_blur: string
-  onEndPlay: () => void
+  onTimeframeChange: (val: number) => void
 }
 const CanvasTime = ({
   showTimeGraph,
@@ -30,7 +30,7 @@ const CanvasTime = ({
   colorA,
   colorB,
   colorA_blur,
-  onEndPlay
+  onTimeframeChange,
 }: CanvasTimeProps) => {
   const canvas = useRef<HTMLCanvasElement>(null);
   const [sX, setSX] = useState<number>(0);
@@ -52,11 +52,10 @@ const CanvasTime = ({
   const startTimer = () => {
     stopTimer()
     timerID.current = setInterval(() => {
-      console.log('interval', timeOffset)
+      // console.log('interval', timeOffset)
       setTimeOffset(v => v += 1 / framesPerSecond)
     }, intervalTime)
-    console.log('started', timerID.current)
-    
+    // console.log('started', timerID.current)
   }
   const stopTimer = () => {
     if (timerID.current) {
@@ -64,9 +63,8 @@ const CanvasTime = ({
       timerID.current = undefined
     }
   }
-// animation play
+  // animation play
   useEffect(() => {
-    console.log('bbb ', { count: timeOffset })
     drawAt(timeOffset)
   }, [timeOffset])
 
@@ -90,7 +88,7 @@ const CanvasTime = ({
     offset.current = { x: xStep, y: yStep }
 
     drawFrame()
-    console.log('===drawGraph===', { duration, xStep, yStep })
+    // console.log('===drawGraph===', { duration, xStep, yStep })
   }
 
   function drawFrame() {
@@ -123,7 +121,7 @@ const CanvasTime = ({
     // draw pointers
     ctx.beginPath()
     ctx.lineWidth = 4;
-    ctx.strokeStyle = Colors.C;
+    ctx.strokeStyle = themeColors.C;
     if (pointerC > 0) {
       const pC = Math.abs(1 - pointerC / 100) * height
       ctx.moveTo(0, pC)
@@ -139,7 +137,7 @@ const CanvasTime = ({
   }
 
   const drawAt = (timeAt: number) => {
-    console.log('drawAt - ', { timeAt })
+    // console.log('drawAt - ', { timeAt })
     if (!canvas.current) return
     const ctx = canvas.current.getContext('2d');
     if (!ctx) return
@@ -177,7 +175,7 @@ const CanvasTime = ({
 
     const ptBlue = { x: sX + offset.current.x * (timeAt * framesPerSecond), y: sY + offset.current.y * (timeAt * framesPerSecond) }
     const ptRed = { x: sX + offset.current.x * (timeAt * framesPerSecond), y: height - offset.current.y * (timeAt * framesPerSecond) }
-    console.log('drawAt - ', { timeAt })
+    // console.log('drawAt - ', { timeAt })
 
     ctx.lineTo(ptBlue.x, ptBlue.y)
     ctx.strokeStyle = colorA;
@@ -208,23 +206,23 @@ const CanvasTime = ({
   }
 
   useEffect(() => {
-    console.log('canvasTime useEffect -', { sX, sY, eX, eY })
+    // console.log('canvasTime useEffect -', { sX, sY, eX, eY })
     initAll()
     drawAt(timeOffset)
   }, [showTimeGraph, c1, c2, t1, t2, sX, sY, eX, eY, pointerC, pointerT])
 
   useEffect(() => {
     if (showTimeGraph < 2) {
-      console.log('stopped', timerID.current)
+      // console.log('stopped', timerID.current)
       stopTimer()
       setTimeOffset(0)
     } else if (showTimeGraph === 2) {
-      console.log('useEffect -- started')
+      // console.log('useEffect -- started')
       setTimeOffset(0)
       startTimer() // call animation play
     }
     if (showTimeGraph > 2) {
-      console.log('aaa useEffect -- stopTimer', { showTimeGraph })
+      // console.log('aaa useEffect -- stopTimer', { showTimeGraph })
       stopTimer()
 
       setTimeOffset(maxTime)

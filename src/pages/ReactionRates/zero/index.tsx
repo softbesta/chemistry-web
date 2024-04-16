@@ -17,17 +17,20 @@ const ReactionZero = () => {
     valuesC: valuesC,
     setValuesC: setConcentrationAB,
     valuesT: valuesT,
-    showTimeIndexC: showIndexC,
-    setShowTimeIndexC: setShowIndexC,
-    showTimeIndexT: showIndexT,
-    setShowTimeIndexT: setShowIndexT,
+    canvaTimeSliderC: showIndexC,
+    setCanvaTimeSliderC: setShowIndexC,
+    canvaTimeSliderT: showIndexT,
+    setCanvaTimeSliderT: setShowIndexT,
     setValuesT: setValuesT,
-    showTimeGraph,
-    setShowTimeGraph,
+    canvaTimeState: showTimeGraph,
+    setCanvaTimeState: setShowTimeGraph,
     // curTurs
     // setCurTurs,
     // setPlayAnimation,
     setCurStep,
+    canvaBeakerState: beakerState,
+    setCanvaBeakerState: setBeakerState,
+    setTimeframe,
   } = useAppData()
 
   const {
@@ -57,7 +60,7 @@ const ReactionZero = () => {
   // const maxStep = maxStep_Zero
   // console.log('000,', { zeroTurs })
 
-  // Tutorial-Actions
+  // *** Tutorial-ACTIONS
   const curActions = zeroTurs[curStep]?.actions
   useEffect(() => {
     // console.log('zero page ===useEffect=== --- ', { curStep })
@@ -66,6 +69,9 @@ const ReactionZero = () => {
     if (curActions) {
       if (Number.isFinite(curActions?.showTimeGraph)) {
         setShowTimeGraph(curActions.showTimeGraph)
+      }
+      if (Number.isFinite(curActions?.beakerState)) {
+        setBeakerState(curActions.beakerState)
       }
       curActions?.showIndexC && setShowIndexC(curActions.showIndexC)
       curActions?.showIndexT && setShowIndexT(curActions.showIndexT)
@@ -160,6 +166,7 @@ const ReactionZero = () => {
   return <div className={styles.container}>
     <p>step: {curStep}</p>
     <p>showTimeGraph: {showTimeGraph}</p>
+    <p>beakerState: {beakerState}</p>
 
     <div className={styles.reactionDrawContainer}>
       <div>
@@ -169,7 +176,9 @@ const ReactionZero = () => {
       </div>
 
       <EnergyProfile
-        valueC={valuesC}
+        valuesC={valuesC}
+        beakerState={beakerState}
+        onEndPlay={() => {}}
       />
       <ChartTime
         valuesC={valuesC}
@@ -179,7 +188,7 @@ const ReactionZero = () => {
         setValuesT={val => setValuesT(val)}
         showIndexT={showIndexT}
         showTimeGraph={showTimeGraph}
-        setShowTimeGraph={setShowTimeGraph}
+        onTimeframeChange={val => setTimeframe(val)}
       />
       <ChartBar />
     </div>

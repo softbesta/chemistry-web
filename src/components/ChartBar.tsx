@@ -1,7 +1,7 @@
 import styles from './ChartBar.module.scss'
 import BarChartCanvas from './CanvasBar'
 import useAppData from '../hooks/useAppData'
-import { Colors } from '../constants'
+import { themeColors } from '../constants'
 
 const ChartBar = () => {
   const { curStep, valuesC: concentrationAB, valuesT: reactionTime } = useAppData()
@@ -21,8 +21,8 @@ const ChartBar = () => {
         t2={reactionTime[0]}
         height={212}
         width={212}
-        colorA={Colors.A}
-        colorB={Colors.B}
+        colorA={themeColors.A}
+        colorB={themeColors.B}
       />
     </div>
   )

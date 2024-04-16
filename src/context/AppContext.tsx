@@ -1,5 +1,5 @@
-import { createContext, useState } from "react"
-import { MenuList, routes } from "../constants"
+import { createContext, useRef, useState } from "react"
+import { MenuList, initDots, routes } from "../constants"
 import { PageMenuType } from "../helper/types"
 
 interface IAppContext {
@@ -24,14 +24,24 @@ interface IAppContext {
   valuesT: number[],
   setValuesT: React.Dispatch<React.SetStateAction<number[]>>,
 
-  // playAnimation: boolean,
+  // animation time frame
+  timeframe: number,
+  setTimeframe: React.Dispatch<React.SetStateAction<number>>,
+
+  // *** canvas Time actions
   // setPlayAnimation: React.Dispatch<React.SetStateAction<boolean>>,
-  showTimeGraph: number,
-  setShowTimeGraph: React.Dispatch<React.SetStateAction<number>>,
-  showTimeIndexT: number[]
-  setShowTimeIndexT: React.Dispatch<React.SetStateAction<number[]>>,
-  showTimeIndexC: number[]
-  setShowTimeIndexC: React.Dispatch<React.SetStateAction<number[]>>,
+  canvaTimeState: number,
+  setCanvaTimeState: React.Dispatch<React.SetStateAction<number>>,
+  canvaTimeSliderT: number[]
+  setCanvaTimeSliderT: React.Dispatch<React.SetStateAction<number[]>>,
+  canvaTimeSliderC: number[]
+  setCanvaTimeSliderC: React.Dispatch<React.SetStateAction<number[]>>,
+
+  // *** canvas Beaker actions
+  canvaBeakerState: number,
+  setCanvaBeakerState: React.Dispatch<React.SetStateAction<number>>,
+  beakerDots: React.MutableRefObject<number[]>
+  beakerDotsEnd: React.MutableRefObject<number[]>
 }
 
 const initialState = {
@@ -40,12 +50,21 @@ const initialState = {
   stepPlay: 0,
   concentration: [70, 35],
   reactionTime: [10, 15],
+
+  // animation time frame (0-100)
+  timeframe: 0,
+
+  // *** canvas Time graph
   // playAnimation: false,
-  showTimeGraph: 0,
+  showTimeGraph: 0, // 0: frame, 1: show graph, 2: animation, 3: show end
 
   // 0: hidden, 1: disabled, 2: active
   showIndexC: [2, 0],
   showIndexT: [2, 0],
+
+  // *** canvas Beaker
+  beakerState: 0, // 0: empty, 1: show one, 2: animation, 3: show two
+  beakerDots: initDots,
 }
 
 const AppContext = createContext({} as IAppContext)
@@ -54,19 +73,22 @@ export const AppDataProvider = (props: any) => {
   const { children } = props
   const [count, setCount] = useState(props.count || initialState.count || 0)
 
+  // animation time frame (0-100)
+  const [timeframe, setTimeframe] = useState<number>(initialState.timeframe)
+
   const [curMenu, setCurMenu] = useState<PageMenuType>(MenuList.zero)
   const [curStep, setCurStep] = useState(props.stepMotion || initialState.stepPlay || 0)
-  // const [curTurs, setCurTurs] = useState()
   const [valuesC, setValuesC] = useState<(number)[]>(initialState.concentration)
-  const [concentrationCD, setConcentrationCD] = useState(initialState.concentration)
-  const [concentrationEF, setConcentrationEF] = useState(initialState.concentration)
-  const [valuesT, setValuesT] = useState<number[]>(initialState.reactionTime);
-  // const [playAnimation, setPlayAnimation] = useState<boolean>(initialState.playAnimation)
-  const [curConcentrationAB, setCurConcentrationAB] = useState<number[]>([])
+  const [valuesT, setValuesT] = useState<number[]>(initialState.reactionTime)
 
-  const [showTimeGraph, setShowTimeGraph] = useState<number>(initialState.showTimeGraph) //  0; show Frame,  1; show Graph, 2; show Animation, 3; show end of Animation
-  const [showTimeIndexC, setShowTimeIndexC] = useState<number[]>(initialState.showIndexC)
-  const [showTimeIndexT, setShowTimeIndexT] = useState<number[]>(initialState.showIndexT)
+  //  0; show Frame,  1; show Graph, 2; show Animation, 3; show end of Animation
+  const [canvaTimeState, setCanvaTimeState] = useState<number>(initialState.showTimeGraph)
+  const [canvaTimeSliderC, setCanvaTimeSliderC] = useState<number[]>(initialState.showIndexC)
+  const [canvaTimeSliderT, setCanvaTimeSliderT] = useState<number[]>(initialState.showIndexT)
+
+  const [canvaBeakerState, setCanvaBeakerState] = useState<number>(initialState.beakerState)
+  const beakerDots = useRef<number[]>(initialState.beakerDots)
+  const beakerDotsEnd = useRef<number[]>(initialState.beakerDots)
 
   // need update, don't use yet
   const updateStepPlay = (step: number) => {
@@ -91,13 +113,20 @@ export const AppDataProvider = (props: any) => {
         // playAnimation,
         // setPlayAnimation,
 // controllers - Time Canvas
-        showTimeGraph,
-        setShowTimeGraph,
-        showTimeIndexT,
-        setShowTimeIndexT,
-        showTimeIndexC,
-        setShowTimeIndexC,
+        canvaTimeState,
+        setCanvaTimeState,
+        canvaTimeSliderT,
+        setCanvaTimeSliderT,
+        canvaTimeSliderC,
+        setCanvaTimeSliderC,
 // controllers - Energy Canvas
+        canvaBeakerState,
+        setCanvaBeakerState,
+        beakerDots,
+        beakerDotsEnd,
+// animation Time change status (1-100)
+        timeframe,
+        setTimeframe,
       }}
     >
       {children}

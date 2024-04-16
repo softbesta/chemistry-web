@@ -148,7 +148,7 @@ export const enum MenuList {
 
 // tutorial steps
 
-export const Colors = {
+export const themeColors = {
   none: "rgba(8, 168, 232,0.2)",
   A: 'rgba(8, 168, 232, 0.8)',
   B: 'rgba(255, 19, 19, 0.8)',
@@ -156,9 +156,35 @@ export const Colors = {
   D: 'rgba(99, 105, 209, 0.8)',
   E: 'rgba(156, 109, 138, 0.8)',
   F: 'rgba(27, 153, 139, 0.8)',
-  bg: 'rgba(8, 168, 232, 0.05)',
+  bgA: 'rgba(8, 168, 232, 0.05)',
+  bgB: 'rgba(255, 19, 19, 0.05)',
+  bgC: 'rgba(213, 111, 62, 0.05)',
+  bgD: 'rgba(99, 105, 209, 0.05)',
+  bgE: 'rgba(156, 109, 138, 0.05)',
+  bgF: 'rgba(27, 153, 139, 0.05)',
   grey: 'rgba(209, 209, 214, 0.8)',
 }
-export const colorsArr = [
-  Colors.none, Colors.A, Colors.B, Colors.C, Colors.D, Colors.E, Colors.F
+export const dotColors = [
+                     // dot Index
+  themeColors.none,  // 0
+  themeColors.A,     // 1
+  themeColors.B,     // 2
+  themeColors.C,     // 3
+  themeColors.D,     // 4
+  themeColors.E,     // 5
+  themeColors.F,     // 6
 ]
+export const dotBgColors = [
+                     // dot Index
+  themeColors.none,  // 0
+  themeColors.bgA,   // 1
+  themeColors.bgB,   // 2
+  themeColors.bgC,   // 3
+  themeColors.bgD,   // 4
+  themeColors.bgE,   // 5
+  themeColors.bgF,   // 6
+]
+
+// initial Beaker dots
+export const totalDots = 144
+export const initDots = Array.from({ length: totalDots }, () => 0)

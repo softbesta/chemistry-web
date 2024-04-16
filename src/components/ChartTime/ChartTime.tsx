@@ -3,7 +3,7 @@ import styles from './ChartTime.module.scss'
 import { useCallback, useMemo, useState } from "react"
 import useAppData from "../../hooks/useAppData"
 import CanvasTime from "./CanvasTime"
-import { Colors } from "../../constants"
+import { themeColors } from "../../constants"
 import SliderVert from "./SliderVert"
 import SliderHoriz from "./SliderHoriz"
 
@@ -16,7 +16,7 @@ interface ChartTimeProps {
   showIndexT: number[]
   // playAnimation: boolean
   showTimeGraph: number   //  0; show Frame,  1; show Graph, 2; show Animation, 3; show end of Animation
-  setShowTimeGraph: (val: number) => void
+  onTimeframeChange: (val: number) => void
 }
 
 const ChartTime = ({
@@ -27,7 +27,7 @@ const ChartTime = ({
   showIndexT,
   setValuesT,
   showTimeGraph,
-  setShowTimeGraph,
+  onTimeframeChange,
 }: ChartTimeProps) => {
 
   return (
@@ -41,7 +41,7 @@ const ChartTime = ({
         valuesC={valuesC}
         setValuesC={setValuesC}
         showIndexC={showIndexC}
-        // minDistance={[13, 0]}
+      // minDistance={[13, 0]}
       />
 
       <SliderHoriz
@@ -61,7 +61,7 @@ const ChartTime = ({
           // show={false}
           // show={showTimeGraph > 0}
           showTimeGraph={showTimeGraph}
-          onEndPlay={() => { }}
+          onTimeframeChange={onTimeframeChange}
           // c1={0.5}
           // c2={0.8}
           // t1={16}
@@ -74,9 +74,9 @@ const ChartTime = ({
           pointerT={showIndexT[0] > showIndexT[1] ? valuesT[0] : valuesT[1]}
           height={212}
           width={212}
-          colorA={Colors.A}
-          colorB={Colors.B}
-          colorA_blur={Colors.none}
+          colorA={themeColors.A}
+          colorB={themeColors.B}
+          colorA_blur={themeColors.none}
         />
       </div>
     </div>

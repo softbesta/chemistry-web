@@ -1,10 +1,10 @@
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { generateEnergyArray } from '../helper/functions'
 import Canvas from './Canvas'
 import styles from './EnergyProfile.module.scss'
 import useAppData from '../hooks/useAppData'
-import { Colors, colorsArr } from '../constants'
+import { themeColors, dotColors, initDots, dotBgColors } from '../constants'
 
 function beaker(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, radius: number, fillStyle: string, strokeStyle: string, lineWidth: number, offset: number) {
   ctx.beginPath();
@@ -25,12 +25,14 @@ function beaker(ctx: CanvasRenderingContext2D, x: number, y: number, width: numb
 }
 
 interface EnergyProfileProps {
-  valueC: number[],
+  valuesC: number[],
+  beakerState: number,
+  onEndPlay: () => void
 }
 
-const EnergyProfile = ({ valueC }: EnergyProfileProps) => {
-  const totalDots = 144
-  const [energyDots, setEnergyDots] = useState(Array.from({ length: totalDots }, () => Math.floor(Math.random() * 2)))
+const EnergyProfile = ({ valuesC, beakerState, onEndPlay }: EnergyProfileProps) => {
+  const [energyDots, setEnergyDots] = useState(initDots)
+  const energyDotsAnimation = useRef(initDots)
   // const { concentrationAB } = useAppData()
 
   // console.log({ concentration, energyDots })
@@ -40,18 +42,97 @@ const EnergyProfile = ({ valueC }: EnergyProfileProps) => {
   //   // console.log({ update })
   // }, [concentrationAB])
 
-  useEffect(() => {
-    // console.log('AAA: ', { valueC })
-    let update = generateEnergyArray(energyDots, valueC[0], 1, 0)
-    update = generateEnergyArray(update, (valueC[1] / valueC[0] * 100), 2, 1)
-    setEnergyDots(update)
-  }, [valueC[0]])
-  useEffect(() => {
-    // console.log('BBB: ', { valueC })
-    // const update = generateEnergyArray(energyDots, (valueC[1] / valueC[0] * 100), 2, 1)
-    // setEnergyDots(update)
-  }, [valueC[1]])
+  const { beakerDots, beakerDotsEnd, valuesT } = useAppData()
 
+  useEffect(() => {
+    // console.log('vvv111')
+    let update = generateEnergyArray(beakerDots.current, valuesC[0], 1, 0).items
+    beakerDots.current = update
+    energyDotsAnimation.current = update
+    update = generateEnergyArray(update, (valuesC[1] / valuesC[0] * 100), 2, 1).items
+    beakerDotsEnd.current = update
+    setEnergyDots(beakerDots.current)
+  }, [valuesC[0]])
+  useEffect(() => {
+    // console.log('vvv222')
+    const update = generateEnergyArray(beakerDotsEnd.current, (valuesC[1] / valuesC[0] * 100), 2, 1).items
+    beakerDotsEnd.current = update
+    if (beakerState === 3) {
+      setEnergyDots(beakerDotsEnd.current)
+    }
+  }, [valuesC[1]])
+
+  // // changes while the Animation
+  // useEffect(() => {
+  //   if (beakerState !== 2) return
+  //   const update = generateEnergyArray(beakerDotsEnd.current, (valueC[1] / valueC[0] * 100), 2, 1)
+  // }, [timeframe])
+
+  useEffect(() => {
+    if (beakerState === 2) {
+      setEnergyDots(beakerDots.current)
+      startTimer()
+      return
+    } else {
+      stopTimer()
+    }
+    if (beakerState === 0) {
+      setEnergyDots(initDots)
+    } else if (beakerState === 1) {
+      setEnergyDots(beakerDots.current)
+    } else if (beakerState === 3) {
+      setEnergyDots(beakerDotsEnd.current)
+    }
+  }, [beakerState])
+
+  const [timeCounter, setTimeCounter] = useState<number>(0)
+  const maxTime = Math.abs(valuesT[0] - valuesT[1])
+  const framesPerSecond = 3
+  const intervalTime = 1000 / framesPerSecond
+
+  const timerID = useRef<NodeJS.Timer>()
+  const startTimer = () => {
+    stopTimer()
+    setTimeCounter(0)
+    timerID.current = setInterval(() => {
+      console.log('interval', timeCounter)
+      setTimeCounter(v => v += 1 / framesPerSecond)
+    }, intervalTime)
+    console.log('started', timerID.current)
+  }
+  const stopTimer = () => {
+    if (timerID.current) {
+      clearInterval(timerID.current)
+      timerID.current = undefined
+      console.log('timer end')
+    }
+  }
+
+  // animation play
+  useEffect(() => {
+    if (timeCounter > maxTime) {
+      // animation ends
+      stopTimer()
+      const res = generateEnergyArray(energyDotsAnimation.current, (valuesC[1] / valuesC[0] * 100), 2, 1)
+      beakerDotsEnd.current = res.items
+      setEnergyDots(res.items)
+      onEndPlay()
+      return
+    }
+    const valT = timeCounter / maxTime
+    // const valT = 3 / maxTime
+    const valC = Math.min(...valuesC)
+    const curValC = Math.floor(valC * valT)
+    // console.log('zzz animation - 111', { timeCounter, maxTime })
+    // console.log('zzz animation - 222', { valuesC, valT, valC, curValC })
+    // console.log('zzz animation - 333', valuesC[1] / valuesC[0] * 100)
+    const res = generateEnergyArray(energyDotsAnimation.current, (curValC / valuesC[0] * 100), 2, 1)
+    energyDotsAnimation.current = res.items
+    setEnergyDots(energyDotsAnimation.current)
+    // console.log(',,, ', { timeCounter, changedCount: res.changedCount })
+  }, [timeCounter])
+
+  // render from 'energyDots'
   const drawBeaker = (ctx: CanvasRenderingContext2D) => {
     const width = 206, height = 248
     // parent beaker
@@ -61,7 +142,7 @@ const EnergyProfile = ({ valueC }: EnergyProfileProps) => {
     beaker(ctx, 12, 12, width - 20, height - 20, 15, "white", "white", 0.1, 20)
     ctx.beginPath()
     ctx.rect(12, 142, 210, 122)
-    ctx.fillStyle = Colors.bg
+    ctx.fillStyle = dotBgColors[1]
     ctx.fill()
     ctx.beginPath()
     const delta = 15
@@ -73,7 +154,7 @@ const EnergyProfile = ({ valueC }: EnergyProfileProps) => {
     ctx.strokeStyle = "black"
     ctx.lineWidth = 0.5
     ctx.stroke()
-    let count = 0
+    let index = 0
     const startX = 17, startY = 150, t = 13
     for (let i = 0; i < 9; i++) {
       const yy = startY + i * t
@@ -82,15 +163,29 @@ const EnergyProfile = ({ valueC }: EnergyProfileProps) => {
         const xx = startX + j * t
         ctx.moveTo(xx, yy)
         ctx.arc(xx, yy, 6, 0, 2 * Math.PI);
-        ctx.fillStyle = colorsArr[energyDots[count]]
+        ctx.fillStyle = dotColors[energyDots[index]]
         ctx.fill()
-        count++
+        index++
       }
     }
   };
 
+  const getDotsCounts = (arr: number[]) => {
+    const count: number[] = [0, 0, 0, 0, 0, 0]
+    arr.forEach(item => {
+      count[0]++
+      count[item + 1]++
+    })
+    return count
+  }
+
   return (
     <div className={styles.energyContainer}>
+      <button onClick={() => {
+        console.log('energyDots:', getDotsCounts(energyDots))
+        console.log('energyDotsAnimation:', getDotsCounts(energyDotsAnimation.current))
+        console.log('beakerDotsEnd:', getDotsCounts(beakerDotsEnd.current))
+      }}>Test</button>
       <Canvas draw={drawBeaker} height={270} width={250} />
     </div>
   )

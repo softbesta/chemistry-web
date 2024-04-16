@@ -145,30 +145,36 @@ export const stepsActions = [
     showIndexC: [2, 0],
     showIndexT: [2, 0],
     showTimeGraph: 0,
+    beakerState: 1,
   },
   { // 1
     showIndexC: [1, 2],
     showIndexT: [1, 2],
     showTimeGraph: 0,
+    beakerState: 3,
   },
   { // 2
     showIndexC: [1, 2],
     showIndexT: [1, 2],
     showTimeGraph: 1,
+    beakerState: 2,
   },
   { // 3
     showIndexC: [1, 2],
     showIndexT: [1, 2],
     showTimeGraph: 1,
+    beakerState: 2,
   },
   { // 4
     showIndexC: [1, 2],
     showIndexT: [1, 2],
     showTimeGraph: 2,
+    beakerState: 1,
   },
   { // 5
     showIndexC: [1, 2],
     showIndexT: [1, 2],
     showTimeGraph: 3,
+    beakerState: 0,
   },
 ]
