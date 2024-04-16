@@ -5,10 +5,10 @@ import { useMemo } from "react"
 interface SliderVert {
   valuesC: number[]
   setValuesC: (val: number[]) => void
-  showIndexC: number[]
+  canvaTimeSliderC: number[]
 }
 
-const SliderVert = ({ valuesC, setValuesC, showIndexC }: SliderVert) => {
+const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC }: SliderVert) => {
   const infoC = useMemo(() => {
     let showCount = 0, disabledCount = 0
     showIndexC.forEach(item => {

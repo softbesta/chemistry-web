@@ -5,10 +5,10 @@ import { useMemo } from "react"
 interface SliderHoriz {
   valuesT: number[]
   setValuesT: (val: number[]) => void
-  showIndexT: number[]
+  canvaTimeSliderT: number[]
 }
 
-const SliderHoriz = ({ valuesT, setValuesT, showIndexT }: SliderHoriz) => {
+const SliderHoriz = ({ valuesT, setValuesT, canvaTimeSliderT: showIndexT }: SliderHoriz) => {
   const infoT = useMemo(() => {
     let showCount = 0, disabledCount = 0
     showIndexT.forEach(item => {

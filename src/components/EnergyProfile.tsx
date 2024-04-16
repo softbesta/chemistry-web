@@ -181,11 +181,11 @@ const EnergyProfile = ({ valuesC, beakerState, onEndPlay }: EnergyProfileProps) 
 
   return (
     <div className={styles.energyContainer}>
-      <button onClick={() => {
+      {/* <button onClick={() => {
         console.log('energyDots:', getDotsCounts(energyDots))
         console.log('energyDotsAnimation:', getDotsCounts(energyDotsAnimation.current))
         console.log('beakerDotsEnd:', getDotsCounts(beakerDotsEnd.current))
-      }}>Test</button>
+      }}>Test</button> */}
       <Canvas draw={drawBeaker} height={270} width={250} />
     </div>
   )

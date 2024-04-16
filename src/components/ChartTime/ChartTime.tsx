@@ -12,21 +12,21 @@ interface ChartTimeProps {
   setValuesC: (val: number[]) => void
   valuesT: number[]
   setValuesT: (val: number[]) => void
-  showIndexC: number[]
-  showIndexT: number[]
+  canvaTimeSliderC: number[]
+  canvaTimeSliderT: number[]
   // playAnimation: boolean
-  showTimeGraph: number   //  0; show Frame,  1; show Graph, 2; show Animation, 3; show end of Animation
+  canvaTimeState: number   //  0; show Frame,  1; show Graph, 2; show Animation, 3; show end of Animation
   onTimeframeChange: (val: number) => void
 }
 
 const ChartTime = ({
   valuesC,
   setValuesC,
-  showIndexC,
+  canvaTimeSliderC,
   valuesT,
-  showIndexT,
+  canvaTimeSliderT,
   setValuesT,
-  showTimeGraph,
+  canvaTimeState: showTimeGraph,
   onTimeframeChange,
 }: ChartTimeProps) => {
 
@@ -40,14 +40,14 @@ const ChartTime = ({
       <SliderVert
         valuesC={valuesC}
         setValuesC={setValuesC}
-        showIndexC={showIndexC}
+        canvaTimeSliderC={canvaTimeSliderC}
       // minDistance={[13, 0]}
       />
 
       <SliderHoriz
         valuesT={valuesT}
         setValuesT={setValuesT}
-        showIndexT={showIndexT}
+        canvaTimeSliderT={canvaTimeSliderT}
       />
 
       <div
@@ -70,8 +70,8 @@ const ChartTime = ({
           c2={valuesC[0] / 100}
           t1={valuesT[1]}
           t2={valuesT[0]}
-          pointerC={showIndexC[1] > showIndexC[0] ? valuesC[1] : valuesC[0]}
-          pointerT={showIndexT[0] > showIndexT[1] ? valuesT[0] : valuesT[1]}
+          pointerC={canvaTimeSliderC[1] > canvaTimeSliderC[0] ? valuesC[1] : valuesC[0]}
+          pointerT={canvaTimeSliderT[0] > canvaTimeSliderT[1] ? valuesT[0] : valuesT[1]}
           height={212}
           width={212}
           colorA={themeColors.A}

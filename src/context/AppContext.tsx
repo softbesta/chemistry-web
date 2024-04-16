@@ -56,14 +56,14 @@ const initialState = {
 
   // *** canvas Time graph
   // playAnimation: false,
-  showTimeGraph: 0, // 0: frame, 1: show graph, 2: animation, 3: show end
+  canvaTimeState: 0, // 0: frame, 1: show graph, 2: animation, 3: show end
 
   // 0: hidden, 1: disabled, 2: active
-  showIndexC: [2, 0],
-  showIndexT: [2, 0],
+  canvaTimeSliderC: [2, 0],
+  canvaTimeSliderT: [2, 0],
 
   // *** canvas Beaker
-  beakerState: 0, // 0: empty, 1: show one, 2: animation, 3: show two
+  canvaBeakerState: 0, // 0: empty, 1: show one, 2: animation, 3: show two
   beakerDots: initDots,
 }
 
@@ -82,11 +82,11 @@ export const AppDataProvider = (props: any) => {
   const [valuesT, setValuesT] = useState<number[]>(initialState.reactionTime)
 
   //  0; show Frame,  1; show Graph, 2; show Animation, 3; show end of Animation
-  const [canvaTimeState, setCanvaTimeState] = useState<number>(initialState.showTimeGraph)
-  const [canvaTimeSliderC, setCanvaTimeSliderC] = useState<number[]>(initialState.showIndexC)
-  const [canvaTimeSliderT, setCanvaTimeSliderT] = useState<number[]>(initialState.showIndexT)
+  const [canvaTimeState, setCanvaTimeState] = useState<number>(initialState.canvaTimeState)
+  const [canvaTimeSliderC, setCanvaTimeSliderC] = useState<number[]>(initialState.canvaTimeSliderC)
+  const [canvaTimeSliderT, setCanvaTimeSliderT] = useState<number[]>(initialState.canvaTimeSliderT)
 
-  const [canvaBeakerState, setCanvaBeakerState] = useState<number>(initialState.beakerState)
+  const [canvaBeakerState, setCanvaBeakerState] = useState<number>(initialState.canvaBeakerState)
   const beakerDots = useRef<number[]>(initialState.beakerDots)
   const beakerDotsEnd = useRef<number[]>(initialState.beakerDots)
 

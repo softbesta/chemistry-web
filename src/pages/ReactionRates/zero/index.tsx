@@ -14,22 +14,22 @@ const ReactionZero = () => {
   const {
     curStep,
     // setCurStep,
-    valuesC: valuesC,
-    setValuesC: setConcentrationAB,
-    valuesT: valuesT,
-    canvaTimeSliderC: showIndexC,
-    setCanvaTimeSliderC: setShowIndexC,
-    canvaTimeSliderT: showIndexT,
-    setCanvaTimeSliderT: setShowIndexT,
-    setValuesT: setValuesT,
-    canvaTimeState: showTimeGraph,
-    setCanvaTimeState: setShowTimeGraph,
+    valuesC,
+    setValuesC,
+    valuesT,
+    setValuesT,
+    canvaTimeSliderC,
+    setCanvaTimeSliderC,
+    canvaTimeSliderT,
+    setCanvaTimeSliderT,
+    canvaTimeState,
+    setCanvaTimeState,
     // curTurs
     // setCurTurs,
     // setPlayAnimation,
     setCurStep,
-    canvaBeakerState: beakerState,
-    setCanvaBeakerState: setBeakerState,
+    canvaBeakerState,
+    setCanvaBeakerState,
     setTimeframe,
   } = useAppData()
 
@@ -50,7 +50,7 @@ const ReactionZero = () => {
   //   setConcentrationAB(v => (v - 3) < 0 ? 0 : v - 3)
   // }
 
-  const zeroTurs = Array.from(Array(10).keys()).map(idx => {
+  const zeroTurs = Array.from(Array(tur_Text.length).keys()).map(idx => {
     return {
       text: tur_Text[idx],
       highlight: tur_Hightlights[idx],
@@ -65,16 +65,20 @@ const ReactionZero = () => {
   useEffect(() => {
     // console.log('zero page ===useEffect=== --- ', { curStep })
 
-    console.log({ curActions })
+    console.log('curActions: ', { curActions, curStep })
     if (curActions) {
-      if (Number.isFinite(curActions?.showTimeGraph)) {
-        setShowTimeGraph(curActions.showTimeGraph)
+      if (curActions?.canvaTimeState !== undefined) {
+        setCanvaTimeState(curActions.canvaTimeState)
       }
-      if (Number.isFinite(curActions?.beakerState)) {
-        setBeakerState(curActions.beakerState)
+      if (curActions?.canvaBeakerState !== undefined) {
+        setCanvaBeakerState(curActions.canvaBeakerState)
       }
-      curActions?.showIndexC && setShowIndexC(curActions.showIndexC)
-      curActions?.showIndexT && setShowIndexT(curActions.showIndexT)
+      if (Array.isArray(curActions?.canvaTimeSliderC)) {
+        setCanvaTimeSliderC(curActions.canvaTimeSliderC)
+      }
+      if (Array.isArray(curActions?.canvaTimeSliderT)) {
+        setCanvaTimeSliderT(curActions.canvaTimeSliderT)
+      }
     }
 
   }, [curStep, curActions])
@@ -120,7 +124,6 @@ const ReactionZero = () => {
   // const blanks = [[true, true, true, true, true], [true]]
   const blanks = [[]]
 
-
   // get available next step number
   const getNextStep = (step: number) => {
     let update = curStep + step
@@ -147,47 +150,42 @@ const ReactionZero = () => {
   const handleTest1 = () => {
     console.log('===handleTest=== 111')
     // console.log({ valuesC })
-    setShowTimeGraph(2)
+    setCanvaTimeState(2)
 
-    // setShowIndexC([2, 0])
-    // setShowIndexT([2, 0])
   }
   const handleTest2 = () => {
-    console.log('===handleTest2=== - ', { showIndexC, valuesC })
-    setShowTimeGraph(1)
-    // setShowIndexC([1, 2])
-    // setShowIndexT([1, 2])
+    console.log('===handleTest2=== - ', { canvaTimeSliderC, valuesC })
+    setCanvaTimeState(1)
   }
   const handleTest3 = () => {
-    // setShowIndexC([1, 1])
-    console.log('===handleTest3=== - ', { showTimeGraph, showIndexT, valuesT })
+    console.log('===handleTest3=== - ', { showTimeGraph: canvaTimeState, showIndexT: canvaTimeSliderT, valuesT })
     // console.log(' ', infoC, { isDisabledA, isDisabledB })
   }
   return <div className={styles.container}>
-    <p>step: {curStep}</p>
-    <p>showTimeGraph: {showTimeGraph}</p>
-    <p>beakerState: {beakerState}</p>
+    {/* <p>step: {curStep}</p>
+    <p>showTimeGraph: {canvaTimeState}</p>
+    <p>beakerState: {canvaBeakerState}</p> */}
 
     <div className={styles.reactionDrawContainer}>
-      <div>
+      {/* <div>
         <button onClick={() => handleTest1()}>111</button>
         <button onClick={() => handleTest2()}>222</button>
         <button onClick={() => handleTest3()}>TeST</button>
-      </div>
+      </div> */}
 
       <EnergyProfile
         valuesC={valuesC}
-        beakerState={beakerState}
+        beakerState={canvaBeakerState}
         onEndPlay={() => {}}
       />
       <ChartTime
         valuesC={valuesC}
-        setValuesC={val => setConcentrationAB(val)}
-        showIndexC={showIndexC}
+        setValuesC={val => setValuesC(val)}
+        canvaTimeSliderC={canvaTimeSliderC}
         valuesT={valuesT}
         setValuesT={val => setValuesT(val)}
-        showIndexT={showIndexT}
-        showTimeGraph={showTimeGraph}
+        canvaTimeSliderT={canvaTimeSliderT}
+        canvaTimeState={canvaTimeState}
         onTimeframeChange={val => setTimeframe(val)}
       />
       <ChartBar />
@@ -203,7 +201,7 @@ const ReactionZero = () => {
         onStepChange={onStepChange}
       />
     </div>
-    {/* {isHighlight && <div className='overlay'></div>} */}
+    {isHighlight && <div className='overlay'></div>}
   </div>
 }
 export default ReactionZero
