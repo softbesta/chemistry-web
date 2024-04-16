@@ -3,8 +3,6 @@ import styles from './CanvasTime.module.scss'
 import { Colors } from "../../constants"
 
 interface CanvasTimeProps {
-  play: boolean
-  show: boolean
   showTimeGraph: number
   c2: number
   c1: number
@@ -20,8 +18,6 @@ interface CanvasTimeProps {
   onEndPlay: () => void
 }
 const CanvasTime = ({
-  play,
-  show,
   showTimeGraph,
   c2,
   c1,
@@ -41,13 +37,42 @@ const CanvasTime = ({
   const [sY, setSY] = useState<number>(0);
   const [eX, setEX] = useState<number>(0);
   const [eY, setEY] = useState<number>(0);
-  const requestAnimationFrame = window.requestAnimationFrame
-  const cancelAnimationFrame = window.cancelAnimationFrame
+  // const ptBlue = useRef({ x: 0, y: 0 })
+  // const ptRed = useRef({ x: 0, y: 0 })
+  const offset = useRef({ x: 1, y: 1 })
+  // const requestAnimationFrame = window.requestAnimationFrame
+  // const cancelAnimationFrame = window.cancelAnimationFrame
 
-  const animate = () => {
+  const [timeOffset, setTimeOffset] = useState<number>(0)
+  const maxTime = Math.abs(t1 - t2)
+  const framesPerSecond = 20
+  const intervalTime = 1000 / framesPerSecond
+
+  const timerID = useRef<NodeJS.Timer>()
+  const startTimer = () => {
+    stopTimer()
+    timerID.current = setInterval(() => {
+      console.log('interval', timeOffset)
+      setTimeOffset(v => v += 1 / framesPerSecond)
+    }, intervalTime)
+    console.log('started', timerID.current)
+    
+  }
+  const stopTimer = () => {
+    if (timerID.current) {
+      clearInterval(timerID.current)
+      timerID.current = undefined
+    }
+  }
+// animation play
+  useEffect(() => {
+    console.log('bbb ', { count: timeOffset })
+    drawAt(timeOffset)
+  }, [timeOffset])
+
+  const initAll = () => {
     if (!canvas.current) return
-    const ctx = canvas.current.getContext('2d');
-    let startX: number, startY1: number, startY2: number, xStep: number, yStep: number, duration, endX: number, otherReq: number;
+    let startX: number, startY1: number, startY2: number, xStep: number, yStep: number, duration, endX: number
 
     startX = (t2 / 20) * width;
     setSX(startX);
@@ -58,118 +83,156 @@ const CanvasTime = ({
     const endY1 = Math.abs(1 - c1) * height;
     setEY(endY1);
     startY2 = 0;
-    duration = Math.abs(t1 - t2) * 1000 / 60;
-    xStep = (Math.abs(t1 - t2) / 20 * width) / duration;
-    yStep = (Math.abs(c2 - c1) * height) / duration;
+    duration = Math.abs(t1 - t2) * framesPerSecond // draw every 0.1s offset
+    xStep = (Math.abs(t1 - t2) / 20 * width) / duration
+    yStep = (Math.abs(c2 - c1) * height) / duration
 
-    function drawFrame() {
-      if (!ctx) return
-      ctx.beginPath();
-      ctx.clearRect(0, 0, width, height);
-      ctx.beginPath();
-      ctx.rect(0, 0, width, height);
-      ctx.strokeStyle = "black";
-      ctx.lineWidth = 4;
-      ctx.stroke();
+    offset.current = { x: xStep, y: yStep }
 
-      // draw rulers
-      ctx.beginPath()
-      ctx.lineWidth = 1;
-      const yy = height / 10
-      for (let ty = height - yy; ty > 0; ty -= yy) {
-        ctx.moveTo(0, ty)
-        ctx.lineTo(10, ty)
-      }
-      const xx = height / 10
-      for (let tx = height - xx; tx > 0; tx -= xx) {
-        ctx.moveTo(tx, height)
-        ctx.lineTo(tx, height - 10)
-      }
-      ctx.stroke()
+    drawFrame()
+    console.log('===drawGraph===', { duration, xStep, yStep })
+  }
 
-      // draw pointers
-      ctx.beginPath()
-      ctx.lineWidth = 4;
-      ctx.strokeStyle = Colors.C;
-      if (pointerC > 0) {
-        const pC = Math.abs(1 - pointerC / 100) * height
-        ctx.moveTo(0, pC)
-        ctx.lineTo(20, pC)
-      }
-      if (pointerT > 0) {
-        const pT = (pointerT / 20) * width
-        ctx.moveTo(pT, height)
-        ctx.lineTo(pT, height - 20)
-      }
-      // console.log('here - ', { pointerC, pointerT })
-      ctx.stroke()
+  function drawFrame() {
+    if (!canvas.current) return
+    const ctx = canvas.current.getContext('2d');
+    if (!ctx) return
+    ctx.beginPath();
+    ctx.clearRect(0, 0, width, height);
+    ctx.beginPath();
+    ctx.rect(0, 0, width, height);
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 4;
+    ctx.stroke();
+
+    // draw rulers
+    ctx.beginPath()
+    ctx.lineWidth = 1;
+    const yy = height / 10
+    for (let ty = height - yy; ty > 0; ty -= yy) {
+      ctx.moveTo(0, ty)
+      ctx.lineTo(10, ty)
+    }
+    const xx = height / 10
+    for (let tx = height - xx; tx > 0; tx -= xx) {
+      ctx.moveTo(tx, height)
+      ctx.lineTo(tx, height - 10)
+    }
+    ctx.stroke()
+
+    // draw pointers
+    ctx.beginPath()
+    ctx.lineWidth = 4;
+    ctx.strokeStyle = Colors.C;
+    if (pointerC > 0) {
+      const pC = Math.abs(1 - pointerC / 100) * height
+      ctx.moveTo(0, pC)
+      ctx.lineTo(20, pC)
+    }
+    if (pointerT > 0) {
+      const pT = (pointerT / 20) * width
+      ctx.moveTo(pT, height)
+      ctx.lineTo(pT, height - 20)
+    }
+    // console.log('here - ', { pointerC, pointerT })
+    ctx.stroke()
+  }
+
+  const drawAt = (timeAt: number) => {
+    console.log('drawAt - ', { timeAt })
+    if (!canvas.current) return
+    const ctx = canvas.current.getContext('2d');
+    if (!ctx) return
+    // draw frame
+    drawFrame()
+    if (showTimeGraph < 1) return
+
+    // show graph
+    ctx.lineWidth = 1;
+    ctx.moveTo(sX, 0);
+    ctx.lineTo(sX, height);
+    ctx.moveTo(eX, 0);
+    ctx.lineTo(eX, height);
+    ctx.moveTo(0, sY);
+    ctx.lineTo(width, sY);
+    ctx.moveTo(0, eY);
+    ctx.lineTo(width, eY);
+    ctx.strokeStyle = "black";
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(sX, sY);
+    ctx.lineTo(eX, eY);
+    ctx.moveTo(sX, height);
+    ctx.lineTo(eX, height - (eY - sY));
+    ctx.strokeStyle = "gray";
+    ctx.stroke();
+    // draw Blue dot
+    ctx.beginPath();
+    ctx.moveTo(sX, sY);
+
+    if (timeAt >= maxTime) {
+      timeAt = maxTime
+      stopTimer()
     }
 
-    function step() {
-      if (!ctx) return
-// draw frame
-      drawFrame()
-      if (showTimeGraph < 1) return
+    const ptBlue = { x: sX + offset.current.x * (timeAt * framesPerSecond), y: sY + offset.current.y * (timeAt * framesPerSecond) }
+    const ptRed = { x: sX + offset.current.x * (timeAt * framesPerSecond), y: height - offset.current.y * (timeAt * framesPerSecond) }
+    console.log('drawAt - ', { timeAt })
 
-// show graph
-      ctx.lineWidth = 1;
-      ctx.moveTo(sX, 0);
-      ctx.lineTo(sX, height);
-      ctx.moveTo(eX, 0);
-      ctx.lineTo(eX, height);
-      ctx.moveTo(0, sY);
-      ctx.lineTo(width, sY);
-      ctx.moveTo(0, eY);
-      ctx.lineTo(width, eY);
-      ctx.strokeStyle = "black";
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(sX, sY);
-      ctx.lineTo(eX, eY);
-      ctx.moveTo(sX, height);
-      ctx.lineTo(eX, height - (eY - sY));
-      ctx.strokeStyle = "gray";
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(sX, sY);
-      ctx.lineTo(startX + xStep, startY1 + yStep);
-      ctx.strokeStyle = colorA;
-      ctx.stroke();
-      ctx.moveTo(startX + xStep, startY1 + yStep)
-      ctx.arc(startX + xStep, startY1 + yStep, 15, 0, Math.PI * 2);
-      ctx.fillStyle = colorA_blur
-      ctx.fill();
-      ctx.beginPath();
-      ctx.arc(startX + xStep, startY1 + yStep, 4, 0, Math.PI * 2);
-      ctx.fillStyle = colorA
-      ctx.fill();
-      ctx.beginPath();
-      ctx.moveTo(sX, height);
-      ctx.lineTo(startX + xStep, height - startY2 + yStep);
-      ctx.moveTo(startX + xStep, height - startY2 + yStep);
-      ctx.arc(startX + xStep, height - startY2 + yStep, 2, 0, Math.PI * 2);
-      ctx.strokeStyle = colorB;
-      ctx.stroke();
-      startX += xStep;
-      startY1 += yStep;
-      startY2 += yStep;
+    ctx.lineTo(ptBlue.x, ptBlue.y)
+    ctx.strokeStyle = colorA;
+    ctx.stroke();
+    ctx.moveTo(ptBlue.x, ptBlue.y)
+    ctx.arc(ptBlue.x, ptBlue.y, 15, 0, Math.PI * 2)
+    ctx.fillStyle = colorA_blur
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(ptBlue.x, ptBlue.y, 4, 0, Math.PI * 2)
+    ctx.fillStyle = colorA
+    ctx.fill();
 
-// show animation
-      if (showTimeGraph === 3 && endX > startX) {
-        otherReq && requestAnimationFrame(step);
-      } else {
-        cancelAnimationFrame(otherReq);
-        onEndPlay()
-      }
-    }
+    //draw Red dot
+    ctx.beginPath();
+    ctx.moveTo(sX, height);
+    ctx.lineTo(ptRed.x, ptRed.y)
+    ctx.strokeStyle = colorB;
+    ctx.stroke();
+    ctx.moveTo(ptRed.x, ptRed.y)
+    ctx.arc(ptRed.x, ptRed.y, 2, 0, Math.PI * 2)
+    ctx.fillStyle = colorB
+    ctx.fill();
 
-    otherReq = requestAnimationFrame(step);
+  }
+  const endPlay = () => {
+    stopTimer()
   }
 
   useEffect(() => {
-    // console.log('canvasTime useEffect -', { play }, sX, sY, eX, eY)
-    animate()
+    console.log('canvasTime useEffect -', { sX, sY, eX, eY })
+    initAll()
+    drawAt(timeOffset)
   }, [showTimeGraph, c1, c2, t1, t2, sX, sY, eX, eY, pointerC, pointerT])
+
+  useEffect(() => {
+    if (showTimeGraph < 2) {
+      console.log('stopped', timerID.current)
+      stopTimer()
+      setTimeOffset(0)
+    } else if (showTimeGraph === 2) {
+      console.log('useEffect -- started')
+      setTimeOffset(0)
+      startTimer() // call animation play
+    }
+    if (showTimeGraph > 2) {
+      console.log('aaa useEffect -- stopTimer', { showTimeGraph })
+      stopTimer()
+
+      setTimeOffset(maxTime)
+      // drawAt(maxTime)
+    }
+    return () => stopTimer()
+  }, [showTimeGraph])
+
   return (
     <>
       <canvas

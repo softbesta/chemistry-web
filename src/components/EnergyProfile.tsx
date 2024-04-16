@@ -25,10 +25,10 @@ function beaker(ctx: CanvasRenderingContext2D, x: number, y: number, width: numb
 }
 
 interface EnergyProfileProps {
-  concentrationAB: number[],
+  valueC: number[],
 }
 
-const EnergyProfile = ({ concentrationAB }: EnergyProfileProps) => {
+const EnergyProfile = ({ valueC }: EnergyProfileProps) => {
   const totalDots = 144
   const [energyDots, setEnergyDots] = useState(Array.from({ length: totalDots }, () => Math.floor(Math.random() * 2)))
   // const { concentrationAB } = useAppData()
@@ -41,16 +41,16 @@ const EnergyProfile = ({ concentrationAB }: EnergyProfileProps) => {
   // }, [concentrationAB])
 
   useEffect(() => {
-    console.log('AAA: ', { concentrationAB })
-    let update = generateEnergyArray(energyDots, concentrationAB[0], 1, 0)
-    // update = generateEnergyArray(update, (concentrationAB[1] / concentrationAB[0] * 100), 2, 1)
+    // console.log('AAA: ', { valueC })
+    let update = generateEnergyArray(energyDots, valueC[0], 1, 0)
+    update = generateEnergyArray(update, (valueC[1] / valueC[0] * 100), 2, 1)
     setEnergyDots(update)
-  }, [concentrationAB[0]])
+  }, [valueC[0]])
   useEffect(() => {
-    console.log('BBB: ', { concentrationAB })
-    // const update = generateEnergyArray(energyDots, (concentrationAB[1] / concentrationAB[0] * 100), 2, 1)
+    // console.log('BBB: ', { valueC })
+    // const update = generateEnergyArray(energyDots, (valueC[1] / valueC[0] * 100), 2, 1)
     // setEnergyDots(update)
-  }, [concentrationAB[1]])
+  }, [valueC[1]])
 
   const drawBeaker = (ctx: CanvasRenderingContext2D) => {
     const width = 206, height = 248

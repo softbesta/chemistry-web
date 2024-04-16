@@ -20,7 +20,7 @@ import useFunctions from '../hooks/useFunctions'
 const NavMenu = () => {
   const [showMenu, setShowMenu] = useState(false)
   const toggleMenu = () => {
-    console.log({ showMenu })
+    // console.log({ showMenu })
     setShowMenu(v => !v)
   }
   return <div className={styles.menuContainer} id='menuContainer'>
@@ -47,7 +47,7 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
   const { curMenu, setCurMenu } = useAppData()
 
   useEffect(() => {
-    console.log({ location })
+    // console.log({ location })
 
     if (location.pathname === routes[MenuList.zero].path) {
       setCurMenu(MenuList.zero)

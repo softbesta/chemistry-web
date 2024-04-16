@@ -1,4 +1,4 @@
-export const maxStepCount_Zero = 18
+export const maxStep_Zero = 18
 
 export const tur_Text = [
   [ // 0
@@ -139,30 +139,36 @@ export const tur_Hightlights = [
 ]
 
 export const stepsActions = [
-  // (A - 0, B - 1), (C - 2, D - 3), (E - 4, F - 5)
-  {
+  // energyAB: (A - 0, B - 1), (C - 2, D - 3), (E - 4, F - 5)
+  { // 0
+    valuesC: [0, 1],
     showIndexC: [2, 0],
     showIndexT: [2, 0],
     showTimeGraph: 0,
   },
-  {
+  { // 1
     showIndexC: [1, 2],
     showIndexT: [1, 2],
     showTimeGraph: 0,
   },
-  {
+  { // 2
     showIndexC: [1, 2],
     showIndexT: [1, 2],
     showTimeGraph: 1,
   },
-  {
+  { // 3
     showIndexC: [1, 2],
     showIndexT: [1, 2],
     showTimeGraph: 1,
   },
-  {
+  { // 4
     showIndexC: [1, 2],
     showIndexT: [1, 2],
     showTimeGraph: 2,
+  },
+  { // 5
+    showIndexC: [1, 2],
+    showIndexT: [1, 2],
+    showTimeGraph: 3,
   },
 ]

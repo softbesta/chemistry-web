@@ -23,13 +23,13 @@ const SliderHoriz = ({ valuesT, setValuesT, showIndexT }: SliderHoriz) => {
   const getValueT = () => {
     let update: number[] = []
     if (showIndexT[0] > 0 && showIndexT[1] > 0) {
-      console.log('===getValueC===', valuesT)
+      // console.log('===getValueT===', valuesT)
       update = [valuesT[0], valuesT[1]]
     } else if (showIndexT[0] > 0) {
-      console.log('===getValueC===  000', valuesT[0])
+      // console.log('===getValueT===  000', valuesT[0])
       update = [valuesT[0]]
     } else if (showIndexT[1] > 0) {
-      console.log('===getValueC===  111', valuesT[1])
+      // console.log('===getValueT===  111', valuesT[1])
       update = [valuesT[1]]
     } else update = []
     return update.map(item => item * 10)
@@ -52,12 +52,10 @@ const SliderHoriz = ({ valuesT, setValuesT, showIndexT }: SliderHoriz) => {
         update = [update[0], val]
       }
     }
-    console.log('111 ', update)
+    // console.log('111 ', update)
     if (update[1] <= update[0]) update[1] = update[0] <= 200 ? update[0] : 200
     update = update.map(item => item / 10)
-    console.log('222 ', update)
-    // if (update[0] < 10) update[0] = 10
-    // if (update[0] < 27) update[0] = 27
+    // console.log('222 ', update)
     setValuesT(update)
   }
   const textT = useMemo(() => {
@@ -79,7 +77,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showIndexT }: SliderHoriz) => {
         max={200}
         step={1}
         onChange={(val, index) => {
-          console.log({ val, index })
+          // console.log({ val, index })
           handleChangeTime(val)
         }}
         renderThumb={(props, state) => {

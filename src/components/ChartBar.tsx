@@ -4,7 +4,7 @@ import useAppData from '../hooks/useAppData'
 import { Colors } from '../constants'
 
 const ChartBar = () => {
-  const { curStep, concentrationAB, reactionTime } = useAppData()
+  const { curStep, valuesC: concentrationAB, valuesT: reactionTime } = useAppData()
 
   return (
     <div className={styles.chartBarContainer}>

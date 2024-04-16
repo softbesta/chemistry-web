@@ -4,7 +4,7 @@ import useAppData from "./useAppData";
 import { routes } from "../constants";
 import { useHighLight } from "./useHighlight";
 // should be exchanged as App context state
-import { maxStepCount_Zero, tur_Hightlights } from "../pages/ReactionRates/zero/constants";
+import { maxStep_Zero, tur_Hightlights } from "../pages/ReactionRates/zero/constants";
 
 const useFunctions = () => {
   const navigate = useNavigate()

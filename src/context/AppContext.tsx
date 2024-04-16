@@ -15,23 +15,23 @@ interface IAppContext {
   // --- Description --- concentrationAB
   // ; minValue = 0, maxValue = 100
   // A: concentrationAB[0],  B: concentrationAB[1]    A > B
-  concentrationAB: (number)[],
-  setConcentrationAB: React.Dispatch<React.SetStateAction<(number)[]>>,
+  valuesC: (number)[],
+  setValuesC: React.Dispatch<React.SetStateAction<(number)[]>>,
 
   // --- Description --- reactionTime
   // ; minValue = 0, maxValue = 20
   // A: reactionTime[0],     B: reactionTime[1]       A < B
-  reactionTime: number[],
-  setReactionTime: React.Dispatch<React.SetStateAction<number[]>>,
+  valuesT: number[],
+  setValuesT: React.Dispatch<React.SetStateAction<number[]>>,
 
   // playAnimation: boolean,
   // setPlayAnimation: React.Dispatch<React.SetStateAction<boolean>>,
   showTimeGraph: number,
   setShowTimeGraph: React.Dispatch<React.SetStateAction<number>>,
-  showIndexT: number[]
-  setShowIndexT: React.Dispatch<React.SetStateAction<number[]>>,
-  showIndexC: number[]
-  setShowIndexC: React.Dispatch<React.SetStateAction<number[]>>,
+  showTimeIndexT: number[]
+  setShowTimeIndexT: React.Dispatch<React.SetStateAction<number[]>>,
+  showTimeIndexC: number[]
+  setShowTimeIndexC: React.Dispatch<React.SetStateAction<number[]>>,
 }
 
 const initialState = {
@@ -57,16 +57,16 @@ export const AppDataProvider = (props: any) => {
   const [curMenu, setCurMenu] = useState<PageMenuType>(MenuList.zero)
   const [curStep, setCurStep] = useState(props.stepMotion || initialState.stepPlay || 0)
   // const [curTurs, setCurTurs] = useState()
-  const [concentrationAB, setConcentrationAB] = useState<(number)[]>(initialState.concentration)
+  const [valuesC, setValuesC] = useState<(number)[]>(initialState.concentration)
   const [concentrationCD, setConcentrationCD] = useState(initialState.concentration)
   const [concentrationEF, setConcentrationEF] = useState(initialState.concentration)
-  const [reactionTime, setReactionTime] = useState<number[]>(initialState.reactionTime);
+  const [valuesT, setValuesT] = useState<number[]>(initialState.reactionTime);
   // const [playAnimation, setPlayAnimation] = useState<boolean>(initialState.playAnimation)
   const [curConcentrationAB, setCurConcentrationAB] = useState<number[]>([])
 
   const [showTimeGraph, setShowTimeGraph] = useState<number>(initialState.showTimeGraph) //  0; show Frame,  1; show Graph, 2; show Animation, 3; show end of Animation
-  const [showIndexC, setShowIndexC] = useState<number[]>(initialState.showIndexC)
-  const [showIndexT, setShowIndexT] = useState<number[]>(initialState.showIndexT)
+  const [showTimeIndexC, setShowTimeIndexC] = useState<number[]>(initialState.showIndexC)
+  const [showTimeIndexT, setShowTimeIndexT] = useState<number[]>(initialState.showIndexT)
 
   // need update, don't use yet
   const updateStepPlay = (step: number) => {
@@ -84,18 +84,20 @@ export const AppDataProvider = (props: any) => {
         curStep,
         setCurStep,
         // updateStepPlay,
-        concentrationAB,
-        setConcentrationAB,
-        reactionTime,
-        setReactionTime,
+        valuesC,
+        setValuesC,
+        valuesT,
+        setValuesT,
         // playAnimation,
         // setPlayAnimation,
+// controllers - Time Canvas
         showTimeGraph,
         setShowTimeGraph,
-        showIndexT,
-        setShowIndexT,
-        showIndexC,
-        setShowIndexC,
+        showTimeIndexT,
+        setShowTimeIndexT,
+        showTimeIndexC,
+        setShowTimeIndexC,
+// controllers - Energy Canvas
       }}
     >
       {children}

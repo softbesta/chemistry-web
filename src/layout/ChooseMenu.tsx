@@ -52,7 +52,7 @@ const ChooseMenuPanel = ({ visible, items, activeItemIndex }: ChooseMenuPanelPro
     <div className={styles.ChooseMenuItemContainer}>
       {items.map((item, index) => {
         const isActiveItem = index === activeItemIndex
-        console.log({ isActiveItem, index, activeItemIndex })
+        // console.log({ isActiveItem, index, activeItemIndex })
         return <div
           key={index}
           className={`${styles.ChooseMenuItem} ${isActiveItem ? styles.activated : ''} ${item.disabled ? styles.disable : ''}`}

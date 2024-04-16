@@ -57,9 +57,9 @@ const ChartTime = ({
         {/* <Canvas draw={drawChartTime} height={222} width={222} /> */}
         <CanvasTime
           // play={playAnimation}
-          play={showTimeGraph > 1}
+          // play={showTimeGraph > 1}
           // show={false}
-          show={showTimeGraph > 0}
+          // show={showTimeGraph > 0}
           showTimeGraph={showTimeGraph}
           onEndPlay={() => { }}
           // c1={0.5}

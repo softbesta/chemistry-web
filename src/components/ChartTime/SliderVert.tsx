@@ -21,24 +21,24 @@ const SliderVert = ({ valuesC, setValuesC, showIndexC }: SliderVert) => {
     }
   }, [showIndexC])
   const disabledClass = infoC.disabledCount === 1 ? styles.disabled1 : infoC.disabledCount === 2 ? styles.disabled2 : ''
-  console.log({ disabledClass })
+  // console.log({ disabledClass })
 
   const getValueC = () => {
     let update: number[] = []
     if (showIndexC[0] > 0 && showIndexC[1] > 0) {
-      console.log('===getValueC===', valuesC)
+      // console.log('===getValueC===', valuesC)
       update = [valuesC[1], valuesC[0]]
     } else if (showIndexC[0] > 0) {
-      console.log('===getValueC===  000', valuesC[0])
+      // console.log('===getValueC===  000', valuesC[0])
       update = [valuesC[0]]
     } else if (showIndexC[1] > 0) {
-      console.log('===getValueC===  111', valuesC[1])
+      // console.log('===getValueC===  111', valuesC[1])
       update = [valuesC[1]]
     } else update = []
     return update
   }
   const handleChangeAB = (val: number[] | number) => {
-    console.log('===handleChangeAB=== ', { values: val, valuesC })
+    // console.log('===handleChangeAB=== ', { values: val, valuesC })
     let update: number[] = valuesC
     if (Array.isArray(val)) {
       if (showIndexC[0] === 2) {
@@ -55,7 +55,7 @@ const SliderVert = ({ valuesC, setValuesC, showIndexC }: SliderVert) => {
         update = [update[0], val]
       }
     }
-    console.log({ update })
+    // console.log({ update })
     if (update[0] < 27) update[0] = 27
     if (update[1] > update[0] - 13) update[1] = update[0] - 13
     setValuesC(update)
@@ -87,7 +87,7 @@ const SliderVert = ({ valuesC, setValuesC, showIndexC }: SliderVert) => {
         max={100}
         minDistance={13}
         onChange={(val, index) => {
-          console.log({ val, index })
+          // console.log({ val, index })
           handleChangeAB(val)
         }}
         renderThumb={(props, state) => {

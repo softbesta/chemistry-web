@@ -7,21 +7,21 @@ import ChartBar from "../../../components/ChartBar"
 import MathContent from "../../../components/MathContent"
 import TutorialControl from "../../../components/TutorialControl"
 import { useHighLight } from "../../../hooks/useHighlight"
-import { maxStepCount_Zero, stepsActions, tur_Hightlights, tur_Text } from "./constants"
+import { maxStep_Zero, stepsActions, tur_Hightlights, tur_Text } from "./constants"
 import useFunctions from "../../../hooks/useFunctions"
 
 const ReactionZero = () => {
   const {
     curStep,
     // setCurStep,
-    concentrationAB: valuesC,
-    setConcentrationAB,
-    reactionTime: valuesT,
-    showIndexC,
-    setShowIndexC,
-    showIndexT,
-    setShowIndexT,
-    setReactionTime: setValuesT,
+    valuesC: valuesC,
+    setValuesC: setConcentrationAB,
+    valuesT: valuesT,
+    showTimeIndexC: showIndexC,
+    setShowTimeIndexC: setShowIndexC,
+    showTimeIndexT: showIndexT,
+    setShowTimeIndexT: setShowIndexT,
+    setValuesT: setValuesT,
     showTimeGraph,
     setShowTimeGraph,
     // curTurs
@@ -54,20 +54,24 @@ const ReactionZero = () => {
       actions: stepsActions[idx],
     }
   })
-  const maxStep = maxStepCount_Zero
-  console.log('000,', { zeroTurs })
+  // const maxStep = maxStep_Zero
+  // console.log('000,', { zeroTurs })
 
+  // Tutorial-Actions
+  const curActions = zeroTurs[curStep]?.actions
   useEffect(() => {
-    console.log('zero page ===useEffect=== --- ', { curStep })
-    const curActions = zeroTurs[curStep]?.actions
+    // console.log('zero page ===useEffect=== --- ', { curStep })
 
+    console.log({ curActions })
     if (curActions) {
-      curActions?.showTimeGraph && setShowTimeGraph(curActions.showTimeGraph)
+      if (Number.isFinite(curActions?.showTimeGraph)) {
+        setShowTimeGraph(curActions.showTimeGraph)
+      }
       curActions?.showIndexC && setShowIndexC(curActions.showIndexC)
       curActions?.showIndexT && setShowIndexT(curActions.showIndexT)
     }
 
-  }, [curStep])
+  }, [curStep, curActions])
 
   const getFormula = () => {
 
@@ -116,7 +120,7 @@ const ReactionZero = () => {
     let update = curStep + step
     if (update < 0) update = 0
     // else if (update > stepPlayCount[activeMenu]) update = stepPlayCount[activeMenu]
-    else if (update >= maxStepCount_Zero) update = maxStepCount_Zero - 1
+    else if (update >= maxStep_Zero) update = maxStep_Zero - 1
     return update
   }
   // call when click prev step
@@ -125,6 +129,7 @@ const ReactionZero = () => {
     if (curStep === nextStep) return
     // console.log({ curStep }, tur_Hightlights[curStep])
     // console.log({ nextStep }, tur_Hightlights[nextStep])
+    // Tutorial-Highlight
     removeHighlightElement(zeroTurs[curStep]?.highlight)
     if (zeroTurs[nextStep]?.highlight?.length > 0) {
       highlightElement(zeroTurs[nextStep].highlight)
@@ -132,29 +137,20 @@ const ReactionZero = () => {
 
     setCurStep(nextStep)
   }
-  const onPrevStep = () => {
-    console.log('===handleStepPrev===', curStep, { tur_Hightlights })
-    onStepChange(-1)
-  }
-  // call when click next step
-  const onNextStep = () => {
-    console.log('===handleStepNext===', curStep, { tur_Hightlights })
-    onStepChange(1)
-  }
-
-
 
   const handleTest1 = () => {
     console.log('===handleTest=== 111')
     // console.log({ valuesC })
+    setShowTimeGraph(2)
 
-    setShowIndexC([2, 0])
-    setShowIndexT([2, 0])
+    // setShowIndexC([2, 0])
+    // setShowIndexT([2, 0])
   }
   const handleTest2 = () => {
-    // console.log('===handleTest2=== - ', { showIndexC, valuesC })
-    setShowIndexC([1, 2])
-    setShowIndexT([1, 2])
+    console.log('===handleTest2=== - ', { showIndexC, valuesC })
+    setShowTimeGraph(1)
+    // setShowIndexC([1, 2])
+    // setShowIndexT([1, 2])
   }
   const handleTest3 = () => {
     // setShowIndexC([1, 1])
@@ -173,7 +169,7 @@ const ReactionZero = () => {
       </div>
 
       <EnergyProfile
-        concentrationAB={valuesC}
+        valueC={valuesC}
       />
       <ChartTime
         valuesC={valuesC}
@@ -195,11 +191,10 @@ const ReactionZero = () => {
       <TutorialControl
         // curStep={curStep}
         turText={tur_Text[curStep]}
-        onNextStep={onNextStep}
-        onPrevStep={onPrevStep}
+        onStepChange={onStepChange}
       />
     </div>
-    {isHighlight && <div className='overlay'></div>}
+    {/* {isHighlight && <div className='overlay'></div>} */}
   </div>
 }
 export default ReactionZero

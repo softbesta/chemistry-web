@@ -39,14 +39,14 @@ const ChapterMenuPanel = ({ visible }: ChapterMenuPanelProps) => {
   // const isActive = menuItem.subItems ? menuItem.subItems.findIndex(item => item.value === activeMenu) >= 0 : false
 
   const handleMenuItemClick = (menuItemIndex: any) => {
-    console.log({ menuItemIndex })
+    // console.log({ menuItemIndex })
     let update: number
     if (menuItemIndex === openedMenuIndex) update = -1
     else update = menuItemIndex
     setOpenedMenuIndex(update)
   }
   const handleSubItemClick = (subItem: any) => {
-    console.log({ subItem })
+    // console.log({ subItem })
     updatePageFromMenu(subItem.value)
   }
 

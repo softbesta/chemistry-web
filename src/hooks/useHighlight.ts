@@ -24,7 +24,7 @@ export const useHighLight = () => {
       if (!document.getElementById(targetID)) return
       elems.push(document.getElementById(targetID))
     })
-    console.log({elems})
+    // console.log({elems})
     elems.forEach(elem => {
       if (elem) {
         setOverlayOnElement(elem, "overlayID");

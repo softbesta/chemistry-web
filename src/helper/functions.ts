@@ -62,6 +62,6 @@ export const generateEnergyArray = (arr: any, percentage: any, originVal: number
   }
 
   updatedArrIndexes.sort((a, b) => a - b)
-  console.log({ updatedArrIndexes })
+  // console.log({ updatedArrIndexes })
   return res
 }

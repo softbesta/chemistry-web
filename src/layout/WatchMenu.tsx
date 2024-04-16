@@ -24,7 +24,7 @@ interface WatchMenuPanelProps {
   visible: boolean
 }
 const WatchMenuPanel = ({ visible }: WatchMenuPanelProps) => {
-  const { concentrationAB, reactionTime } = useAppData()
+  const { valuesC: concentrationAB, valuesT: reactionTime } = useAppData()
 
   return <div className={`${styles.WatchMenuPanel} ${visible ? styles.active : ''}`}>
     <div className={styles.WatchMenuGridItem}>c</div>

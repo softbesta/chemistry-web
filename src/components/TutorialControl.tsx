@@ -2,15 +2,14 @@ import styles from './TutorialControl.module.scss'
 import ImgBeacky from '../assets/ReactionRates/reaction_boxes/beaky.png'
 import useAppData from '../hooks/useAppData'
 import { useHighLight } from '../hooks/useHighlight'
-import { maxStepCount_Zero, tur_Hightlights, tur_Text } from '../pages/ReactionRates/zero/constants'
+import { maxStep_Zero, tur_Hightlights, tur_Text } from '../pages/ReactionRates/zero/constants'
 
 interface TutorialControlProps {
   turText: string[]
-  onNextStep: () => void
-  onPrevStep: () => void
+  onStepChange: (step: number) => void
 }
 
-const TutorialControl = ({turText, onNextStep, onPrevStep }: TutorialControlProps) => {
+const TutorialControl = ({ turText, onStepChange }: TutorialControlProps) => {
   // const {
   //   curStep,
   //   setCurStep,
@@ -77,14 +76,14 @@ const TutorialControl = ({turText, onNextStep, onPrevStep }: TutorialControlProp
       <button
         id='tur_stepPrevButton'
         className={styles.prevBtn}
-        onClick={() => onPrevStep()}
+        onClick={() => onStepChange(-1)}
       >
         &#9664;
       </button>
       <button
         id='tur_stepNextButton'
         className={styles.nextBtn}
-        onClick={() => onNextStep()}
+        onClick={() => onStepChange(1)}
       >
         Next <span>&#9654;</span>
       </button>
