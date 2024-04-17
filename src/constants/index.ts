@@ -173,8 +173,25 @@ export const enum MenuList {
   balanced = 'balanced',
 }
 
-// tutorial steps
+// Menu list in order by
+export const MenuOrder = [
+  MenuList.zero,
+  MenuList.zeroQuiz,
+  MenuList.first,
+  MenuList.firstQuiz,
+  MenuList.second,
+  MenuList.secondQuiz,
+  MenuList.comparison,
+  MenuList.comparisonQuiz,
+  MenuList.kinetics,
+  MenuList.kineticsQuiz,
+  // Todo: need to add more menus
+  MenuList.aqueous,
+  MenuList.introduction,
+  MenuList.balanced,
+]
 
+// Colors to be used
 export const themeColors = {
   none: "rgba(8, 168, 232,0.2)",
   A: 'rgba(8, 168, 232, 0.8)',

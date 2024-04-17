@@ -93,3 +93,14 @@ export const getItemsRandomlyFromArray = (arr: any[], count?: number) => {
   const res = shuffled.slice(0, count ? count : shuffled.length)
   return res
 }
+
+// local storage functions
+export const getStorage = (key: string) => {
+  const res = localStorage.getItem(key)
+  if (!res) return
+  return JSON.parse(res)
+}
+export const setStorage = (key: string, val: any) => {
+  const update = JSON.stringify(val)
+  localStorage.setItem(key, update)
+}

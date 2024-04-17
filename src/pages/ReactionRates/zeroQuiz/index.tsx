@@ -4,6 +4,7 @@ import styles from './styles.module.scss'
 import Buttons from '../../../components/Buttons/Buttons'
 import { QuizAnswerType, QuizItemType, quizData } from './constants'
 import { getItemsRandomlyFromArray } from '../../../helper/functions'
+import useFunctions from '../../../hooks/useFunctions'
 
 // Quiz answer steps
 interface QuestionStepProps {
@@ -107,16 +108,25 @@ const ReactionZeroQuiz = () => {
   const [selectedAnswer, setSelectedAnswer] = useState<number[][]>([])
   const [correctStep, setCorrectStep] = useState(0)
 
+  const {
+    updatePageFromMenu,
+    getNextMenu
+  } = useFunctions()
+
   useEffect(() => {
   }, [quizType])
 
   const handleStep = (val: number) => {
     let nextStep = quizStep + val
     if (nextStep > quizType) {
-      // show Next Course
+      if (quizType > 0) {
+        // show Next Course
+        updatePageFromMenu(getNextMenu(1))
+      }
       return
     } else if (nextStep < 0) {
       // show Prev Course
+      updatePageFromMenu(getNextMenu(-1))
       return
     }
     // console.log('handleStep', { val, nextStep })

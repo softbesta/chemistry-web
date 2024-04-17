@@ -11,6 +11,8 @@ import { maxStep_Zero, stepsActions, tur_Hightlights, tur_Text } from "./constan
 import useFunctions from "../../../hooks/useFunctions"
 import ChooseMenu from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
+import { MenuList, MenuOrder } from "../../../constants"
+import { getStorage, setStorage } from "../../../helper/functions"
 
 const ReactionZero = () => {
   const {
@@ -33,11 +35,14 @@ const ReactionZero = () => {
     canvaBeakerState,
     setCanvaBeakerState,
     setTimeframe,
+    setCurMenu,
   } = useAppData()
 
   const {
     // onNextStep,
     // onPrevStep,
+    updatePageFromMenu,
+    getNextMenu,
   } = useFunctions()
 
   const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
@@ -129,14 +134,25 @@ const ReactionZero = () => {
   // get available next step number
   const getNextStep = (step: number) => {
     let update = curStep + step
-    if (update < 0) update = 0
+    if (update < 0) {
+      update = 0
+      console.log('getNextStep 0', { update })
+      updatePageFromMenu(getNextMenu(-1))
+      return
+    }
     // else if (update > stepPlayCount[activeMenu]) update = stepPlayCount[activeMenu]
-    else if (update >= maxStep_Zero) update = maxStep_Zero - 1
+    else if (update >= maxStep_Zero) {
+      update = maxStep_Zero - 1
+      updatePageFromMenu(getNextMenu(1))
+      return
+    }
+
     return update
   }
   // call when click prev step
   const onStepChange = (step: number) => {
     const nextStep = getNextStep(step)
+    if (!nextStep) return
     if (curStep === nextStep) return
     // console.log({ curStep }, tur_Hightlights[curStep])
     // console.log({ nextStep }, tur_Hightlights[nextStep])
@@ -152,15 +168,18 @@ const ReactionZero = () => {
   const handleTest1 = () => {
     console.log('===handleTest=== 111')
     // console.log({ valuesC })
-    setCanvaTimeState(2)
-
+    // setCanvaTimeState(2)
+    const menuStatus = JSON.stringify(MenuOrder)
+    setStorage('courseStatus', menuStatus)
   }
   const handleTest2 = () => {
-    console.log('===handleTest2=== - ', { canvaTimeSliderC, valuesC })
-    setCanvaTimeState(1)
+    console.log('===handleTest2=== - ')
+    const res = getStorage('courseStatus')
+    console.log({res})
+    // setCanvaTimeState(1)
   }
   const handleTest3 = () => {
-    console.log('===handleTest3=== - ', { showTimeGraph: canvaTimeState, showIndexT: canvaTimeSliderT, valuesT })
+    console.log('===handleTest3=== - ')
     // console.log(' ', infoC, { isDisabledA, isDisabledB })
   }
   return <div className={styles.container}>
@@ -180,7 +199,7 @@ const ReactionZero = () => {
       <EnergyProfile
         valuesC={valuesC}
         beakerState={canvaBeakerState}
-        onEndPlay={() => {}}
+        onEndPlay={() => { }}
       />
       <ChartTime
         valuesC={valuesC}

@@ -3,6 +3,11 @@ import { MenuList, initDots, routes } from "../constants"
 import { PageMenuType } from "../helper/types"
 
 interface IAppContext {
+
+  // --- Description --- courseStatus
+  // available course(menu) list.
+  courseStatus: MenuList[],
+  setCourseStatus: React.Dispatch<React.SetStateAction<MenuList[]>>,
   // --- Description --- curMenu
   // menu name for opened page.
   curMenu: PageMenuType,
@@ -73,16 +78,21 @@ export const AppDataProvider = (props: any) => {
   const { children } = props
   const [count, setCount] = useState(props.count || initialState.count || 0)
 
+  // available course (menu) list in order by
+  const [courseStatus, setCourseStatus] = useState<MenuList[]>([MenuList.zero])
+
+  // use Menu, Step to manage page
+  const [curMenu, setCurMenu] = useState<PageMenuType>(MenuList.zero)
+  const [curStep, setCurStep] = useState(props.stepMotion || initialState.stepPlay || 0)
+
   // animation time frame (0-100)
   const [timeframe, setTimeframe] = useState<number>(initialState.timeframe)
 
-  const [curMenu, setCurMenu] = useState<PageMenuType>(MenuList.zero)
-  const [curStep, setCurStep] = useState(props.stepMotion || initialState.stepPlay || 0)
-  const [valuesC, setValuesC] = useState<(number)[]>(initialState.concentration)
-  const [valuesT, setValuesT] = useState<number[]>(initialState.reactionTime)
-
   //  0; show Frame,  1; show Graph, 2; show Animation, 3; show end of Animation
   const [canvaTimeState, setCanvaTimeState] = useState<number>(initialState.canvaTimeState)
+
+  const [valuesC, setValuesC] = useState<(number)[]>(initialState.concentration)
+  const [valuesT, setValuesT] = useState<number[]>(initialState.reactionTime)
   const [canvaTimeSliderC, setCanvaTimeSliderC] = useState<number[]>(initialState.canvaTimeSliderC)
   const [canvaTimeSliderT, setCanvaTimeSliderT] = useState<number[]>(initialState.canvaTimeSliderT)
 
@@ -101,6 +111,8 @@ export const AppDataProvider = (props: any) => {
   return (
     <AppContext.Provider
       value={{
+        courseStatus,
+        setCourseStatus,
         curMenu,
         setCurMenu,
         curStep,
