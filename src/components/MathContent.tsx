@@ -24,9 +24,10 @@ interface MathContentProps {
   exp4: string,
   blanks: (any | undefined)[]
   blanksCount: number
+  className?: string
 }
-const MathContent = ({ exp0, exp1, exp2, exp3, exp4, blanks }: MathContentProps) => {
-  return <div className={styles.mathContentContainer}>
+const MathContent = ({ exp0, exp1, exp2, exp3, exp4, blanks, className = '' }: MathContentProps) => {
+  return <div className={`${styles.mathContentContainer} ${className}`}>
     <MathJaxContext config={config}>
       <div
         id='tur_math1'

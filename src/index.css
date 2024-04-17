@@ -23,3 +23,8 @@ code {
   position: absolute;
   bottom: -3px;
 }
+.sm_top {
+  font-size: 11px;
+  position: absolute;
+  top: -7px;
+}

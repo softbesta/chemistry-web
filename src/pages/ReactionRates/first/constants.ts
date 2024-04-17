@@ -11,33 +11,31 @@ export const tur_Text = [
     `Great! Now you can set the <span>concentration of A at the end of the reaction [A<span class='sm_botom'>t</span>]</span> and the <span>time the reaction will last (t)</span>.`,
   ],
   [ // 2
-    `The order of a reaction has to do with the rate of it. <span>Rate</span> is the rate of \
-      change in the concentration per unit time. The rate constant <span>k</span> is a value on \
-      which the <span>rate</span> depends. For this reaction, k=0.070M/s.`,
+    `The rate constant <span>k</span> is a value on which the <span>rate</span> depends. This dependency is often represented with the rate law or the rate equation.`,
   ],
   [ // 3
-    `<span>Half-life (t<span class='sm_botom'>1/2</span>)</span> is an expression to easily calculate the point in time at \
-      which the concentration of the reactant, in this case <span>A</span>, is half of what the \
-      initial concentration was. For this reaction, <span>t<span class='sm_botom'>1/2</span>=\
-      10.00s</span>.`,
+    `Rate laws or rate equations are mathematical expressions that describe the relationship \
+    between the <span>rate</span> of a chemical reaction and the concentration of its reactants. \
+    For this reaction, <span>k=0.069</span>.`,
   ],
   [ // 4
-    `<p>Let's watch how all the molecules are all changing! As \
-    A disappears, B is being produced.</p>`,
-    `<p>This happens at a variable <span>rate (in units of M/s)</span>, which is dependent on <span>k</span>.</p>`,
+    `<p>For a reaction with one reactant it's usually written as <span>rate=k[A]</span><span class='sm_top'>order</span>.`,
+    `For this reaction then, <span>rate=k[A]</span><span class='sm_top'>1</span>.</p>`,
   ],
   [ // 5 here goes next step automatically after action
-    `<p style='font-size: 17px'>For this zero order reaction, <span>rate</span> is constant and it's equal to <span>k</span>, that's why a graph plotting \(Strings.aVsT) is a straight line.</p>`,
-    `<p style='font-size: 17px'>[A]<span>(y)</span>=-kt<span>(mx)</span>+[A0]<span>(b)</span></p>`,
-    `<span style='font-size: 17px'>Where -k is the slope</span>`,
+    `<p style='font-size: 17px'>Half-life (t<span class='sm_botom'>1/2</span>)</span> is an expression to easily calculate the point in time at which the concentration of the reactant, in this case <span>A</span>, is half of what the \
+    initial concentration was. For this reaction,</p>`,
+    `<p style='font-size: 17px'> <span>t<span class='sm_botom'>1/2</span>=\
+    In(1)/k=10.00s</span>.</p>`,
   ],
   [ // 6
-    `You can click the button in the top right corner to see the initial and final concentration and time for this reaction.`,
-    `<span>Try clicking the toggle to see your results</span>.`,
+    `<p>Let's watch how all the molecules are all changing!</p>`,
+    `<p>As A disappears, B is being produced.</p>`,
+    `<p>This happens at a variable <span>rate (in units of M/s)</span>, which is dependent on <span>k</span> and <span>[A]</span>.</p>`,
   ],
   [ // 7
-    `Amazing! Let's take a snapshot!`,
-    `Try <span>dragging the time indicator</span> to scrub through the reaction time.`,
+    `For the previous zero order reaction, <span>rate</span> was constant because it was independent \
+    of <span>[A]</span>, since <span>rate=k[A]<span class='sm_top'>0</span></span> is equivalent to <span>rate=k</span>, which is the rate constant.`,
   ],
   [ // 8
     `Now, let's try choosing a different reaction, which has a fixed rate constant, <span>k</span>.`,
