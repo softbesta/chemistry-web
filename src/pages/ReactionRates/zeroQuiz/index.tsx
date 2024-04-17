@@ -5,6 +5,7 @@ import Buttons from '../../../components/Buttons/Buttons'
 import { QuizAnswerType, QuizItemType, quizData } from './constants'
 import { getItemsRandomlyFromArray } from '../../../helper/functions'
 import useFunctions from '../../../hooks/useFunctions'
+import useAppData from '../../../hooks/useAppData'
 
 // Quiz answer steps
 interface QuestionStepProps {
@@ -110,8 +111,11 @@ const ReactionZeroQuiz = () => {
 
   const {
     updatePageFromMenu,
-    getNextMenu
+    getNextMenu,
   } = useFunctions()
+  const {
+    availableMenuList
+  } = useAppData()
 
   useEffect(() => {
   }, [quizType])
@@ -184,7 +188,15 @@ const ReactionZeroQuiz = () => {
       {quizStep === 0 && <div className={styles.content}>
         <h1 className={styles.title}>Let's take a quiz</h1>
         <h2 className={styles.description}>Choose the difficulty level of the quiz</h2>
-        <p className={styles.skipQuiz}>Skip Quiz</p>
+        <div className={styles.skipQuiz}>
+          <p
+            onClick={() => {
+              updatePageFromMenu(getNextMenu(1), true)
+            }}
+          >
+            Skip Quiz
+          </p>
+        </div>
         <div className={styles.selectQuiz}>
           <QuestionDifficulty
             text={'Easy'}

@@ -53,7 +53,7 @@ interface NavPanelProps {
 }
 const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
   let location = useLocation()
-  const { curMenu, setCurMenu, courseStatus, count } = useAppData()
+  const { curMenu, setCurMenu, availableMenuList, count } = useAppData()
   const { updatePageFromMenu, initializePage, handleTest } = useFunctions()
   // const { handleTest } = useTestFunc()
   useEffect(() => {
@@ -81,10 +81,9 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
   }, [curMenu])
   const handleMenuItemClick = (menu: MenuList) => {
     console.log('===handleMenuItemClick===')
-    console.log({ courseStatus, menu })
-    console.log('isavailable menu; ', courseStatus.includes(menu))
-    if (!courseStatus.includes(menu)) return
-    updatePageFromMenu(menu)
+    console.log({ availableMenuList, menu })
+    console.log('isavailable menu; ', availableMenuList.includes(menu))
+    updatePageFromMenu(menu, true)
   }
 
   return <div className={`${styles.navPanel} ${visible ? styles.active : ''}`}>

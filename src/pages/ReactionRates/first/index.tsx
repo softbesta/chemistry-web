@@ -182,7 +182,7 @@ const ReactionFirst = () => {
   }
   const handleTest2 = () => {
     console.log('===handleTest2=== - ')
-    const res = getStorage('courseStatus')
+    const res = getStorage('availableMenuList')
     console.log({ res })
     // setCanvaTimeState(1)
   }

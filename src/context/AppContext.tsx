@@ -4,11 +4,11 @@ import { PageMenuType } from "../helper/types"
 
 interface IAppContext {
 
-  // --- Description --- courseStatus
+  // --- Description --- availableMenuList
   // available course(menu) list.
-  courseStatus: MenuList[],
-  // setCourseStatus: React.Dispatch<React.SetStateAction<MenuList[]>>,
-  setCourseStatus: (val: MenuList[]) => void,
+  availableMenuList: MenuList[],
+  // setAvailableMenuList: React.Dispatch<React.SetStateAction<MenuList[]>>,
+  setAvailableMenuList: (val: MenuList[]) => void,
 
   // --- Description --- curMenu
   // menu name for opened page.
@@ -102,11 +102,11 @@ export const AppDataProvider = (props: any) => {
   const [count, setCount] = useState<number>(props.count || initialState.count || 0)
 
   // ** available course (menu) list in order by
-  const [courseStatus, setCourseStatus1] = useState<MenuList[]>([])
-  const setCourseStatus = (val: MenuList[]) => {
-    console.log('===setCourseStatus===')
+  const [availableMenuList, setAvailableMenuList1] = useState<MenuList[]>([])
+  const setAvailableMenuList = (val: MenuList[]) => {
+    console.log('===setAvailableMenuList===')
     console.log({ val })
-    setCourseStatus1(val)
+    setAvailableMenuList1(val)
   }
 
   // ** use Menu, Step to manage page
@@ -153,8 +153,8 @@ export const AppDataProvider = (props: any) => {
   return (
     <AppContext.Provider
       value={{
-        courseStatus,
-        setCourseStatus,
+        availableMenuList,
+        setAvailableMenuList,
         curMenu,
         setCurMenu,
         curStep,

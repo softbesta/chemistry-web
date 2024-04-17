@@ -29,7 +29,7 @@ interface ChapterMenuPanelProps {
   visible: boolean
 }
 const ChapterMenuPanel = ({ visible }: ChapterMenuPanelProps) => {
-  const { curMenu, setCurMenu, courseStatus } = useAppData()
+  const { curMenu, setCurMenu, availableMenuList } = useAppData()
   const { updatePageFromMenu } = useFunctions()
 
   const subItemsList = chaptersMenuList.map(menu => menu.subItems?.map(sub => sub.value) || [])
@@ -69,7 +69,7 @@ const ChapterMenuPanel = ({ visible }: ChapterMenuPanelProps) => {
               key={subItem.value}
               className={`${styles.subItem} ${isActiveSubItem ? styles.activeSubItem : ''}`}
               onClick={() => handleSubItemClick(subItem)}
-              disabled={!courseStatus.includes(subItem.value as MenuList)}
+              disabled={!availableMenuList.includes(subItem.value as MenuList)}
             >
               {subItem.title}
             </button>

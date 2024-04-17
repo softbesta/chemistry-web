@@ -14,29 +14,39 @@ const useFunctions = () => {
     curMenu,
     curStep,
     setCurStep,
-    setCourseStatus,
+    availableMenuList,
+    setAvailableMenuList,
     setActiveDotIndex,
     setCount,
   } = useAppData()
 
   const initializePage = (menu: MenuList) => {
     console.log('===initializePage===')
-    // update 'courseStatus' in localStorage and context
-    let update = getStorage('courseStatus') as MenuList[] || []
+    // update 'availableMenuList' in localStorage and context
+    let update = getStorage('availableMenuList') as MenuList[] || []
     if (!update.includes(menu)) {
       update = [...update, menu]
-      setStorage('courseStatus', update)
+      setStorage('availableMenuList', update)
     }
     console.log({update})
-    setCourseStatus(update)
+    setAvailableMenuList(update)
 
     // Todo: initialize context status.
     setCurStep(0)
     setActiveDotIndex(0)
   }
+  // check menu is in availableMenuList
+  const checkMenuAvailable = (menu: MenuList) => {
+    return availableMenuList.includes(menu)
+  }
   // call when menu is clicked
-  const updatePageFromMenu = (menu: MenuList) => {
+  const updatePageFromMenu = (menu: MenuList, checkAvailableMenu: boolean = false) => {
+    console.log({menu}, {checkAvailableMenu})
     // initializePage(menu)
+    if (checkAvailableMenu) {
+      console.log('check: ', !checkMenuAvailable(menu))
+      if (!checkMenuAvailable(menu)) return
+    }
     const path = routes[menu]?.path
     if (!path) {
       navigate('/nopage')
@@ -62,6 +72,7 @@ const useFunctions = () => {
 
   const returnValues = {
     initializePage,
+    checkMenuAvailable,
     updatePageFromMenu,
     getNextMenu,
     handleTest,

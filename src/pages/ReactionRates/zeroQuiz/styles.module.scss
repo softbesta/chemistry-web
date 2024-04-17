@@ -38,12 +38,16 @@
     }
 
     .skipQuiz {
-      text-align: right;
-      color: rgb(225 45 45 / 80%);
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 20px;
-      margin: 0;
+      display: flex;
+      justify-content: end;
+      p {
+        color: rgb(225 45 45 / 80%);
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 20px;
+        margin: 0;
+        cursor: pointer;
+      }
     }
 
     .selectQuiz {
