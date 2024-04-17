@@ -7,10 +7,11 @@ import Buttons from './Buttons/Buttons'
 
 interface TutorialControlProps {
   turText: string[]
+  isDisableNextButton?: boolean
   onStepChange: (step: number) => void
 }
 
-const TutorialControl = ({ turText, onStepChange }: TutorialControlProps) => {
+const TutorialControl = ({ turText, isDisableNextButton = false, onStepChange }: TutorialControlProps) => {
   // const {
   //   curStep,
   //   setCurStep,
@@ -83,6 +84,7 @@ const TutorialControl = ({ turText, onStepChange }: TutorialControlProps) => {
       <Buttons.NextButton
         id='tur_stepNextButton'
         onClick={() => onStepChange(1)}
+        disabled={isDisableNextButton}
       />
       {/* <button
         id='tur_stepPrevButton'

@@ -220,6 +220,7 @@ export const stepsActions = [
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    activeDotIndex: 0,
     isEnableChooseMenu: true,
   },
   // 9   Great! You picked a...
@@ -228,6 +229,7 @@ export const stepsActions = [
     canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    activeDotIndex: 1,
     isEnableChooseMenu: false,
   },
   // 10   Awesome! Now set ...
@@ -258,6 +260,7 @@ export const stepsActions = [
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    activeDotIndex: 1,
     isEnableChooseMenu: true,
   },
   // 14   Great! You picked a ...
@@ -266,6 +269,7 @@ export const stepsActions = [
     canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    activeDotIndex: 2,
     isEnableChooseMenu: false,
   },
   // 15   Awesome! Now set the ...

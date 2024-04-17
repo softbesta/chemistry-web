@@ -72,8 +72,8 @@ const BarChartCanvas = ({ play, c2, c1, t2, t1, height, width, colorA, colorB }:
     const ctx = canvas.current.getContext('2d');
     if (!ctx) return
     drawFrame()
-    console.log({ c1, c2, t1, t2 })
-    console.log({ sX, sY, eX, eY })
+    // console.log({ c1, c2, t1, t2 })
+    // console.log({ sX, sY, eX, eY })
 
     const height = 194
 
@@ -83,14 +83,14 @@ const BarChartCanvas = ({ play, c2, c1, t2, t1, height, width, colorA, colorB }:
     ctx.fill();
 
     ctx.beginPath();
-    ctx.rect(40, height, 30, - height * Math.max(c1, c2))      // A start (c2: 0)
-    // ctx.rect(40, height, 30, - height * Math.abs(c1 - c2))   // A end
+    // ctx.rect(40, height, 30, - height * Math.max(c1, c2))      // A start (c2: 0)
+    ctx.rect(40, height, 30, - height * Math.abs(c1 - c2))   // A end
     ctx.fillStyle = colorA;
     ctx.fill();
 
     ctx.beginPath();
-    ctx.rect(140, height, 30, - height * 0)                     // B start
-    // ctx.rect(140, height, 30, - height * Math.min(c1, c2));  // B end
+    // ctx.rect(140, height, 30, - height * 0)                     // B start
+    ctx.rect(140, height, 30, - height * Math.min(c1, c2));  // B end
     ctx.fillStyle = colorB;
     ctx.fill();
 

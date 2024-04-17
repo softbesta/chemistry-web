@@ -33,6 +33,7 @@ const ChooseMenu = ({ isEnable = false, onClickItem }: ChooseMenuProps) => {
   const handleItemClick = (index: number) => {
     console.log('ChooseMenu.handleItemClick', { index })
     setActiveDotIndex(index)
+    onClickItem?.()
     toogleShowChapterPanel()
   }
   return <div

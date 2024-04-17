@@ -40,6 +40,7 @@ const ReactionFirst = () => {
     isEnableChooseMenu,
     setIsEnableChooseMenu,
     activeDotIndex,
+    setActiveDotIndex,
   } = useAppData()
 
   const {
@@ -50,6 +51,8 @@ const ReactionFirst = () => {
   } = useFunctions()
 
   const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
+
+  const [prevStep, setPrevStep] = useState<number>(curStep)
 
   // *** Setup tutorial actions here
   const zeroTurs = Array.from(Array(tur_Text.length).keys()).map(idx => {
@@ -76,6 +79,10 @@ const ReactionFirst = () => {
         console.log('zzz curActions.isEnableChooseMenu', curActions.isEnableChooseMenu)
         setIsEnableChooseMenu(curActions.isEnableChooseMenu)
       }
+      if (curActions?.activeDotIndex !== undefined) {
+        console.log('zzz curActions.activeDotIndex', curActions.activeDotIndex)
+        setActiveDotIndex(curActions.activeDotIndex)
+      }
       if (Array.isArray(curActions?.canvaTimeSliderC)) {
         setCanvaTimeSliderC(curActions.canvaTimeSliderC)
       }
@@ -85,12 +92,10 @@ const ReactionFirst = () => {
     }
 
   }, [curStep, curActions])
-  // *** Tutorial-ACTIONS  - curStep changes
-  useEffect(() => {
-    // Todo: go to next step.
-    console.log('ReactionZero.useEffect', {activeDotIndex})
+
+  const handleClickChooseMenuItem = () => {
     onStepChange(1)
-  }, [activeDotIndex])
+  }
 
   const getFormula = () => {
 
@@ -151,7 +156,9 @@ const ReactionFirst = () => {
   }
   // call when click prev step
   const onStepChange = (step: number) => {
+    console.log('===onStepChange===', {step})
     const nextStep = getNextStep(step)
+    console.log({nextStep})
     if (nextStep === undefined) return
     if (curStep === nextStep) return
     // Tutorial-Highlight
@@ -160,6 +167,8 @@ const ReactionFirst = () => {
       highlightElement(zeroTurs[nextStep].highlight)
     }
 
+    console.log({curStep})
+    setPrevStep(curStep)
     setCurStep(nextStep)
   }
 
@@ -167,8 +176,7 @@ const ReactionFirst = () => {
     console.log('===handleTest=== 111')
     // console.log({ valuesC })
     // setCanvaTimeState(2)
-    const menuStatus = JSON.stringify(MenuOrder)
-    setStorage('courseStatus', menuStatus)
+    console.log({ prevStep, curStep })
   }
   const handleTest2 = () => {
     console.log('===handleTest2=== - ')
@@ -182,7 +190,7 @@ const ReactionFirst = () => {
   }
   return <div className={styles.container}>
     <ChapterMenu />
-    <ChooseMenu  isEnable={isEnableChooseMenu} />
+    <ChooseMenu isEnable={isEnableChooseMenu} onClickItem={() => handleClickChooseMenuItem()} />
     <WatchMenu />
     {/* <p>step: {curStep}</p>
     <p>showTimeGraph: {canvaTimeState}</p>
@@ -217,15 +225,16 @@ const ReactionFirst = () => {
       />
     </div>
     <div className={styles.reactionContentContainer}>
+      {/* <div className={styles.chartInA}></div> */}
       <MathContent
         {...getFormula()}
         blanks={tur_MathBlanks[curStep]}
         blanksCount={11}
       />
       <TutorialControl
-        // curStep={curStep}
         turText={tur_Text[curStep]}
         onStepChange={onStepChange}
+        isDisableNextButton={isEnableChooseMenu}
       />
     </div>
     {isHighlight && <div className='overlay'></div>}

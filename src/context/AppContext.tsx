@@ -56,7 +56,7 @@ interface IAppContext {
   // *** Choose menu value - 0: 'A to B', 1: 'C to D', 2: 'E to F'
   isEnableChooseMenu: boolean,
   setIsEnableChooseMenu: React.Dispatch<React.SetStateAction<boolean>>,
-  activeDotIndex: number,
+  activeDotIndex: number,   // need init action
   setActiveDotIndex: React.Dispatch<React.SetStateAction<number>>,
 
   // test purpose

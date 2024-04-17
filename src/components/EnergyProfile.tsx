@@ -84,6 +84,7 @@ const EnergyProfile = ({ valuesC, beakerState, beakerDotColor, onEndPlay }: Ener
     } else if (beakerState === 3) {
       setEnergyDots(beakerDotsEnd.current)
     }
+    return () => stopTimer()
   }, [beakerState])
 
   const [timeCounter, setTimeCounter] = useState<number>(0)
