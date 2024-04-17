@@ -232,7 +232,6 @@ const ReactionZero = () => {
         blanksCount={11}
       />
       <TutorialControl
-        // curStep={curStep}
         turText={tur_Text[curStep]}
         onStepChange={onStepChange}
         isDisableNextButton={isEnableChooseMenu}

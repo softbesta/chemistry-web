@@ -156,9 +156,9 @@ const ReactionFirst = () => {
   }
   // call when click prev step
   const onStepChange = (step: number) => {
-    console.log('===onStepChange===', {step})
+    console.log('===onStepChange===', { step })
     const nextStep = getNextStep(step)
-    console.log({nextStep})
+    console.log({ nextStep })
     if (nextStep === undefined) return
     if (curStep === nextStep) return
     // Tutorial-Highlight
@@ -167,7 +167,7 @@ const ReactionFirst = () => {
       highlightElement(zeroTurs[nextStep].highlight)
     }
 
-    console.log({curStep})
+    console.log({ curStep })
     setPrevStep(curStep)
     setCurStep(nextStep)
   }
