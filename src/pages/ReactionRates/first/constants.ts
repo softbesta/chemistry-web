@@ -144,7 +144,7 @@ export const tur_Hightlights = [
   // 12   Now, let's try choosing...
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_chooseMenuIcon'],
 
-  // 13   Great! You picked a... EF
+  // 13   Great! You picked a... CD
   [],
 
   // 14   Awesome! Now set the ...
@@ -186,7 +186,7 @@ export const stepsActions = [
   // canvaTimeState;    0 - show Frame only, 1 - show Graph
   //                    2 - Animation,       3 - show End
 
-  // 0   This is zero...
+  // 0   This is a first...
   { // 0
     canvaTimeSliderC: [2, 0],
     canvaTimeSliderT: [2, 0],
@@ -197,46 +197,46 @@ export const stepsActions = [
   // 1   Great! Now you ...
   { // 1
     canvaTimeSliderC: [1, 2],
-    canvaTimeSliderT: [1, 2],
+    canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
     canvaBeakerState: 1,
   },
-  // 2   The order of a ...
+  // 2   The rate constant...
   { // 2
     canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 1],
+    canvaTimeSliderT: [1, 0],
     canvaTimeState: 1,
     canvaBeakerState: 1,
   },
-  // 3   Half-lie (t12) ...
+  // 3   Rate laws or rate ...
   { // 3
     canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 1],
+    canvaTimeSliderT: [1, 0],
     canvaTimeState: 1,
     canvaBeakerState: 1,
   },
-  // 4   Let's watch how all...
+  // 4   For a reaction...
   { // 4
     canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 1,
+    canvaBeakerState: 1,
+  },
+  // 5   Half-life t1/2 ...
+  { // 5
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 1,
+    canvaBeakerState: 1,
+  },
+  // 6   Let's watch how all....
+  { // 6
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
     canvaTimeState: 2,
     canvaBeakerState: 2,
   },
-  // 5   For this zero order ...
-  { // 5
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 1],
-    canvaTimeState: 3,
-    canvaBeakerState: 3,
-  },
-  // 6   You can click the....
-  { // 6
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 1],
-    canvaTimeState: 3,
-    canvaBeakerState: 3,
-  },
-  // 7   Amazing! Let's take...
+  // 7   For the previous zero...
   { // 7
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 1],
@@ -244,80 +244,114 @@ export const stepsActions = [
     canvaBeakerState: 3,
     isEnableChooseMenu: false,
   },
-  // 8   Now, let's try choosing...
+  // 8   For this first order...
   { // 8
     canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 1],
+    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
     // activeDotIndex: 0,
     // isEnableChooseMenu: true,
   },
-  // 9   Great! You picked a...
+  // 9   Notice how [A] drops...
   { // 9
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBeakerState: 3,
+    // activeDotIndex: 1,
+    // isEnableChooseMenu: false,
+  },
+  // 10   For simplification purposes ...
+  { // 10
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBeakerState: 3,
+  },
+  // 11   Amazing! Let's take...
+  { // 11
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBeakerState: 3,
+    isEnableChooseMenu: false,
+  },
+  // 12   Now, let's try choosing...
+  { // 12
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBeakerState: 3,
+    activeDotIndex: 0,
+    isEnableChooseMenu: true,
+  },
+  // 13   Great! You picked a... CD
+  { // 13
     canvaTimeSliderC: [2, 0],
     canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
     canvaBeakerState: 1,
-    // activeDotIndex: 1,
-    // isEnableChooseMenu: false,
+    activeDotIndex: 1,
+    isEnableChooseMenu: false,
   },
-  // 10   Awesome! Now set ...
-  { // 10
+  // 14   Awesome! Now set the ...
+  { // 14
     canvaTimeSliderC: [1, 0],
     canvaTimeSliderT: [1, 2],
     canvaTimeState: 1,
     canvaBeakerState: 1,
   },
-  // 11   Let's watch how all the...
-  { // 11
+  // 15   Let's watch how ...
+  { // 15
     canvaTimeSliderC: [1, 0],
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 2,
     canvaBeakerState: 2,
   },
-  // 12   Amazing, let's take...
-  { // 12
+  // 16   Amazing! Let's take ...
+  { // 16
     canvaTimeSliderC: [1, 0],
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 3,
     canvaBeakerState: 3,
     isEnableChooseMenu: false,
   },
-  // 13   Now, let's try choosing... EF
-  { // 13
-    canvaTimeSliderC: [1, 1],
+  // 17   Now, let's try choosing ...
+  { // 17
+    canvaTimeSliderC: [1, 0],
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 3,
     canvaBeakerState: 3,
-    // activeDotIndex: 1,
-    // isEnableChooseMenu: true,
+    activeDotIndex: 1,
+    isEnableChooseMenu: true,
   },
-  // 14   Great! You picked a ...
-  { // 14
+  // 18   Great! You picked a ... EF
+  { // 18
     canvaTimeSliderC: [2, 0],
     canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
     canvaBeakerState: 1,
-    // activeDotIndex: 2,
-    // isEnableChooseMenu: false,
+    activeDotIndex: 2,
+    isEnableChooseMenu: false,
   },
-  // 15   Awesome! Now set the ...
-  { // 15
+  // 19   Awesome! Now set the ...
+  { // 19
     canvaTimeSliderC: [1, 2],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 1,
     canvaBeakerState: 1,
+    isEnableChooseMenu: false,
   },
-  // 16   Let's watch how all ...
-  { // 16
+  // 20   Let's watch how all ...
+  { // 20
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 2,
     canvaBeakerState: 2,
   },
-  // 17   Amazing, let's take ...
-  { // 17
+  // 21   Amazing! Let's take a ...
+  { // 21
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
