@@ -17,28 +17,24 @@ export const routes = {
   second: {
     title: 'Second order reaction',
     path: '/reaction/second',
-    path1: '/reaction/second',
     type: 'reaction',
   },
   // 1 - 4
   comparison: {
     title: 'Reaction comparison',
-    path: '/reaction/first',
-    path1: '/reaction/comparison',
+    path: '/reaction/comparison',
     type: 'reaction',
   },
   // 1 - 5
   kinetics: {
     title: 'Kinetics',
-    path: '/reaction/first',
-    path1: '/reaction/kinetics',
+    path: '/reaction/kinetics',
     type: 'reaction',
   },
   // Quiz
   zeroQuiz: {  // updated
     title: 'Quiz for Zero order reaction',
-    path: '/reaction/zero/quiz',
-    path1: '/quiz',
+    path: '/quiz',
     type: 'quiz',
   },
   firstQuiz: {  // updated
@@ -48,41 +44,35 @@ export const routes = {
   },
   secondQuiz: {
     title: 'Quiz for Second order reaction',
-    path: '/reaction/first',
-    path1: '/reaction/second/quiz',
+    path: '/reaction/second/quiz',
     type: 'quiz',
   },
   comparisonQuiz: {
     title: 'Quiz for Reaction comparison',
-    path: '/reaction/first',
-    path1: '/reaction/comparison/quiz',
+    path: '/reaction/comparison/quiz',
     type: 'quiz',
   },
   kineticsQuiz: {
     title: 'Quiz for Kinetics',
-    path: '/reaction/first',
-    path1: '/reaction/kinetics/quiz',
+    path: '/reaction/kinetics/quiz',
     type: 'quiz',
   },
   // 2 - 1
   aqueous: {
     title: 'Aqueous reaction',
-    path: '/reaction/first',
-    path1: '/equilibrium/aqueous',
+    path: '/equilibrium/aqueous',
     type: 'equilibrium',
   },
   // 3 - 1
   introduction: {
     title: 'Introduction',
-    path: '/reaction/first',
-    path1: '/acids/introduction',
+    path: '/acids/introduction',
     type: 'acids',
   },
   // 4 - 1
   balanced: {
     title: 'Balanced reactions',
-    path: '/reaction/first',
-    path1: '/chemical/balanced',
+    path: '/chemical/balanced',
     type: 'chemical',
   },
 }
