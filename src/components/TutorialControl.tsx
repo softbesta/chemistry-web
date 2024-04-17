@@ -3,6 +3,7 @@ import ImgBeacky from '../assets/ReactionRates/reaction_boxes/beaky.png'
 import useAppData from '../hooks/useAppData'
 import { useHighLight } from '../hooks/useHighlight'
 import { maxStep_Zero, tur_Hightlights, tur_Text } from '../pages/ReactionRates/zero/constants'
+import Buttons from './Buttons/Buttons'
 
 interface TutorialControlProps {
   turText: string[]
@@ -73,20 +74,30 @@ const TutorialControl = ({ turText, onStepChange }: TutorialControlProps) => {
       </div>
     </div>
     <div className={styles.stepButtons}>
-      <button
+      <Buttons.StepButton
+        id='tur_stepPrevButton'
+        onClick={() => onStepChange(-1)}
+      >
+        &#9664;
+      </Buttons.StepButton>
+      <Buttons.NextButton
+        id='tur_stepNextButton'
+        onClick={() => onStepChange(1)}
+      />
+      {/* <button
         id='tur_stepPrevButton'
         className={styles.prevBtn}
         onClick={() => onStepChange(-1)}
       >
         &#9664;
-      </button>
-      <button
+      </button> */}
+      {/* <button
         id='tur_stepNextButton'
         className={styles.nextBtn}
         onClick={() => onStepChange(1)}
       >
         Next <span>&#9654;</span>
-      </button>
+      </button> */}
       {/* <button onClick={() => handleTest()}>Test tutorial</button> */}
     </div>
   </div>)

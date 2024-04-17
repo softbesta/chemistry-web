@@ -8,12 +8,14 @@ import { routes } from './constants';
 import CommonLayout from './layout/CommonLayout';
 import './App.css'
 import PageError from './pages/404page';
+import ReactionZeroQuiz from './pages/ReactionRates/zeroQuiz';
 
 function App() {
   return (
     <CommonLayout>
       <Routes>
         <Route path={routes.zero.path} index element={<ReactionZero />} />
+        <Route path={routes.zeroQuiz.path} index element={<ReactionZeroQuiz />} />
         <Route path={routes.first.path} element={<ReactionFirst />} />
         <Route path='about' element={<AboutPage />} />
         <Route path='nopage' element={<PageError />} />

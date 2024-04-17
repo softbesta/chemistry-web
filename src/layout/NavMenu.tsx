@@ -12,8 +12,8 @@ import IconKinetics from '../assets/ReactionRates/navpanel/kineticsicon@3x.png'
 import IconKineticsPressed from '../assets/ReactionRates/navpanel/kineticsicon-pressed@3x.png'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { MenuList, routes } from '../constants'
-import SvgQuiz from '../components/SVGIcons/SvgQuiz'
-import SvgArchive from '../components/SVGIcons/SvgArchive'
+import SvgQuiz from '../components/Icons/SvgQuiz'
+import SvgArchive from '../components/Icons/SvgArchive'
 import useAppData from '../hooks/useAppData'
 import useFunctions from '../hooks/useFunctions'
 
@@ -48,6 +48,11 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
 
   useEffect(() => {
     // console.log({ location })
+
+    const menuNames = Object.keys(routes) as MenuList[]
+    const curRouteMenu = menuNames.find(item => routes[item].path === location.pathname)
+    if (!curRouteMenu) return
+    setCurMenu(curRouteMenu)
 
     if (location.pathname === routes[MenuList.zero].path) {
       setCurMenu(MenuList.zero)

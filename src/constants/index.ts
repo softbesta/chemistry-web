@@ -1,63 +1,90 @@
 
 export const routes = {
+  // chapter 1 - 1
   zero: {
     title: 'Zero order reaction',
     path: '/',
     type: 'reaction',
     // path: 'reaction/zero',
   },
+  // 1 - 2
   first: {
     title: 'First order reaction',
     path: '/reaction/first',
     type: 'reaction',
   },
+  // 1 - 3
   second: {
     title: 'Second order reaction',
     path: '/reaction/first',
     path1: '/reaction/second',
     type: 'reaction',
   },
+  // 1 - 4
   comparison: {
     title: 'Reaction comparison',
     path: '/reaction/first',
     path1: '/reaction/comparison',
     type: 'reaction',
   },
+  // 1 - 5
   kinetics: {
     title: 'Kinetics',
     path: '/reaction/first',
     path1: '/reaction/kinetics',
     type: 'reaction',
   },
+  // Quiz
   zeroQuiz: {
     title: 'Quiz for Zero order reaction',
-    path: '/reaction/first',
+    path: '/reaction/zero/quiz',
     path1: '/quiz',
-    type: 'reaction',
+    type: 'quiz',
   },
   firstQuiz: {
     title: 'Quiz for First order reaction',
     path: '/reaction/first',
     path1: '/reaction/first/quiz',
-    type: 'reaction',
+    type: 'quiz',
   },
   secondQuiz: {
     title: 'Quiz for Second order reaction',
     path: '/reaction/first',
     path1: '/reaction/second/quiz',
-    type: 'reaction',
+    type: 'quiz',
   },
   comparisonQuiz: {
     title: 'Quiz for Reaction comparison',
     path: '/reaction/first',
     path1: '/reaction/comparison/quiz',
-    type: 'reaction',
+    type: 'quiz',
   },
   kineticsQuiz: {
     title: 'Quiz for Kinetics',
     path: '/reaction/first',
     path1: '/reaction/kinetics/quiz',
-    type: 'reaction',
+    type: 'quiz',
+  },
+  // 2 - 1
+  aqueous: {
+    title: 'Aqueous reaction',
+    path: '/reaction/first',
+    path1: '/equilibrium/aqueous',
+    type: 'equilibrium',
+  },
+  // 3 - 1
+  introduction: {
+    title: 'Introduction',
+    path: '/reaction/first',
+    path1: '/acids/introduction',
+    type: 'acids',
+  },
+  // 4 - 1
+  balanced: {
+    title: 'Balanced reactions',
+    path: '/reaction/first',
+    path1: '/chemical/balanced',
+    type: 'chemical',
   },
 }
 
@@ -188,3 +215,12 @@ export const dotBgColors = [
 // initial Beaker dots
 export const totalDots = 144
 export const initDots = Array.from({ length: totalDots }, () => 0)
+
+const testColors = `
+// dark red
+color: rgb(225 45 45 / 80%);
+// dark blue
+color: rgba(96, 147, 202, 1);
+// grey
+color: rgba(100, 100, 100, 0.8);
+`

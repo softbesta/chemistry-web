@@ -79,10 +79,17 @@ export const generateEnergyArray = (arr: any, percentage: any, originVal: number
   }
 }
 
+// debug purpose
 export const energyBeforeAnimation = (arr: number[], percentage: number, originVal: number = 1) => {
   const res = [...arr]
   res.forEach((item, index) => {
     if (item > 0) res[index] = originVal
   })
+  return res
+}
+
+export const getItemsRandomlyFromArray = (arr: any[], count?: number) => {
+  const shuffled = [...arr].sort(() => 0.5 - Math.random())
+  const res = shuffled.slice(0, count ? count : shuffled.length)
   return res
 }

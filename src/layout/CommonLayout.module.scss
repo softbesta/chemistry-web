@@ -1,13 +1,24 @@
 .layout {
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
+  
+  .navMenuDivider {
+    width: 100%;
+    height: 75px;
+    background-color: white;
+    position: absolute;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 10px;
+  }
+  
 }
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  height: 100vh;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;

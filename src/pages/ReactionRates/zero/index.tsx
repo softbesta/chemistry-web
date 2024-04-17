@@ -9,6 +9,8 @@ import TutorialControl from "../../../components/TutorialControl"
 import { useHighLight } from "../../../hooks/useHighlight"
 import { maxStep_Zero, stepsActions, tur_Hightlights, tur_Text } from "./constants"
 import useFunctions from "../../../hooks/useFunctions"
+import ChooseMenu from "../../../layout/ChooseMenu"
+import WatchMenu from "../../../layout/WatchMenu"
 
 const ReactionZero = () => {
   const {
@@ -162,6 +164,8 @@ const ReactionZero = () => {
     // console.log(' ', infoC, { isDisabledA, isDisabledB })
   }
   return <div className={styles.container}>
+    <ChooseMenu />
+    <WatchMenu />
     {/* <p>step: {curStep}</p>
     <p>showTimeGraph: {canvaTimeState}</p>
     <p>beakerState: {canvaBeakerState}</p> */}
