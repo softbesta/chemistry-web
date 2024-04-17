@@ -19,7 +19,7 @@ interface ChooseMenuProps {
   isEnable?: boolean
   onClickItem?: () => void
 }
-const ChooseMenu = ({ isEnable = true, onClickItem }: ChooseMenuProps) => {
+const ChooseMenu = ({ isEnable = false, onClickItem }: ChooseMenuProps) => {
   const { activeDotIndex, setActiveDotIndex } = useAppData()
   const [isActive, setIsActive] = useState(false)
   const toogleShowChapterPanel = () => {
@@ -83,7 +83,7 @@ const ChooseMenuPanel = ({
             ${isActiveItem ? styles.activated : ''} 
           `}
           onClick={() => onItemClick(index)}
-          disabled={activeItemIndex + 1 > index}
+          disabled={!(activeItemIndex + 1 === index)}
         >
           {item.title}
         </button>

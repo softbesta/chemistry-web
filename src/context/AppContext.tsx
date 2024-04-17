@@ -50,8 +50,8 @@ interface IAppContext {
   beakerDots: React.MutableRefObject<number[]>
   beakerDotsEnd: React.MutableRefObject<number[]>
   // *** canvas Beaker A/B dot colors 
-  beakerDotColorList: string[][],
-  setBeakerDotColorList: React.Dispatch<React.SetStateAction<string[][]>>,
+  // beakerDotColorList: string[][],
+  // setBeakerDotColorList: React.Dispatch<React.SetStateAction<string[][]>>,
 
   // *** Choose menu value - 0: 'A to B', 1: 'C to D', 2: 'E to F'
   isEnableChooseMenu: boolean,
@@ -85,11 +85,11 @@ const initialState = {
   // *** canvas Beaker
   canvaBeakerState: 0, // 0: empty, 1: show one, 2: animation, 3: show two
   beakerDots: initDots,
-  beakerDotColors: [
-    [themeColors.none, themeColors.A, themeColors.B], // A to B
-    [themeColors.none, themeColors.C, themeColors.D], // C to D
-    [themeColors.none, themeColors.E, themeColors.F], // E to F
-  ],
+  // beakerDotColorList: [
+  //   [themeColors.none, themeColors.A, themeColors.B], // A to B
+  //   [themeColors.none, themeColors.C, themeColors.D], // C to D
+  //   [themeColors.none, themeColors.E, themeColors.F], // E to F
+  // ],
   activeDotIndex: 0
 }
 
@@ -136,7 +136,7 @@ export const AppDataProvider = (props: any) => {
   const beakerDotsEnd = useRef<number[]>(initialState.beakerDots)
 
   // themeColors[][]
-  const [beakerDotColorList, setBeakerDotColorList] = useState<string[][]>(initialState.beakerDotColors)
+  // const [beakerDotColorList, setBeakerDotColorList] = useState<string[][]>(initialState.beakerDotColorList)
 
   // 0: A to B, 1: C to D, 2: E to F
   const [isEnableChooseMenu, setIsEnableChooseMenu] = useState<boolean>(true)
@@ -166,25 +166,28 @@ export const AppDataProvider = (props: any) => {
         setValuesT,
         // playAnimation,
         // setPlayAnimation,
-        // controllers - Time Canvas
+
+        // ** controllers - Time Canvas
         canvaTimeState,
         setCanvaTimeState,
         canvaTimeSliderT,
         setCanvaTimeSliderT,
         canvaTimeSliderC,
         setCanvaTimeSliderC,
-        // controllers - Energy Canvas
+
+        // ** controllers - Energy Canvas
         canvaBeakerState,
         setCanvaBeakerState,
         beakerDots,
         beakerDotsEnd,
-        beakerDotColorList,
-        setBeakerDotColorList,
-        // animation Time change status (1-100)
+        // beakerDotColorList,
+        // setBeakerDotColorList,
+
+        // ** animation Time change status (1-100)
         timeframe,
         setTimeframe,
 
-        // Choose Menu - 0: 'A to B', ...
+        // ** Choose Menu - 0: 'A to B', ...
         isEnableChooseMenu,
         setIsEnableChooseMenu,
         activeDotIndex,

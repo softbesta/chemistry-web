@@ -228,7 +228,11 @@ export const dotBgColors = [
   themeColors.bgE,   // 5
   themeColors.bgF,   // 6
 ]
-
+export const dotColorList = [
+  [themeColors.none, themeColors.A, themeColors.B], // A to B
+  [themeColors.none, themeColors.C, themeColors.D], // C to D
+  [themeColors.none, themeColors.E, themeColors.F], // E to F
+]
 // initial Beaker dots
 export const totalDots = 144
 export const initDots = Array.from({ length: totalDots }, () => 0)

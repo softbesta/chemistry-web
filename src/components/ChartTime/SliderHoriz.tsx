@@ -53,7 +53,9 @@ const SliderHoriz = ({ valuesT, setValuesT, canvaTimeSliderT: showIndexT }: Slid
       }
     }
     // console.log('111 ', update)
-    if (update[1] <= update[0]) update[1] = update[0] <= 200 ? update[0] : 200
+    if (update[1] < 2) update[0] = 2
+    if (update[0] > update[1] - 2) update[0] = update[1] - 1
+    // if (update[1] <= update[0]) update[1] = update[0] <= 200 ? update[0] : 200
     update = update.map(item => item / 10)
     // console.log('222 ', update)
     setValuesT(update)

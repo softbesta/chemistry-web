@@ -15,6 +15,7 @@ const useFunctions = () => {
     curStep,
     setCurStep,
     setCourseStatus,
+    setActiveDotIndex,
     setCount,
   } = useAppData()
 
@@ -31,6 +32,7 @@ const useFunctions = () => {
 
     // Todo: initialize context status.
     setCurStep(0)
+    setActiveDotIndex(0)
   }
   // call when menu is clicked
   const updatePageFromMenu = (menu: MenuList) => {

@@ -11,7 +11,7 @@ import { maxStep_Zero, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text }
 import useFunctions from "../../../hooks/useFunctions"
 import ChooseMenu from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
-import { MenuList, MenuOrder } from "../../../constants"
+import { MenuList, MenuOrder, dotColorList } from "../../../constants"
 import { getStorage, setStorage } from "../../../helper/functions"
 import ChapterMenu from "../../../layout/ChapterMenu"
 
@@ -37,8 +37,6 @@ const ReactionZero = () => {
     setCanvaBeakerState,
     setTimeframe,
     setCurMenu,
-    beakerDotColorList,
-    setBeakerDotColorList,
     isEnableChooseMenu,
     setIsEnableChooseMenu,
     activeDotIndex,
@@ -199,7 +197,7 @@ const ReactionZero = () => {
 
       <EnergyProfile
         valuesC={valuesC}
-        beakerDotColor={beakerDotColorList[activeDotIndex]}
+        beakerDotColor={dotColorList[activeDotIndex]}
         beakerState={canvaBeakerState}
         onEndPlay={() => { }}
       />
@@ -212,8 +210,11 @@ const ReactionZero = () => {
         canvaTimeSliderT={canvaTimeSliderT}
         canvaTimeState={canvaTimeState}
         onTimeframeChange={val => setTimeframe(val)}
+        colors={dotColorList[activeDotIndex]}
       />
-      <ChartBar />
+      <ChartBar
+        colors={dotColorList[activeDotIndex]}
+      />
     </div>
     <div className={styles.reactionContentContainer}>
       <MathContent

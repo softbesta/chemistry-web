@@ -17,6 +17,7 @@ interface ChartTimeProps {
   // playAnimation: boolean
   canvaTimeState: number   //  0; show Frame,  1; show Graph, 2; show Animation, 3; show end of Animation
   onTimeframeChange: (val: number) => void
+  colors: string[]
 }
 
 const ChartTime = ({
@@ -28,6 +29,7 @@ const ChartTime = ({
   setValuesT,
   canvaTimeState: showTimeGraph,
   onTimeframeChange,
+  colors,
 }: ChartTimeProps) => {
 
   return (
@@ -74,9 +76,9 @@ const ChartTime = ({
           pointerT={canvaTimeSliderT[0] > canvaTimeSliderT[1] ? valuesT[0] : valuesT[1]}
           height={212}
           width={212}
-          colorA={themeColors.A}
-          colorB={themeColors.B}
-          colorA_blur={themeColors.none}
+          colorA={colors[1]}
+          colorB={colors[2]}
+          colorA_blur={colors[0]}
         />
       </div>
     </div>

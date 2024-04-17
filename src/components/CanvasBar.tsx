@@ -20,14 +20,12 @@ const BarChartCanvas = ({ play, c2, c1, t2, t1, height, width, colorA, colorB }:
   const [sY, setSY] = useState<number>(0);
   const [eX, setEX] = useState<number>(0);
   const [eY, setEY] = useState<number>(0);
-  const requestAnimationFrame = window.requestAnimationFrame
+  // const requestAnimationFrame = window.requestAnimationFrame
+  // const cancelAnimationFrame = window.cancelAnimationFrame
 
-  const cancelAnimationFrame = window.cancelAnimationFrame
-
-  useEffect(() => {
+  const initAll = () => {
     if (!canvas.current) return
-    const ctx = canvas.current.getContext('2d');
-    let startX, startY1: number, startY2: number, yStep: number, duration, endX, otherReq: number;
+    let startX, startY1: number, endX
 
     startX = (t2 / 20);
     setSX(startX);
@@ -37,61 +35,116 @@ const BarChartCanvas = ({ play, c2, c1, t2, t1, height, width, colorA, colorB }:
     setSY(startY1);
     const endY = Math.abs(1 - c1);
     setEY(endY);
-    startY2 = 0;
-    duration = Math.abs(t1 - t2) * 1000 / 60;
-    yStep = (Math.abs(c2 - c1)) / duration;
+  }
 
-    function step() {
-      if (!ctx) return
-      ctx.clearRect(0, 0, width, height);
+  const drawFrame = () => {
+    if (!canvas.current) return
+    const ctx = canvas.current.getContext('2d');
+    if (!ctx) return
+
+    ctx.clearRect(0, 0, width, height);
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(0, height);
+    ctx.lineTo(width, height);
+    ctx.lineTo(width, 0);
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = "black";
+    ctx.stroke();
+
+    for (let y = 22; y < 210; y += 19) {
       ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(0, height);
-      ctx.lineTo(width, height);
-      ctx.lineTo(width, 0);
-      ctx.lineWidth = 3;
-      ctx.strokeStyle = "black";
+      ctx.moveTo(width, y);
+      ctx.lineTo(0, y);
+      ctx.lineWidth = 0.3;
       ctx.stroke();
 
-      for (let y = 22; y < 210; y += 19) {
-        ctx.beginPath();
-        ctx.moveTo(width, y);
-        ctx.lineTo(0, y);
-        ctx.lineWidth = 0.3;
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(10, y);
-        ctx.lineWidth = 2;
-        ctx.stroke();
-      }
-
       ctx.beginPath();
-      ctx.rect(40, 194 - 194 * c2, 30, 194 * c2);
-      ctx.fillStyle = themeColors.grey;
-      ctx.fill();
-      ctx.beginPath();
-      ctx.rect(40, 194 - 194 * startY1, 30, 194 * startY1);
-      ctx.fillStyle = colorA;
-      ctx.fill();
-      startY1 -= yStep;
-
-      ctx.beginPath();
-      ctx.rect(140, 194 - 194 * startY2, 30, 194 * startY2);
-      ctx.fillStyle = colorB;
-      ctx.fill();
-      startY2 += yStep;
-      if (c1 < startY1) {
-        otherReq && requestAnimationFrame(step);
-      } else cancelAnimationFrame(otherReq);
+      ctx.moveTo(0, y);
+      ctx.lineTo(10, y);
+      ctx.lineWidth = 2;
+      ctx.stroke();
     }
+  }
 
-    otherReq = requestAnimationFrame(step);
+  function drawAt(timeOffset: number) {
+    if (!canvas.current) return
+    const ctx = canvas.current.getContext('2d');
+    if (!ctx) return
+    drawFrame()
+    console.log({ c1, c2, t1, t2 })
+    console.log({ sX, sY, eX, eY })
 
-  }, [play, sX, sY, eX, eY])
+    const height = 194
+
+    ctx.beginPath();
+    ctx.rect(40, height, 30, - height * Math.max(c1, c2)); // grey at A
+    ctx.fillStyle = themeColors.grey;
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.rect(40, height, 30, - height * Math.max(c1, c2))      // A start (c2: 0)
+    // ctx.rect(40, height, 30, - height * Math.abs(c1 - c2))   // A end
+    ctx.fillStyle = colorA;
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.rect(140, height, 30, - height * 0)                     // B start
+    // ctx.rect(140, height, 30, - height * Math.min(c1, c2));  // B end
+    ctx.fillStyle = colorB;
+    ctx.fill();
+
+    // dot A
+    ctx.beginPath()
+    ctx.moveTo(40, 200)
+    ctx.arc(55, 227, 8, 0, Math.PI * 2)
+    ctx.fillStyle = colorA
+    ctx.fill()
+    // dot B
+    ctx.beginPath()
+    ctx.moveTo(40, 200)
+    ctx.arc(155, 227, 8, 0, Math.PI * 2)
+    ctx.fillStyle = colorB
+    ctx.fill()
+    ctx.font = '20px Arial'
+    ctx.fillStyle = 'black'
+    // ctx.strokeStyle = 'black'
+    ctx.fillText('A', 49, 255)
+    ctx.fillText('B', 149, 255)
+  }
+
+  const [timeOffset, setTimeOffset] = useState<number>(0)
+  const maxTime = Math.abs(t1 - t2)
+  const framesPerSecond = 20
+  const intervalTime = 1000 / framesPerSecond
+
+  const timerID = useRef<NodeJS.Timer>()
+  const startTimer = () => {
+    stopTimer()
+    timerID.current = setInterval(() => {
+      // console.log('interval', timeOffset)
+      setTimeOffset(v => v += 1 / framesPerSecond)
+    }, intervalTime)
+    // console.log('started', timerID.current)
+  }
+  const stopTimer = () => {
+    if (timerID.current) {
+      clearInterval(timerID.current)
+      timerID.current = undefined
+    }
+  }
+  // animation play
+  useEffect(() => {
+    drawAt(timeOffset)
+  }, [timeOffset])
+
+  useEffect(() => {
+    if (!canvas.current) return
+    initAll()
+    drawAt(timeOffset)
+  }, [play, c1, c2, t1, t2, sX, sY, eX, eY, colorA])
   return (
-    <canvas ref={canvas} height={height} width={width} />
+    <canvas ref={canvas} height={height + 62} width={width} />
   );
 };
 

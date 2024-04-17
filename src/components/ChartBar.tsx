@@ -3,8 +3,12 @@ import BarChartCanvas from './CanvasBar'
 import useAppData from '../hooks/useAppData'
 import { themeColors } from '../constants'
 
-const ChartBar = () => {
+interface ChartBarProps {
+  colors: string[]
+}
+const ChartBar = ({ colors }: ChartBarProps) => {
   const { curStep, valuesC: concentrationAB, valuesT: reactionTime } = useAppData()
+  const textA = 'A' + 1
 
   return (
     <div className={styles.chartBarContainer}>
@@ -15,14 +19,14 @@ const ChartBar = () => {
         // c1={0.5}
         // t2={3.2}
         // t1={16}
-        c1={concentrationAB[1]/100}
-        c2={concentrationAB[0]/100}
+        c1={concentrationAB[1] / 100}
+        c2={concentrationAB[0] / 100}
         t1={reactionTime[1]}
         t2={reactionTime[0]}
         height={212}
         width={212}
-        colorA={themeColors.A}
-        colorB={themeColors.B}
+        colorA={colors[1]}
+        colorB={colors[2]}
       />
     </div>
   )
