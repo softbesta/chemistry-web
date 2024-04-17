@@ -10,6 +10,11 @@ import IconComparison from '../assets/ReactionRates/navpanel/comparisonicon@3x.p
 import IconComparisonPressed from '../assets/ReactionRates/navpanel/comparisonicon-pressed@3x.png'
 import IconKinetics from '../assets/ReactionRates/navpanel/kineticsicon@3x.png'
 import IconKineticsPressed from '../assets/ReactionRates/navpanel/kineticsicon-pressed@3x.png'
+import IconCircle from '../assets/ReactionRates/navpanel/circle.png'
+import IconMessage from '../assets/ReactionRates/navpanel/message.png'
+import IconShare from '../assets/ReactionRates/navpanel/share.png'
+import IconInfomation from '../assets/ReactionRates/navpanel/information.png'
+
 import { useLocation, useNavigate } from 'react-router-dom'
 import { MenuList, MenuOrder, routes } from '../constants'
 import SvgQuiz from '../components/Icons/SvgQuiz'
@@ -17,6 +22,7 @@ import SvgArchive from '../components/Icons/SvgArchive'
 import useAppData from '../hooks/useAppData'
 import useFunctions from '../hooks/useFunctions'
 import useTestFunc from '../hooks/useTestFunc'
+import PanelShape from '../components/CanvasNavPanel'
 
 const NavMenu = () => {
   const [showMenu, setShowMenu] = useState(false)
@@ -82,6 +88,12 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
   }
 
   return <div className={`${styles.navPanel} ${visible ? styles.active : ''}`}>
+    
+    <PanelShape
+      tabWidth={60}
+      tabHeight={60}
+      cornerRadius={20}
+    />
     <div
       className={`${styles.closeIcon}`}
       onClick={() => onClose()}
@@ -92,6 +104,46 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
     <div className={styles.navContent}>
       <div className={styles.navLinks}>
 
+        <img
+          className={`
+              ${styles.imgInfo}
+            `}
+          src={IconCircle}
+          alt='IconKinetics'
+          onClick={() => {
+            handleMenuItemClick(MenuList.kinetics)
+          }}
+        />
+        <img
+          className={`
+              ${styles.imgInfo}
+            `}
+          src={IconShare}
+          alt='IconKinetics'
+          onClick={() => {
+            handleMenuItemClick(MenuList.kinetics)
+          }}
+        />
+        <img
+          className={`
+              ${styles.imgInfo}
+            `}
+          src={IconMessage}
+          alt='IconKinetics'
+          onClick={() => {
+            handleMenuItemClick(MenuList.kinetics)
+          }}
+        />
+        <img
+          className={`
+              ${styles.imgInfo}
+            `}
+          src={IconInfomation}
+          alt='IconKinetics'
+          onClick={() => {
+            handleMenuItemClick(MenuList.kinetics)
+          }}
+        />
       </div>
       <div className={styles.navMenus}>
         <div className={styles.navMenuItem}>

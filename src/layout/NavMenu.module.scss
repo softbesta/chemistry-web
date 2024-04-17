@@ -34,13 +34,14 @@
   .closeIcon {
     position: absolute;
     top: 0;
-    right: 0;
+    right: -30px;
     width: 40px;
     height: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
     transition: all 200ms;
+    z-index: 3;
 
     div {
       margin-top: 8px;
@@ -60,15 +61,16 @@
 
   .navPanel {
     transition: all 500ms;
-    opacity: 0;           // animation
-    margin-left: -400px;  // animation
-    margin-top: -40px;    // animation
-    background-color: white;
-    width: 400px;
+    opacity: 0; // animation
+    margin-left: -400px; // animation
+    margin-top: -40px; // animation
+    // background-color: white;
+    width: 300px;
     position: absolute;
-    border-top: 2px solid black;
-    border-right: 2px solid black;
-    border-bottom: 2px solid black;
+
+    // border-top: 2px solid black;
+    // border-right: 2px solid black;
+    // border-bottom: 2px solid black;
 
     &.active {
       opacity: 1;
@@ -78,11 +80,20 @@
 
     .navContent {
       display: flex;
-      padding: 10px 50px 10px 50px;
+      position: relative;
+      padding: 10px 35px 10px 50px;
 
       .navLinks {
-        width: 50px;
-        background-color: gray;
+        width: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        // background-color: gray;
+        .imgInfo {
+          width: 30px;
+          cursor: pointer;
+        }
       }
 
       .navMenus {
@@ -90,10 +101,13 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+        width: 100%;
 
         .navMenuItem {
           display: flex;
           align-items: flex-end;
+          width: 100%;
+          justify-content: space-between;
 
           .imgChapter {
             width: 50px;

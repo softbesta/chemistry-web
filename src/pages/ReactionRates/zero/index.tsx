@@ -14,6 +14,7 @@ import WatchMenu from "../../../layout/WatchMenu"
 import { MenuList, MenuOrder, dotColorList } from "../../../constants"
 import { getStorage, setStorage } from "../../../helper/functions"
 import ChapterMenu from "../../../layout/ChapterMenu"
+import PanelShape from "../../../components/CanvasNavPanel"
 
 const ReactionZero = () => {
   const {
@@ -156,9 +157,9 @@ const ReactionZero = () => {
   }
   // call when click prev step
   const onStepChange = (step: number) => {
-    console.log('===onStepChange===', {step})
+    console.log('===onStepChange===', { step })
     const nextStep = getNextStep(step)
-    console.log({nextStep})
+    console.log({ nextStep })
     if (nextStep === undefined) return
     if (curStep === nextStep) return
     // Tutorial-Highlight
@@ -167,7 +168,7 @@ const ReactionZero = () => {
       highlightElement(zeroTurs[nextStep].highlight)
     }
 
-    console.log({curStep})
+    console.log({ curStep })
     setPrevStep(curStep)
     setCurStep(nextStep)
   }
