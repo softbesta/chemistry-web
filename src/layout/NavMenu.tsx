@@ -16,6 +16,7 @@ import SvgQuiz from '../components/Icons/SvgQuiz'
 import SvgArchive from '../components/Icons/SvgArchive'
 import useAppData from '../hooks/useAppData'
 import useFunctions from '../hooks/useFunctions'
+import useTestFunc from '../hooks/useTestFunc'
 
 const NavMenu = () => {
   const [showMenu, setShowMenu] = useState(false)
@@ -46,8 +47,9 @@ interface NavPanelProps {
 }
 const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
   let location = useLocation()
-  const { updatePageFromMenu, initializePage } = useFunctions()
-  const { curMenu, setCurMenu, courseStatus } = useAppData()
+  const { curMenu, setCurMenu, courseStatus, count } = useAppData()
+  const { updatePageFromMenu, initializePage, handleTest } = useFunctions()
+  // const { handleTest } = useTestFunc()
   useEffect(() => {
     // console.log({ location })
 
@@ -55,7 +57,6 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
     const curRouteMenu = menuNames.find(item => routes[item].path === location.pathname)
     if (!curRouteMenu) return
     setCurMenu(curRouteMenu)
-    initializePage(curRouteMenu)
 
     if (location.pathname === routes[MenuList.zero].path) {
       setCurMenu(MenuList.zero)
@@ -69,6 +70,16 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
       setCurMenu(MenuList.kinetics)
     }
   }, [location.pathname])
+  useEffect(() => {
+    initializePage(curMenu)
+  }, [curMenu])
+  const handleMenuItemClick = (menu: MenuList) => {
+    console.log('===handleMenuItemClick===')
+    console.log({ courseStatus, menu })
+    console.log('isavailable menu; ', courseStatus.includes(menu))
+    if (!courseStatus.includes(menu)) return
+    updatePageFromMenu(menu)
+  }
 
   return <div className={`${styles.navPanel} ${visible ? styles.active : ''}`}>
     <div
@@ -91,14 +102,11 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
             src={curMenu === MenuList.zero ? IconZeroOrderPressed : IconZeroOrder}
             alt='IconZero'
             onClick={() => {
-              if (!courseStatus.includes(MenuList.zero)) return
-              console.log({ courseStatus })
-              updatePageFromMenu(MenuList.zero)
+              handleMenuItemClick(MenuList.zero)
             }}
           />
           <div onClick={() => {
-            if (!courseStatus.includes(MenuList.zeroQuiz)) return
-            updatePageFromMenu(MenuList.zeroQuiz)
+            handleMenuItemClick(MenuList.zeroQuiz)
           }
           }>
             <SvgQuiz fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
@@ -115,14 +123,11 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
             src={curMenu === MenuList.first ? IconFirstOrderPressed : IconFirstOrder}
             alt='IconFirst'
             onClick={() => {
-              if (!courseStatus.includes(MenuList.first)) return
-              console.log({ courseStatus })
-              updatePageFromMenu(MenuList.first)
+              handleMenuItemClick(MenuList.first)
             }}
           />
           <div onClick={() => {
-            if (!courseStatus.includes(MenuList.firstQuiz)) return
-            updatePageFromMenu(MenuList.firstQuiz)
+            handleMenuItemClick(MenuList.firstQuiz)
           }}>
             <SvgQuiz fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
           </div>
@@ -138,13 +143,11 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
             src={curMenu === MenuList.second ? IconSecondOrderPressed : IconSecondOrder}
             alt='IconSecond'
             onClick={() => {
-              if (!courseStatus.includes(MenuList.second)) return
-              updatePageFromMenu(MenuList.second)
+              handleMenuItemClick(MenuList.second)
             }}
           />
           <div onClick={() => {
-            if (!courseStatus.includes(MenuList.secondQuiz)) return
-            updatePageFromMenu(MenuList.secondQuiz)
+            handleMenuItemClick(MenuList.secondQuiz)
           }}>
             <SvgQuiz fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
           </div>
@@ -160,13 +163,11 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
             src={curMenu === MenuList.comparison ? IconComparisonPressed : IconComparison}
             alt='IconComparison'
             onClick={() => {
-              if (!courseStatus.includes(MenuList.comparison)) return
-              updatePageFromMenu(MenuList.comparison)
+              handleMenuItemClick(MenuList.comparison)
             }}
           />
           <div onClick={() => {
-            if (!courseStatus.includes(MenuList.comparisonQuiz)) return
-            updatePageFromMenu(MenuList.comparisonQuiz)
+            handleMenuItemClick(MenuList.comparisonQuiz)
           }}>
             <SvgQuiz fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
           </div>
@@ -182,13 +183,11 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
             src={curMenu === MenuList.kinetics ? IconKineticsPressed : IconKinetics}
             alt='IconKinetics'
             onClick={() => {
-              if (!courseStatus.includes(MenuList.kinetics)) return
-              updatePageFromMenu(MenuList.kinetics)
+              handleMenuItemClick(MenuList.kinetics)
             }}
           />
           <div onClick={() => {
-            if (!courseStatus.includes(MenuList.kineticsQuiz)) return
-            updatePageFromMenu(MenuList.kineticsQuiz)
+            handleMenuItemClick(MenuList.kineticsQuiz)
           }
           }>
             <SvgQuiz fillColor={'rgb(68, 150, 247)'} width={40} height={40} />

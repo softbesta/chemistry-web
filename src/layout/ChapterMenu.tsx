@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from './ChapterMenu.module.scss'
 import { DropDownButton } from '../components/DropDownButton'
-import { chaptersMenuList } from '../constants'
+import { MenuList, chaptersMenuList } from '../constants'
 import useAppData from '../hooks/useAppData'
 import useFunctions from '../hooks/useFunctions'
 import { PageMenuType } from '../helper/types'
@@ -29,7 +29,7 @@ interface ChapterMenuPanelProps {
   visible: boolean
 }
 const ChapterMenuPanel = ({ visible }: ChapterMenuPanelProps) => {
-  const { curMenu, setCurMenu } = useAppData()
+  const { curMenu, setCurMenu, courseStatus } = useAppData()
   const { updatePageFromMenu } = useFunctions()
 
   const subItemsList = chaptersMenuList.map(menu => menu.subItems?.map(sub => sub.value) || [])
@@ -65,13 +65,14 @@ const ChapterMenuPanel = ({ visible }: ChapterMenuPanelProps) => {
         <div className={`${styles.menuItemPanel} ${openedMenuIndex === menuIndex ? styles.activeMenuItemPane : ''}`}>
           {menuItem.subItems?.map(subItem => {
             const isActiveSubItem = curMenu === subItem.value
-            return <div
+            return <button
               key={subItem.value}
               className={`${styles.subItem} ${isActiveSubItem ? styles.activeSubItem : ''}`}
               onClick={() => handleSubItemClick(subItem)}
+              disabled={!courseStatus.includes(subItem.value as MenuList)}
             >
               {subItem.title}
-            </div>
+            </button>
           })}
         </div>
       </div>

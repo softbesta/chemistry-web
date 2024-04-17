@@ -7,11 +7,13 @@ interface IAppContext {
   // --- Description --- courseStatus
   // available course(menu) list.
   courseStatus: MenuList[],
-  setCourseStatus: React.Dispatch<React.SetStateAction<MenuList[]>>,
+  // setCourseStatus: React.Dispatch<React.SetStateAction<MenuList[]>>,
+  setCourseStatus: (val: MenuList[]) => void,
+
   // --- Description --- curMenu
   // menu name for opened page.
-  curMenu: PageMenuType,
-  setCurMenu: React.Dispatch<React.SetStateAction<PageMenuType>>,
+  curMenu: MenuList,
+  setCurMenu: React.Dispatch<React.SetStateAction<MenuList>>,
   // --- Description --- curStep
   // current tutorial step for opened page.
   curStep: number,
@@ -47,6 +49,10 @@ interface IAppContext {
   setCanvaBeakerState: React.Dispatch<React.SetStateAction<number>>,
   beakerDots: React.MutableRefObject<number[]>
   beakerDotsEnd: React.MutableRefObject<number[]>
+
+  // test purpose
+  count: number,
+  setCount: React.Dispatch<React.SetStateAction<number>>,
 }
 
 const initialState = {
@@ -76,13 +82,18 @@ const AppContext = createContext({} as IAppContext)
 
 export const AppDataProvider = (props: any) => {
   const { children } = props
-  const [count, setCount] = useState(props.count || initialState.count || 0)
+  const [count, setCount] = useState<number>(props.count || initialState.count || 0)
 
   // available course (menu) list in order by
-  const [courseStatus, setCourseStatus] = useState<MenuList[]>([MenuList.zero])
+  const [courseStatus, setCourseStatus1] = useState<MenuList[]>([])
+  const setCourseStatus = (val: MenuList[]) => {
+    console.log('===setCourseStatus===')
+    console.log({val})
+    setCourseStatus1(val)
+  }
 
   // use Menu, Step to manage page
-  const [curMenu, setCurMenu] = useState<PageMenuType>(MenuList.zero)
+  const [curMenu, setCurMenu] = useState<MenuList>(MenuList.zero)
   const [curStep, setCurStep] = useState(props.stepMotion || initialState.stepPlay || 0)
 
   // animation time frame (0-100)
@@ -139,6 +150,9 @@ export const AppDataProvider = (props: any) => {
 // animation Time change status (1-100)
         timeframe,
         setTimeframe,
+
+        // test purpose
+        count, setCount,
       }}
     >
       {children}

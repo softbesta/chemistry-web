@@ -13,6 +13,7 @@ import ChooseMenu from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
 import { MenuList, MenuOrder } from "../../../constants"
 import { getStorage, setStorage } from "../../../helper/functions"
+import ChapterMenu from "../../../layout/ChapterMenu"
 
 const ReactionZero = () => {
   const {
@@ -181,6 +182,7 @@ const ReactionZero = () => {
     // console.log(' ', infoC, { isDisabledA, isDisabledB })
   }
   return <div className={styles.container}>
+    <ChapterMenu />
     <ChooseMenu />
     <WatchMenu />
     {/* <p>step: {curStep}</p>

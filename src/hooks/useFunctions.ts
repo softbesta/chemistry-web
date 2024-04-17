@@ -9,37 +9,43 @@ import { getStorage, setStorage } from "../helper/functions";
 
 const useFunctions = () => {
   const navigate = useNavigate()
-  let location = useLocation()
   const {
     setCurMenu,
     curMenu,
     curStep,
     setCurStep,
     setCourseStatus,
+    setCount,
   } = useAppData()
 
   const initializePage = (menu: MenuList) => {
+    console.log('===initializePage===')
     // update 'courseStatus' in localStorage and context
     let update = getStorage('courseStatus') as MenuList[] || []
     if (!update.includes(menu)) {
       update = [...update, menu]
       setStorage('courseStatus', update)
-      setCourseStatus(update)
     }
+    console.log({update})
+    setCourseStatus(update)
 
     // Todo: initialize context status.
     setCurStep(0)
   }
   // call when menu is clicked
   const updatePageFromMenu = (menu: MenuList) => {
-    initializePage(menu)
+    // initializePage(menu)
     const path = routes[menu]?.path
     if (!path) {
       navigate('/nopage')
       return
     }
-    setCurMenu(menu)
+    // setCurMenu(menu)
     navigate(path)
+  }
+
+  const handleTest = () => {
+    setCount(111)
   }
 
   // pageStep; -1: returns previous page menu, 1: returns next page menu
@@ -56,6 +62,7 @@ const useFunctions = () => {
     initializePage,
     updatePageFromMenu,
     getNextMenu,
+    handleTest,
   }
   return returnValues
 }

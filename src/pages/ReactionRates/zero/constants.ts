@@ -1,6 +1,8 @@
 export const maxStep_Zero = 18
 
 export const tur_Text = [
+  // display.reactant.name; A
+  // display.product.name;  B
   [ // 0
     `This is a zero order reaction in which a reactant A turns into the product B. But what does it mean? Let's find out!`,
     '',
@@ -21,12 +23,14 @@ export const tur_Text = [
       10.00s</span>.`,
   ],
   [ // 4
-    `<p style='font-size: 17px'>Let's watch how all the molecules are changing! As \(display.reactant.name) \
-      disappears, \(display.product.name) is being produced.</p>`,
-    `<p style='font-size: 17px'>This happens at a constant <span>rate (in units of M/s),</span> which is dependent on <span>k</span>.</p>`,
+    `<p>Let's watch how all the molecules are all changing! As \
+    A disappears, B is being produced.</p>`,
+    `<p>This happens at a variable <span>rate (in units of M/s)</span>, which is dependent on <span>k</span>.</p>`,
   ],
   [ // 5 here goes next step automatically after action
-    `For this zero order reaction, <span>rate</span> is constant and it's equal to <span>k</span>, that's why a graph plotting \(Strings.aVsT) is a straight line.`,
+    `<p style='font-size: 17px'>For this zero order reaction, <span>rate</span> is constant and it's equal to <span>k</span>, that's why a graph plotting \(Strings.aVsT) is a straight line.</p>`,
+    `<p style='font-size: 17px'>[A]<span>(y)</span>=-kt<span>(mx)</span>+[A0]<span>(b)</span></p>`,
+    `<span style='font-size: 17px'>Where -k is the slope</span>`,
   ],
   [ // 6
     `You can click the button in the top right corner to see the initial and final concentration and time for this reaction.`,
@@ -49,36 +53,33 @@ export const tur_Text = [
     `Notice how the final concentration varies as you adjust the final time.`,
   ],
   [ // 11
-    `<span style="font-size: 16px">Let's watch all the molecules changing!",
-      "As \(display.reactant.name) disappears, \(display.product.name) is being produced.</span>`,
-    `<span style="font-size: 16px">This happens at a variable *rate (in units of $M/s$)*, which is dependent on *k* \
-      and *[\(display.reactant.name)]*.</span>`,
+    `<p>Let's watch how all the molecules are all changing! As \
+    C disappears, D is being produced.</p>`,
+    `<p>This happens at a variable <span>rate (in units of M/s)</span>, which is dependent on <span>k</span>.</p>`,
   ],
   [ // 12
     `Amazing! Let's take a snapshot!`,
     `Try <span>dragging the time indicator</span> to scrub through the reaction time.`,
   ],
   [ // 13
-    `Now, let's try choosing a different reaction, which has a fixed rate constant, *k*.`,
-    `*Choose a reaction above*.`,
+    `Now, let's try choosing a different reaction, which has a fixed rate constant, <span>k</span>.`,
+    `<span>Choose a reaction above</span>.`,
   ],
   [ // 14
-    `Great! You picked a reaction with a rate constant \(rateConstant.str(decimals: 2)).`,
-    `Why don't you *set the initial concentration and initial time*?`,
+    `Great! You picked a reaction with a rate constant \ 0.07.`,
+    `Why don't you <span>set the initial concentration and initial time</span>?`,
   ],
   [ // 15
     `Awesome! Now set the final concentration of the reaction.`,
     `Notice how the final time varies as you adjust the final concentration.`,
   ],
   [ // 16
-    `Let's watch all the molecules changing!",
-      "As \(display.reactant.name) disappears, \(display.product.name) is being produced.`,
-    `This happens at a variable *rate (in units of $M/s$)*, which is dependent on *k* \
-      and *[\(display.reactant.name)]*.`,
+    `Let's watch how all the molecules changing! As \ E disappears, \ F is being produced.`,
+    `This happens at a variable <span>rate (in units of M/s)</span>, which is dependent on <span>k</span>.`,
   ],
   [ // 17
     `Amazing, let's take another snapshot!`,
-    `Try *dragging the time indicator* to scrub through the reaction time.`,
+    `Try <span>dragging the time indicator</span> to scrub through the reaction time.`,
     `Then, let's take a quiz to review what we've learnt.`,
   ],
   // open Quiz
