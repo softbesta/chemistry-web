@@ -162,6 +162,7 @@ export const stepsActions = [
     canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    isEnableChooseMenu: false,
   },
   // 1   Great! Now you ...
   { // 1
@@ -211,6 +212,7 @@ export const stepsActions = [
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isEnableChooseMenu: false,
   },
   // 8   Now, let's try choosing...
   { // 8
@@ -218,6 +220,7 @@ export const stepsActions = [
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isEnableChooseMenu: true,
   },
   // 9   Great! You picked a...
   { // 9
@@ -225,6 +228,7 @@ export const stepsActions = [
     canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    isEnableChooseMenu: false,
   },
   // 10   Awesome! Now set ...
   { // 10
@@ -246,6 +250,7 @@ export const stepsActions = [
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isEnableChooseMenu: false,
   },
   // 13   Now, let's try choosing... EF
   { // 13
@@ -253,6 +258,7 @@ export const stepsActions = [
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isEnableChooseMenu: true,
   },
   // 14   Great! You picked a ...
   { // 14
@@ -260,6 +266,7 @@ export const stepsActions = [
     canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    isEnableChooseMenu: false,
   },
   // 15   Awesome! Now set the ...
   { // 15

@@ -37,6 +37,11 @@ const ReactionZero = () => {
     setCanvaBeakerState,
     setTimeframe,
     setCurMenu,
+    beakerDotColorList,
+    setBeakerDotColorList,
+    isEnableChooseMenu,
+    setIsEnableChooseMenu,
+    activeDotIndex,
   } = useAppData()
 
   const {
@@ -48,16 +53,7 @@ const ReactionZero = () => {
 
   const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
 
-  // const [curTur_text, setCurTur_text] = useState<string[]>()
-  // const [curTur_light, setCurTur_light] = useState<string[]>()
-
-  // const handletest = () => {
-  //   setConcentrationAB(v => (v + 3) > 100 ? 100 : v + 3)
-  // }
-  // const handletest1 = () => {
-  //   setConcentrationAB(v => (v - 3) < 0 ? 0 : v - 3)
-  // }
-
+  // *** Setup tutorial actions here
   const zeroTurs = Array.from(Array(tur_Text.length).keys()).map(idx => {
     return {
       text: tur_Text[idx],
@@ -65,21 +61,22 @@ const ReactionZero = () => {
       actions: stepsActions[idx],
     }
   })
-  // const maxStep = maxStep_Zero
-  // console.log('000,', { zeroTurs })
 
-  // *** Tutorial-ACTIONS
+  // *** Tutorial-ACTIONS  - curStep changes
   const curActions = zeroTurs[curStep]?.actions
   useEffect(() => {
-    // console.log('zero page ===useEffect=== --- ', { curStep })
-
-    console.log('curActions: ', { curActions, curStep })
+    console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep })
+    // console.log('curActions: ', { curActions, curStep })
     if (curActions) {
       if (curActions?.canvaTimeState !== undefined) {
         setCanvaTimeState(curActions.canvaTimeState)
       }
       if (curActions?.canvaBeakerState !== undefined) {
         setCanvaBeakerState(curActions.canvaBeakerState)
+      }
+      if (curActions?.isEnableChooseMenu !== undefined) {
+        console.log('zzz curActions.isEnableChooseMenu', curActions.isEnableChooseMenu)
+        setIsEnableChooseMenu(curActions.isEnableChooseMenu)
       }
       if (Array.isArray(curActions?.canvaTimeSliderC)) {
         setCanvaTimeSliderC(curActions.canvaTimeSliderC)
@@ -90,6 +87,12 @@ const ReactionZero = () => {
     }
 
   }, [curStep, curActions])
+  // *** Tutorial-ACTIONS  - curStep changes
+  useEffect(() => {
+    // Todo: go to next step.
+    console.log('ReactionZero.useEffect', {activeDotIndex})
+    onStepChange(1)
+  }, [activeDotIndex])
 
   const getFormula = () => {
 
@@ -153,8 +156,6 @@ const ReactionZero = () => {
     const nextStep = getNextStep(step)
     if (nextStep === undefined) return
     if (curStep === nextStep) return
-    // console.log({ curStep }, tur_Hightlights[curStep])
-    // console.log({ nextStep }, tur_Hightlights[nextStep])
     // Tutorial-Highlight
     removeHighlightElement(zeroTurs[curStep]?.highlight)
     if (zeroTurs[nextStep]?.highlight?.length > 0) {
@@ -183,7 +184,7 @@ const ReactionZero = () => {
   }
   return <div className={styles.container}>
     <ChapterMenu />
-    <ChooseMenu />
+    <ChooseMenu  isEnable={isEnableChooseMenu} />
     <WatchMenu />
     {/* <p>step: {curStep}</p>
     <p>showTimeGraph: {canvaTimeState}</p>
@@ -198,6 +199,7 @@ const ReactionZero = () => {
 
       <EnergyProfile
         valuesC={valuesC}
+        beakerDotColor={beakerDotColorList[activeDotIndex]}
         beakerState={canvaBeakerState}
         onEndPlay={() => { }}
       />

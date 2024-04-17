@@ -1,5 +1,5 @@
 import { createContext, useRef, useState } from "react"
-import { MenuList, initDots, routes } from "../constants"
+import { MenuList, initDots, routes, themeColors } from "../constants"
 import { PageMenuType } from "../helper/types"
 
 interface IAppContext {
@@ -49,6 +49,15 @@ interface IAppContext {
   setCanvaBeakerState: React.Dispatch<React.SetStateAction<number>>,
   beakerDots: React.MutableRefObject<number[]>
   beakerDotsEnd: React.MutableRefObject<number[]>
+  // *** canvas Beaker A/B dot colors 
+  beakerDotColorList: string[][],
+  setBeakerDotColorList: React.Dispatch<React.SetStateAction<string[][]>>,
+
+  // *** Choose menu value - 0: 'A to B', 1: 'C to D', 2: 'E to F'
+  isEnableChooseMenu: boolean,
+  setIsEnableChooseMenu: React.Dispatch<React.SetStateAction<boolean>>,
+  activeDotIndex: number,
+  setActiveDotIndex: React.Dispatch<React.SetStateAction<number>>,
 
   // test purpose
   count: number,
@@ -76,40 +85,62 @@ const initialState = {
   // *** canvas Beaker
   canvaBeakerState: 0, // 0: empty, 1: show one, 2: animation, 3: show two
   beakerDots: initDots,
+  beakerDotColors: [
+    [themeColors.none, themeColors.A, themeColors.B], // A to B
+    [themeColors.none, themeColors.C, themeColors.D], // C to D
+    [themeColors.none, themeColors.E, themeColors.F], // E to F
+  ],
+  activeDotIndex: 0
 }
 
 const AppContext = createContext({} as IAppContext)
 
 export const AppDataProvider = (props: any) => {
   const { children } = props
+
+  // test purpose
   const [count, setCount] = useState<number>(props.count || initialState.count || 0)
 
-  // available course (menu) list in order by
+  // ** available course (menu) list in order by
   const [courseStatus, setCourseStatus1] = useState<MenuList[]>([])
   const setCourseStatus = (val: MenuList[]) => {
     console.log('===setCourseStatus===')
-    console.log({val})
+    console.log({ val })
     setCourseStatus1(val)
   }
 
-  // use Menu, Step to manage page
+  // ** use Menu, Step to manage page
   const [curMenu, setCurMenu] = useState<MenuList>(MenuList.zero)
   const [curStep, setCurStep] = useState(props.stepMotion || initialState.stepPlay || 0)
 
-  // animation time frame (0-100)
+  // ** animation time frame (0-100)
   const [timeframe, setTimeframe] = useState<number>(initialState.timeframe)
 
-  //  0; show Frame,  1; show Graph, 2; show Animation, 3; show end of Animation
+  // 0; show Frame,  1; show Graph, 2; show Animation, 3; show end of Animation
   const [canvaTimeState, setCanvaTimeState] = useState<number>(initialState.canvaTimeState)
 
+  // [0-100, 0-100]
   const [valuesC, setValuesC] = useState<(number)[]>(initialState.concentration)
+  // [0-20, 0-20]
   const [valuesT, setValuesT] = useState<number[]>(initialState.reactionTime)
+  // [0-2, 0-2]       0: hidden, 1: disabled, 2: show
   const [canvaTimeSliderC, setCanvaTimeSliderC] = useState<number[]>(initialState.canvaTimeSliderC)
+  // [0-2, 0-2]       0: hidden, 1: disabled, 2: show
   const [canvaTimeSliderT, setCanvaTimeSliderT] = useState<number[]>(initialState.canvaTimeSliderT)
 
+  // 0: empty, 1: show one, 2: animation, 3: show two
   const [canvaBeakerState, setCanvaBeakerState] = useState<number>(initialState.canvaBeakerState)
+
+  // [0, 1, 2, 0, 2, ...]            0: none, 1: A, 2: B
   const beakerDots = useRef<number[]>(initialState.beakerDots)
   const beakerDotsEnd = useRef<number[]>(initialState.beakerDots)
+
+  // themeColors[][]
+  const [beakerDotColorList, setBeakerDotColorList] = useState<string[][]>(initialState.beakerDotColors)
+
+  // 0: A to B, 1: C to D, 2: E to F
+  const [isEnableChooseMenu, setIsEnableChooseMenu] = useState<boolean>(true)
+  const [activeDotIndex, setActiveDotIndex] = useState<number>(initialState.activeDotIndex)
 
   // need update, don't use yet
   const updateStepPlay = (step: number) => {
@@ -135,21 +166,29 @@ export const AppDataProvider = (props: any) => {
         setValuesT,
         // playAnimation,
         // setPlayAnimation,
-// controllers - Time Canvas
+        // controllers - Time Canvas
         canvaTimeState,
         setCanvaTimeState,
         canvaTimeSliderT,
         setCanvaTimeSliderT,
         canvaTimeSliderC,
         setCanvaTimeSliderC,
-// controllers - Energy Canvas
+        // controllers - Energy Canvas
         canvaBeakerState,
         setCanvaBeakerState,
         beakerDots,
         beakerDotsEnd,
-// animation Time change status (1-100)
+        beakerDotColorList,
+        setBeakerDotColorList,
+        // animation Time change status (1-100)
         timeframe,
         setTimeframe,
+
+        // Choose Menu - 0: 'A to B', ...
+        isEnableChooseMenu,
+        setIsEnableChooseMenu,
+        activeDotIndex,
+        setActiveDotIndex,
 
         // test purpose
         count, setCount,

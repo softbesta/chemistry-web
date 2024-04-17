@@ -27,10 +27,11 @@ function beaker(ctx: CanvasRenderingContext2D, x: number, y: number, width: numb
 interface EnergyProfileProps {
   valuesC: number[],
   beakerState: number,
+  beakerDotColor: string[],
   onEndPlay: () => void
 }
 
-const EnergyProfile = ({ valuesC, beakerState, onEndPlay }: EnergyProfileProps) => {
+const EnergyProfile = ({ valuesC, beakerState, beakerDotColor, onEndPlay }: EnergyProfileProps) => {
   const [energyDots, setEnergyDots] = useState(initDots)
   const energyDotsAnimation = useRef(initDots)
   // const { concentrationAB } = useAppData()
@@ -163,7 +164,7 @@ const EnergyProfile = ({ valuesC, beakerState, onEndPlay }: EnergyProfileProps) 
         const xx = startX + j * t
         ctx.moveTo(xx, yy)
         ctx.arc(xx, yy, 6, 0, 2 * Math.PI);
-        ctx.fillStyle = dotColors[energyDots[index]]
+        ctx.fillStyle = beakerDotColor[energyDots[index]]
         ctx.fill()
         index++
       }

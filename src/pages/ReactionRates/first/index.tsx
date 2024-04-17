@@ -37,6 +37,7 @@ const ReactionFirst = () => {
     setCanvaBeakerState,
     setTimeframe,
     setCurMenu,
+    beakerDotColorList,
   } = useAppData()
 
   const {
@@ -197,6 +198,7 @@ const ReactionFirst = () => {
       </div> */}
 
       <EnergyProfile
+        beakerDotColor={beakerDotColorList[0]}
         valuesC={valuesC}
         beakerState={canvaBeakerState}
         onEndPlay={() => { }}

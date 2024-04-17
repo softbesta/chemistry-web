@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import styles from './ChooseMenu.module.scss'
+import useAppData from '../hooks/useAppData'
 
 const chooseMenuItems = [
   {
@@ -14,12 +15,24 @@ const chooseMenuItems = [
   },
 ]
 
-const ChooseMenu = () => {
+interface ChooseMenuProps {
+  isEnable?: boolean
+  onClickItem?: () => void
+}
+const ChooseMenu = ({ isEnable = true, onClickItem }: ChooseMenuProps) => {
+  const { activeDotIndex, setActiveDotIndex } = useAppData()
   const [isActive, setIsActive] = useState(false)
   const toogleShowChapterPanel = () => {
+    console.log("disabled", {isEnable})
+    if (!isEnable) {
+      setIsActive(false)
+      return
+    }
     setIsActive(!isActive)
   }
   const handleItemClick = (index: number) => {
+    console.log('ChooseMenu.handleItemClick', { index })
+    setActiveDotIndex(index)
     toogleShowChapterPanel()
   }
   return <div
@@ -35,7 +48,7 @@ const ChooseMenu = () => {
     <ChooseMenuPanel
       visible={isActive}
       items={chooseMenuItems}
-      activeItemIndex={1}
+      activeItemIndex={activeDotIndex}
       onItemClick={handleItemClick}
     />
   </div>
@@ -45,7 +58,7 @@ export default ChooseMenu
 interface ChooseMenuPanelProps {
   visible: boolean
   items: { title: string, disabled?: boolean }[]
-  activeItemIndex?: number,
+  activeItemIndex: number,
   onItemClick: (val: number) => void
 }
 const ChooseMenuPanel = ({
@@ -61,19 +74,19 @@ const ChooseMenuPanel = ({
     </div>
     <div className={styles.ChooseMenuItemContainer}>
       {items.map((item, index) => {
-        const isActiveItem = index === activeItemIndex
+        const isActiveItem = index === activeItemIndex + 1
         // console.log({ isActiveItem, index, activeItemIndex })
-        return <div
+        return <button
           key={index}
           className={`
             ${styles.ChooseMenuItem} 
             ${isActiveItem ? styles.activated : ''} 
-            ${item.disabled ? styles.disable : ''}
           `}
           onClick={() => onItemClick(index)}
+          disabled={activeItemIndex + 1 > index}
         >
           {item.title}
-        </div>
+        </button>
       })}
     </div>
   </div >
