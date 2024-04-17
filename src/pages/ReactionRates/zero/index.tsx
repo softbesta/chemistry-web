@@ -1,6 +1,6 @@
 import useAppData from "../../../hooks/useAppData"
 import styles from './zero.module.scss'
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import EnergyProfile from "../../../components/EnergyProfile"
 import ChartTime from "../../../components/ChartTime/ChartTime"
 import ChartBar from "../../../components/ChartBar"
@@ -11,15 +11,12 @@ import { maxStep_Zero, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text }
 import useFunctions from "../../../hooks/useFunctions"
 import ChooseMenu from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
-import { MenuList, MenuOrder, dotColorList } from "../../../constants"
-import { getStorage, setStorage } from "../../../helper/functions"
+import { dotColorList } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
-import PanelShape from "../../../components/CanvasNavPanel"
 
 const ReactionZero = () => {
   const {
     curStep,
-    // setCurStep,
     valuesC,
     setValuesC,
     valuesT,
@@ -30,14 +27,10 @@ const ReactionZero = () => {
     setCanvaTimeSliderT,
     canvaTimeState,
     setCanvaTimeState,
-    // curTurs
-    // setCurTurs,
-    // setPlayAnimation,
     setCurStep,
     canvaBeakerState,
     setCanvaBeakerState,
     setTimeframe,
-    setCurMenu,
     isEnableChooseMenu,
     setIsEnableChooseMenu,
     activeDotIndex,
@@ -45,15 +38,11 @@ const ReactionZero = () => {
   } = useAppData()
 
   const {
-    // onNextStep,
-    // onPrevStep,
     updatePageFromMenu,
     getNextMenu,
   } = useFunctions()
 
   const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
-
-  const [prevStep, setPrevStep] = useState<number>(curStep)
 
   // *** Setup tutorial actions here
   const zeroTurs = Array.from(Array(tur_Text.length).keys()).map(idx => {
@@ -171,7 +160,6 @@ const ReactionZero = () => {
     }
 
     console.log({ curStep })
-    setPrevStep(curStep)
     setCurStep(nextStep)
   }
 
@@ -179,12 +167,11 @@ const ReactionZero = () => {
     console.log('===handleTest=== 111')
     // console.log({ valuesC })
     // setCanvaTimeState(2)
-    console.log({ prevStep, curStep })
   }
   const handleTest2 = () => {
     console.log('===handleTest2=== - ')
-    const res = getStorage('availableMenuList')
-    console.log({ res })
+    // const res = getStorage('availableMenuList')
+    // console.log({ res })
     // setCanvaTimeState(1)
   }
   const handleTest3 = () => {

@@ -1,19 +1,4 @@
-export interface QuizAnswerType {
-  answer: string,
-  explanation: string,
-  answerLabel?: string,
-  explanationLabel?: string,
-  position?: string,
-}
-export interface QuizItemType {
-  id: string,
-  question: string,
-  correctAnswer: QuizAnswerType,
-  otherAnswers: QuizAnswerType[],
-  allAnswerItems?: QuizAnswerType[],
-  difficulty: string,
-  [x: string]: any,
-}
+import { QuizItemType } from "../../../helper/types";
 
 export const quizData: QuizItemType[] = [
   {

@@ -1,6 +1,6 @@
 import useAppData from "../../../hooks/useAppData"
 import styles from './first.module.scss'
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import EnergyProfile from "../../../components/EnergyProfile"
 import ChartTime from "../../../components/ChartTime/ChartTime"
 import ChartBar from "../../../components/ChartBar"
@@ -11,14 +11,12 @@ import { maxStep_Zero as maxStep_First, stepsActions, tur_MathBlanks, tur_Hightl
 import useFunctions from "../../../hooks/useFunctions"
 import ChooseMenu from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
-import { MenuList, MenuOrder, dotColorList } from "../../../constants"
-import { getStorage, setStorage } from "../../../helper/functions"
+import { dotColorList } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
 
 const ReactionFirst = () => {
   const {
     curStep,
-    // setCurStep,
     valuesC,
     setValuesC,
     valuesT,
@@ -29,14 +27,10 @@ const ReactionFirst = () => {
     setCanvaTimeSliderT,
     canvaTimeState,
     setCanvaTimeState,
-    // curTurs
-    // setCurTurs,
-    // setPlayAnimation,
     setCurStep,
     canvaBeakerState,
     setCanvaBeakerState,
     setTimeframe,
-    setCurMenu,
     isEnableChooseMenu,
     setIsEnableChooseMenu,
     activeDotIndex,
@@ -44,15 +38,11 @@ const ReactionFirst = () => {
   } = useAppData()
 
   const {
-    // onNextStep,
-    // onPrevStep,
     updatePageFromMenu,
     getNextMenu,
   } = useFunctions()
 
   const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
-
-  const [prevStep, setPrevStep] = useState<number>(curStep)
 
   // *** Setup tutorial actions here
   const zeroTurs = Array.from(Array(tur_Text.length).keys()).map(idx => {
@@ -98,15 +88,6 @@ const ReactionFirst = () => {
   }
 
   const getFormula = () => {
-
-    // const expressions = [
-    //   `\\[ Rate = 0.07 = -\\frac{-0.53}{7.28} = -\\frac{0.26 - 0.79}{19.40 - 12.12}\\]`,
-    //   `\\[ t_{1/2} = [A_0]/(2k) \\]`,
-    //   `\\[ 11.46 = 1.68 / (2 x 0.07) \\]`,
-    //   `\\[ Rate = k[A]^0 \\]`,
-    //   `\\[ 0.07 = 0.073(0.60)^0 \\]`,
-    // ]
-
     const c1 = (valuesC[0] ?? 0) / 100
     const c2 = (valuesC[1] ?? 0) / 100
     const t1 = valuesT[0]
@@ -147,7 +128,6 @@ const ReactionFirst = () => {
       updatePageFromMenu(getNextMenu(-1))
       return
     }
-    // else if (update > stepPlayCount[activeMenu]) update = stepPlayCount[activeMenu]
     else if (update >= maxStep_First) {
       update = maxStep_First - 1
       updatePageFromMenu(getNextMenu(1))
@@ -170,41 +150,15 @@ const ReactionFirst = () => {
     }
 
     console.log({ curStep })
-    setPrevStep(curStep)
     setCurStep(nextStep)
   }
 
-  const handleTest1 = () => {
-    console.log('===handleTest=== 111')
-    // console.log({ valuesC })
-    // setCanvaTimeState(2)
-    console.log({ prevStep, curStep })
-  }
-  const handleTest2 = () => {
-    console.log('===handleTest2=== - ')
-    const res = getStorage('availableMenuList')
-    console.log({ res })
-    // setCanvaTimeState(1)
-  }
-  const handleTest3 = () => {
-    console.log('===handleTest3=== - ')
-    // console.log(' ', infoC, { isDisabledA, isDisabledB })
-  }
   return <div className={styles.container}>
     <ChapterMenu />
     <ChooseMenu isEnable={isEnableChooseMenu} onClickItem={() => handleClickChooseMenuItem()} />
     <WatchMenu />
-    {/* <p>step: {curStep}</p>
-    <p>showTimeGraph: {canvaTimeState}</p>
-    <p>beakerState: {canvaBeakerState}</p> */}
 
     <div className={styles.reactionDrawContainer}>
-      {/* <div>
-        <button onClick={() => handleTest1()}>111</button>
-        <button onClick={() => handleTest2()}>222</button>
-        <button onClick={() => handleTest3()}>TeST</button>
-      </div> */}
-
       <EnergyProfile
         valuesC={valuesC}
         beakerDotColor={dotColorList[activeDotIndex]}

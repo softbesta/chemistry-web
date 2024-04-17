@@ -9,6 +9,7 @@ import CommonLayout from './layout/CommonLayout';
 import './App.css'
 import PageError from './pages/404page';
 import ReactionZeroQuiz from './pages/ReactionRates/zeroQuiz';
+import ReactionFirstQuiz from './pages/ReactionRates/firstQuiz';
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
         <Route path={routes.zero.path} index element={<ReactionZero />} />
         <Route path={routes.zeroQuiz.path} index element={<ReactionZeroQuiz />} />
         <Route path={routes.first.path} element={<ReactionFirst />} />
+        <Route path={routes.firstQuiz.path} element={<ReactionFirstQuiz />} />
+        <Route path='*' element={<PageError />} />
         <Route path='about' element={<AboutPage />} />
         <Route path='nopage' element={<PageError />} />
       </Routes>

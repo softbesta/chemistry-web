@@ -1,14 +1,14 @@
 
 export const routes = {
   // chapter 1 - 1
-  zero: {
+  zero: {  // updated
     title: 'Zero order reaction',
     path: '/',
     type: 'reaction',
     // path: 'reaction/zero',
   },
   // 1 - 2
-  first: {
+  first: {  // updated
     title: 'First order reaction',
     path: '/reaction/first',
     type: 'reaction',
@@ -16,7 +16,7 @@ export const routes = {
   // 1 - 3
   second: {
     title: 'Second order reaction',
-    path: '/reaction/first',
+    path: '/reaction/second',
     path1: '/reaction/second',
     type: 'reaction',
   },
@@ -35,16 +35,15 @@ export const routes = {
     type: 'reaction',
   },
   // Quiz
-  zeroQuiz: {
+  zeroQuiz: {  // updated
     title: 'Quiz for Zero order reaction',
     path: '/reaction/zero/quiz',
     path1: '/quiz',
     type: 'quiz',
   },
-  firstQuiz: {
+  firstQuiz: {  // updated
     title: 'Quiz for First order reaction',
-    path: '/reaction/first',
-    path1: '/reaction/first/quiz',
+    path: '/reaction/first/quiz',
     type: 'quiz',
   },
   secondQuiz: {

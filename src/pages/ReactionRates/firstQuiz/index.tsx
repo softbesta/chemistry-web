@@ -2,7 +2,7 @@ import QuizReaction from "../../../components/QuizReaction"
 import { quizData } from "./constants"
 
 // Main page
-const ReactionZeroQuiz = () => {
+const ReactionFirstQuiz = () => {
   return <QuizReaction quizData={quizData} />
 }
-export default ReactionZeroQuiz
+export default ReactionFirstQuiz
