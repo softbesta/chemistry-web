@@ -16,8 +16,11 @@ const chooseMenuItems = [
 
 const ChooseMenu = () => {
   const [isActive, setIsActive] = useState(false)
-  const handleShowChapterList = () => {
+  const toogleShowChapterPanel = () => {
     setIsActive(!isActive)
+  }
+  const handleItemClick = (index: number) => {
+    toogleShowChapterPanel()
   }
   return <div
     id='tur_chooseMenuIcon'
@@ -25,7 +28,7 @@ const ChooseMenu = () => {
   >
     <div
       className={`${styles.chooseDropDownBtn} ${isActive ? styles.active : ''}`}
-      onClick={() => handleShowChapterList()}
+      onClick={() => toogleShowChapterPanel()}
     >
       <span className={styles.arrow} />
     </div>
@@ -33,6 +36,7 @@ const ChooseMenu = () => {
       visible={isActive}
       items={chooseMenuItems}
       activeItemIndex={1}
+      onItemClick={handleItemClick}
     />
   </div>
 }
@@ -42,8 +46,14 @@ interface ChooseMenuPanelProps {
   visible: boolean
   items: { title: string, disabled?: boolean }[]
   activeItemIndex?: number,
+  onItemClick: (val: number) => void
 }
-const ChooseMenuPanel = ({ visible, items, activeItemIndex }: ChooseMenuPanelProps) => {
+const ChooseMenuPanel = ({
+  visible,
+  items,
+  activeItemIndex,
+  onItemClick
+}: ChooseMenuPanelProps) => {
   return <div className={`${styles.ChooseMenuPanel} ${visible ? styles.active : ''}`}>
     {/* <p>This is Order Menu Panel</p> */}
     <div className={styles.ChooseMenuHeader}>
@@ -55,7 +65,12 @@ const ChooseMenuPanel = ({ visible, items, activeItemIndex }: ChooseMenuPanelPro
         // console.log({ isActiveItem, index, activeItemIndex })
         return <div
           key={index}
-          className={`${styles.ChooseMenuItem} ${isActiveItem ? styles.activated : ''} ${item.disabled ? styles.disable : ''}`}
+          className={`
+            ${styles.ChooseMenuItem} 
+            ${isActiveItem ? styles.activated : ''} 
+            ${item.disabled ? styles.disable : ''}
+          `}
+          onClick={() => onItemClick(index)}
         >
           {item.title}
         </div>

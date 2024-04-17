@@ -16,3 +16,10 @@ code {
 * {
   box-sizing: border-box;
 }
+
+/* tutorial text class */
+.sm_botom {
+  font-size: 11px;
+  position: absolute;
+  bottom: -3px;
+}

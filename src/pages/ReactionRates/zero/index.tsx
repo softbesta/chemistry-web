@@ -7,7 +7,7 @@ import ChartBar from "../../../components/ChartBar"
 import MathContent from "../../../components/MathContent"
 import TutorialControl from "../../../components/TutorialControl"
 import { useHighLight } from "../../../hooks/useHighlight"
-import { maxStep_Zero, stepsActions, tur_Hightlights, tur_Text } from "./constants"
+import { maxStep_Zero, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text } from "./constants"
 import useFunctions from "../../../hooks/useFunctions"
 import ChooseMenu from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
@@ -116,7 +116,7 @@ const ReactionZero = () => {
 
     const exp0 = `\\[ Rate = ${k.toFixed(2)} = -\\frac{${c.toFixed(2)}}{${t.toFixed(2)}} = -\\frac{${c2.toFixed(2)} - ${c1.toFixed(2)}}{${t2.toFixed(2)} - ${t1.toFixed(2)}}\\]`
     const exp1 = `\\[ t_{1/2} = [A_0]/(2k) \\]`
-    const exp2 = `\\[ ${t_12.toFixed(2)} = ${A0.toFixed(2)} / (2 x ${k.toFixed(2)}) \\]`
+    const exp2 = `\\[ ${t_12.toFixed(2)} = ${A0.toFixed(2)} / (2  x  ${k.toFixed(2)}) \\]`
     const exp3 = `\\[ Rate = k[A]^0 \\]`
     const exp4 = `\\[ ${k.toFixed(2)} = ${k.toFixed(3)}(${c1.toFixed(2)})^0 \\]`
 
@@ -128,8 +128,6 @@ const ReactionZero = () => {
       exp4,
     }
   }
-  // const blanks = [[true, true, true, true, true], [true]]
-  const blanks = [[]]
 
   // get available next step number
   const getNextStep = (step: number) => {
@@ -152,7 +150,7 @@ const ReactionZero = () => {
   // call when click prev step
   const onStepChange = (step: number) => {
     const nextStep = getNextStep(step)
-    if (!nextStep) return
+    if (nextStep === undefined) return
     if (curStep === nextStep) return
     // console.log({ curStep }, tur_Hightlights[curStep])
     // console.log({ nextStep }, tur_Hightlights[nextStep])
@@ -175,7 +173,7 @@ const ReactionZero = () => {
   const handleTest2 = () => {
     console.log('===handleTest2=== - ')
     const res = getStorage('courseStatus')
-    console.log({res})
+    console.log({ res })
     // setCanvaTimeState(1)
   }
   const handleTest3 = () => {
@@ -216,7 +214,8 @@ const ReactionZero = () => {
     <div className={styles.reactionContentContainer}>
       <MathContent
         {...getFormula()}
-        blanks={blanks}
+        blanks={tur_MathBlanks[curStep]}
+        blanksCount={11}
       />
       <TutorialControl
         // curStep={curStep}

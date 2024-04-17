@@ -22,7 +22,8 @@ interface MathContentProps {
   exp2: string,
   exp3: string,
   exp4: string,
-  blanks: (boolean | undefined)[][]
+  blanks: (any | undefined)[]
+  blanksCount: number
 }
 const MathContent = ({ exp0, exp1, exp2, exp3, exp4, blanks }: MathContentProps) => {
   return <div className={styles.mathContentContainer}>
@@ -49,7 +50,6 @@ const MathContent = ({ exp0, exp1, exp2, exp3, exp4, blanks }: MathContentProps)
           {exp0}
           {/* {`\\[ Rate = 0.07 = -\\frac{-0.53}{7.28} = -\\frac{0.26 - 0.79}{19.40 - 12.12}\\]`} */}
         </MathJax>
-        {blanks[0][0] && <div className={styles.blank} />}
       </div>
       <div
         id='tur_math3'
@@ -92,6 +92,25 @@ const MathContent = ({ exp0, exp1, exp2, exp3, exp4, blanks }: MathContentProps)
       </div>
     </MathJaxContext>
 
+
+    {blanks && blanks.map((item, index) => {
+      if (!item) return null
+      const className = `
+        ${styles.blank} 
+        ${item ? styles.active : ''}
+      `
+      return <div
+        key={index}
+        className={className}
+        style={item}
+      />
+    })}
+    
+    {/* <div className={`
+      ${styles.blank} 
+      ${styles.blank_test} 
+      ${styles.active}
+    `} /> */}
     {/* <p>{exp0}</p> */}
   </div>
 }
