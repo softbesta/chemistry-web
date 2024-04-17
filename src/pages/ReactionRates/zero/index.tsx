@@ -122,11 +122,12 @@ const ReactionZero = () => {
     const A0 = a0Numerator / (t1 - t2)
     const t_12 = A0 / (2 * rateConstant)
 
-    const exp0 = `\\[ Rate = ${k.toFixed(2)} = -\\frac{${c.toFixed(2)}}{${t.toFixed(2)}} = -\\frac{${c2.toFixed(2)} - ${c1.toFixed(2)}}{${t2.toFixed(2)} - ${t1.toFixed(2)}}\\]`
-    const exp1 = `\\[ t_{1/2} = [A_0]/(2k) \\]`
-    const exp2 = `\\[ ${t_12.toFixed(2)} = ${A0.toFixed(2)} / (2  x  ${k.toFixed(2)}) \\]`
-    const exp3 = `\\[ Rate = k[A]^0 \\]`
-    const exp4 = `\\[ ${k.toFixed(2)} = ${k.toFixed(3)}(${c1.toFixed(2)})^0 \\]`
+    const exp0 = `\\[ Rate = k = -\\frac{△c}{△t} = -\\frac{c_2 - c_1}{t_2 - t_1}\\]`
+    const exp1 = `\\[ Rate = ${k.toFixed(2)} = -\\frac{${c.toFixed(2)}}{${t.toFixed(2)}} = -\\frac{${c2.toFixed(2)} - ${c1.toFixed(2)}}{${t2.toFixed(2)} - ${t1.toFixed(2)}}\\]`
+    const exp2 = `\\[ t_{1/2} = [A_0]/(2k) \\]`
+    const exp3 = `\\[ ${t_12.toFixed(2)} = ${A0.toFixed(2)} / (2  x  ${k.toFixed(2)}) \\]`
+    const exp4 = `\\[ Rate = k[A]^0 \\]`
+    const exp5 = `\\[ ${k.toFixed(2)} = ${k.toFixed(3)}(${c1.toFixed(2)})^0 \\]`
 
     return {
       exp0,
@@ -134,6 +135,7 @@ const ReactionZero = () => {
       exp2,
       exp3,
       exp4,
+      exp5,
     }
   }
 

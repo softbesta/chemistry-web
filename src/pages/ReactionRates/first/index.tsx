@@ -7,7 +7,7 @@ import ChartBar from "../../../components/ChartBar"
 import MathContent from "../../../components/MathContent"
 import TutorialControl from "../../../components/TutorialControl"
 import { useHighLight } from "../../../hooks/useHighlight"
-import { maxStep_Zero, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text } from "./constants"
+import { maxStep_Zero as maxStep_First, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text } from "./constants"
 import useFunctions from "../../../hooks/useFunctions"
 import ChooseMenu from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
@@ -64,7 +64,7 @@ const ReactionFirst = () => {
   })
 
   // *** Tutorial-ACTIONS  - curStep changes
-  const curActions = zeroTurs[curStep]?.actions
+  const curActions = zeroTurs[curStep]?.actions as any
   useEffect(() => {
     console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep })
     // console.log('curActions: ', { curActions, curStep })
@@ -121,11 +121,12 @@ const ReactionFirst = () => {
     const A0 = a0Numerator / (t1 - t2)
     const t_12 = A0 / (2 * rateConstant)
 
-    const exp0 = `\\[ k = \\frac{${c2.toFixed(2)} - ${c1.toFixed(2)}}{${t1.toFixed(2)}}\\]`
-    const exp1 = `\\[ t_{1/2} = In(2)/k \\]`
-    const exp2 = `\\[ ${t_12.toFixed(2)} = ${A0.toFixed(2)} / ${k.toFixed(2)} \\]`
-    const exp3 = `\\[ Rate = k[A]^1 \\]`
-    const exp4 = `\\[ ${k.toFixed(2)} = ${k.toFixed(3)}(${c1.toFixed(2)})^1 \\]`
+    const exp0 = `\\[ k = \\frac{In[A_0] - In[A_t]}{t}\\]`
+    const exp1 = `\\[ k = \\frac{(-${c2.toFixed(2)}) - (-${c1.toFixed(2)})}{${t1.toFixed(2)}}\\]`
+    const exp2 = `\\[ t_{1/2} = In(2)/k \\]`
+    const exp3 = `\\[ ${t_12.toFixed(2)} = ${A0.toFixed(2)} / ${k.toFixed(2)} \\]`
+    const exp4 = `\\[ Rate = k[A]^1 \\]`
+    const exp5 = `\\[ ${k.toFixed(2)} = ${k.toFixed(3)}(${c1.toFixed(2)})^1 \\]`
 
     return {
       exp0,
@@ -133,6 +134,7 @@ const ReactionFirst = () => {
       exp2,
       exp3,
       exp4,
+      exp5,
     }
   }
 
@@ -146,8 +148,8 @@ const ReactionFirst = () => {
       return
     }
     // else if (update > stepPlayCount[activeMenu]) update = stepPlayCount[activeMenu]
-    else if (update >= maxStep_Zero) {
-      update = maxStep_Zero - 1
+    else if (update >= maxStep_First) {
+      update = maxStep_First - 1
       updatePageFromMenu(getNextMenu(1))
       return
     }

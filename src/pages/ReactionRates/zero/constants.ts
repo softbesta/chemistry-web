@@ -45,7 +45,7 @@ export const tur_Text = [
     `<span>Choose a reaction above</span>.`,
   ],
   [ // 9
-    `Great! You picked a reaction with a rate constant \(rateConstant.str(decimals: 2)).`,
+    `Great! You picked a reaction with a rate constant 0.04.`,
     `Why don't you <span>set the initial concentration and initial time</span>?`,
   ],
   [ // 10

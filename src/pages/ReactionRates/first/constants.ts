@@ -1,4 +1,4 @@
-export const maxStep_Zero = 18
+export const maxStep_Zero = 22
 
 export const tur_Text = [
   // display.reactant.name; A
@@ -23,7 +23,7 @@ export const tur_Text = [
     `For this reaction then, <span>rate=k[A]</span><span class='sm_top'>1</span>.</p>`,
   ],
   [ // 5 here goes next step automatically after action
-    `<p style='font-size: 17px'>Half-life (t<span class='sm_botom'>1/2</span>)</span> is an expression to easily calculate the point in time at which the concentration of the reactant, in this case <span>A</span>, is half of what the \
+    `<p style='font-size: 17px'><span>Half-life (t<span class='sm_botom'>1/2</span>)</span> is an expression to easily calculate the point in time at which the concentration of the reactant, in this case <span>A</span>, is half of what the \
     initial concentration was. For this reaction,</p>`,
     `<p style='font-size: 17px'> <span>t<span class='sm_botom'>1/2</span>=\
     In(1)/k=10.00s</span>.</p>`,
@@ -38,44 +38,66 @@ export const tur_Text = [
     of <span>[A]</span>, since <span>rate=k[A]<span class='sm_top'>0</span></span> is equivalent to <span>rate=k</span>, which is the rate constant.`,
   ],
   [ // 8
-    `Now, let's try choosing a different reaction, which has a fixed rate constant, <span>k</span>.`,
-    `<span>Choose a reaction above</span>.`,
+    `For this first order reaction, <span>rate=k[A]<span class='sm_top'>1</span></span>. That's why a graph plotting \
+    \([A] vs t]) is a curve, given how the <span>rate</span> is proportional to the concentration \
+    of <span>A</span>`,
   ],
   [ // 9
-    `Great! You picked a reaction with a rate constant \(rateConstant.str(decimals: 2)).`,
-    `Why don't you <span>set the initial concentration and initial time</span>?`,
+    `<p style='font-size: 17px'>Notice how <span>[A]</span> drops faster at the beginning because there's more of <span>A</span> present, making \
+    the <span>rate</span> higher.</p>`,
+    `<p style='font-size: 17px'>Towards the end of the reaction there's much less <span>[A]</span> present, so the <span>rate</span> of the \
+    reaction is lower, making <span>[A]</span> drop slower.</p>`,
   ],
   [ // 10
-    `Awesome! Now set the time the reaction ends.`,
-    `Notice how the final concentration varies as you adjust the final time.`,
+    `<p style='font-size: 17px'>For simplification purposes, when integrating the rate law or the rate equation, we get \
+    the <span>integrated rate law</span>.</p>`,
+    `<p style='font-size: 17px'>This is a form of the rate law that makes it simpler to make calculations and graphs from \
+    the original rate law equation.</p>`,
   ],
   [ // 11
-    `<p>Let's watch how all the molecules are all changing! As \
-    C disappears, D is being produced.</p>`,
-    `<p>This happens at a variable <span>rate (in units of M/s)</span>, which is dependent on <span>k</span>.</p>`,
-  ],
-  [ // 12
     `Amazing! Let's take a snapshot!`,
     `Try <span>dragging the time indicator</span> to scrub through the reaction time.`,
   ],
-  [ // 13
+  [ // 12
     `Now, let's try choosing a different reaction, which has a fixed rate constant, <span>k</span>.`,
     `<span>Choose a reaction above</span>.`,
   ],
-  [ // 14
-    `Great! You picked a reaction with a rate constant \ 0.07.`,
+  [ // 13
+    `Great! You picked a reaction with a rate constant 0.04.`,
     `Why don't you <span>set the initial concentration and initial time</span>?`,
   ],
+  [ // 14
+    `Awesome! Now set the time the reaction ends.`,
+    `Notice how the final concentration varies as you adjust the final time.`,
+  ],
   [ // 15
-    `Awesome! Now set the final concentration of the reaction.`,
-    `Notice how the final time varies as you adjust the final concentration.`,
+    `<p>Let's watch how all the molecules are all changing!</p>`,
+    `<p>As C disappears, D is being produced.</p>`,
+    `<p>This happens at a variable <span>rate (in units of M/s)</span>, which is dependent on <span>k</span> and <span>[C]</span>.</p>`,
   ],
   [ // 16
-    `Let's watch how all the molecules changing! As \ E disappears, \ F is being produced.`,
-    `This happens at a variable <span>rate (in units of M/s)</span>, which is dependent on <span>k</span>.`,
+    `Amazing! Let's take a snapshot!`,
+    `Try <span>dragging the time indicator</span> to scrub through the reaction time.`,
   ],
   [ // 17
-    `Amazing, let's take another snapshot!`,
+    `Now, let's try choosing a different reaction, which has a fixed rate constant, <span>k</span>.`,
+    `<span>Choose a reaction above</span>.`,
+  ],
+  [ // 18
+    `Great! You picked a reaction with a rate constant 0.07.`,
+    `Why don't you <span>set the initial concentration and initial time</span>?`,
+  ],
+  [ // 19
+    `Awesome! Now set the time the reaction ends.`,
+    `Notice how the final concentration varies as you adjust the final time.`,
+  ],
+  [ // 20
+    `<p>Let's watch how all the molecules are all changing!</p>`,
+    `<p>As E disappears, F is being produced.</p>`,
+    `<p>This happens at a variable <span>rate (in units of M/s)</span>, which is dependent on <span>k</span> and <span>[E]</span>.</p>`,
+  ],
+  [ // 21
+    `Amazing! Let's take a snapshot!`,
     `Try <span>dragging the time indicator</span> to scrub through the reaction time.`,
     `Then, let's take a quiz to review what we've learnt.`,
   ],
@@ -83,58 +105,70 @@ export const tur_Text = [
 ]
 
 export const tur_Hightlights = [
-  // 0   This is zero...
+  // 0   This is a first...
   [],
 
   // 1   Great! Now you ...
   [],
 
-  // 2   The order of a ...
+  // 2   The rate constant...
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math1', 'tur_math2'],
 
-  // 3   Half-lie (t12) ...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math3'],
+  // 3   Rate laws or rate ...
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math1', 'tur_math2'],
 
-  // 4   Let's watch how all...
+  // 4   For a reaction...
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math4', 'tur_canvasTime'],
+
+  // 5   Half-life t1/2 ...
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math3'], // +
+
+  // 6   Let's watch how all....
+  [], // Choose reaction 'C to D'
+
+  // 7   For the previous zero...
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
 
-  // 5   For this zero order ...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'], // +
+  // 8   For this first order...
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
 
-  // 6   You can click the....
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_watchMenuIcon'], // Choose reaction 'C to D'
+  // 9   Notice how [A] drops...
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton'],
 
-  // 7   Amazing! Let's take...
+  // 10   For simplification purposes ...
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
+
+  // 11   Amazing! Let's take...
   [],
 
-  // 8   Now, let's try choosing...
+  // 12   Now, let's try choosing...
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_chooseMenuIcon'],
 
-  // 9   Great! You picked a...
+  // 13   Great! You picked a... EF
   [],
 
-  // 10   Awesome! Now set ...
+  // 14   Awesome! Now set the ...
   [],
 
-  // 11   Let's watch how all the...
+  // 15   Let's watch how ...
   [],
 
-  // 12   Amazing, let's take...
+  // 16   Amazing! Let's take ...
   [],
 
-  // 13   Now, let's try choosing... EF
+  // 17   Now, let's try choosing ...
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_chooseMenuIcon'],
 
-  // 14   Great! You picked a ...
+  // 18   Great! You picked a ...
   [],
 
-  // 15   Awesome! Now set the ...
+  // 19   Awesome! Now set the ...
   [],
 
-  // 16   Let's watch how all ...
+  // 20   Let's watch how all ...
   [],
 
-  // 17   Amazing, let's take ...
+  // 21   Amazing! Let's take a ...
   [],
   // here goes to Quiz
 ]
@@ -142,7 +176,7 @@ export const tur_Hightlights = [
 export const stepsActions = [
   // energyAB;          (A - 0, B - 1), (C - 2, D - 3), (E - 4, F - 5)
   // valuesC, canvaTimeSliderC, canvaTimeSliderT;
-  //                    index-0: A index-1: B
+  //                    index-0: A,  index-1: B
   // canvaTimeSliderC;  0 - hidden, 1 - disabled, 2 - active
   // canvaTimeSliderT;  0 - hidden, 1 - disabled, 2 - active
   // valuesC;           0 ~ 100
@@ -217,8 +251,8 @@ export const stepsActions = [
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 3,
     canvaBeakerState: 3,
-    activeDotIndex: 0,
-    isEnableChooseMenu: true,
+    // activeDotIndex: 0,
+    // isEnableChooseMenu: true,
   },
   // 9   Great! You picked a...
   { // 9
@@ -226,8 +260,8 @@ export const stepsActions = [
     canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
     canvaBeakerState: 1,
-    activeDotIndex: 1,
-    isEnableChooseMenu: false,
+    // activeDotIndex: 1,
+    // isEnableChooseMenu: false,
   },
   // 10   Awesome! Now set ...
   { // 10
@@ -257,8 +291,8 @@ export const stepsActions = [
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 3,
     canvaBeakerState: 3,
-    activeDotIndex: 1,
-    isEnableChooseMenu: true,
+    // activeDotIndex: 1,
+    // isEnableChooseMenu: true,
   },
   // 14   Great! You picked a ...
   { // 14
@@ -266,8 +300,8 @@ export const stepsActions = [
     canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
     canvaBeakerState: 1,
-    activeDotIndex: 2,
-    isEnableChooseMenu: false,
+    // activeDotIndex: 2,
+    // isEnableChooseMenu: false,
   },
   // 15   Awesome! Now set the ...
   { // 15
@@ -294,20 +328,16 @@ export const stepsActions = [
 
 export const tur_MathBlanks = [
   [
-    { left: 73, top: 115, width: 50 }, //0
-    { left: 169, top: 98, width: 60 }, //1
-    { left: 287, top: 98, width: 55 }, //2
-    { left: 169, top: 136, width: 60 }, //3
-    { left: 287, top: 136, width: 55 }, //4
-    { left: 201, top: 185, width: 50 }, //5
-    { left: 278, top: 185, width: 45 }, //6
-    { left: 363, top: 185, width: 43 }, //7
-    { left: 212, top: 237, width: 43 }, //8
-    { left: 284, top: 237, width: 52 }, //9
-    { left: 344, top: 237, width: 41 }, //10
+    { left: -12, top: 94, width: 27 }, //0
+    { left: 126, top: 81, width: 48 }, //1
+    { left: 0, top: 180, width: 42 }, //2
+    { left: 106, top: 180, width: 42 }, //3
+    { left: 0, top: 248, width: 36 }, //4
+    { left: 57, top: 248, width: 41 }, //5
+    { left: 105, top: 248, width: 32 }, //6
   ],
   [
-    { left: 212, top: 237, width: 43 }, //8
-    { left: 344, top: 237, width: 41 }, //10
+    { left: 0, top: 248, width: 36 }, //4
+    { left: 105, top: 248, width: 32 }, //6
   ],
 ]

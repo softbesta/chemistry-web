@@ -22,11 +22,12 @@ interface MathContentProps {
   exp2: string,
   exp3: string,
   exp4: string,
+  exp5: string,
   blanks: (any | undefined)[]
   blanksCount: number
   className?: string
 }
-const MathContent = ({ exp0, exp1, exp2, exp3, exp4, blanks, className = '' }: MathContentProps) => {
+const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, className = '' }: MathContentProps) => {
   return <div className={`${styles.mathContentContainer} ${className}`}>
     <MathJaxContext config={config}>
       <div
@@ -37,7 +38,7 @@ const MathContent = ({ exp0, exp1, exp2, exp3, exp4, blanks, className = '' }: M
           className={styles.mathjax}
           dynamic
         >
-          {`\\[ Rate = k = -\\frac{△c}{△t} = -\\frac{c_2 - c_1}{t_2 - t_1}\\]`}
+          {exp0}
         </MathJax>
       </div>
       <div
@@ -48,7 +49,7 @@ const MathContent = ({ exp0, exp1, exp2, exp3, exp4, blanks, className = '' }: M
           className={styles.mathjax}
           dynamic
         >
-          {exp0}
+          {exp1}
           {/* {`\\[ Rate = 0.07 = -\\frac{-0.53}{7.28} = -\\frac{0.26 - 0.79}{19.40 - 12.12}\\]`} */}
         </MathJax>
       </div>
@@ -60,14 +61,14 @@ const MathContent = ({ exp0, exp1, exp2, exp3, exp4, blanks, className = '' }: M
           className={styles.mathjax}
           dynamic
         >
-          {exp1}
+          {exp2}
           {/* {`\\[ t_{1/2} = [A_0]/(2k) \\]`} */}
         </MathJax>
         <MathJax
           className={styles.mathjax}
           dynamic
         >
-          {exp2}
+          {exp3}
           {/* {`\\[ 11.46 = 1.68 / (2 x 0.07) \\]`} */}
         </MathJax>
       </div>
@@ -79,7 +80,7 @@ const MathContent = ({ exp0, exp1, exp2, exp3, exp4, blanks, className = '' }: M
           className={styles.mathjax}
           dynamic
         >
-          {exp3}
+          {exp4}
           {/* {`\\[ Rate = k[A]^0 \\]`} */}
         </MathJax>
         <MathJax
@@ -87,7 +88,7 @@ const MathContent = ({ exp0, exp1, exp2, exp3, exp4, blanks, className = '' }: M
           inline
           dynamic
         >
-          {exp4}
+          {exp5}
           {/* {`\\[ 0.07 = 0.073(0.60)^0 \\]`} */}
         </MathJax>
       </div>
