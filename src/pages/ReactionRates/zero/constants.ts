@@ -1,4 +1,3 @@
-export const maxStep_Zero = 18
 
 export const tur_Text = [
   // display.reactant.name; A
@@ -313,3 +312,4 @@ export const tur_MathBlanks = [
     { left: 344, top: 237, width: 41 }, //10
   ],
 ]
+export const maxStep_Zero = tur_Text.length // 18 steps

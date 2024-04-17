@@ -7,7 +7,7 @@ import ChartBar from "../../../components/ChartBar"
 import MathContent from "../../../components/MathContent"
 import TutorialControl from "../../../components/TutorialControl"
 import { useHighLight } from "../../../hooks/useHighlight"
-import { maxStep_Zero as maxStep_First, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text } from "./constants"
+import { maxStep_First, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text } from "./constants"
 import useFunctions from "../../../hooks/useFunctions"
 import ChooseMenu from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
@@ -45,7 +45,7 @@ const ReactionFirst = () => {
   const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
 
   // *** Setup tutorial actions here
-  const zeroTurs = Array.from(Array(tur_Text.length).keys()).map(idx => {
+  const firstTurs = Array.from(Array(tur_Text.length).keys()).map(idx => {
     return {
       text: tur_Text[idx],
       highlight: tur_Hightlights[idx],
@@ -54,7 +54,7 @@ const ReactionFirst = () => {
   })
 
   // *** Tutorial-ACTIONS  - curStep changes
-  const curActions = zeroTurs[curStep]?.actions as any
+  const curActions = firstTurs[curStep]?.actions as any
   useEffect(() => {
     console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep })
     // console.log('curActions: ', { curActions, curStep })
@@ -144,9 +144,9 @@ const ReactionFirst = () => {
     if (nextStep === undefined) return
     if (curStep === nextStep) return
     // Tutorial-Highlight
-    removeHighlightElement(zeroTurs[curStep]?.highlight)
-    if (zeroTurs[nextStep]?.highlight?.length > 0) {
-      highlightElement(zeroTurs[nextStep].highlight)
+    removeHighlightElement(firstTurs[curStep]?.highlight)
+    if (firstTurs[nextStep]?.highlight?.length > 0) {
+      highlightElement(firstTurs[nextStep].highlight)
     }
 
     console.log({ curStep })
@@ -183,7 +183,7 @@ const ReactionFirst = () => {
     <div className={styles.reactionContentContainer}>
       <div className={styles.chartInA}></div>
       <MathContent
-        className={styles.firstMathContent}
+        className={styles.mathContent}
         {...getFormula()}
         blanks={tur_MathBlanks[curStep]}
         blanksCount={11}
