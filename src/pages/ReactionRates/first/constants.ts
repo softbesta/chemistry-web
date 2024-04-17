@@ -4,12 +4,11 @@ export const tur_Text = [
   // display.reactant.name; A
   // display.product.name;  B
   [ // 0
-    `This is a zero order reaction in which a reactant A turns into the product B. But what does it mean? Let's find out!`,
-    '',
-    `<span>Set the initial concentration of A (c<span class='sm_botom'>1</span>) and the initial time at which it'll start (t<span class='sm_botom'>1</span>)</span>.`,
+    `This is a first order reaction.`,
+    `Why don't you set the <span>initial concentration of A [A_0_]</span>, the reactant?.`,
   ],
   [ // 1
-    `Great! Now you can set the <span>concentration of A at the end of the reaction (c<span class='sm_botom'>2</span>)</span> and the <span>time the reaction will end (t<span class='sm_botom'>2</span>)</span>.`,
+    `Great! Now you can set the <span>concentration of A at the end of the reaction [A<span class='sm_botom'>t</span>]</span> and the <span>time the reaction will last (t)</span>.`,
   ],
   [ // 2
     `The order of a reaction has to do with the rate of it. <span>Rate</span> is the rate of \

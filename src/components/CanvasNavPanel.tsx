@@ -2,8 +2,8 @@ import React from 'react';
 import styles from './CanvasNavPanel.module.scss'
 
 type PanelShapeProps = {
-  height?: string | number | undefined,
-  width?: string | number | undefined,
+  height?: number | undefined,
+  width?: number | undefined,
   tabWidth: number,
   tabHeight: number,
   cornerRadius: number,
@@ -21,7 +21,10 @@ const PanelShape = (props: PanelShapeProps) => {
   React.useEffect(() => {
     const ctx = canvas?.current?.getContext('2d');
     if (ctx) {
-      const { height: rectHeight, width: rectWidth } = ctx.canvas;
+      ctx.clearRect(0, 0, width, height)
+      const { height: rectHeightA, width: rectWidthA } = ctx.canvas;
+      const rectHeight = rectHeightA - 12
+      const rectWidth = rectWidthA - 12
 
       let panelWidth = rectWidth - tabWidth;
       let panelHeight = rectHeight - tabHeight;
@@ -78,9 +81,11 @@ const PanelShape = (props: PanelShapeProps) => {
       ctx.lineTo(0, 0);
       ctx.fillStyle = 'white'
       ctx.fill()
-      ctx.lineWidth = 2
+      ctx.lineWidth = 0.1
       ctx.stroke();
 
+      ctx.shadowColor = 'rgb(30, 30, 30)'
+      ctx.shadowBlur = 10
     }
   })
   return (

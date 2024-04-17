@@ -1,7 +1,8 @@
 .menuContainer {
-  position: absolute;
+  position: fixed;
   top: 25px;
-  left: 30px;
+  left: 6%;
+  // left: 30px;
   background: white;
   z-index: 200;
 
@@ -34,7 +35,7 @@
   .closeIcon {
     position: absolute;
     top: 0;
-    right: -30px;
+    right: -20px;
     width: 40px;
     height: 40px;
     display: flex;
@@ -81,7 +82,7 @@
     .navContent {
       display: flex;
       position: relative;
-      padding: 10px 35px 10px 50px;
+      padding: 10px 45px 10px 60px;
 
       .navLinks {
         width: 30px;
