@@ -354,8 +354,8 @@ export const stepsActions = [
 
 export const tur_MathBlanks = [
   [
-    { left: -12, top: 94, width: 27 }, //0
-    { left: 126, top: 81, width: 48 }, //1
+    { left: 0, top: 94, width: 32 }, //0
+    { left: 148, top: 81, width: 48 }, //1
     { left: 0, top: 180, width: 42 }, //2
     { left: 106, top: 180, width: 42 }, //3
     { left: 0, top: 248, width: 36 }, //4

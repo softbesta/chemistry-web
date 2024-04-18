@@ -92,22 +92,21 @@ const ReactionFirst = () => {
     const c2 = (valuesC[1] ?? 0) / 100
     const t1 = valuesT[0]
     const t2 = valuesT[1]
-    const c = c2 - c1
-    const t = t2 - t1
-    const k = -(c / t)
-    const deltaT = t2 - t1
-    const deltaC = c2 - c1
-    const rateConstant = -deltaC / deltaT
-    const a0Numerator = (t1 * c2) - (t2 * c1)
-    const A0 = a0Numerator / (t1 - t2)
-    const t_12 = A0 / (2 * rateConstant)
+
+    const lnA0 = Math.log(c1)
+    const lnAt = Math.log(c2)
+    const k = (lnA0 - lnAt) / t1
+    const t_12 = Math.log(2) / k
+    const rate = k * c1
+
+    console.log({ c1, c2, lnA0, lnAt, t1 })
 
     const exp0 = `\\[ k = \\frac{In[A_0] - In[A_t]}{t}\\]`
-    const exp1 = `\\[ k = \\frac{(-${c2.toFixed(2)}) - (-${c1.toFixed(2)})}{${t1.toFixed(2)}}\\]`
+    const exp1 = `\\[ ${k.toFixed(2)} = \\frac{(${lnA0.toFixed(2)}) - (${lnAt.toFixed(2)})}{${t1.toFixed(2)}}\\]`
     const exp2 = `\\[ t_{1/2} = In(2)/k \\]`
-    const exp3 = `\\[ ${t_12.toFixed(2)} = ${A0.toFixed(2)} / ${k.toFixed(2)} \\]`
+    const exp3 = `\\[ ${t_12.toFixed(2)} = ${Math.log(2).toFixed(2)} / ${k.toFixed(2)} \\]`
     const exp4 = `\\[ Rate = k[A]^1 \\]`
-    const exp5 = `\\[ ${k.toFixed(2)} = ${k.toFixed(3)}(${c1.toFixed(2)})^1 \\]`
+    const exp5 = `\\[ ${rate.toFixed(2)} = ${k.toFixed(3)}(${c1.toFixed(2)})^1 \\]`
 
     return {
       exp0,

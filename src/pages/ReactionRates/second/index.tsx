@@ -91,25 +91,18 @@ const ReactionSecond = () => {
     const c1 = (valuesC[0] ?? 0) / 100
     const c2 = (valuesC[1] ?? 0) / 100
     const t1 = valuesT[0]
-    const t2 = valuesT[1]
-    // const c = c2 - c1
-    // const t = t2 - t1
-    // const k = -(c / t)
-    // const deltaT = t2 - t1
-    // const deltaC = c2 - c1
-    // const rateConstant = -deltaC / deltaT
-    // const a0Numerator = (t1 * c2) - (t2 * c1)
-    // const A0 = a0Numerator / (t1 - t2)
-    // const t_12 = A0 / (2 * rateConstant)
-    const k = ((1 / c2) - (1 / c1)) / t1
-    const t_12 = 1 / (k)
+    const At = c2
+    const A0 = c1
+    const k = ((1 / At) - (1 / A0)) / t1
+    const t_12 = 1 / (k * A0)
+    const rate = k * (At * At)
 
     const exp0 = `\\[ k = \\frac{(1/[A_t]) - (1/[A_0])}{t}\\]`
-    const exp1 = `\\[ k = \\frac{${(1 / c2).toFixed(2)} - ${(1 / c1).toFixed(2)}}{${t1.toFixed(2)}}\\]`
+    const exp1 = `\\[ k = \\frac{${(1 / At).toFixed(2)} - ${(1 / A0).toFixed(2)}}{${t1.toFixed(2)}}\\]`
     const exp2 = `\\[ t_{1/2} = 1/k[A_0] \\]`
-    const exp3 = `\\[ ${t_12.toFixed(2)} = 1/${k.toFixed(2)}(${c1.toFixed(2)}) \\]`
+    const exp3 = `\\[ ${t_12.toFixed(2)} = 1/${k.toFixed(2)}(${A0.toFixed(2)}) \\]`
     const exp4 = `\\[ Rate = k[A]^2 \\]`
-    const exp5 = `\\[ ${k.toFixed(2)} = ${k.toFixed(3)}(${c1.toFixed(2)})^2 \\]`
+    const exp5 = `\\[ ${rate.toFixed(2)} = ${k.toFixed(3)}(${At.toFixed(2)})^2 \\]`
 
     return {
       exp0,
