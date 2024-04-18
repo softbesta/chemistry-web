@@ -18,59 +18,13 @@ const TutorialControl = ({
   className,
   onStepChange
 }: TutorialControlProps) => {
-  // const {
-  //   curStep,
-  //   setCurStep,
-  // } = useAppData()
-
-  // const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
-
-  // const getNextStep = (step: number) => {
-  //   let update = curStep + step
-  //   if (update < 0) update = 0
-  //   // else if (update > stepPlayCount[activeMenu]) update = stepPlayCount[activeMenu]
-  //   else if (update >= maxStepCount_Zero) update = maxStepCount_Zero - 1
-  //   return update
-  // }
-
-  // const handleStepPrev = () => {
-  //   console.log('===handleStepPrev===', curStep)
-  //   const nextStep = getNextStep(-1)
-  //   if (curStep === nextStep) return
-  //   console.log({ curStep }, tur_Hightlights[curStep])
-  //   console.log({ nextStep }, tur_Hightlights[nextStep])
-  //   removeHighlightElement(tur_Hightlights[curStep])
-  //   if (tur_Hightlights[nextStep]?.length > 0) {
-  //     highlightElement(tur_Hightlights[nextStep])
-  //   }
-  //   setCurStep(nextStep)
-  // }
-  // const handleStepNext = () => {
-  //   console.log('===handleStepNext===', curStep)
-  //   const nextStep = getNextStep(1)
-  //   if (curStep === nextStep) return
-  //   console.log({ curStep }, tur_Hightlights[curStep])
-  //   console.log({ nextStep }, tur_Hightlights[nextStep])
-  //   removeHighlightElement(tur_Hightlights[curStep])
-  //   if (tur_Hightlights[nextStep]?.length > 0) {
-  //     highlightElement(tur_Hightlights[nextStep])
-  //   }
-  //   setCurStep(nextStep)
-  // }
-
-  // const handleTest = () => {
-  //   console.log('===handleTest===')
-  //   highlightElement(['stepPrevButton', 'stepNextButton'])
-  //   // startTutorials()
-  // }
   return (<div className={`${styles.tutorialControl} ${className || ''}`}>
-
     <div
       id='tur_tutorialText'
       className={styles.tutorialTextContainer}
     >
       <div className={styles.tutorialText}>
-        {turText.map((val, index) => <div
+        {turText?.map((val, index) => <div
           key={index}
           className={styles.tutorialTextItem}
           dangerouslySetInnerHTML={{ __html: val || '' }}

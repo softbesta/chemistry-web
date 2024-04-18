@@ -48,7 +48,7 @@ const ReactionComparison = () => {
   const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
 
   // *** Setup tutorial actions here
-  const secondTurs = Array.from(Array(tur_Text.length).keys()).map(idx => {
+  const tutorials = Array.from(Array(tur_Text.length).keys()).map(idx => {
     return {
       text: tur_Text[idx],
       highlight: tur_Hightlights[idx],
@@ -57,7 +57,7 @@ const ReactionComparison = () => {
   })
 
   // *** Tutorial-ACTIONS  - curStep changes
-  const curActions = secondTurs[curStep]?.actions as any
+  const curActions = tutorials[curStep]?.actions as any
   useEffect(() => {
     console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep })
     // console.log('curActions: ', { curActions, curStep })
@@ -69,11 +69,9 @@ const ReactionComparison = () => {
         setCanvaBeakerState(curActions.canvaBeakerState)
       }
       if (curActions?.isEnableChooseMenu !== undefined) {
-        console.log('zzz curActions.isEnableChooseMenu', curActions.isEnableChooseMenu)
         setIsEnableChooseMenu(curActions.isEnableChooseMenu)
       }
       if (curActions?.activeDotIndex !== undefined) {
-        console.log('zzz curActions.activeDotIndex', curActions.activeDotIndex)
         setActiveDotIndex(curActions.activeDotIndex)
       }
       if (Array.isArray(curActions?.canvaTimeSliderC)) {
@@ -90,7 +88,6 @@ const ReactionComparison = () => {
     let update = curStep + step
     if (update < 0) {
       update = 0
-      console.log('getNextStep 0', { update })
       updatePageFromMenu(getNextMenu(-1))
       return
     }
@@ -106,18 +103,21 @@ const ReactionComparison = () => {
   const onStepChange = (step: number) => {
     console.log('===onStepChange===', { step })
     const nextStep = getNextStep(step)
-    console.log({ nextStep })
+    console.log({ curStep, nextStep })
     if (nextStep === undefined) return
     if (curStep === nextStep) return
     // Tutorial-Highlight
-    removeHighlightElement(secondTurs[curStep]?.highlight)
-    if (secondTurs[nextStep]?.highlight?.length > 0) {
-      highlightElement(secondTurs[nextStep].highlight)
+    removeHighlightElement(tutorials[curStep]?.highlight)
+    if (tutorials[nextStep]?.highlight?.length > 0) {
+      highlightElement(tutorials[nextStep].highlight)
     }
 
-    console.log({ curStep })
     setCurStep(nextStep)
   }
+  // remove highlighted elements when page opens
+  useEffect(() => {
+    return () => removeHighlightElement(tutorials[curStep]?.highlight)
+  }, [])
 
   const getOrderListItems = () => {
     const order0 = {

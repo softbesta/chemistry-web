@@ -46,7 +46,7 @@ const ReactionSecond = () => {
   const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
 
   // *** Setup tutorial actions here
-  const secondTurs = Array.from(Array(tur_Text.length).keys()).map(idx => {
+  const tutorials = Array.from(Array(tur_Text.length).keys()).map(idx => {
     return {
       text: tur_Text[idx],
       highlight: tur_Hightlights[idx],
@@ -55,7 +55,7 @@ const ReactionSecond = () => {
   })
 
   // *** Tutorial-ACTIONS  - curStep changes
-  const curActions = secondTurs[curStep]?.actions as any
+  const curActions = tutorials[curStep]?.actions as any
   useEffect(() => {
     console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep })
     // console.log('curActions: ', { curActions, curStep })
@@ -140,9 +140,9 @@ const ReactionSecond = () => {
     if (nextStep === undefined) return
     if (curStep === nextStep) return
     // Tutorial-Highlight
-    removeHighlightElement(secondTurs[curStep]?.highlight)
-    if (secondTurs[nextStep]?.highlight?.length > 0) {
-      highlightElement(secondTurs[nextStep].highlight)
+    removeHighlightElement(tutorials[curStep]?.highlight)
+    if (tutorials[nextStep]?.highlight?.length > 0) {
+      highlightElement(tutorials[nextStep].highlight)
     }
 
     console.log({ curStep })
