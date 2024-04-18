@@ -2,14 +2,17 @@ import { useEffect, useRef, useState } from "react"
 import styles from './CanvasTime.module.scss'
 import { themeColors } from "../../constants"
 
+// Moves t1 to t2
 interface CanvasTimeProps {
   showTimeGraph: number
   c2: number
   c1: number
   t2: number
   t1: number
-  pointerC: number
-  pointerT: number
+  maxC: number
+  maxT: number
+  pointerC?: number
+  pointerT?: number
   height: number
   width: number
   colorA: string
@@ -19,12 +22,14 @@ interface CanvasTimeProps {
 }
 const CanvasTime = ({
   showTimeGraph,
-  c2,
   c1,
-  t2,
+  c2,
   t1,
-  pointerC,
-  pointerT,
+  t2,
+  maxC,
+  maxT,
+  pointerC, // c1 indicator (0 value: hidden)
+  pointerT, // c2 indicator (0 value: hidden)
   height,
   width,
   colorA,
@@ -39,13 +44,14 @@ const CanvasTime = ({
   const [eY, setEY] = useState<number>(0);
   // const ptBlue = useRef({ x: 0, y: 0 })
   // const ptRed = useRef({ x: 0, y: 0 })
-  const offset = useRef({ x: 1, y: 1 })
-  // const requestAnimationFrame = window.requestAnimationFrame
-  // const cancelAnimationFrame = window.cancelAnimationFrame
+  const offsetPerFrame = useRef({ x: 1, y: 1 })
 
-  const [timeOffset, setTimeOffset] = useState<number>(0)
-  const maxTime = Math.abs(t1 - t2)
+  // timeAt;  current animation second - start at 't1' second, end at 't2' second
+  const [timeOffset, setTimeOffset] = useState<number>(t1)
+  const maxT_offset = Math.abs(t1 - t2) // total animation second
+  const maxC_offset = Math.abs(c1 - c2)
   const framesPerSecond = 20
+  const tickLength = 20
   const intervalTime = 1000 / framesPerSecond
 
   const timerID = useRef<NodeJS.Timer>()
@@ -68,24 +74,35 @@ const CanvasTime = ({
     drawAt(timeOffset)
   }, [timeOffset])
 
+  const getX = (t: number) => {
+    return t / maxT * width
+  }
+  const getY = (c: number) => {
+    return (1 - c / maxC) * height
+  }
+
   const initAll = () => {
     if (!canvas.current) return
-    let startX: number, startY1: number, startY2: number, xStep: number, yStep: number, duration, endX: number
+    const x1 = getX(t1)
+    const x2 = getX(t2)
+    const y1 = getY(c1)
+    const y2 = getY(c2)
+    offsetPerFrame.current.x = (x2 - x1) / (maxT_offset * framesPerSecond)
+    offsetPerFrame.current.y = (y2 - y1) / (maxT_offset * framesPerSecond)
 
-    startX = (t2 / 20) * width;
-    setSX(startX);
-    endX = (t1 / 20) * width;
-    setEX(endX);
-    startY1 = Math.abs(1 - c2) * height;
-    setSY(startY1);
-    const endY1 = Math.abs(1 - c1) * height;
-    setEY(endY1);
-    startY2 = 0;
-    duration = Math.abs(t1 - t2) * framesPerSecond // draw every 0.1s offset
-    xStep = (Math.abs(t1 - t2) / 20 * width) / duration
-    yStep = (Math.abs(c2 - c1) * height) / duration
+    setSX(x1)
+    setEX(x2)
+    setSY(y1)
+    setEY(y2)
+    // duration = Math.abs(vT1 - vT2) * framesPerSecond // draw every 0.1s offset
+    // xStep = (Math.abs(vT1 - vT2) / maxT * width) / duration
+    // yStep = (Math.abs(vC2 - vC1) * height) / duration
 
-    offset.current = { x: xStep, y: yStep }
+    console.log({ c1, c2, t1, t2 })
+    console.log({ y1, y2, x1, x2 })
+    console.log(offsetPerFrame.current)
+
+    // offset.current = { x: xStep, y: yStep }
 
     drawFrame()
     // console.log('===drawGraph===', { duration, xStep, yStep })
@@ -122,15 +139,15 @@ const CanvasTime = ({
     ctx.beginPath()
     ctx.lineWidth = 4;
     ctx.strokeStyle = themeColors.C;
-    if (pointerC > 0) {
-      const pC = Math.abs(1 - pointerC / 100) * height
+    if (pointerC) {
+      const pC = Math.abs(1 - pointerC / maxC) * height
       ctx.moveTo(0, pC)
-      ctx.lineTo(20, pC)
+      ctx.lineTo(tickLength, pC)
     }
-    if (pointerT > 0) {
-      const pT = (pointerT / 20) * width
+    if (pointerT) {
+      const pT = (pointerT / maxT) * width
       ctx.moveTo(pT, height)
-      ctx.lineTo(pT, height - 20)
+      ctx.lineTo(pT, height - tickLength)
     }
     // console.log('here - ', { pointerC, pointerT })
     ctx.stroke()
@@ -146,59 +163,59 @@ const CanvasTime = ({
     if (showTimeGraph < 1) return
 
     // show graph
-    ctx.lineWidth = 1;
-    ctx.moveTo(sX, 0);
-    ctx.lineTo(sX, height);
-    ctx.moveTo(eX, 0);
-    ctx.lineTo(eX, height);
-    ctx.moveTo(0, sY);
-    ctx.lineTo(width, sY);
-    ctx.moveTo(0, eY);
-    ctx.lineTo(width, eY);
-    ctx.strokeStyle = "black";
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(sX, sY);
-    ctx.lineTo(eX, eY);
-    ctx.moveTo(sX, height);
-    ctx.lineTo(eX, height - (eY - sY));
-    ctx.strokeStyle = "gray";
-    ctx.stroke();
+    ctx.lineWidth = 1
+    ctx.moveTo(sX, 0)
+    ctx.lineTo(sX, height)
+    ctx.moveTo(eX, 0)
+    ctx.lineTo(eX, height)
+    ctx.moveTo(0, sY)
+    ctx.lineTo(width, sY)
+    ctx.moveTo(0, eY)
+    ctx.lineTo(width, eY)
+    ctx.strokeStyle = "black"
+    ctx.stroke()
+    ctx.beginPath()
+    ctx.moveTo(sX, sY)
+    ctx.lineTo(eX, eY)
+    ctx.moveTo(sX, height)
+    ctx.lineTo(eX, height - (eY - sY))
+    ctx.strokeStyle = "gray"
+    ctx.stroke()
     // draw Blue dot
-    ctx.beginPath();
-    ctx.moveTo(sX, sY);
+    ctx.beginPath()
+    ctx.moveTo(sX, sY)
 
-    if (timeAt >= maxTime) {
-      timeAt = maxTime
+    if (timeAt >= maxT_offset) {
+      timeAt = maxT_offset
       stopTimer()
     }
 
-    const ptBlue = { x: sX + offset.current.x * (timeAt * framesPerSecond), y: sY + offset.current.y * (timeAt * framesPerSecond) }
-    const ptRed = { x: sX + offset.current.x * (timeAt * framesPerSecond), y: height - offset.current.y * (timeAt * framesPerSecond) }
+    const ptBlue = { x: sX + offsetPerFrame.current.x * (timeAt * framesPerSecond), y: sY + offsetPerFrame.current.y * (timeAt * framesPerSecond) }
+    const ptRed = { x: sX + offsetPerFrame.current.x * (timeAt * framesPerSecond), y: height - offsetPerFrame.current.y * (timeAt * framesPerSecond) }
     // console.log('drawAt - ', { timeAt })
 
     ctx.lineTo(ptBlue.x, ptBlue.y)
-    ctx.strokeStyle = colorA;
-    ctx.stroke();
+    ctx.strokeStyle = colorA
+    ctx.stroke()
     ctx.moveTo(ptBlue.x, ptBlue.y)
     ctx.arc(ptBlue.x, ptBlue.y, 15, 0, Math.PI * 2)
     ctx.fillStyle = colorA_blur
-    ctx.fill();
-    ctx.beginPath();
+    ctx.fill()
+    ctx.beginPath()
     ctx.arc(ptBlue.x, ptBlue.y, 4, 0, Math.PI * 2)
     ctx.fillStyle = colorA
-    ctx.fill();
+    ctx.fill()
 
     //draw Red dot
-    ctx.beginPath();
-    ctx.moveTo(sX, height);
+    ctx.beginPath()
+    ctx.moveTo(sX, height)
     ctx.lineTo(ptRed.x, ptRed.y)
-    ctx.strokeStyle = colorB;
-    ctx.stroke();
+    ctx.strokeStyle = colorB
+    ctx.stroke()
     ctx.moveTo(ptRed.x, ptRed.y)
     ctx.arc(ptRed.x, ptRed.y, 2, 0, Math.PI * 2)
     ctx.fillStyle = colorB
-    ctx.fill();
+    ctx.fill()
 
   }
   const endPlay = () => {
@@ -225,7 +242,7 @@ const CanvasTime = ({
       // console.log('aaa useEffect -- stopTimer', { showTimeGraph })
       stopTimer()
 
-      setTimeOffset(maxTime)
+      setTimeOffset(maxT_offset)
       // drawAt(maxTime)
     }
     return () => stopTimer()

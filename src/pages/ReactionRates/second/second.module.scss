@@ -14,21 +14,15 @@
 
 }
 
-
-.barContainer {
-  display: flex;
-  position: relative;
-  background-color: aquamarine;
-  width: 220px;
-
-  .barImg {
-    position: absolute;
-  }
-}
-
 .reactionContentContainer {
   .chartInA {
-    width: 300px;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    width: 270px;
+    height: 212px;
+    margin-top: 15px;
+    // width: 300px;
     // background-color: aqua;
   }
 
