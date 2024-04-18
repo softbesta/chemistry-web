@@ -104,3 +104,32 @@ export const setStorage = (key: string, val: any) => {
   const update = JSON.stringify(val)
   localStorage.setItem(key, update)
 }
+
+export const expressWithClass = (str: string, mark: string, className: string) => {
+  const parts = str.split(mark)
+  let final = parts[0]
+  console.log('expclass- aaa', { str, mark, parts, final })
+  if (parts.length === 1) return final
+  for (let i = 1; i < parts.length - 1; i++) {
+    if (i % 2 === 1) {
+      final += `<span class="${className}">`
+    } else {
+      final += `</span>`
+    }
+    console.log('zzz - ', i, parts[i], final)
+    final += parts[i]
+  }
+  final += `</span>` + parts[parts.length - 1]
+  console.log('expclass- bbb', { final })
+  return final
+}
+
+export const convertExpToHtml = (exp: string | undefined) => {
+  if (!exp) return
+  let update = ''
+  update = expressWithClass(exp, '__', 'sm_botom')
+  update = expressWithClass(update, '^', 'sm_top')
+  update = expressWithClass(update, '**', 'txt_red')
+  return update
+}
+

@@ -19,12 +19,15 @@ code {
 
 /* tutorial text class */
 .sm_botom {
-  font-size: 11px;
-  position: absolute;
+  font-size: 12px;
+  position: relative;
   bottom: -3px;
 }
 .sm_top {
-  font-size: 11px;
-  position: absolute;
+  font-size: 12px;
+  position: relative;
   top: -7px;
+}
+.txt_red {
+  color: rgb(220, 84, 59);;
 }

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import styles from './CanvasTime.module.scss'
 import { themeColors } from "../../constants"
+import { SizeStyle } from "../../helper/types"
 
 // Moves t1 to t2
 interface CanvasTimeProps {
@@ -13,11 +14,12 @@ interface CanvasTimeProps {
   maxT: number
   pointerC?: number
   pointerT?: number
-  height: number
-  width: number
+  height?: number
+  width?: number
   colorA: string
   colorB: string
   colorA_blur: string
+  canvasSize?: SizeStyle
   onTimeframeChange?: (val: number) => void
 }
 const CanvasTime = ({
@@ -30,11 +32,12 @@ const CanvasTime = ({
   maxT,
   pointerC, // c1 indicator (0 value: hidden)
   pointerT, // c2 indicator (0 value: hidden)
-  height,
-  width,
+  height = 212,
+  width = 212,
   colorA,
   colorB,
   colorA_blur,
+  canvasSize = { width: 212, height: 212 },
   onTimeframeChange,
 }: CanvasTimeProps) => {
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -249,15 +252,16 @@ const CanvasTime = ({
   }, [showTimeGraph])
 
   return (
-    <>
+    <div style={{ ...canvasSize }}>
       <canvas
         id='tur_canvasTime'
         className={styles.canvasTime}
         ref={canvas}
-        height={height}
-        width={width}
+        height={212}
+        width={212}
+        style={{ width: '100%', height: '100%' }}
       />
-    </>
+    </div>
   );
 };
 

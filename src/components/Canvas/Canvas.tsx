@@ -5,7 +5,7 @@ interface CanvasProps {
   width: number,
   height: number,
 }
-const Canvas = ({ draw, height, width }: CanvasProps) => {
+const Canvas = ({ draw, width, height }: CanvasProps) => {
   const canvas = React.useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     if (!canvas.current) return
@@ -14,7 +14,7 @@ const Canvas = ({ draw, height, width }: CanvasProps) => {
     draw(context)
   })
   return (
-    <canvas ref={canvas} height={height} width={width} />
+    <canvas ref={canvas} width={width} height={height} style={{width: '100%', height: '100%'}} />
   )
 }
 Canvas.propTypes = {

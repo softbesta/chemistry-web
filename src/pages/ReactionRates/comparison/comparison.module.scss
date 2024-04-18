@@ -1,0 +1,50 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 10px;
+
+  .tutorial {
+    // position: absolute;
+    // bottom: 0;
+    // right: 0;
+  }
+
+  .reactionDrawContainer {
+    display: flex;
+    // justify-content: center;
+    // width: 100%;
+    // gap: 30px;
+
+    .chartBeakerCol {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chartTimeCol {
+    }
+
+    .chartInA {
+      display: flex;
+      justify-content: flex-end;
+      position: relative;
+      width: 175px;
+      height: 170px;
+      margin-top: 0;
+    }
+  }
+
+  .reactionContentContainer {
+    display: flex;
+    flex-direction: column;
+
+    .orderListContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+
+  }
+}

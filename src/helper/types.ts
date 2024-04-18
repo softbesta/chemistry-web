@@ -17,3 +17,13 @@ export interface QuizItemType {
   difficulty: string,
   [x: string]: any,
 }
+
+export type SizeStyle = {
+  width?: number,
+  height?: number,
+}
+
+export type Point = {
+  x: number,
+  y: number,
+}

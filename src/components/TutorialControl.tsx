@@ -8,10 +8,16 @@ import Buttons from './Buttons/Buttons'
 interface TutorialControlProps {
   turText: string[]
   isDisableNextButton?: boolean
+  className?: string
   onStepChange: (step: number) => void
 }
 
-const TutorialControl = ({ turText, isDisableNextButton = false, onStepChange }: TutorialControlProps) => {
+const TutorialControl = ({
+  turText,
+  isDisableNextButton = false,
+  className,
+  onStepChange
+}: TutorialControlProps) => {
   // const {
   //   curStep,
   //   setCurStep,
@@ -57,7 +63,7 @@ const TutorialControl = ({ turText, isDisableNextButton = false, onStepChange }:
   //   highlightElement(['stepPrevButton', 'stepNextButton'])
   //   // startTutorials()
   // }
-  return (<div className={styles.tutorialControl}>
+  return (<div className={`${styles.tutorialControl} ${className || ''}`}>
 
     <div
       id='tur_tutorialText'

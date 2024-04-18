@@ -5,6 +5,7 @@ import Canvas from './Canvas/Canvas'
 import styles from './EnergyProfile.module.scss'
 import useAppData from '../hooks/useAppData'
 import { themeColors, dotColors, initDots, dotBgColors } from '../constants'
+import { SizeStyle } from '../helper/types'
 
 function beaker(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, radius: number, fillStyle: string, strokeStyle: string, lineWidth: number, offset: number) {
   ctx.beginPath();
@@ -28,10 +29,18 @@ interface EnergyProfileProps {
   valuesC: number[],
   beakerState: number,
   beakerDotColor: string[],
-  onEndPlay: () => void
+  canvasSize?: SizeStyle
+  onEndPlay?: () => void
 }
 
-const EnergyProfile = ({ valuesC, beakerState, beakerDotColor, onEndPlay }: EnergyProfileProps) => {
+const EnergyProfile = ({
+  valuesC,
+  beakerState,
+  beakerDotColor,
+  canvasSize = { width: 230, height: 285 },
+  onEndPlay
+}: EnergyProfileProps) => {
+
   const [energyDots, setEnergyDots] = useState(initDots)
   const energyDotsAnimation = useRef(initDots)
   // const { concentrationAB } = useAppData()
@@ -118,7 +127,7 @@ const EnergyProfile = ({ valuesC, beakerState, beakerDotColor, onEndPlay }: Ener
       const res = generateEnergyArray(energyDotsAnimation.current, (valuesC[1] / valuesC[0] * 100), 2, 1)
       beakerDotsEnd.current = res.items
       setEnergyDots(res.items)
-      onEndPlay()
+      onEndPlay?.()
       return
     }
     const valT = timeCounter / maxTime
@@ -137,6 +146,7 @@ const EnergyProfile = ({ valuesC, beakerState, beakerDotColor, onEndPlay }: Ener
   // render from 'energyDots'
   const drawBeaker = (ctx: CanvasRenderingContext2D) => {
     const width = 206, height = 248
+    // const { width, height } = beakerSize
     // parent beaker
     beaker(ctx, 12, 12, width, height, 15, "lightgray", "black", 3, 0)
     ctx.clip()
@@ -182,13 +192,17 @@ const EnergyProfile = ({ valuesC, beakerState, beakerDotColor, onEndPlay }: Ener
   }
 
   return (
-    <div className={styles.energyContainer}>
+    <div
+      className={styles.energyContainer}
+    >
       {/* <button onClick={() => {
         console.log('energyDots:', getDotsCounts(energyDots))
         console.log('energyDotsAnimation:', getDotsCounts(energyDotsAnimation.current))
         console.log('beakerDotsEnd:', getDotsCounts(beakerDotsEnd.current))
       }}>Test</button> */}
-      <Canvas draw={drawBeaker} height={270} width={250} />
+      <div style={{ ...canvasSize }}>
+        <Canvas draw={drawBeaker} width={230} height={270} />
+      </div>
     </div>
   )
 }
