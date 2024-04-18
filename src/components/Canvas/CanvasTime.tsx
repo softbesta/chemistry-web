@@ -15,7 +15,7 @@ interface CanvasTimeProps {
   colorA: string
   colorB: string
   colorA_blur: string
-  onTimeframeChange: (val: number) => void
+  onTimeframeChange?: (val: number) => void
 }
 const CanvasTime = ({
   showTimeGraph,

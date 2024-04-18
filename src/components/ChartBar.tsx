@@ -1,5 +1,5 @@
 import styles from './ChartBar.module.scss'
-import BarChartCanvas from './CanvasBar'
+import BarChartCanvas from './Canvas/CanvasBar'
 import useAppData from '../hooks/useAppData'
 import { themeColors } from '../constants'
 

@@ -1,7 +1,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { generateEnergyArray } from '../helper/functions'
-import Canvas from './Canvas'
+import Canvas from './Canvas/Canvas'
 import styles from './EnergyProfile.module.scss'
 import useAppData from '../hooks/useAppData'
 import { themeColors, dotColors, initDots, dotBgColors } from '../constants'

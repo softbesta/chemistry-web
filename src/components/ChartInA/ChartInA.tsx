@@ -1,35 +1,28 @@
-import ReactSlider from "react-slider"
-import styles from './ChartTime.module.scss'
-import { useCallback, useMemo, useState } from "react"
-import useAppData from "../../hooks/useAppData"
-import CanvasTime from "../Canvas/CanvasTime"
-import { themeColors } from "../../constants"
-import SliderVert from "./SliderVert"
-import SliderHoriz from "./SliderHoriz"
+import CanvasTime from '../Canvas/CanvasTime'
+import styles from './ChartInA.module.scss'
 
 interface ChartTimeProps {
   valuesC: number[]
-  setValuesC: (val: number[]) => void
   valuesT: number[]
-  setValuesT: (val: number[]) => void
   canvaTimeSliderC: number[]
   canvaTimeSliderT: number[]
-  // playAnimation: boolean
   canvaTimeState: number   //  0; show Frame,  1; show Graph, 2; show Animation, 3; show end of Animation
   onTimeframeChange: (val: number) => void
   colors: string[]
+  textVert?: string,
+  textHoriz?: string
 }
 
-const ChartTime = ({
+const ChartInA = ({
   valuesC,
-  setValuesC,
   canvaTimeSliderC,
   valuesT,
   canvaTimeSliderT,
-  setValuesT,
   canvaTimeState: showTimeGraph,
   onTimeframeChange,
   colors,
+  textVert,
+  textHoriz,
 }: ChartTimeProps) => {
 
   return (
@@ -39,7 +32,7 @@ const ChartTime = ({
         console.log({ pointerC })
       }}>chartTest</button> */}
 
-      <SliderVert
+      {/* <SliderVert
         valuesC={valuesC}
         setValuesC={setValuesC}
         canvaTimeSliderC={canvaTimeSliderC}
@@ -50,7 +43,15 @@ const ChartTime = ({
         valuesT={valuesT}
         setValuesT={setValuesT}
         canvaTimeSliderT={canvaTimeSliderT}
-      />
+      /> */}
+
+      {textVert && <div className={styles.textVert}>
+        {textVert}
+      </div>}
+
+      {textHoriz && <div className={styles.textHoriz}>
+        {textHoriz}
+      </div>}
 
       <div
         // id='tur_chartTime'
@@ -85,4 +86,4 @@ const ChartTime = ({
   )
 }
 
-export default ChartTime
+export default ChartInA

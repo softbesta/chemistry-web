@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { themeColors } from "../constants"
+import { themeColors } from "../../constants"
 
 
 interface BarChartCanvasProps {

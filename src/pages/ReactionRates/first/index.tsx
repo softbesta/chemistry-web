@@ -13,6 +13,8 @@ import ChooseMenu from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
 import { dotColorList } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
+import CanvasTime from "../../../components/Canvas/CanvasTime"
+import ChartInA from "../../../components/ChartInA/ChartInA"
 
 const ReactionFirst = () => {
   const {
@@ -180,7 +182,19 @@ const ReactionFirst = () => {
       />
     </div>
     <div className={styles.reactionContentContainer}>
-      <div className={styles.chartInA}></div>
+      <div className={styles.chartInA}>
+        <ChartInA
+          valuesC={valuesC}
+          canvaTimeSliderC={canvaTimeSliderC}
+          valuesT={valuesT}
+          canvaTimeSliderT={canvaTimeSliderT}
+          canvaTimeState={canvaTimeState}
+          onTimeframeChange={val => setTimeframe(val)}
+          colors={dotColorList[activeDotIndex]}
+          textVert={`In(${'A'})`}
+          textHoriz={`Time`}
+        />
+      </div>
       <MathContent
         className={styles.mathContent}
         {...getFormula()}
