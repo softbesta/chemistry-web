@@ -160,7 +160,12 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
             handleMenuItemClick(MenuList.zeroQuiz)
           }
           }>
-            <SvgQuiz fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
+            <SvgQuiz
+              fillColor={'rgb(68, 150, 247)'}
+              width={40}
+              height={40}
+              isActive={curMenu === MenuList.zeroQuiz}
+            />
           </div>
           <div>
             <SvgArchive fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
@@ -180,7 +185,12 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
           <div onClick={() => {
             handleMenuItemClick(MenuList.firstQuiz)
           }}>
-            <SvgQuiz fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
+            <SvgQuiz
+              fillColor={'rgb(68, 150, 247)'}
+              width={40}
+              height={40}
+              isActive={curMenu === MenuList.firstQuiz}
+            />
           </div>
           <div>
             <SvgArchive fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
@@ -200,7 +210,12 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
           <div onClick={() => {
             handleMenuItemClick(MenuList.secondQuiz)
           }}>
-            <SvgQuiz fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
+            <SvgQuiz
+              fillColor={'rgb(68, 150, 247)'}
+              width={40}
+              height={40}
+              isActive={curMenu === MenuList.secondQuiz}
+            />
           </div>
           <div>
             <SvgArchive fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
@@ -220,7 +235,12 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
           <div onClick={() => {
             handleMenuItemClick(MenuList.comparisonQuiz)
           }}>
-            <SvgQuiz fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
+            <SvgQuiz
+              fillColor={'rgb(68, 150, 247)'}
+              width={40}
+              height={40}
+              isActive={curMenu === MenuList.comparisonQuiz}
+            />
           </div>
           <div>
             <SvgArchive fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
@@ -241,7 +261,12 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
             handleMenuItemClick(MenuList.kineticsQuiz)
           }
           }>
-            <SvgQuiz fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
+            <SvgQuiz
+              fillColor={'rgb(68, 150, 247)'}
+              width={40}
+              height={40}
+              isActive={curMenu === MenuList.kineticsQuiz}
+            />
           </div>
           <div>
             <SvgArchive fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
