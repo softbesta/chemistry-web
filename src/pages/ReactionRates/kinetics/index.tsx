@@ -11,7 +11,7 @@ import { maxStep_Kinetics, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Te
 import useFunctions from "../../../hooks/useFunctions"
 import ChooseMenu from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
-import { dotColorList } from "../../../constants"
+import { dotColorList, sliderVertText } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
 import ChartInA from "../../../components/ChartInA/ChartInA"
 import { convertExpToHtml } from "../../../helper/functions"
@@ -120,33 +120,30 @@ const ReactionKinetics = () => {
     const c1 = (valuesC[0] ?? 0) / 100
     const c2 = (valuesC[1] ?? 0) / 100
     const t1 = valuesT[0]
-    const t2 = valuesT[1]
-    const c = c2 - c1
-    const t = t2 - t1
-    const k = -(c / t)
-    const deltaT = t2 - t1
-    const deltaC = c2 - c1
-    const rateConstant = -deltaC / deltaT     
-    const a0Numerator = (t1 * c2) - (t2 * c1) 
-    const A0 = a0Numerator / (t1 - t2)
-    const t_12 = A0 / (2 * rateConstant)
-    // console.log({c1, c2, t1, t2, c, t, k, deltaC, deltaT, rateConstant, a0Numerator, A0, t_12})
+    const At = c2
+    const A0 = c1
+    const k = ((1 / At) - (1 / A0)) / t1
+    const t_12 = 1 / (k * A0)
+    const rate = k * (At * At)
+    // console.log({c1, c2, t1, t2, lnA0, lnAt, k, t_12, rate})
 
+    // turText can be undefined on new page due to curStep(lazy changes of state variable)
     const turTxt = tur_Text[curStep]
-    const update = turTxt.map((item) => {
+    const turVal = [
+      k.toFixed(3),   // val[0]
+      t_12.toFixed(2),// val[1]
+      k.toFixed(2),   // val[2]
+    ]
+    const update = turTxt?.map((item) => {
       // const update: string[] = []
       let res = ''
       if (typeof item === 'function') {
-        res = item([
-          k.toFixed(3),   // val[0]
-          t_12.toFixed(2),// val[1]
-          k.toFixed(2),
-        ])
+        res = item(turVal)
       } else {
         res = item
       }
       return convertExpToHtml(res)
-    })
+    }) ?? []
     return update
   }, [curStep])
 
@@ -199,7 +196,7 @@ const ReactionKinetics = () => {
         valuesT={valuesT}
         beakerDotColor={dotColorList[activeDotIndex]}
         beakerState={canvaBeakerState}
-        onEndPlay={() => { }}
+        onEndPlay={() => onStepChange(1)}
       />
       <ChartTime
         valuesC={valuesC}
@@ -211,6 +208,8 @@ const ReactionKinetics = () => {
         canvaTimeState={canvaTimeState}
         onTimeframeChange={val => setTimeframe(val)}
         colors={dotColorList[activeDotIndex]}
+        textVert={`[${sliderVertText[activeDotIndex]}]`}
+        textHoriz={`Time`}
       />
       <ChartBar
         colors={dotColorList[activeDotIndex]}

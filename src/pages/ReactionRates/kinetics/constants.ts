@@ -4,172 +4,297 @@ export const tur_Text: TurTextType = [
   // display.reactant.name; A
   // display.product.name;  B
   [ // 0
-    `This is a second order reaction.`,
-    `Why don't you set the <span>initial concentration of A [A__0__]</span>, the reactant?.`,
+    `Not so fast!`,
+    `Choose a reaction to work with for this experiment.`,
+    `**Tap the right corner button to show the dropdown list.**`,
   ],
   [ // 1
-    `Great! Now you can set the <span>concentration of A at the end of the reaction [A<span class='sm-botom'>t</span>]</span> and the <span>time the reaction will last (t)</span>.`,
+    `We now know that the concentration can affect the **rate** of a reaction. \
+    But there are other variables that can affect in one way or another the **rate** too. Let's first talk about **collision theory**.`,
   ],
   [ // 2
-    `For this reaction, $**k=\(rateConstant.str(decimals: 3))**$.`,
+    `It states that the reaction rate is equal to the frequency of effective collisions between reactants. \
+    For a collision to be effective, the molecules must collide with sufficient energy and in the proper orientation so that products can form.`,
   ],
   [ // 3
-    `For a reaction with one reactant it's usually written as $**rate=k[A]^order^**$.`,
-    `For this reaction then, $**rate=k[A]^2^**$.`,
+    `This minimum amount of energy that is needed to initiate or start a chemical reaction is called **activation energy (E__a__).** \
+    As long as the collision of the molecules orientated properly have enough energy to surpass the **E__a__**, the collision will be successful.`,
   ],
   [ // 4
-    `**Half-life (t__1/2__)** is an expression to easily calculate the time at which the concentration of the reactant, in this case **A**, is half of what the initial concentration was.`,
-    `For this reaction,`,
-    `**t__1/2__=1/k[A__0__]=\(halfLife.str(decimals: 2))s**.",
-    label: Labelling.stringToLabel("t__1/2__ = 1 /, k times [A__0__], =\(halfLife.str(decimals: 2)) s.`,
+    `But how is the temperature related to the **rate**? Well, an equation that portrays this \
+    more accurately is the **Arrhenius equation**. As you can see, the temperature \
+    specifically affects the rate constant **k**.`,
   ],
   [ // 5
-    `<p>Let's watch how all the molecules are all changing!</p>`,
-    `<p>As A disappears, B is being produced.</p>`,
-    `<p>This happens at a variable <span>rate (in units of M/s)</span>, which is dependent on <span>k</span> and <span>[A]</span>.</p>`,
+    `**k** is the rate constant, **A** is a term called the frequency factor that accounts for molecular orientation, \
+    **e** is the natural logarithm base, **R** is the universal gas constant 8.314 J mol^-1^ K^-1^, \
+    **T** is the Kelvin temperature, and **E__a__** is the activation energy.`,
   ],
   [ // 6
-    `For this second order reaction, $**rate=k[A]^2^**$, that's why a graph plotting \
-    \(Strings.aVsT) is a steeper curve, given how the **rate** is proportional to the \
-    concentration of **A** squared.`,
+    `As you can tell by the equation, the higher the temperature, the higher the rate constant will be, thus making the **rate** higher too. \
+    In a more practical way, high temperatures make the average energy of molecules go up, beating the **E__a__** barrier.`,
   ],
   [ // 7
-    `Notice how **[A]** drops a lot faster at the beginning of the reaction because there's more of **A** present, making the **rate** much higher.`,
+    `When applying logarithmic properties to both sides, you get a version of the equation that's linear, where:`,
+    `ln(k)**(y)**=(-E__a__/RT)**(mx)**+ln(a)**(b)**`,
+    `With a slope of -E__a__/R.`,
   ],
   [ // 8
-    `Subsequently, towards the end of the reaction, there's much less **[A]** present, so the **rate** of the reaction is a lot lower, making **[A]** drop significantly slower at this point.`,
+    `If the linear equation is used to represent 2 different points (point 1 and point 2) of the line, we can sum \
+    up the equations to get this form of the Arrhenius equation. This is a very common way to use the Arrhenius equation \
+    where k__1__ is the rate constant at T__1__ and k__2__ is the rate constant at T__2__.`,
   ],
   [ // 9
-    `For example, if $**[A]=0.9**$, then $**[A]^2^=0.81**$. And if $**[A]=0.8**$, then $**[A]^2^=0.64**$.`,
-    ``,
-    `You see that dropping **[A]** by 0.1 would make a first order reaction drop its **rate** by 0.1, and a second order reaction drop its **rate** by 0.17.`,
+    `For this reaction, **E__a__ is \(eaString)** and **k is \(k.str(decimals: 1))** \
+    when the temperature is **\(t.str(decimals: 0)) K**. \
+    In other words, the kinetic energy of the molecules have to be one that when colliding, the potential \
+    energy resultant is higher than **\(eaString)** in order for A and B to successfully transform into a C molecule.`,
   ],
   [ // 10
-    `Since 0.1 is less than 0.17, it's noticeable how for a second order reaction the **rate** would drop faster.`,
-    `In other words, the rate of the reaction will drop **more drastically for a second order reaction at first**, and slowly reduce to a point at which the rate drops **slower than in a first order reaction towards the end**.`,
+    `One way to depict the reaction's activation energy and potential energy is with an **energy diagram or reaction profile**. \
+    The reaction profile plots the increase in potential energy of the reactants as they approach, reaching a maximum at the moment \
+    of collision, and then the decrease in potential energy as the products recoil.`,
   ],
   [ // 11
-    `For this second order reaction, the resultant integrated rate law is  $**k=(1/[A]-1/[A__0__])/t**$. \
-    That's why a graph plotting \(Strings.aVsT) is a straight line.`,
-    `1/[A]**(y)**=kt**(mx)**+1/[A__0__]**(b)`,
-    `Where the slope is **k**.`,
+    `This is an **exothermic reaction** because the reaction starts at a higher point of \
+    energy than where it ends. In other words, energy is being released when the reaction \
+    takes place. This energy released is usually referred to as heat, but we'll talk about \
+    that deeper in other units.`,
   ],
+  // [ // 12
+  //   `This is an **endothermic reaction** because the reaction starts at a lower point of energy \
+  //   than where it ends. In other words, energy is being absorbed when the reaction takes \
+  //   place. This energy is usually referred to as heat, but we'll talk about that deeper in \
+  //   other units.`,
+  // ],
   [ // 12
-    `Amazing! Let's take a snapshot!`,
-    `Try <span>dragging the time indicator</span> to scrub through the reaction time.`,
+    `The hump or bell in the graph represents the **activation energy**. The reaction energy has to be one \
+    that overcomes that difference for it to occur. Otherwise, even with the proper orientation the molecules colliding of \
+    A and B won't be turning into C. The higher **E__a__** is, the harder it is for the reaction to have sufficient energy to overcome it.`,
   ],
   [ // 13
-    `Now, let's try choosing a different reaction, which has a fixed rate constant, <span>k</span>.`,
-    `<span>Choose a reaction above</span>.`,
+    `There's a way to reduce the **activation energy**, and that is with the use of a **catalyst**. \
+    Catalysts make reactions faster, and even though there are various types, in one way or another they do \
+    so by reducing the activation energy, or **E__a__**.`,
   ],
   [ // 14
-    `Great! You picked a reaction with a rate constant 0.04.`,
-    `Why don't you <span>set the initial concentration and initial time</span>?`,
+    `Let's try that out!`,
+    `Choose a catalyst to use to make the reaction in the beaker go faster.`,
+    `**Tap a catalyst to select it**.`,
   ],
   [ // 15
-    `Awesome! Now set the time the reaction ends.`,
-    `Notice how the final concentration varies as you adjust the final time.`,
+    `Perfect! Now shake the catalyst to drop it into the beaker, and let's see what happens.`,
+    `**Shake your phone or tablet or just tap the shaker once again**.`,
   ],
   [ // 16
-    `<p>Let's watch how all the molecules are all changing!</p>`,
-    `<p>As C disappears, D is being produced.</p>`,
-    `<p>This happens at a variable <span>rate (in units of M/s)</span>, which is dependent on <span>k</span> and <span>[C]</span>.</p>`,
+    `Look! The E__a__ was reduced to **\(newEa.str(decimals: 0)) J** \
+    thanks to that catalyst. See that horizontal line? It represents the average kinetic energy of the molecules. \
+    Right now it's lower than E__a__, so no products are going to be formed just yet.`,
   ],
   [ // 17
-    `Amazing! Let's take a snapshot!`,
-    `Try <span>dragging the time indicator</span> to scrub through the reaction time.`,
+    `Take a look at the linear graph of ln(k) vs 1/T with a slope of \(slope.str(decimals: 0)). \
+    This graph is very useful to determine the relation between the constant **k** and the temperature. \
+    Here you can see too that the higher **k** is, the higher **T** is.`,
   ],
   [ // 18
-    `Now, let's try choosing a different reaction, which has a fixed rate constant, <span>k</span>.`,
-    `<span>Choose a reaction above</span>.`,
+    `Points of that graph are being represented in this equation. As of now, **k** went up to **\(newK.str(decimals: 1))** \
+    when **T** is **\(temp.str(decimals: 0))K**, because the catalyst lowered the E__a__, making the constant **k** higher, thus making the **rate** higher too.`,
   ],
   [ // 19
-    `Great! You picked a reaction with a rate constant 0.07.`,
-    `Why don't you <span>set the initial concentration and initial time</span>?`,
+    `Let's try to produce C. **Use the flame slider to increase the temperature in the beaker**. \
+    This will make the kinetic energy of the molecules increase too, meaning they will go faster so that when they collide \
+    there's enough energy to overcome the E__a__.`,
   ],
   [ // 20
-    `Awesome! Now set the time the reaction ends.`,
-    `Notice how the final concentration varies as you adjust the final time.`,
+    `Perfect! Successful collisions are taking place!`,
+    `Notice how the average kinetic bar goes up when the temperature goes up too. Also, notice how the rate constant can vary with the temperature.`,
   ],
   [ // 21
-    `<p>Let's watch how all the molecules are all changing!</p>`,
-    `<p>As E disappears, F is being produced.</p>`,
-    `<p>This happens at a variable <span>rate (in units of M/s)</span>, which is dependent on <span>k</span> and <span>[E]</span>.</p>`,
+    `It's all done! All of A and B has turned into C successfully.`,
+    `**Choose another catalyst**, and let's see how it compares.`,
   ],
   [ // 22
-    `Amazing, let's take another snapshot!`,
-    `Try <span>dragging the time indicator</span> to scrub through the reaction time.`,
-    `Then, let's take a quiz to review what we've learnt.`,
+    `Let's try that out!`,
+    `Choose a catalyst to use to make the reaction in the beaker go faster.`,
+    `**Tap a catalyst to select it**.`,
   ],
+  [ // 23
+    `Perfect! Now shake the catalyst to drop it into the beaker, and let's see what happens.`,
+    `**Shake your phone or tablet or just tap the shaker once again**.`,
+  ],
+  [ // 24
+    `Look! The E__a__ was reduced to **\(newEa.str(decimals: 0)) J** \
+    thanks to that catalyst. See that horizontal line? It represents the average kinetic energy of the molecules. \
+    Right now it's lower than E__a__, so no products are going to be formed just yet.`,
+  ],
+  [ // 25
+    `Let's try to produce C. **Use the flame slider to increase the temperature in the beaker**. \
+    This will make the kinetic energy of the molecules increase too, meaning they will go faster so that when they collide \
+    there's enough energy to overcome the E__a__.`,
+  ],
+  [ // 26
+    `Perfect! Successful collisions are taking place!`,
+    `Notice how the average kinetic bar goes up when the temperature goes up too. Also, notice how the rate constant can vary with the temperature.`,
+  ],
+  [ // 27
+    `It's all done! All of A and B has turned into C successfully.`,
+    `**Choose another catalyst**, and let's see how it compares.`,
+  ],
+  [ // 28
+    `Let's try that out!`,
+    `Choose a catalyst to use to make the reaction in the beaker go faster.`,
+    `**Tap a catalyst to select it**.`,
+  ],
+  [ // 29
+    `Look! The E__a__ was reduced to **\(newEa.str(decimals: 0)) J** \
+    thanks to that catalyst. See that horizontal line? It represents the average kinetic energy of the molecules. \
+    Right now it's lower than E__a__, so no products are going to be formed just yet.`,
+  ],
+  [ // 30
+    `Let's try to produce C. **Use the flame slider to increase the temperature in the beaker**. \
+    This will make the kinetic energy of the molecules increase too, meaning they will go faster so that when they collide \
+    there's enough energy to overcome the E__a__.`,
+  ],
+  [ // 31
+    `Perfect! Successful collisions are taking place!`,
+    `Notice how the average kinetic bar goes up when the temperature goes up too. Also, notice how the rate constant can vary with the temperature.`,
+  ],
+  [ // 32
+    `It's all done! All of A and B has turned into C successfully.`,
+    `Let's take another quiz, and then you're free to **explore further** the reaction rates.`,
+  ],
+
+  // [ // 22
+  //   `Awesome!`,
+  //   `Play with temperature to set T__2__. **Use the flame slider.**`,
+  // ],
+  // [ // 22
+  //   `Keep playing with temperature to see more collisions.`,
+  //   `**Use the flame slider.**`,
+  // ],
+  // [ // 22
+  //   `You've already used this catalyst, so let's try another one.`,
+  //   `**Tap a different catalyst to select it**.`,
+  // ],
+  // [ // 22
+  //   `Now you can explore all parts of kinetics, just tap the button at the top left corner to \
+  //   reveal the navigation menu, then choose your favorite part to review it once more!`,
+  //   `Why don't you try **selecting the filing cabinet** to view the reactions you created earlier?`,
+  // ],
   // open Quiz
 ]
 
 export const tur_Hightlights = [
-  // 0   This is a second ...
+  // 0   Not so fast! ...
   [],
 
-  // 1   Great! Now you ...
+  // 1   We now know that the concentration ...
   [],
 
-  // 2   For this reaction, ...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math1', 'tur_math2'],
+  // 2   It states that the reaction, ...
+  [],
+  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__math1', 'tur__math2'],
 
-  // 3   For a reaction with...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime', 'tur_math4'],
+  // 3   This minimum amount of...
+  [],
+  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__canvasTime', 'tur__math4'],
 
-  // 4   Half-life (t1/2)...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math3'],
+  // 4   But how is the temperature...
+  [],
+  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__math3'],
 
-  // 5   Let's watch how all...
+  // 5   k is the rate constant...
   [], // +
 
-  // 6   For this second order....
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'], // Choose reaction 'C to D'
+  // 6   As you can tell by the equation....
+  [],
+  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__canvasTime'], // Choose reaction 'C to D'
 
-  // 7   Notice how [A] drops...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
+  // 7   When applying logarithmic...
+  [],
+  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__canvasTime'],
 
-  // 8   Subsequently, towards the...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
+  // 8   If the linear equation...
+  [],
+  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__canvasTime'],
 
-  // 9   For example, if [A]...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
+  // 9   For this reaction, **E__a__...
+  [],
+  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__canvasTime'],
 
-  // 10   Since 0.1 is less than ...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
+  // 10   One way to depict the reaction ...
+  [],
+  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__canvasTime'],
 
-  // 11   For this second order...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
+  // 11   This is an **exothermic reaction...
+  [],
+  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__canvasTime'],
 
-  // 12   Amazing! Let's take a...
+  // 12   The hump or bell in the ...
   [],
 
-  // 13   Now, let's try choosing... 
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_chooseMenuIcon'],
+  // 13   There's a way to reduce... 
+  [],
+  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__chooseMenuIcon'],
 
-  // 14   Great! You picked a reaction ... CD
+  // 14   Let's try that out! ...
   [],
 
-  // 15   Awesome! Now set the ...
+  // 15   Perfect! Now shake the catalyst ...
   [],
 
-  // 16   Let's watch how all  ...
+  // 16   Look! The E__a__ was reduced  ...
   [],
 
-  // 17   Amazing! Let's take  ...
+  // 17   Take a look at the linear  ...
   [],
 
-  // 18   Now, let's try choosing ...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_chooseMenuIcon'],
+  // 18   Points of that graph are ...
+  [],
+  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__chooseMenuIcon'],
 
-  // 19   Great! You picked a reaction... EF
+  // 19   Let's try to produce C....
   [],
 
-  // 20   Awesome! Now set the ...
+  // 20   Perfect! Successful collisions ...
   [],
 
-  // 21   Let's watch how all ...
+  // 21   It's all done! All of ...
   [],
+
+  // 22   Let's try that out! ...
+  [],
+
+  // 23   Perfect! Now shake the ...
+  [],
+
+  // 24   Look! The E__a__ was ...
+  [],
+
+  // 25   Let's try to produce C ...
+  [],
+
+  // 26   Perfect! Successful collisions ...
+  [],
+
+  // 27   It's all done! All of ...
+  [],
+
+  // 28   Let's try that out! ...
+  [],
+
+  // 29   Look! The E__a__ was ...
+  [],
+
+  // 30   Let's try to produce ...
+  [],
+
+  // 31   Perfect! Successful collisions ...
+  [],
+
+  // 32   It's all done! All of ...
+  [],
+
   // here goes to Quiz
 ]
 
@@ -186,7 +311,7 @@ export const stepsActions = [
   // canvaTimeState;    0 - show Frame only, 1 - show Graph
   //                    2 - Animation,       3 - show End
 
-  // 0   This is a second ...
+  // 0   Not so fast! ...
   { // 0
     canvaTimeSliderC: [2, 0],
     canvaTimeSliderT: [2, 0],
@@ -194,49 +319,49 @@ export const stepsActions = [
     canvaBeakerState: 1,
     isEnableChooseMenu: false,
   },
-  // 1   Great! Now you ...
+  // 1   We now know that the concentration ...
   { // 1
     canvaTimeSliderC: [1, 2],
     canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
     canvaBeakerState: 1,
   },
-  // 2   For this reaction, ...
+  // 2   It states that the reaction, ...
   { // 2
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 1,
     canvaBeakerState: 1,
   },
-  // 3   For a reaction with...
+  // 3   This minimum amount of...
   { // 3
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 1,
     canvaBeakerState: 1,
   },
-  // 4   Half-life (t1/2)...
+  // 4   But how is the temperature...
   { // 4
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 1,
     canvaBeakerState: 1,
   },
-  // 5   Let's watch how all...
+  // 5   k is the rate constant...
   { // 5
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 2,
     canvaBeakerState: 2,
   },
-  // 6   For this second order....
+  // 6   As you can tell by the equation....
   { // 6
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
-  // 7   Notice how [A] drops...
+  // 7   When applying logarithmic...
   { // 7
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
@@ -244,35 +369,35 @@ export const stepsActions = [
     canvaBeakerState: 3,
     isEnableChooseMenu: false,
   },
-  // 8   Subsequently, towards the...
+  // 8   If the linear equation...
   { // 8
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
-  // 9   For example, if [A]...
+  // 9   For this reaction, **E__a__...
   { // 9
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
-  // 10   Since 0.1 is less than ...
+  // 10   One way to depict the reaction ...
   { // 10
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
-  // 11   For this second order...
+  // 11   This is an **exothermic reaction...
   { // 11
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
-  // 12   Amazing! Let's take a...
+  // 12   The hump or bell in the ...
   { // 12
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
@@ -280,7 +405,7 @@ export const stepsActions = [
     canvaBeakerState: 3,
     isEnableChooseMenu: false,
   },
-  // 13   Now, let's try choosing... 
+  // 13   There's a way to reduce... 
   { // 13
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
@@ -289,7 +414,7 @@ export const stepsActions = [
     activeDotIndex: 0,
     isEnableChooseMenu: true,
   },
-  // 14   Great! You picked a reaction ... CD
+  // 14   Let's try that out! ...
   { // 14
     canvaTimeSliderC: [2, 0],
     canvaTimeSliderT: [2, 0],
@@ -298,21 +423,21 @@ export const stepsActions = [
     activeDotIndex: 1,
     isEnableChooseMenu: false,
   },
-  // 15   Awesome! Now set the ...
+  // 15   Perfect! Now shake the catalyst ...
   { // 15
     canvaTimeSliderC: [1, 0],
     canvaTimeSliderT: [1, 2],
     canvaTimeState: 1,
     canvaBeakerState: 1,
   },
-  // 16   Let's watch how all  ...
+  // 16   Look! The E__a__ was reduced  ...
   { // 16
     canvaTimeSliderC: [1, 0],
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 2,
     canvaBeakerState: 2,
   },
-  // 17   Amazing! Let's take  ...
+  // 17   Take a look at the linear  ...
   { // 17
     canvaTimeSliderC: [1, 0],
     canvaTimeSliderT: [1, 1],
@@ -320,7 +445,7 @@ export const stepsActions = [
     canvaBeakerState: 3,
     isEnableChooseMenu: false,
   },
-  // 18   Now, let's try choosing ...
+  // 18   Points of that graph are ...
   { // 18
     canvaTimeSliderC: [1, 0],
     canvaTimeSliderT: [1, 1],
@@ -329,7 +454,7 @@ export const stepsActions = [
     activeDotIndex: 1,
     isEnableChooseMenu: true,
   },
-  // 19   Great! You picked a reaction... EF
+  // 19   Let's try to produce C....
   { // 19
     canvaTimeSliderC: [2, 0],
     canvaTimeSliderT: [2, 0],
@@ -338,22 +463,92 @@ export const stepsActions = [
     activeDotIndex: 2,
     isEnableChooseMenu: false,
   },
-  // 20   Awesome! Now set the ...
+  // 20   Perfect! Successful collisions ...
   { // 20
     canvaTimeSliderC: [1, 2],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 1,
     canvaBeakerState: 1,
   },
-  // 21   Let's watch how all ...
+  // 21   It's all done! All of ...
   { // 21
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 2,
     canvaBeakerState: 2,
   },
-  // 21   Amazing, let's take another ...
-  { // 21
+  // 22   Let's try that out! ...
+  { // 22
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBeakerState: 3,
+  },
+  // 23   Perfect! Now shake the ...
+  { // 23
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBeakerState: 3,
+  },
+  // 24   Look! The E__a__ was ...
+  { // 24
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBeakerState: 3,
+  },
+  // 25   Let's try to produce C ...
+  { // 25
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBeakerState: 3,
+  },
+  // 26   Perfect! Successful collisions ...
+  { // 26
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBeakerState: 3,
+  },
+  // 27   It's all done! All of ...
+  { // 27
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBeakerState: 3,
+  },
+  // 28   Let's try that out! ...
+  { // 28
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBeakerState: 3,
+  },
+  // 29   Look! The E__a__ was ...
+  { // 29
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBeakerState: 3,
+  },
+  // 30   Let's try to produce ...
+  { // 30
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBeakerState: 3,
+  },
+  // 31   Perfect! Successful collisions ...
+  { // 31
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBeakerState: 3,
+  },
+  // 32   It's all done! All of ...
+  { // 32
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
