@@ -39,25 +39,30 @@ export const tur_Hightlights = [
   [],
 
   // 1   These equations on the...
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_orderCardItem0', 'tur_orderCardItem1', 'tur_orderCardItem2'],
 
   // 2   On the left, we have...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math1', 'tur_math2'],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_energyProfile0', 'tur_energyProfile1', 'tur_energyProfile2', 'tur_chartInA0', 'tur_chartInA1', 'tur_chartInA2', 'tur_playButton0', 'tur_playButton1', 'tur_playButton2'],
+  // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math1', 'tur_math2'],
 
   // 3   Let's try something...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime', 'tur_math4'],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_orderCardItem0', 'tur_orderCardItem1', 'tur_orderCardItem2', 'tur_chartInA0', 'tur_chartInA1', 'tur_chartInA2', 'tur_playButton0', 'tur_playButton1', 'tur_playButton2', 'tur_handDragOrderItem'],
+  // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime', 'tur_math4'],
 
   // 4   Tap next or press play...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math3'],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_chartInA0', 'tur_chartInA1', 'tur_chartInA2', 'tur_playButton0', 'tur_playButton1', 'tur_playButton2'],
+  // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math3'],
 
   // 5   Let's see how long...
   [], // +
 
   // 6   Awesome!...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'], // Choose reaction 'C to D'
+  [],
+  // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'], // Choose reaction 'C to D'
 
   // 7   Took you a while...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
+  [],
+  // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
 
   // here goes to Quiz
 ]
@@ -77,6 +82,8 @@ export const stepsActions = [
     canvaTimeState: 0,
     canvaBeakerState: 1,
     isEnableChooseMenu: false,
+    orderItemMove: false,
+    playButtonStatus: 1,
   },
   // 1   These equations on the...
   { // 1
@@ -87,32 +94,41 @@ export const stepsActions = [
   { // 2
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    orderItemMove: false,
   },
   // 3   Let's try something...
   { // 3
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    orderItemMove: true,
+    playButtonStatus: 1,
   },
   // 4   Tap next or press play...
   { // 4
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    orderItemMove: false,
+    playButtonStatus: 2,
   },
   // 5   Let's see how long...
   { // 5
     canvaTimeState: 2,
     canvaBeakerState: 2,
+    playButtonStatus: 0,
   },
   // 6   Awesome!...
   { // 6
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    playButtonStatus: 0,
   },
   // 7   Took you a while...
   { // 7
     canvaTimeState: 3,
     canvaBeakerState: 3,
     isEnableChooseMenu: false,
+    orderItemMove: false,
+    playButtonStatus: 0,
   },
 ]
 

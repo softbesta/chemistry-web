@@ -3,6 +3,7 @@ import CanvasTime from '../Canvas/CanvasTime'
 import styles from './ChartInA.module.scss'
 
 interface ChartTimeProps {
+  turIndex?: string
   className?: string
   valuesC: number[]
   valuesT: number[]
@@ -17,6 +18,7 @@ interface ChartTimeProps {
 }
 
 const ChartInA = ({
+  turIndex,
   className,
   valuesC,
   valuesT,
@@ -38,7 +40,9 @@ const ChartInA = ({
   }
 
   return (
-    <div className={`${styles.chartTimeContainer} ${className || ''}`}>
+    <div
+      className={`${styles.chartTimeContainer} ${className || ''}`}
+    >
       {textVert && <div
         className={styles.textVert}
         style={{
@@ -58,7 +62,7 @@ const ChartInA = ({
       </div>}
 
       <div
-        id='tur_chartInA'
+        id={`tur_chartInA${turIndex ?? ''}`}
         className={styles.chartTime}
       // style={{ ...canvasSize }}
       >

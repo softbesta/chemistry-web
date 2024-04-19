@@ -57,7 +57,7 @@ const QuizReaction = ({quizData}: QuizReactionProps) => {
     })
     // setAnswerList(updateAnswerItems)
 
-    console.log('111', { update: updateQuizList, updateAnswerItems })
+    // console.log('111', { update: updateQuizList, updateAnswerItems })
     setQuizList(updateQuizList)
     setCorrectStep(0)
     setSelectedAnswer([])
@@ -72,7 +72,7 @@ const QuizReaction = ({quizData}: QuizReactionProps) => {
   }
   const handleCorrectAnswer = (val: number) => {
 
-    console.log({ correctStep, correctAnswerData: quizList[val] })
+    // console.log({ correctStep, correctAnswerData: quizList[val] })
     setCorrectStep(v => v + 1)
   }
 

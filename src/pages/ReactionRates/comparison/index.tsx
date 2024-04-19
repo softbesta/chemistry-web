@@ -1,6 +1,6 @@
 import useAppData from "../../../hooks/useAppData"
 import styles from './comparison.module.scss'
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import EnergyProfile from "../../../components/EnergyProfile"
 import ChartTime from "../../../components/ChartTime/ChartTime"
 import ChartBar from "../../../components/ChartBar"
@@ -16,6 +16,8 @@ import ChapterMenu from "../../../layout/ChapterMenu"
 import ChartInA from "../../../components/ChartInA/ChartInA"
 import { SizeStyle } from "../../../helper/types"
 import OrderCardItem from "../../../components/OrderCardItem"
+import HandDragOrderItem from "../../../components/HandDragOrderItem"
+import Buttons from "../../../components/Buttons/Buttons"
 
 const ReactionComparison = () => {
   const {
@@ -74,6 +76,12 @@ const ReactionComparison = () => {
       if (curActions?.activeDotIndex !== undefined) {
         setActiveDotIndex(curActions.activeDotIndex)
       }
+      if (curActions?.orderItemMove !== undefined) {
+        setIsOrderItemMove(curActions.orderItemMove)
+      }
+      if (curActions?.playButtonStatus !== undefined) {
+        setPlayButtonStatus(curActions.playButtonStatus)
+      }
       if (Array.isArray(curActions?.canvaTimeSliderC)) {
         setCanvaTimeSliderC(curActions.canvaTimeSliderC)
       }
@@ -119,6 +127,7 @@ const ReactionComparison = () => {
     return () => removeHighlightElement(tutorials[curStep]?.highlight)
   }, [])
 
+  const [isOrderItemMove, setIsOrderItemMove] = useState(false)
   const getOrderListItems = () => {
     const order0 = {
       title: 'Order: 0',
@@ -146,6 +155,11 @@ const ReactionComparison = () => {
   }
   const orderListItems = getOrderListItems()
 
+  const [playButtonStatus, setPlayButtonStatus] = useState(0)
+  const handleClickPlayButton = () => {
+    onStepChange(1)
+  }
+
   const beakerSize: SizeStyle = { width: 170, height: 170 }
   const timeInASize: SizeStyle = { width: 130, height: 130 }
 
@@ -155,18 +169,21 @@ const ReactionComparison = () => {
     <div className={styles.reactionDrawContainer}>
       <div className={styles.chartBeakerCol}>
         <EnergyProfile
+          index={'0'}
           valuesC={valuesC}
           beakerDotColor={dotColorList[activeDotIndex]}
           beakerState={canvaBeakerState}
           canvasSize={beakerSize}
         />
         <EnergyProfile
+          index={'1'}
           valuesC={valuesC}
           beakerDotColor={dotColorList[activeDotIndex]}
           beakerState={canvaBeakerState}
           canvasSize={beakerSize}
         />
         <EnergyProfile
+          index={'2'}
           valuesC={valuesC}
           beakerDotColor={dotColorList[activeDotIndex]}
           beakerState={canvaBeakerState}
@@ -174,45 +191,82 @@ const ReactionComparison = () => {
         />
       </div>
       <div className={styles.chartTimeCol}>
-        <ChartInA
-          className={styles.chartInA}
-          valuesC={valuesC}
-          canvaTimeSliderC={canvaTimeSliderC}
-          valuesT={valuesT}
-          canvaTimeSliderT={canvaTimeSliderT}
-          canvaTimeState={canvaTimeState}
-          onTimeframeChange={val => setTimeframe(val)}
-          colors={dotColorList[activeDotIndex]}
-          textVert={`[${'A'}]`}
-          textHoriz={`Time`}
-          canvasSize={timeInASize}
-        />
-        <ChartInA
-          className={styles.chartInA}
-          valuesC={valuesC}
-          canvaTimeSliderC={canvaTimeSliderC}
-          valuesT={valuesT}
-          canvaTimeSliderT={canvaTimeSliderT}
-          canvaTimeState={canvaTimeState}
-          onTimeframeChange={val => setTimeframe(val)}
-          colors={dotColorList[activeDotIndex]}
-          textVert={`[${'A'}]`}
-          textHoriz={`Time`}
-          canvasSize={timeInASize}
-        />
-        <ChartInA
-          className={styles.chartInA}
-          valuesC={valuesC}
-          canvaTimeSliderC={canvaTimeSliderC}
-          valuesT={valuesT}
-          canvaTimeSliderT={canvaTimeSliderT}
-          canvaTimeState={canvaTimeState}
-          onTimeframeChange={val => setTimeframe(val)}
-          colors={dotColorList[activeDotIndex]}
-          textVert={`[${'A'}]`}
-          textHoriz={`Time`}
-          canvasSize={timeInASize}
-        />
+        <div className={styles.chartTimeItem}>
+          <ChartInA
+            turIndex={'0'}
+            className={styles.chartInA}
+            valuesC={valuesC}
+            canvaTimeSliderC={canvaTimeSliderC}
+            valuesT={valuesT}
+            canvaTimeSliderT={canvaTimeSliderT}
+            canvaTimeState={canvaTimeState}
+            onTimeframeChange={val => setTimeframe(val)}
+            colors={dotColorList[activeDotIndex]}
+            textVert={`[${'A'}]`}
+            textHoriz={`Time`}
+            canvasSize={timeInASize}
+          />
+          {playButtonStatus > 0 && <div
+            id="tur_playButton0"
+            className={styles.playBtnContainer}
+          >
+            <Buttons.PlayButton
+              isActive={playButtonStatus === 2}
+              onPlay={() => handleClickPlayButton()}
+            />
+          </div>}
+        </div>
+        <div className={styles.chartTimeItem}>
+          <ChartInA
+            turIndex={'1'}
+            className={styles.chartInA}
+            valuesC={valuesC}
+            canvaTimeSliderC={canvaTimeSliderC}
+            valuesT={valuesT}
+            canvaTimeSliderT={canvaTimeSliderT}
+            canvaTimeState={canvaTimeState}
+            onTimeframeChange={val => setTimeframe(val)}
+            colors={dotColorList[activeDotIndex]}
+            textVert={`[${'A'}]`}
+            textHoriz={`Time`}
+            canvasSize={timeInASize}
+          />
+          {playButtonStatus > 0 && <div
+            id="tur_playButton1"
+            className={styles.playBtnContainer}
+          >
+            <Buttons.PlayButton
+              id="tur_playButton1"
+              isActive={playButtonStatus === 2}
+              onPlay={() => handleClickPlayButton()}
+            />
+          </div>}
+        </div>
+        <div className={styles.chartTimeItem}>
+          <ChartInA
+            turIndex={'2'}
+            className={styles.chartInA}
+            valuesC={valuesC}
+            canvaTimeSliderC={canvaTimeSliderC}
+            valuesT={valuesT}
+            canvaTimeSliderT={canvaTimeSliderT}
+            canvaTimeState={canvaTimeState}
+            onTimeframeChange={val => setTimeframe(val)}
+            colors={dotColorList[activeDotIndex]}
+            textVert={`[${'A'}]`}
+            textHoriz={`Time`}
+            canvasSize={timeInASize}
+          />
+          {playButtonStatus > 0 && <div
+            id="tur_playButton2"
+            className={styles.playBtnContainer}
+          >
+            <Buttons.PlayButton
+              isActive={playButtonStatus === 2}
+              onPlay={() => handleClickPlayButton()}
+            />
+          </div>}
+        </div>
       </div>
     </div>
     <div className={styles.reactionContentContainer}>
@@ -222,6 +276,14 @@ const ReactionComparison = () => {
           orderType={index}
           {...item}
         />)}
+
+        {isOrderItemMove && <HandDragOrderItem
+          isAnimate={isOrderItemMove}
+        />}
+        {/* <button onClick={() => {
+          console.log({ isOrderItemMove })
+          setIsOrderItemMove(v => !v)
+        }}>TestAnimation</button> */}
       </div>
       <TutorialControl
         className={styles.tutorial}

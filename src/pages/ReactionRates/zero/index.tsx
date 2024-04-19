@@ -162,6 +162,10 @@ const ReactionZero = () => {
     console.log({ curStep })
     setCurStep(nextStep)
   }
+  // remove highlighted elements when page opens
+  useEffect(() => {
+    return () => removeHighlightElement(tutorials[curStep]?.highlight)
+  }, [])
 
   const handleTest1 = () => {
     console.log('===handleTest=== 111')

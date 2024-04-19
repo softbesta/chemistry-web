@@ -8,6 +8,7 @@ interface OrderCardItemProps {
   exp1?: string
   exp2?: string
   exp3?: string
+  onClick?: () => void
 }
 const OrderCardItem = ({
   orderType,
@@ -16,10 +17,12 @@ const OrderCardItem = ({
   exp1,
   exp2,
   exp3,
+  onClick,
 }: OrderCardItemProps) => {
   return <div
     id={`tur_orderCardItem${orderType}`}
     className={`${styles.orderItemCard} ${styles[`type${orderType}`]}`}
+    onClick={() => onClick?.()}
   >
     <div className={styles.orderTitle}>
       {title}

@@ -33,4 +33,28 @@
     top: -4px;
     right: -4px;
   }
+
+  &.disabledNext {
+    color: #c1c1c1; // themeColor.grey
+
+    span {
+      background-color: #c1c1c1;;
+    }
+  }
+}
+
+.playBtn {
+  border: 1px solid black;
+  border-radius: 100%;
+  font-size: 30px;
+  padding: 12px;
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  color: #c1c1c1;
+
+  &.active {
+    cursor: pointer;
+    color: rgb(220, 84, 59);
+  }
 }

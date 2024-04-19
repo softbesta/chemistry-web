@@ -1,5 +1,5 @@
 import useAppData from "../../../hooks/useAppData"
-import styles from './first.module.scss'
+import styles from './kinetics.module.scss'
 import { useEffect } from "react"
 import EnergyProfile from "../../../components/EnergyProfile"
 import ChartTime from "../../../components/ChartTime/ChartTime"
@@ -7,16 +7,15 @@ import ChartBar from "../../../components/ChartBar"
 import MathContent from "../../../components/MathContent"
 import TutorialControl from "../../../components/TutorialControl"
 import { useHighLight } from "../../../hooks/useHighlight"
-import { maxStep_First, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text } from "./constants"
+import { maxStep_Kinetics, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text } from "./constants"
 import useFunctions from "../../../hooks/useFunctions"
 import ChooseMenu from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
 import { dotColorList } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
-import CanvasTime from "../../../components/Canvas/CanvasTime"
 import ChartInA from "../../../components/ChartInA/ChartInA"
 
-const ReactionFirst = () => {
+const ReactionKinetics = () => {
   const {
     curStep,
     valuesC,
@@ -93,22 +92,18 @@ const ReactionFirst = () => {
     const c1 = (valuesC[0] ?? 0) / 100
     const c2 = (valuesC[1] ?? 0) / 100
     const t1 = valuesT[0]
-    const t2 = valuesT[1]
+    const At = c2
+    const A0 = c1
+    const k = ((1 / At) - (1 / A0)) / t1
+    const t_12 = 1 / (k * A0)
+    const rate = k * (At * At)
 
-    const lnA0 = Math.log(c1)
-    const lnAt = Math.log(c2)
-    const k = (lnA0 - lnAt) / t1
-    const t_12 = Math.log(2) / k
-    const rate = k * c1
-
-    // console.log({ c1, c2, lnA0, lnAt, t1 })
-
-    const exp0 = `\\[ k = \\frac{In[A_0] - In[A_t]}{t}\\]`
-    const exp1 = `\\[ ${k.toFixed(2)} = \\frac{(${lnA0.toFixed(2)}) - (${lnAt.toFixed(2)})}{${t1.toFixed(2)}}\\]`
-    const exp2 = `\\[ t_{1/2} = In(2)/k \\]`
-    const exp3 = `\\[ ${t_12.toFixed(2)} = ${Math.log(2).toFixed(2)} / ${k.toFixed(2)} \\]`
-    const exp4 = `\\[ Rate = k[A]^1 \\]`
-    const exp5 = `\\[ ${rate.toFixed(2)} = ${k.toFixed(3)}(${c1.toFixed(2)})^1 \\]`
+    const exp0 = `\\[ k = \\frac{(1/[A_t]) - (1/[A_0])}{t}\\]`
+    const exp1 = `\\[ k = \\frac{${(1 / At).toFixed(2)} - ${(1 / A0).toFixed(2)}}{${t1.toFixed(2)}}\\]`
+    const exp2 = `\\[ t_{1/2} = 1/k[A_0] \\]`
+    const exp3 = `\\[ ${t_12.toFixed(2)} = 1/${k.toFixed(2)}(${A0.toFixed(2)}) \\]`
+    const exp4 = `\\[ Rate = k[A]^2 \\]`
+    const exp5 = `\\[ ${rate.toFixed(2)} = ${k.toFixed(3)}(${At.toFixed(2)})^2 \\]`
 
     return {
       exp0,
@@ -129,8 +124,8 @@ const ReactionFirst = () => {
       updatePageFromMenu(getNextMenu(-1))
       return
     }
-    else if (update >= maxStep_First) {
-      update = maxStep_First - 1
+    else if (update >= maxStep_Kinetics) {
+      update = maxStep_Kinetics - 1
       updatePageFromMenu(getNextMenu(1))
       return
     }
@@ -214,4 +209,4 @@ const ReactionFirst = () => {
     {isHighlight && <div className='overlay'></div>}
   </div>
 }
-export default ReactionFirst
+export default ReactionKinetics

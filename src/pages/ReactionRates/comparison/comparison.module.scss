@@ -2,8 +2,8 @@
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 10px;
+  justify-content: center;
+  gap: 40px;
 
   .tutorial {
     // position: absolute;
@@ -23,15 +23,25 @@
     }
 
     .chartTimeCol {
-    }
-
-    .chartInA {
-      display: flex;
-      justify-content: flex-end;
       position: relative;
-      width: 175px;
-      height: 170px;
-      margin-top: 0;
+
+      .chartTimeItem{
+        position: relative;
+
+        .chartInA {
+          display: flex;
+          justify-content: flex-end;
+          position: relative;
+          width: 175px;
+          height: 170px;
+          margin-top: 0;
+        }
+        .playBtnContainer {
+          position: absolute;
+          top: 5px;
+          left: 46%;
+        }
+      }
     }
   }
 
@@ -40,6 +50,7 @@
     flex-direction: column;
 
     .orderListContainer {
+      position: relative;
       display: flex;
       flex-direction: column;
       gap: 5px;

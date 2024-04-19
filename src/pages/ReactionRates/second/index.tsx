@@ -148,6 +148,10 @@ const ReactionSecond = () => {
     console.log({ curStep })
     setCurStep(nextStep)
   }
+  // remove highlighted elements when page opens
+  useEffect(() => {
+    return () => removeHighlightElement(tutorials[curStep]?.highlight)
+  }, [])
 
   return <div className={styles.container}>
     <ChapterMenu />

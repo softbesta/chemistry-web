@@ -101,9 +101,9 @@ const CanvasTime = ({
     // xStep = (Math.abs(vT1 - vT2) / maxT * width) / duration
     // yStep = (Math.abs(vC2 - vC1) * height) / duration
 
-    console.log({ c1, c2, t1, t2 })
-    console.log({ y1, y2, x1, x2 })
-    console.log(offsetPerFrame.current)
+    // console.log({ c1, c2, t1, t2 })
+    // console.log({ y1, y2, x1, x2 })
+    // console.log(offsetPerFrame.current)
 
     // offset.current = { x: xStep, y: yStep }
 

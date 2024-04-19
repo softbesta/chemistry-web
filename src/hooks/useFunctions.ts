@@ -28,7 +28,7 @@ const useFunctions = () => {
       update = [...update, menu]
       setStorage('availableMenuList', update)
     }
-    console.log({update})
+    // console.log({update})
     setAvailableMenuList(update)
 
     // Todo: initialize context status.
@@ -41,10 +41,10 @@ const useFunctions = () => {
   }
   // call when menu is clicked
   const updatePageFromMenu = (menu: MenuList, checkAvailableMenu: boolean = false) => {
-    console.log({menu}, {checkAvailableMenu})
+    // console.log({menu}, {checkAvailableMenu})
     // initializePage(menu)
     if (checkAvailableMenu) {
-      console.log('check: ', !checkMenuAvailable(menu))
+      // console.log('check: ', !checkMenuAvailable(menu))
       if (!checkMenuAvailable(menu)) return
     }
     const path = routes[menu]?.path
@@ -57,7 +57,7 @@ const useFunctions = () => {
   }
 
   const handleTest = () => {
-    setCount(111)
+    setCount(v => v + 1)
   }
 
   // pageStep; -1: returns previous page menu, 1: returns next page menu

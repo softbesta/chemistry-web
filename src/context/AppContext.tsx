@@ -105,7 +105,7 @@ export const AppDataProvider = (props: any) => {
   const [availableMenuList, setAvailableMenuList1] = useState<MenuList[]>([])
   const setAvailableMenuList = (val: MenuList[]) => {
     console.log('===setAvailableMenuList===')
-    console.log({ val })
+    // console.log({ val })
     setAvailableMenuList1(val)
   }
 

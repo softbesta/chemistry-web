@@ -26,6 +26,7 @@ function beaker(ctx: CanvasRenderingContext2D, x: number, y: number, width: numb
 }
 
 interface EnergyProfileProps {
+  index?: string,
   valuesC: number[],
   beakerState: number,
   beakerDotColor: string[],
@@ -34,6 +35,7 @@ interface EnergyProfileProps {
 }
 
 const EnergyProfile = ({
+  index,
   valuesC,
   beakerState,
   beakerDotColor,
@@ -193,6 +195,7 @@ const EnergyProfile = ({
 
   return (
     <div
+      id={`tur_energyProfile${index ?? ''}`}
       className={styles.energyContainer}
     >
       {/* <button onClick={() => {

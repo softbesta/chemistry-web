@@ -108,7 +108,7 @@ export const setStorage = (key: string, val: any) => {
 export const expressWithClass = (str: string, mark: string, className: string) => {
   const parts = str.split(mark)
   let final = parts[0]
-  console.log('expclass- aaa', { str, mark, parts, final })
+  // console.log('expclass- aaa', { str, mark, parts, final })
   if (parts.length === 1) return final
   for (let i = 1; i < parts.length - 1; i++) {
     if (i % 2 === 1) {
@@ -116,11 +116,11 @@ export const expressWithClass = (str: string, mark: string, className: string) =
     } else {
       final += `</span>`
     }
-    console.log('zzz - ', i, parts[i], final)
+    // console.log('zzz - ', i, parts[i], final)
     final += parts[i]
   }
   final += `</span>` + parts[parts.length - 1]
-  console.log('expclass- bbb', { final })
+  // console.log('expclass- bbb', { final })
   return final
 }
 

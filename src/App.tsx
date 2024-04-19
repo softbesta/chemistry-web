@@ -14,6 +14,8 @@ import ReactionSecond from './pages/ReactionRates/second';
 import ReactionSecondQuiz from './pages/ReactionRates/secondQuiz';
 import ReactionComparison from './pages/ReactionRates/comparison';
 import ReactionComparisonQuiz from './pages/ReactionRates/comparisonQuiz';
+import ReactionKinetics from './pages/ReactionRates/kinetics';
+import ReactionKineticsQuiz from './pages/ReactionRates/kineticsQuiz';
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
         <Route path={routes.secondQuiz.path} element={<ReactionSecondQuiz />} />
         <Route path={routes.comparison.path} element={<ReactionComparison />} />
         <Route path={routes.comparisonQuiz.path} element={<ReactionComparisonQuiz />} />
+        <Route path={routes.kinetics.path} element={<ReactionKinetics />} />
+        <Route path={routes.kineticsQuiz.path} element={<ReactionKineticsQuiz />} />
         <Route path='*' element={<PageError />} />
         <Route path='about' element={<AboutPage />} />
         <Route path='nopage' element={<PageError />} />
