@@ -11,7 +11,7 @@ import { maxStep_First, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text 
 import useFunctions from "../../../hooks/useFunctions"
 import ChooseMenu from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
-import { dotColorList } from "../../../constants"
+import { dotColorList, sliderVertText } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
 import CanvasTime from "../../../components/Canvas/CanvasTime"
 import ChartInA from "../../../components/ChartInA/ChartInA"
@@ -169,7 +169,7 @@ const ReactionFirst = () => {
         valuesT={valuesT}
         beakerDotColor={dotColorList[activeDotIndex]}
         beakerState={canvaBeakerState}
-        onEndPlay={() => { }}
+        onEndPlay={() => onStepChange(1)}
       />
       <ChartTime
         valuesC={valuesC}
@@ -181,6 +181,8 @@ const ReactionFirst = () => {
         canvaTimeState={canvaTimeState}
         onTimeframeChange={val => setTimeframe(val)}
         colors={dotColorList[activeDotIndex]}
+        textVert={`[${sliderVertText[activeDotIndex]}]`}
+        textHoriz={`Time`}
       />
       <ChartBar
         colors={dotColorList[activeDotIndex]}

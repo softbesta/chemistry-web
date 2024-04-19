@@ -202,7 +202,7 @@ const ReactionZero = () => {
         valuesT={valuesT}
         beakerDotColor={dotColorList[activeDotIndex]}
         beakerState={canvaBeakerState}
-        onEndPlay={() => { }}
+        onEndPlay={() => onStepChange(1)}
       />
       <ChartTime
         valuesC={valuesC}
