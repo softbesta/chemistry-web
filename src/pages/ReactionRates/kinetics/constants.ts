@@ -7,7 +7,7 @@ export const tur_Text = [
     `Why don't you set the <span>initial concentration of A [A_0_]</span>, the reactant?.`,
   ],
   [ // 1
-    `Great! Now you can set the <span>concentration of A at the end of the reaction [A<span class='sm_botom'>t</span>]</span> and the <span>time the reaction will last (t)</span>.`,
+    `Great! Now you can set the <span>concentration of A at the end of the reaction [A<span class='sm-botom'>t</span>]</span> and the <span>time the reaction will last (t)</span>.`,
   ],
   [ // 2
     `For this reaction, $*k=\(rateConstant.str(decimals: 3))*$.`,

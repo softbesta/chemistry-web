@@ -5,10 +5,10 @@ export const tur_Text = [
   [ // 0
     `This is a zero order reaction in which a reactant A turns into the product B. But what does it mean? Let's find out!`,
     '',
-    `<span>Set the initial concentration of A (c<span class='sm_botom'>1</span>) and the initial time at which it'll start (t<span class='sm_botom'>1</span>)</span>.`,
+    `<span>Set the initial concentration of A (c<span class='sm-botom'>1</span>) and the initial time at which it'll start (t<span class='sm-botom'>1</span>)</span>.`,
   ],
   [ // 1
-    `Great! Now you can set the <span>concentration of A at the end of the reaction (c<span class='sm_botom'>2</span>)</span> and the <span>time the reaction will end (t<span class='sm_botom'>2</span>)</span>.`,
+    `Great! Now you can set the <span>concentration of A at the end of the reaction (c<span class='sm-botom'>2</span>)</span> and the <span>time the reaction will end (t<span class='sm-botom'>2</span>)</span>.`,
   ],
   [ // 2
     `The order of a reaction has to do with the rate of it. <span>Rate</span> is the rate of \
@@ -16,9 +16,9 @@ export const tur_Text = [
       which the <span>rate</span> depends. For this reaction, k=0.070M/s.`,
   ],
   [ // 3
-    `<span>Half-life (t<span class='sm_botom'>1/2</span>)</span> is an expression to easily calculate the point in time at \
+    `<span>Half-life (t<span class='sm-botom'>1/2</span>)</span> is an expression to easily calculate the point in time at \
       which the concentration of the reactant, in this case <span>A</span>, is half of what the \
-      initial concentration was. For this reaction, <span>t<span class='sm_botom'>1/2</span>=\
+      initial concentration was. For this reaction, <span>t<span class='sm-botom'>1/2</span>=\
       10.00s</span>.`,
   ],
   [ // 4

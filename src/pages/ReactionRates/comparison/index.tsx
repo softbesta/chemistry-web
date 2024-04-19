@@ -133,7 +133,7 @@ const ReactionComparison = () => {
   const getOrderListItems = () => {
     const order0 = {
       title: 'Order: 0',
-      // exp0: `[A<span class="sm_botom">t</span>] = [A<span class="sm_botom">0</span>] - kt`,
+      // exp0: `[A<span class="sm-botom">t</span>] = [A<span class="sm-botom">0</span>] - kt`,
       exp0: `&nbsp;[A__t__] = [A__0__] - kt`,
       exp1: `**1.00** = 1.0 - 0.07 (**0.0**)`,
       exp2: `&nbsp;Rate = k[A]^0^`,
@@ -285,11 +285,11 @@ const ReactionComparison = () => {
         {isOrderItemMove && <HandDragOrderItem
           isAnimate={isOrderItemMove}
         />}
-        <button onClick={() => {
+        {/* <button onClick={() => {
           console.log({ isOrderItemMove })
           console.log({ valuesC, valuesT })
           // setIsOrderItemMove(v => !v)
-        }}>TestAnimation</button>
+        }}>TestAnimation</button> */}
       </div>
       <TutorialControl
         className={styles.tutorial}

@@ -18,16 +18,16 @@ code {
 }
 
 /* tutorial text class */
-.sm_botom {
+.sm-botom {
   font-size: 12px;
   position: relative;
   bottom: -3px;
 }
-.sm_top {
+.sm-top {
   font-size: 12px;
   position: relative;
   top: -7px;
 }
-.txt_red {
+.txt-red {
   color: rgb(220, 84, 59);;
 }

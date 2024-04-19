@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './ChooseMenu.module.scss'
 import useAppData from '../hooks/useAppData'
 
@@ -22,8 +22,15 @@ interface ChooseMenuProps {
 const ChooseMenu = ({ isEnable = false, onClickItem }: ChooseMenuProps) => {
   const { activeDotIndex, setActiveDotIndex } = useAppData()
   const [isActive, setIsActive] = useState(false)
+
+  useEffect(() => {
+    console.log('===ChooseMenu.useEffect===')
+    console.log({isEnable})
+    setIsActive(isEnable)
+  }, [isEnable])
+
   const toogleShowChapterPanel = () => {
-    console.log("disabled", {isEnable})
+    console.log("===ChooseMenu.toogleShowChapterPanel===", { isEnable })
     if (!isEnable) {
       setIsActive(false)
       return

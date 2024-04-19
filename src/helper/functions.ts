@@ -127,9 +127,9 @@ export const expressWithClass = (str: string, mark: string, className: string) =
 export const convertExpToHtml = (exp: string | undefined) => {
   if (!exp) return
   let update = ''
-  update = expressWithClass(exp, '__', 'sm_botom')
-  update = expressWithClass(update, '^', 'sm_top')
-  update = expressWithClass(update, '**', 'txt_red')
+  update = expressWithClass(exp, '__', 'sm-botom')
+  update = expressWithClass(update, '^', 'sm-top')
+  update = expressWithClass(update, '**', 'txt-red')
   return update
 }
 

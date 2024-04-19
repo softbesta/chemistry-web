@@ -7,7 +7,7 @@ export const tur_Text = [
     `Why don't you set the <span>initial concentration of A [A_0_]</span>, the reactant?.`,
   ],
   [ // 1
-    `Great! Now you can set the <span>concentration of A at the end of the reaction [A<span class='sm_botom'>t</span>]</span> and the <span>time the reaction will last (t)</span>.`,
+    `Great! Now you can set the <span>concentration of A at the end of the reaction [A<span class='sm-botom'>t</span>]</span> and the <span>time the reaction will last (t)</span>.`,
   ],
   [ // 2
     `The rate constant <span>k</span> is a value on which the <span>rate</span> depends. This dependency is often represented with the rate law or the rate equation.`,
@@ -18,13 +18,13 @@ export const tur_Text = [
     For this reaction, <span>k=0.069</span>.`,
   ],
   [ // 4
-    `<p>For a reaction with one reactant it's usually written as <span>rate=k[A]</span><span class='sm_top'>order</span>.`,
-    `For this reaction then, <span>rate=k[A]</span><span class='sm_top'>1</span>.</p>`,
+    `<p>For a reaction with one reactant it's usually written as <span>rate=k[A]</span><span class='sm-top'>order</span>.`,
+    `For this reaction then, <span>rate=k[A]</span><span class='sm-top'>1</span>.</p>`,
   ],
   [ // 5 here goes next step automatically after action
-    `<p style='font-size: 17px'><span>Half-life (t<span class='sm_botom'>1/2</span>)</span> is an expression to easily calculate the point in time at which the concentration of the reactant, in this case <span>A</span>, is half of what the \
+    `<p style='font-size: 17px'><span>Half-life (t<span class='sm-botom'>1/2</span>)</span> is an expression to easily calculate the point in time at which the concentration of the reactant, in this case <span>A</span>, is half of what the \
     initial concentration was. For this reaction,</p>`,
-    `<p style='font-size: 17px'> <span>t<span class='sm_botom'>1/2</span>=\
+    `<p style='font-size: 17px'> <span>t<span class='sm-botom'>1/2</span>=\
     In(1)/k=10.00s</span>.</p>`,
   ],
   [ // 6
@@ -34,10 +34,10 @@ export const tur_Text = [
   ],
   [ // 7
     `For the previous zero order reaction, <span>rate</span> was constant because it was independent \
-    of <span>[A]</span>, since <span>rate=k[A]<span class='sm_top'>0</span></span> is equivalent to <span>rate=k</span>, which is the rate constant.`,
+    of <span>[A]</span>, since <span>rate=k[A]<span class='sm-top'>0</span></span> is equivalent to <span>rate=k</span>, which is the rate constant.`,
   ],
   [ // 8
-    `For this first order reaction, <span>rate=k[A]<span class='sm_top'>1</span></span>. That's why a graph plotting \
+    `For this first order reaction, <span>rate=k[A]<span class='sm-top'>1</span></span>. That's why a graph plotting \
     \([A] vs t]) is a curve, given how the <span>rate</span> is proportional to the concentration \
     of <span>A</span>`,
   ],

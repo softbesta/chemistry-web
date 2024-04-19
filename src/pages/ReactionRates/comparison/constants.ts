@@ -89,17 +89,23 @@ export const stepsActions = [
   { // 1
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    isEnableChooseMenu: false,
+    orderItemMove: false,
+    playButtonStatus: 1,
   },
   // 2   On the left, we have...
   { // 2
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    isEnableChooseMenu: false,
     orderItemMove: false,
+    playButtonStatus: 1,
   },
   // 3   Let's try something...
   { // 3
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    isEnableChooseMenu: false,
     orderItemMove: true,
     playButtonStatus: 1,
   },
@@ -107,6 +113,7 @@ export const stepsActions = [
   { // 4
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    isEnableChooseMenu: false,
     orderItemMove: false,
     playButtonStatus: 2,
   },
@@ -114,12 +121,16 @@ export const stepsActions = [
   { // 5
     canvaTimeState: 2,
     canvaBeakerState: 2,
+    isEnableChooseMenu: false,
+    orderItemMove: false,
     playButtonStatus: 0,
   },
   // 6   Awesome!...
   { // 6
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isEnableChooseMenu: false,
+    orderItemMove: false,
     playButtonStatus: 0,
   },
   // 7   Took you a while...
