@@ -18,6 +18,8 @@ interface ChartTimeProps {
   canvaTimeState: number   //  0; show Frame,  1; show Graph, 2; show Animation, 3; show end of Animation
   onTimeframeChange: (val: number) => void
   colors: string[]
+  textVert?: string
+  textHoriz?: string
 }
 
 const ChartTime = ({
@@ -30,6 +32,8 @@ const ChartTime = ({
   canvaTimeState: showTimeGraph,
   onTimeframeChange,
   colors,
+  textVert,
+  textHoriz,
 }: ChartTimeProps) => {
 
   return (
@@ -43,6 +47,7 @@ const ChartTime = ({
         valuesC={valuesC}
         setValuesC={setValuesC}
         canvaTimeSliderC={canvaTimeSliderC}
+        textVert={textVert}
       // minDistance={[13, 0]}
       />
 

@@ -222,6 +222,9 @@ export const dotColorList = [
   [themeColors.none, themeColors.C, themeColors.D], // C to D
   [themeColors.none, themeColors.E, themeColors.F], // E to F
 ]
+export const sliderVertText = [
+  'A', 'C', 'E'
+]
 // initial Beaker dots
 export const totalDots = 144
 export const initDots = Array.from({ length: totalDots }, () => 0)

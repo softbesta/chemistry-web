@@ -12,7 +12,7 @@ interface ChartTimeProps {
   canvaTimeState: number   //  0; show Frame,  1; show Graph, 2; show Animation, 3; show end of Animation
   onTimeframeChange: (val: number) => void
   colors: string[]
-  textVert?: string,
+  textVert?: string
   textHoriz?: string
   canvasSize?: SizeStyle
 }

@@ -6,9 +6,10 @@ interface SliderVert {
   valuesC: number[]
   setValuesC: (val: number[]) => void
   canvaTimeSliderC: number[]
+  textVert?: string
 }
 
-const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC }: SliderVert) => {
+const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, textVert }: SliderVert) => {
   const infoC = useMemo(() => {
     let showCount = 0, disabledCount = 0
     showIndexC.forEach(item => {
@@ -107,8 +108,8 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC }: Slide
       />}
     </div>
     <div className={styles.textVert}>
-      <p>{`[A]`}</p>
-      <p>{textC?.toFixed(2)}</p>
+      <p>{`${textVert || '[A]'}`}</p>
+      <p className='txt-red'>{textC?.toFixed(2)} M</p>
     </div>
   </div>
 }

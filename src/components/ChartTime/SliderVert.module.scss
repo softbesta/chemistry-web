@@ -66,10 +66,12 @@
 .textVert {
   position: absolute;
   top: 100px;
-  right: 255px;
+  right: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: max-content;
+  font-weight: 600;
 
   p {
     margin: 0;

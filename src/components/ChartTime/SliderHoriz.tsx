@@ -101,7 +101,7 @@ const SliderHoriz = ({ valuesT, setValuesT, canvaTimeSliderT: showIndexT }: Slid
       />}
     </div>
     <div className={styles.textHoriz}>
-      <p>{`Time:`} {textT?.toFixed(1)}</p>
+      <p>{`Time:`} <span className='txt-red'>{textT?.toFixed(1)} s</span></p>
     </div>
     {/* <button
       className={styles.test1}

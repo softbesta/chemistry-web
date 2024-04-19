@@ -11,7 +11,7 @@ import { maxStep_Zero, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text }
 import useFunctions from "../../../hooks/useFunctions"
 import ChooseMenu from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
-import { dotColorList } from "../../../constants"
+import { dotColorList, sliderVertText } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
 
 const ReactionZero = () => {
@@ -214,6 +214,8 @@ const ReactionZero = () => {
         canvaTimeState={canvaTimeState}
         onTimeframeChange={val => setTimeframe(val)}
         colors={dotColorList[activeDotIndex]}
+        textVert={`[${sliderVertText[activeDotIndex]}]`}
+        textHoriz={`Time`}
       />
       <ChartBar
         colors={dotColorList[activeDotIndex]}
