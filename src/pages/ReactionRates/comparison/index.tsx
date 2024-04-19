@@ -196,7 +196,10 @@ const ReactionComparison = () => {
         />
       </div>
       <div className={styles.chartTimeCol}>
-        <div className={styles.chartTimeItem}>
+        <div
+          id="chartTimeItem0"
+          className={styles.chartTimeItem}
+        >
           <ChartInA
             turIndex={'0'}
             className={styles.chartInA}
@@ -212,7 +215,6 @@ const ReactionComparison = () => {
             canvasSize={timeInASize}
           />
           {playButtonStatus > 0 && <div
-            id="tur_playButton0"
             className={styles.playBtnContainer}
           >
             <Buttons.PlayButton
@@ -221,7 +223,10 @@ const ReactionComparison = () => {
             />
           </div>}
         </div>
-        <div className={styles.chartTimeItem}>
+        <div
+          id="chartTimeItem1"
+          className={styles.chartTimeItem}
+        >
           <ChartInA
             turIndex={'1'}
             className={styles.chartInA}
@@ -237,17 +242,18 @@ const ReactionComparison = () => {
             canvasSize={timeInASize}
           />
           {playButtonStatus > 0 && <div
-            id="tur_playButton1"
             className={styles.playBtnContainer}
           >
             <Buttons.PlayButton
-              id="tur_playButton1"
               isActive={playButtonStatus === 2}
               onPlay={() => handleClickPlayButton()}
             />
           </div>}
         </div>
-        <div className={styles.chartTimeItem}>
+        <div
+          id="chartTimeItem2"
+          className={styles.chartTimeItem}
+        >
           <ChartInA
             turIndex={'2'}
             className={styles.chartInA}
@@ -263,7 +269,6 @@ const ReactionComparison = () => {
             canvasSize={timeInASize}
           />
           {playButtonStatus > 0 && <div
-            id="tur_playButton2"
             className={styles.playBtnContainer}
           >
             <Buttons.PlayButton

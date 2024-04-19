@@ -39,18 +39,32 @@ export const tur_Hightlights = [
   [],
 
   // 1   These equations on the...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_orderCardItem0', 'tur_orderCardItem1', 'tur_orderCardItem2'],
+  [
+    'tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton',
+    'tur_orderCardItem0', 'tur_orderCardItem1', 'tur_orderCardItem2'
+  ],
 
   // 2   On the left, we have...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_energyProfile0', 'tur_energyProfile1', 'tur_energyProfile2', 'tur_chartInA0', 'tur_chartInA1', 'tur_chartInA2', 'tur_playButton0', 'tur_playButton1', 'tur_playButton2'],
+  [
+    'tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton',
+    'tur_energyProfile0', 'tur_energyProfile1', 'tur_energyProfile2',
+    'chartTimeItem0', 'chartTimeItem1', 'chartTimeItem2'],
   // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math1', 'tur_math2'],
 
   // 3   Let's try something...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_orderCardItem0', 'tur_orderCardItem1', 'tur_orderCardItem2', 'tur_chartInA0', 'tur_chartInA1', 'tur_chartInA2', 'tur_playButton0', 'tur_playButton1', 'tur_playButton2', 'tur_handDragOrderItem'],
+  [
+    'tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton',
+    'tur_orderCardItem0', 'tur_orderCardItem1', 'tur_orderCardItem2',
+    'chartTimeItem0', 'chartTimeItem1', 'chartTimeItem2',
+    'tur_handDragOrderItem'
+  ],
   // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime', 'tur_math4'],
 
   // 4   Tap next or press play...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_chartInA0', 'tur_chartInA1', 'tur_chartInA2', 'tur_playButton0', 'tur_playButton1', 'tur_playButton2'],
+  [
+    'tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton',
+    'chartTimeItem0', 'chartTimeItem1', 'chartTimeItem2'
+  ],
   // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math3'],
 
   // 5   Let's see how long...
