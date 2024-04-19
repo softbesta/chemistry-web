@@ -161,6 +161,7 @@ const ReactionSecond = () => {
     <div className={styles.reactionDrawContainer}>
       <EnergyProfile
         valuesC={valuesC}
+        valuesT={valuesT}
         beakerDotColor={dotColorList[activeDotIndex]}
         beakerState={canvaBeakerState}
         onEndPlay={() => { }}

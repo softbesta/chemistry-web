@@ -199,6 +199,7 @@ const ReactionZero = () => {
 
       <EnergyProfile
         valuesC={valuesC}
+        valuesT={valuesT}
         beakerDotColor={dotColorList[activeDotIndex]}
         beakerState={canvaBeakerState}
         onEndPlay={() => { }}

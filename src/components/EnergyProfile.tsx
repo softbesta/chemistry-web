@@ -28,6 +28,7 @@ function beaker(ctx: CanvasRenderingContext2D, x: number, y: number, width: numb
 interface EnergyProfileProps {
   index?: string,
   valuesC: number[],
+  valuesT: number[],
   beakerState: number,
   beakerDotColor: string[],
   canvasSize?: SizeStyle
@@ -37,6 +38,7 @@ interface EnergyProfileProps {
 const EnergyProfile = ({
   index,
   valuesC,
+  valuesT,
   beakerState,
   beakerDotColor,
   canvasSize = { width: 230, height: 285 },
@@ -54,7 +56,7 @@ const EnergyProfile = ({
   //   // console.log({ update })
   // }, [concentrationAB])
 
-  const { beakerDots, beakerDotsEnd, valuesT } = useAppData()
+  const { beakerDots, beakerDotsEnd } = useAppData()
 
   useEffect(() => {
     // console.log('vvv111')

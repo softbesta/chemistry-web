@@ -22,9 +22,9 @@ import Buttons from "../../../components/Buttons/Buttons"
 const ReactionComparison = () => {
   const {
     curStep,
-    valuesC,
+    // valuesC,
     setValuesC,
-    valuesT,
+    // valuesT,
     setValuesT,
     canvaTimeSliderC,
     setCanvaTimeSliderC,
@@ -41,6 +41,8 @@ const ReactionComparison = () => {
     activeDotIndex,
     setActiveDotIndex,
   } = useAppData()
+  const valuesC = [100, 0]
+  const valuesT = [0, 20]
 
   const {
     updatePageFromMenu,
@@ -171,6 +173,7 @@ const ReactionComparison = () => {
         <EnergyProfile
           index={'0'}
           valuesC={valuesC}
+          valuesT={valuesT}
           beakerDotColor={dotColorList[activeDotIndex]}
           beakerState={canvaBeakerState}
           canvasSize={beakerSize}
@@ -178,6 +181,7 @@ const ReactionComparison = () => {
         <EnergyProfile
           index={'1'}
           valuesC={valuesC}
+          valuesT={valuesT}
           beakerDotColor={dotColorList[activeDotIndex]}
           beakerState={canvaBeakerState}
           canvasSize={beakerSize}
@@ -185,6 +189,7 @@ const ReactionComparison = () => {
         <EnergyProfile
           index={'2'}
           valuesC={valuesC}
+          valuesT={valuesT}
           beakerDotColor={dotColorList[activeDotIndex]}
           beakerState={canvaBeakerState}
           canvasSize={beakerSize}
@@ -280,10 +285,11 @@ const ReactionComparison = () => {
         {isOrderItemMove && <HandDragOrderItem
           isAnimate={isOrderItemMove}
         />}
-        {/* <button onClick={() => {
+        <button onClick={() => {
           console.log({ isOrderItemMove })
-          setIsOrderItemMove(v => !v)
-        }}>TestAnimation</button> */}
+          console.log({ valuesC, valuesT })
+          // setIsOrderItemMove(v => !v)
+        }}>TestAnimation</button>
       </div>
       <TutorialControl
         className={styles.tutorial}
