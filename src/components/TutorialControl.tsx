@@ -1,8 +1,5 @@
 import styles from './TutorialControl.module.scss'
 import ImgBeacky from '../assets/ReactionRates/reaction_boxes/beaky.png'
-import useAppData from '../hooks/useAppData'
-import { useHighLight } from '../hooks/useHighlight'
-import { maxStep_Zero, tur_Hightlights, tur_Text } from '../pages/ReactionRates/zero/constants'
 import Buttons from './Buttons/Buttons'
 
 interface TutorialControlProps {

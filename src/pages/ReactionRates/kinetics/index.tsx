@@ -1,6 +1,6 @@
 import useAppData from "../../../hooks/useAppData"
 import styles from './kinetics.module.scss'
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 import EnergyProfile from "../../../components/EnergyProfile"
 import ChartTime from "../../../components/ChartTime/ChartTime"
 import ChartBar from "../../../components/ChartBar"
@@ -14,6 +14,7 @@ import WatchMenu from "../../../layout/WatchMenu"
 import { dotColorList } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
 import ChartInA from "../../../components/ChartInA/ChartInA"
+import { convertExpToHtml } from "../../../helper/functions"
 
 const ReactionKinetics = () => {
   const {
@@ -115,6 +116,40 @@ const ReactionKinetics = () => {
     }
   }
 
+  const getTurTextByStep = useCallback(() => {
+    const c1 = (valuesC[0] ?? 0) / 100
+    const c2 = (valuesC[1] ?? 0) / 100
+    const t1 = valuesT[0]
+    const t2 = valuesT[1]
+    const c = c2 - c1
+    const t = t2 - t1
+    const k = -(c / t)
+    const deltaT = t2 - t1
+    const deltaC = c2 - c1
+    const rateConstant = -deltaC / deltaT     
+    const a0Numerator = (t1 * c2) - (t2 * c1) 
+    const A0 = a0Numerator / (t1 - t2)
+    const t_12 = A0 / (2 * rateConstant)
+    // console.log({c1, c2, t1, t2, c, t, k, deltaC, deltaT, rateConstant, a0Numerator, A0, t_12})
+
+    const turTxt = tur_Text[curStep]
+    const update = turTxt.map((item) => {
+      // const update: string[] = []
+      let res = ''
+      if (typeof item === 'function') {
+        res = item([
+          k.toFixed(3),   // val[0]
+          t_12.toFixed(2),// val[1]
+          k.toFixed(2),
+        ])
+      } else {
+        res = item
+      }
+      return convertExpToHtml(res)
+    })
+    return update
+  }, [curStep])
+
   // get available next step number
   const getNextStep = (step: number) => {
     let update = curStep + step
@@ -202,7 +237,7 @@ const ReactionKinetics = () => {
         blanksCount={11}
       />
       <TutorialControl
-        turText={tur_Text[curStep]}
+        turText={getTurTextByStep()}
         onStepChange={onStepChange}
         isDisableNextButton={isEnableChooseMenu}
       />

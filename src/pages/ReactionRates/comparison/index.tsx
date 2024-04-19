@@ -1,6 +1,6 @@
 import useAppData from "../../../hooks/useAppData"
 import styles from './comparison.module.scss'
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import EnergyProfile from "../../../components/EnergyProfile"
 import ChartTime from "../../../components/ChartTime/ChartTime"
 import ChartBar from "../../../components/ChartBar"
@@ -18,6 +18,7 @@ import { SizeStyle } from "../../../helper/types"
 import OrderCardItem from "../../../components/OrderCardItem"
 import HandDragOrderItem from "../../../components/HandDragOrderItem"
 import Buttons from "../../../components/Buttons/Buttons"
+import { convertExpToHtml } from "../../../helper/functions"
 
 const ReactionComparison = () => {
   const {
@@ -92,6 +93,22 @@ const ReactionComparison = () => {
       }
     }
   }, [curStep, curActions])
+
+  const getTurTextByStep = useCallback(() => {
+    // turText can be undefined on new page due to curStep(lazy changes of state variable)
+    const turTxt = tur_Text[curStep]
+    const update = turTxt?.map((item) => {
+      // const update: string[] = []
+      let res = ''
+      if (typeof item === 'function') {
+        res = item([])
+      } else {
+        res = item
+      }
+      return convertExpToHtml(res)
+    }) ?? []
+    return update
+  }, [curStep])
 
   // get available next step number
   const getNextStep = (step: number) => {
@@ -177,6 +194,7 @@ const ReactionComparison = () => {
           beakerDotColor={dotColorList[activeDotIndex]}
           beakerState={canvaBeakerState}
           canvasSize={beakerSize}
+          onEndPlay={() => onStepChange(1)}
         />
         <EnergyProfile
           index={'1'}
@@ -298,7 +316,7 @@ const ReactionComparison = () => {
       </div>
       <TutorialControl
         className={styles.tutorial}
-        turText={tur_Text[curStep]}
+        turText={getTurTextByStep()}
         onStepChange={onStepChange}
         isDisableNextButton={isEnableChooseMenu}
       />

@@ -27,3 +27,5 @@ export type Point = {
   x: number,
   y: number,
 }
+
+export type TurTextType = (string | ((val: string[]) => string))[][]

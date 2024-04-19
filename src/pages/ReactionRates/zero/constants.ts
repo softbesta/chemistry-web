@@ -1,5 +1,6 @@
+import { TurTextType } from "../../../helper/types"
 
-export const tur_Text = [
+export const tur_Text: TurTextType = [
   // display.reactant.name; A
   // display.product.name;  B
   [ // 0
@@ -11,15 +12,15 @@ export const tur_Text = [
     `Great! Now you can set the <span>concentration of A at the end of the reaction (c<span class='sm-botom'>2</span>)</span> and the <span>time the reaction will end (t<span class='sm-botom'>2</span>)</span>.`,
   ],
   [ // 2
-    `The order of a reaction has to do with the rate of it. <span>Rate</span> is the rate of \
+    (val: string[]) => `The order of a reaction has to do with the rate of it. <span>Rate</span> is the rate of \
       change in the concentration per unit time. The rate constant <span>k</span> is a value on \
-      which the <span>rate</span> depends. For this reaction, k=0.070M/s.`,
+      which the <span>rate</span> depends. For this reaction, k=${val[0]}M/s.`,
   ],
   [ // 3
-    `<span>Half-life (t<span class='sm-botom'>1/2</span>)</span> is an expression to easily calculate the point in time at \
+    (val: string[]) => `<span>Half-life (t<span class='sm-botom'>1/2</span>)</span> is an expression to easily calculate the point in time at \
       which the concentration of the reactant, in this case <span>A</span>, is half of what the \
       initial concentration was. For this reaction, <span>t<span class='sm-botom'>1/2</span>=\
-      10.00s</span>.`,
+      ${val[1]}s</span>.`,
   ],
   [ // 4
     `<p>Let's watch how all the molecules are all changing! As \
@@ -27,7 +28,7 @@ export const tur_Text = [
     `<p>This happens at a variable <span>rate (in units of M/s)</span>, which is dependent on <span>k</span>.</p>`,
   ],
   [ // 5 here goes next step automatically after action
-    `<p style='font-size: 17px'>For this zero order reaction, <span>rate</span> is constant and it's equal to <span>k</span>, that's why a graph plotting \(Strings.aVsT) is a straight line.</p>`,
+    `<p style='font-size: 17px'>For this zero order reaction, <span>rate</span> is constant and it's equal to <span>k</span>, that's why a graph plotting \([A] vs t) is a straight line.</p>`,
     `<p style='font-size: 17px'>[A]<span>(y)</span>=-kt<span>(mx)</span>+[A0]<span>(b)</span></p>`,
     `<span style='font-size: 17px'>Where -k is the slope</span>`,
   ],
@@ -44,7 +45,7 @@ export const tur_Text = [
     `<span>Choose a reaction above</span>.`,
   ],
   [ // 9
-    `Great! You picked a reaction with a rate constant 0.04.`,
+    (val: string[]) => `Great! You picked a reaction with a rate constant ${val[2]}.`,
     `Why don't you <span>set the initial concentration and initial time</span>?`,
   ],
   [ // 10
@@ -65,7 +66,7 @@ export const tur_Text = [
     `<span>Choose a reaction above</span>.`,
   ],
   [ // 14
-    `Great! You picked a reaction with a rate constant \ 0.07.`,
+    (val: string[]) => `Great! You picked a reaction with a rate constant \ ${val[2]}.`,
     `Why don't you <span>set the initial concentration and initial time</span>?`,
   ],
   [ // 15

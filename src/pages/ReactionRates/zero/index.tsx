@@ -1,6 +1,6 @@
 import useAppData from "../../../hooks/useAppData"
 import styles from './zero.module.scss'
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 import EnergyProfile from "../../../components/EnergyProfile"
 import ChartTime from "../../../components/ChartTime/ChartTime"
 import ChartBar from "../../../components/ChartBar"
@@ -13,6 +13,7 @@ import ChooseMenu from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
 import { dotColorList, sliderVertText } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
+import { convertExpToHtml } from "../../../helper/functions"
 
 const ReactionZero = () => {
   const {
@@ -128,6 +129,42 @@ const ReactionZero = () => {
     }
   }
 
+  const getTurTextByStep = useCallback(() => {
+    const c1 = (valuesC[0] ?? 0) / 100
+    const c2 = (valuesC[1] ?? 0) / 100
+    const t1 = valuesT[0]
+    const t2 = valuesT[1]
+    const c = c2 - c1
+    const t = t2 - t1
+    const k = -(c / t)
+    const deltaT = t2 - t1
+    const deltaC = c2 - c1
+    const rateConstant = -deltaC / deltaT     
+    const a0Numerator = (t1 * c2) - (t2 * c1) 
+    const A0 = a0Numerator / (t1 - t2)
+    const t_12 = A0 / (2 * rateConstant)
+    // console.log({c1, c2, t1, t2, c, t, k, deltaC, deltaT, rateConstant, a0Numerator, A0, t_12})
+
+    // turText can be undefined on new page due to curStep(lazy changes of state variable)
+    const turTxt = tur_Text[curStep]
+    const turVal = [
+      k.toFixed(3),   // val[0]
+      t_12.toFixed(2),// val[1]
+      k.toFixed(2),   // val[2]
+    ]
+    const update = turTxt?.map((item) => {
+      // const update: string[] = []
+      let res = ''
+      if (typeof item === 'function') {
+        res = item(turVal)
+      } else {
+        res = item
+      }
+      return convertExpToHtml(res)
+    }) ?? []
+    return update
+  }, [curStep])
+
   // get available next step number
   const getNextStep = (step: number) => {
     let update = curStep + step
@@ -228,7 +265,7 @@ const ReactionZero = () => {
         blanksCount={11}
       />
       <TutorialControl
-        turText={tur_Text[curStep]}
+        turText={getTurTextByStep()}
         onStepChange={onStepChange}
         isDisableNextButton={isEnableChooseMenu}
       />

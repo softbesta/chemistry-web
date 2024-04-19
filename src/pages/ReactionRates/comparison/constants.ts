@@ -1,19 +1,20 @@
+import { TurTextType } from "../../../helper/types"
 
-export const tur_Text = [
+export const tur_Text: TurTextType = [
   // display.reactant.name; A
   // display.product.name;  B
   [ // 0
     `Do you know the difference between the reaction orders?`,
-    `*Let's dig in!*`,
+    `**Let's dig in!**`,
   ],
   [ // 1
-    `These equations on the top seem pretty familiar right? They are the same equations we've encountered before, just solved for *[A]* which is a very useful form. Notice how the constants *k* are the ones we already got from the *previous reactions*.`,
+    `These equations on the top seem pretty familiar right? They are the same equations we've encountered before, just solved for **[A]** which is a very useful form. Notice how the constants **k** are the ones we already got from the **previous reactions**.`,
   ],
   [ // 2
-    `On the left, we have 3 beakers with a reaction of *A* to *B* taking place in each one, all paired to an \(Strings.aVsT) graph. Each reaction will represent an order: zero order, first order, and second order.`,
+    `On the left, we have 3 beakers with a reaction of **A** to **B** taking place in each one, all paired to an ([A] vs t) graph. Each reaction will represent an order: zero order, first order, and second order.`,
   ],
   [ // 3
-    `Let's try something out now! We know that plotting an \(Strings.aVsT) graph for each order results in different types of line (straight line, curved line and more accentuated curve). When the reaction starts running, *try dragging the right equations and dropping them into the proper graphs*.`,
+    `<p style='font-size: 17px'>Let's try something out now! We know that plotting an \([A] vs t) graph for each order results in different types of line (straight line, curved line and more accentuated curve). When the reaction starts running, **try dragging the right equations and dropping them into the proper graphs**.</p>`,
   ],
   [ // 4
     `Tap next or press play on any of the graphs to start the reactions.`,
@@ -21,7 +22,7 @@ export const tur_Text = [
   ],
   [ // 5
     `Let's see how long it takes you to guess!`,
-    `*Drag and drop the equations to the graph of the corresponding order*.`,
+    `**Drag and drop the equations to the graph of the corresponding order**.`,
   ],
   [ // 6
     `Awesome!`,

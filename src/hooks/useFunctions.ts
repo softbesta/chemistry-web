@@ -5,7 +5,7 @@ import { MenuList, MenuOrder, routes } from "../constants";
 import { useHighLight } from "./useHighlight";
 // should be exchanged as App context state
 import { maxStep_Zero, tur_Hightlights } from "../pages/ReactionRates/zero/constants";
-import { getStorage, setStorage } from "../helper/functions";
+import { expressWithClass, getStorage, setStorage } from "../helper/functions";
 
 const useFunctions = () => {
   const navigate = useNavigate()
@@ -68,6 +68,21 @@ const useFunctions = () => {
     if (nextOrder > MenuOrder.length) nextOrder = MenuOrder.length - 1
     else if (nextOrder < 0) nextOrder = 0
     return MenuOrder[nextOrder]
+  }
+
+  const updateWithVariable = () => {
+    let update = ''
+    
+    return update
+  }
+
+  const convertExpToHtml = (exp: string | undefined) => {
+    if (!exp) return
+    let update = ''
+    update = expressWithClass(exp, '__', 'sm-botom')
+    update = expressWithClass(update, '^', 'sm-top')
+    update = expressWithClass(update, '**', 'txt-red')
+    return update
   }
 
   const returnValues = {

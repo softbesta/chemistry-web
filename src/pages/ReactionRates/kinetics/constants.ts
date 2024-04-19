@@ -1,26 +1,27 @@
+import { TurTextType } from "../../../helper/types"
 
-export const tur_Text = [
+export const tur_Text: TurTextType = [
   // display.reactant.name; A
   // display.product.name;  B
   [ // 0
     `This is a second order reaction.`,
-    `Why don't you set the <span>initial concentration of A [A_0_]</span>, the reactant?.`,
+    `Why don't you set the <span>initial concentration of A [A__0__]</span>, the reactant?.`,
   ],
   [ // 1
     `Great! Now you can set the <span>concentration of A at the end of the reaction [A<span class='sm-botom'>t</span>]</span> and the <span>time the reaction will last (t)</span>.`,
   ],
   [ // 2
-    `For this reaction, $*k=\(rateConstant.str(decimals: 3))*$.`,
+    `For this reaction, $**k=\(rateConstant.str(decimals: 3))**$.`,
   ],
   [ // 3
-    `For a reaction with one reactant it's usually written as $*rate=k[A]^order^*$.`,
-    `For this reaction then, $*rate=k[A]^2^*$.`,
+    `For a reaction with one reactant it's usually written as $**rate=k[A]^order^**$.`,
+    `For this reaction then, $**rate=k[A]^2^**$.`,
   ],
   [ // 4
-    `*Half-life (t_1/2_)* is an expression to easily calculate the time at which the concentration of the reactant, in this case *A*, is half of what the initial concentration was.`,
+    `**Half-life (t__1/2__)** is an expression to easily calculate the time at which the concentration of the reactant, in this case **A**, is half of what the initial concentration was.`,
     `For this reaction,`,
-    `*t_1/2_=1/k[A_0_]=\(halfLife.str(decimals: 2))s*.",
-    label: Labelling.stringToLabel("t_1/2_ = 1 /, k times [A_0_], =\(halfLife.str(decimals: 2)) s.`,
+    `**t__1/2__=1/k[A__0__]=\(halfLife.str(decimals: 2))s**.",
+    label: Labelling.stringToLabel("t__1/2__ = 1 /, k times [A__0__], =\(halfLife.str(decimals: 2)) s.`,
   ],
   [ // 5
     `<p>Let's watch how all the molecules are all changing!</p>`,
@@ -28,30 +29,30 @@ export const tur_Text = [
     `<p>This happens at a variable <span>rate (in units of M/s)</span>, which is dependent on <span>k</span> and <span>[A]</span>.</p>`,
   ],
   [ // 6
-    `For this second order reaction, $*rate=k[A]^2^*$, that's why a graph plotting \
-    \(Strings.aVsT) is a steeper curve, given how the *rate* is proportional to the \
-    concentration of *A* squared.`,
+    `For this second order reaction, $**rate=k[A]^2^**$, that's why a graph plotting \
+    \(Strings.aVsT) is a steeper curve, given how the **rate** is proportional to the \
+    concentration of **A** squared.`,
   ],
   [ // 7
-    `Notice how *[A]* drops a lot faster at the beginning of the reaction because there's more of *A* present, making the *rate* much higher.`,
+    `Notice how **[A]** drops a lot faster at the beginning of the reaction because there's more of **A** present, making the **rate** much higher.`,
   ],
   [ // 8
-    `Subsequently, towards the end of the reaction, there's much less *[A]* present, so the *rate* of the reaction is a lot lower, making *[A]* drop significantly slower at this point.`,
+    `Subsequently, towards the end of the reaction, there's much less **[A]** present, so the **rate** of the reaction is a lot lower, making **[A]** drop significantly slower at this point.`,
   ],
   [ // 9
-    `For example, if $*[A]=0.9*$, then $*[A]^2^=0.81*$. And if $*[A]=0.8*$, then $*[A]^2^=0.64*$.`,
+    `For example, if $**[A]=0.9**$, then $**[A]^2^=0.81**$. And if $**[A]=0.8**$, then $**[A]^2^=0.64**$.`,
     ``,
-    `You see that dropping *[A]* by 0.1 would make a first order reaction drop its *rate* by 0.1, and a second order reaction drop its *rate* by 0.17.`,
+    `You see that dropping **[A]** by 0.1 would make a first order reaction drop its **rate** by 0.1, and a second order reaction drop its **rate** by 0.17.`,
   ],
   [ // 10
-    `Since 0.1 is less than 0.17, it's noticeable how for a second order reaction the *rate* would drop faster.`,
-    `In other words, the rate of the reaction will drop *more drastically for a second order reaction at first*, and slowly reduce to a point at which the rate drops *slower than in a first order reaction towards the end*.`,
+    `Since 0.1 is less than 0.17, it's noticeable how for a second order reaction the **rate** would drop faster.`,
+    `In other words, the rate of the reaction will drop **more drastically for a second order reaction at first**, and slowly reduce to a point at which the rate drops **slower than in a first order reaction towards the end**.`,
   ],
   [ // 11
-    `For this second order reaction, the resultant integrated rate law is  $*k=(1/[A]-1/[A_0_])/t*$. \
+    `For this second order reaction, the resultant integrated rate law is  $**k=(1/[A]-1/[A__0__])/t**$. \
     That's why a graph plotting \(Strings.aVsT) is a straight line.`,
-    `1/[A]*(y)*=kt*(mx)*+1/[A_0_]*(b)`,
-    `Where the slope is *k*.`,
+    `1/[A]**(y)**=kt**(mx)**+1/[A__0__]**(b)`,
+    `Where the slope is **k**.`,
   ],
   [ // 12
     `Amazing! Let's take a snapshot!`,

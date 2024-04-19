@@ -1,10 +1,11 @@
+import { TurTextType } from "../../../helper/types"
 
-export const tur_Text = [
+export const tur_Text: TurTextType = [
   // display.reactant.name; A
   // display.product.name;  B
   [ // 0
     `This is a first order reaction.`,
-    `Why don't you set the <span>initial concentration of A [A_0_]</span>, the reactant?.`,
+    `Why don't you set the <span>initial concentration of A [A__0__]</span>, the reactant?.`,
   ],
   [ // 1
     `Great! Now you can set the <span>concentration of A at the end of the reaction [A<span class='sm-botom'>t</span>]</span> and the <span>time the reaction will last (t)</span>.`,
@@ -13,9 +14,9 @@ export const tur_Text = [
     `The rate constant <span>k</span> is a value on which the <span>rate</span> depends. This dependency is often represented with the rate law or the rate equation.`,
   ],
   [ // 3
-    `Rate laws or rate equations are mathematical expressions that describe the relationship \
+    (val: string[]) => `Rate laws or rate equations are mathematical expressions that describe the relationship \
     between the <span>rate</span> of a chemical reaction and the concentration of its reactants. \
-    For this reaction, <span>k=0.069</span>.`,
+    For this reaction, <span>k=${val[0]}</span>.`,
   ],
   [ // 4
     `<p>For a reaction with one reactant it's usually written as <span>rate=k[A]</span><span class='sm-top'>order</span>.`,
@@ -24,8 +25,8 @@ export const tur_Text = [
   [ // 5 here goes next step automatically after action
     `<p style='font-size: 17px'><span>Half-life (t<span class='sm-botom'>1/2</span>)</span> is an expression to easily calculate the point in time at which the concentration of the reactant, in this case <span>A</span>, is half of what the \
     initial concentration was. For this reaction,</p>`,
-    `<p style='font-size: 17px'> <span>t<span class='sm-botom'>1/2</span>=\
-    In(1)/k=10.00s</span>.</p>`,
+    (val: string[]) => `<p style='font-size: 17px'> <span>t<span class='sm-botom'>1/2</span>=\
+    In(1)/k=${val[1]}</span>.</p>`,
   ],
   [ // 6
     `<p>Let's watch how all the molecules are all changing!</p>`,
@@ -62,7 +63,7 @@ export const tur_Text = [
     `<span>Choose a reaction above</span>.`,
   ],
   [ // 13
-    `Great! You picked a reaction with a rate constant 0.04.`,
+    (val: string[]) => `Great! You picked a reaction with a rate constant ${val[2]}.`,
     `Why don't you <span>set the initial concentration and initial time</span>?`,
   ],
   [ // 14
@@ -83,7 +84,7 @@ export const tur_Text = [
     `<span>Choose a reaction above</span>.`,
   ],
   [ // 18
-    `Great! You picked a reaction with a rate constant 0.07.`,
+    (val: string[]) => `Great! You picked a reaction with a rate constant ${val[2]}.`,
     `Why don't you <span>set the initial concentration and initial time</span>?`,
   ],
   [ // 19
