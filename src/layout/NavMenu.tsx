@@ -168,7 +168,12 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
             />
           </div>
           <div>
-            <SvgArchive fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
+            <SvgArchive
+              fillColor={'rgb(68, 150, 247)'}
+              width={40}
+              height={40}
+              isActive={curMenu === MenuList.zeroReview}
+            />
           </div>
         </div>
         <div className={styles.navMenuItem}>
@@ -193,7 +198,12 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
             />
           </div>
           <div>
-            <SvgArchive fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
+            <SvgArchive
+              fillColor={'rgb(68, 150, 247)'}
+              width={40}
+              height={40}
+              isActive={curMenu === MenuList.firstReview}
+            />
           </div>
         </div>
         <div className={styles.navMenuItem}>
@@ -218,7 +228,12 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
             />
           </div>
           <div>
-            <SvgArchive fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
+            <SvgArchive
+              fillColor={'rgb(68, 150, 247)'}
+              width={40}
+              height={40}
+              isActive={curMenu === MenuList.secondReview}
+            />
           </div>
         </div>
         <div className={styles.navMenuItem}>
@@ -243,7 +258,12 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
             />
           </div>
           <div>
-            <SvgArchive fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
+            <SvgArchive
+              fillColor={'rgb(68, 150, 247)'}
+              width={40}
+              height={40}
+              isActive={curMenu === MenuList.comparisonReview}
+            />
           </div>
         </div>
         <div className={styles.navMenuItem}>
@@ -269,7 +289,12 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
             />
           </div>
           <div>
-            <SvgArchive fillColor={'rgb(68, 150, 247)'} width={40} height={40} />
+            <SvgArchive
+              fillColor={'rgb(68, 150, 247)'}
+              width={40}
+              height={40}
+              isActive={curMenu === MenuList.kineticsReview}
+            />
           </div>
         </div>
       </div>

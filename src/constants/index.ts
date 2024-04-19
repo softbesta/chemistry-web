@@ -57,6 +57,32 @@ export const routes = {
     path: '/reaction/kinetics/quiz',
     type: 'quiz',
   },
+  // Review
+  zeroReview: {  // updated
+    title: 'Review for Zero order reaction',
+    path: '/review',
+    type: 'review',
+  },
+  firstReview: {  // updated
+    title: 'Review for First order reaction',
+    path: '/reaction/first/review',
+    type: 'review',
+  },
+  secondReview: {
+    title: 'Review for Second order reaction',
+    path: '/reaction/second/review',
+    type: 'review',
+  },
+  comparisonReview: {
+    title: 'Review for Reaction comparison',
+    path: '/reaction/comparison/review',
+    type: 'review',
+  },
+  kineticsReview: {
+    title: 'Review for Kinetics',
+    path: '/reaction/kinetics/review',
+    type: 'review',
+  },
   // 2 - 1
   aqueous: {
     title: 'Aqueous reaction',
@@ -157,6 +183,11 @@ export const enum MenuList {
   secondQuiz = 'secondQuiz',
   comparisonQuiz = 'comparisonQuiz',
   kineticsQuiz = 'kineticsQuiz',
+  zeroReview = 'zeroReview',
+  firstReview = 'firstReview',
+  secondReview = 'secondReview',
+  comparisonReview = 'comparisonReview',
+  kineticsReview = 'kineticsReview',
   aqueous = 'aqueous',
   introduction = 'introduction',
   balanced = 'balanced',
