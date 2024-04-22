@@ -92,6 +92,7 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, textVer
           handleChangeAB(val)
         }}
         renderThumb={(props, state) => {
+          console.log('sliderthumb ===0', {state, showIndexC})
           const { index } = state
           let disabledclass = ''
           if (index === 1 && showIndexC[0] === 1) {

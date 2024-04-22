@@ -15,6 +15,7 @@ import { dotColorList, sliderVertText } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
 import ChartInA from "../../../components/ChartInA/ChartInA"
 import { convertExpToHtml } from "../../../helper/functions"
+import { EnergyCatalystContainer, EnergyCatalystItem } from "../../../components/EnergyCatalyst"
 
 const ReactionKinetics = () => {
   const {
@@ -188,58 +189,62 @@ const ReactionKinetics = () => {
   return <div className={styles.container}>
     <ChapterMenu />
     <ChooseMenu isEnable={isEnableChooseMenu} onClickItem={() => handleClickChooseMenuItem()} />
-    <WatchMenu />
+    {/* <WatchMenu /> */}
 
     <div className={styles.reactionDrawContainer}>
-      <EnergyProfile
-        valuesC={valuesC}
-        valuesT={valuesT}
-        beakerDotColor={dotColorList[activeDotIndex]}
-        beakerState={canvaBeakerState}
-        onEndPlay={() => onStepChange(1)}
-      />
-      <ChartTime
-        valuesC={valuesC}
-        setValuesC={val => setValuesC(val)}
-        canvaTimeSliderC={canvaTimeSliderC}
-        valuesT={valuesT}
-        setValuesT={val => setValuesT(val)}
-        canvaTimeSliderT={canvaTimeSliderT}
-        canvaTimeState={canvaTimeState}
-        onTimeframeChange={val => setTimeframe(val)}
-        colors={dotColorList[activeDotIndex]}
-        textVert={`[${sliderVertText[activeDotIndex]}]`}
-        textHoriz={`Time`}
-      />
-      <ChartBar
-        colors={dotColorList[activeDotIndex]}
-      />
-    </div>
-    <div className={styles.reactionContentContainer}>
-      <div className={styles.chartInA}>
-        <ChartInA
+      <EnergyCatalystContainer catalystIds={[0, 1, 2]} />
+      <div className={styles.reactionBeaker}>
+        <EnergyProfile
           valuesC={valuesC}
-          canvaTimeSliderC={canvaTimeSliderC}
           valuesT={valuesT}
-          canvaTimeSliderT={canvaTimeSliderT}
-          canvaTimeState={canvaTimeState}
-          onTimeframeChange={val => setTimeframe(val)}
-          colors={dotColorList[activeDotIndex]}
-          textVert={`In(${'A'})`}
-          textHoriz={`Time`}
+          beakerDotColor={dotColorList[activeDotIndex]}
+          beakerState={canvaBeakerState}
+          onEndPlay={() => onStepChange(1)}
         />
       </div>
-      <MathContent
-        className={styles.mathContent}
-        {...getFormula()}
-        blanks={tur_MathBlanks[curStep]}
-        blanksCount={11}
-      />
-      <TutorialControl
-        turText={getTurTextByStep()}
-        onStepChange={onStepChange}
-        isDisableNextButton={isEnableChooseMenu}
-      />
+    </div>
+    <div className={styles.reactionContentContainer}>
+      <div className={styles.reactionChartRow}>
+        <div className={styles.chartInA}>
+          <ChartInA
+            valuesC={valuesC}
+            canvaTimeSliderC={canvaTimeSliderC}
+            valuesT={valuesT}
+            canvaTimeSliderT={canvaTimeSliderT}
+            canvaTimeState={canvaTimeState}
+            onTimeframeChange={val => setTimeframe(val)}
+            colors={dotColorList[activeDotIndex]}
+            textVert={`In(${'A'})`}
+            textHoriz={`Time`}
+          />
+        </div>
+        <div className={styles.chartInA}>
+          <ChartInA
+            valuesC={valuesC}
+            canvaTimeSliderC={canvaTimeSliderC}
+            valuesT={valuesT}
+            canvaTimeSliderT={canvaTimeSliderT}
+            canvaTimeState={canvaTimeState}
+            onTimeframeChange={val => setTimeframe(val)}
+            colors={dotColorList[activeDotIndex]}
+            textVert={`In(${'A'})`}
+            textHoriz={`Time`}
+          />
+        </div>
+      </div>
+      <div className={styles.reactionContentRow}>
+        <MathContent
+          className={styles.mathContent}
+          {...getFormula()}
+          blanks={tur_MathBlanks[curStep]}
+          blanksCount={11}
+        />
+        <TutorialControl
+          turText={getTurTextByStep()}
+          onStepChange={onStepChange}
+          isDisableNextButton={isEnableChooseMenu}
+        />
+      </div>
     </div>
     {isHighlight && <div className='overlay'></div>}
   </div>

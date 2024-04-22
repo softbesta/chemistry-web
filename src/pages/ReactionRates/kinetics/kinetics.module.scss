@@ -1,36 +1,57 @@
-.reactionDrawContainer {
+.container {
   display: flex;
+}
+
+.reactionDrawContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   // justify-content: center;
   // flex-wrap: wrap;
-  width: 100%;
-  gap: 30px;
+  // width: 100%;
+  // gap: 30px;
+
+  .reactionCatalyst {
+  }
+
+  .reactionBeaker {}
 }
 
 .reactionContentContainer {
   display: flex;
+  flex-direction: column;
   width: 100%;
   gap: 30px;
   justify-content: space-around;
 
-}
-
-.reactionContentContainer {
-  .chartInA {
+  .reactionChartRow {
     display: flex;
-    justify-content: flex-end;
-    position: relative;
-    width: 270px;
-    height: 212px;
-    margin-top: 15px;
-    // width: 300px;
-    // background-color: aqua;
+    gap: 30px;
+
+    .chartInA {
+      display: flex;
+      justify-content: flex-end;
+      position: relative;
+      width: 270px;
+      // height: 212px;
+      margin-top: 15px;
+      // width: 300px;
+      // background-color: aqua;
+    }
   }
 
-  .mathContent {
-    font-size: 16px;
-    width: 240px;
-    [class*="mathjaxRow"] {
-      flex-direction: column;
+  .reactionContentRow {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+
+    .mathContent {
+      font-size: 16px;
+      width: 240px;
+
+      [class*="mathjaxRow"] {
+        flex-direction: column;
+      }
     }
   }
 }

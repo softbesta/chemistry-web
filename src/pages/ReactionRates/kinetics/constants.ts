@@ -367,7 +367,7 @@ export const stepsActions = [
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
-    isEnableChooseMenu: false,
+    // isEnableChooseMenu: false,
   },
   // 8   If the linear equation...
   { // 8
@@ -403,7 +403,7 @@ export const stepsActions = [
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
-    isEnableChooseMenu: false,
+    // isEnableChooseMenu: false,
   },
   // 13   There's a way to reduce... 
   { // 13
@@ -412,7 +412,7 @@ export const stepsActions = [
     canvaTimeState: 3,
     canvaBeakerState: 3,
     activeDotIndex: 0,
-    isEnableChooseMenu: true,
+    // isEnableChooseMenu: true,
   },
   // 14   Let's try that out! ...
   { // 14
@@ -421,7 +421,7 @@ export const stepsActions = [
     canvaTimeState: 0,
     canvaBeakerState: 1,
     activeDotIndex: 1,
-    isEnableChooseMenu: false,
+    // isEnableChooseMenu: false,
   },
   // 15   Perfect! Now shake the catalyst ...
   { // 15
@@ -443,7 +443,7 @@ export const stepsActions = [
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 3,
     canvaBeakerState: 3,
-    isEnableChooseMenu: false,
+    // isEnableChooseMenu: false,
   },
   // 18   Points of that graph are ...
   { // 18
@@ -452,7 +452,7 @@ export const stepsActions = [
     canvaTimeState: 3,
     canvaBeakerState: 3,
     activeDotIndex: 1,
-    isEnableChooseMenu: true,
+    // isEnableChooseMenu: true,
   },
   // 19   Let's try to produce C....
   { // 19
@@ -461,7 +461,7 @@ export const stepsActions = [
     canvaTimeState: 0,
     canvaBeakerState: 1,
     activeDotIndex: 2,
-    isEnableChooseMenu: false,
+    // isEnableChooseMenu: false,
   },
   // 20   Perfect! Successful collisions ...
   { // 20

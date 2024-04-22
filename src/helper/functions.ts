@@ -1,4 +1,13 @@
 
+let h: any = 0
+export function debounce<T extends (...args: any[]) => any>(cb: T, wait = 1000) {
+  const callable = (...args: any) => {
+    clearTimeout(h);
+    h = setTimeout(() => cb(...args), wait);
+  };
+  return <T>(<any>callable);
+}
+
 // This function converts array item values from 'value' into '!value'
 //    change given count of random items.
 // arr: example - [true, true, true, true, false, true]
