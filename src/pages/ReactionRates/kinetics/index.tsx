@@ -1,6 +1,6 @@
 import useAppData from "../../../hooks/useAppData"
 import styles from './kinetics.module.scss'
-import { useCallback, useEffect } from "react"
+import { useCallback, useEffect, useState } from "react"
 import EnergyProfile from "../../../components/EnergyProfile"
 import ChartTime from "../../../components/ChartTime/ChartTime"
 import ChartBar from "../../../components/ChartBar"
@@ -15,7 +15,7 @@ import { dotColorList, sliderVertText } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
 import ChartInA from "../../../components/ChartInA/ChartInA"
 import { convertExpToHtml } from "../../../helper/functions"
-import { EnergyCatalystContainer, EnergyCatalystItem } from "../../../components/EnergyCatalyst"
+import { EnergyCatalystContainer, EnergyCatalystMoveableItem } from "../../../components/EnergyCatalyst"
 
 const ReactionKinetics = () => {
   const {
@@ -46,6 +46,7 @@ const ReactionKinetics = () => {
   } = useFunctions()
 
   const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
+  const [catalystItemStates, setCatalystItemStates] = useState([3, 2, 2])
 
   // *** Setup tutorial actions here
   const tutorials = Array.from(Array(tur_Text.length).keys()).map(idx => {
@@ -192,7 +193,11 @@ const ReactionKinetics = () => {
     {/* <WatchMenu /> */}
 
     <div className={styles.reactionDrawContainer}>
-      <EnergyCatalystContainer catalystIds={[0, 1, 2]} />
+      <EnergyCatalystContainer
+        catalystTypes={[0, 1, 3]}
+        catalystItemStates={catalystItemStates}
+        setCatalystItemStates={(val) => setCatalystItemStates(val)}
+      />
       <div className={styles.reactionBeaker}>
         <EnergyProfile
           valuesC={valuesC}

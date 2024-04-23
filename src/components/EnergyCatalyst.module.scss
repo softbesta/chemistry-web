@@ -8,14 +8,17 @@
   // background-color: darkseagreen;
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  transform: rotate(135deg);
+  
+  &.active {
+    transform: rotate(135deg);
+  }
 }
 
 .droppingElement {
   position: absolute;
   width: 30px;
   height: 30px;
-  background-color: chocolate;
+  // background-color: chocolate;
   animation: moveAnimation 1.5s forwards;
   top: 400px;
   right: calc(50% - 15px);
@@ -23,13 +26,13 @@
 
 }
 .catType0 {
-  background-color: aqua;
+  background-color: red;
 }
 .catType1 {
-  background-color: chocolate;
+  background-color: green;
 }
 .catType2 {
-  background-color: darkorchid;
+  background-color: blue;
 }
 
 @keyframes moveAnimation {

@@ -8,6 +8,10 @@ export function debounce<T extends (...args: any[]) => any>(cb: T, wait = 1000) 
   return <T>(<any>callable);
 }
 
+export const delay = (ms: number) => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 // This function converts array item values from 'value' into '!value'
 //    change given count of random items.
 // arr: example - [true, true, true, true, false, true]
