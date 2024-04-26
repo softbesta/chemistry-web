@@ -17,8 +17,8 @@ export const tur_Text: TurTextType = [
     For a collision to be effective, the molecules must collide with sufficient energy and in the proper orientation so that products can form.`,
   ],
   [ // 3
-    `This minimum amount of energy that is needed to initiate or start a chemical reaction is called **activation energy (E__a__).** \
-    As long as the collision of the molecules orientated properly have enough energy to surpass the **E__a__**, the collision will be successful.`,
+    `<p style='font-size: 18px'>This minimum amount of energy that is needed to initiate or start a chemical reaction is called **activation energy (E__a__).** \
+    As long as the collision of the molecules orientated properly have enough energy to surpass the **E__a__**, the collision will be successful.</p>`,
   ],
   [ // 4
     `But how is the temperature related to the **rate**? Well, an equation that portrays this \
@@ -26,40 +26,40 @@ export const tur_Text: TurTextType = [
     specifically affects the rate constant **k**.`,
   ],
   [ // 5
-    `**k** is the rate constant, **A** is a term called the frequency factor that accounts for molecular orientation, \
+    `<p style='font-size: 18px'>**k** is the rate constant, **A** is a term called the frequency factor that accounts for molecular orientation, \
     **e** is the natural logarithm base, **R** is the universal gas constant 8.314 J mol^-1^ K^-1^, \
-    **T** is the Kelvin temperature, and **E__a__** is the activation energy.`,
+    **T** is the Kelvin temperature, and **E__a__** is the activation energy.</p>`,
   ],
   [ // 6
-    `As you can tell by the equation, the higher the temperature, the higher the rate constant will be, thus making the **rate** higher too. \
-    In a more practical way, high temperatures make the average energy of molecules go up, beating the **E__a__** barrier.`,
+    `<p style='font-size: 18px'>As you can tell by the equation, the higher the temperature, the higher the rate constant will be, thus making the **rate** higher too. \
+    In a more practical way, high temperatures make the average energy of molecules go up, beating the **E__a__** barrier.</p>`,
   ],
   [ // 7
     `When applying logarithmic properties to both sides, you get a version of the equation that's linear, where:`,
-    `ln(k)**(y)**=(-E__a__/RT)**(mx)**+ln(a)**(b)**`,
-    `With a slope of -E__a__/R.`,
+    `ln(k)**(y)**=(-E--a--/RT)**(mx)**+ln(a)**(b)**`,
+    `With a slope of -E--a--/R.`,
   ],
   [ // 8
-    `If the linear equation is used to represent 2 different points (point 1 and point 2) of the line, we can sum \
+    `<p style='font-size: 16px'>If the linear equation is used to represent 2 different points (point 1 and point 2) of the line, we can sum \
     up the equations to get this form of the Arrhenius equation. This is a very common way to use the Arrhenius equation \
-    where k__1__ is the rate constant at T__1__ and k__2__ is the rate constant at T__2__.`,
+    where k--1-- is the rate constant at T--1-- and k--2-- is the rate constant at T--2--.</p>`,
   ],
   [ // 9
-    `For this reaction, **E__a__ is \(eaString)** and **k is \(k.str(decimals: 1))** \
-    when the temperature is **\(t.str(decimals: 0)) K**. \
+    (val: string[]) => `<p style='font-size: 16px'>For this reaction, **E__a__ is ${val[0]}J** and **k is ${val[1]}** \
+    when the temperature is **${val[2]}K**. \
     In other words, the kinetic energy of the molecules have to be one that when colliding, the potential \
-    energy resultant is higher than **\(eaString)** in order for A and B to successfully transform into a C molecule.`,
+    energy resultant is higher than **${val[0]}** in order for A and B to successfully transform into a C molecule.</p>`,
   ],
   [ // 10
-    `One way to depict the reaction's activation energy and potential energy is with an **energy diagram or reaction profile**. \
+    `<p style='font-size: 15px'>One way to depict the reaction's activation energy and potential energy is with an **energy diagram or reaction profile**. \
     The reaction profile plots the increase in potential energy of the reactants as they approach, reaching a maximum at the moment \
-    of collision, and then the decrease in potential energy as the products recoil.`,
+    of collision, and then the decrease in potential energy as the products recoil.</p>`,
   ],
   [ // 11
-    `This is an **exothermic reaction** because the reaction starts at a higher point of \
+    `<p style='font-size: 16px'>This is an **exothermic reaction** because the reaction starts at a higher point of \
     energy than where it ends. In other words, energy is being released when the reaction \
     takes place. This energy released is usually referred to as heat, but we'll talk about \
-    that deeper in other units.`,
+    that deeper in other units.</p>`,
   ],
   // [ // 12
   //   `This is an **endothermic reaction** because the reaction starts at a lower point of energy \
@@ -68,14 +68,14 @@ export const tur_Text: TurTextType = [
   //   other units.`,
   // ],
   [ // 12
-    `The hump or bell in the graph represents the **activation energy**. The reaction energy has to be one \
+    `<p style='font-size: 15px'>The hump or bell in the graph represents the **activation energy**. The reaction energy has to be one \
     that overcomes that difference for it to occur. Otherwise, even with the proper orientation the molecules colliding of \
-    A and B won't be turning into C. The higher **E__a__** is, the harder it is for the reaction to have sufficient energy to overcome it.`,
+    A and B won't be turning into C. The higher **E__a__** is, the harder it is for the reaction to have sufficient energy to overcome it.</p>`,
   ],
   [ // 13
-    `There's a way to reduce the **activation energy**, and that is with the use of a **catalyst**. \
+    `<p style='font-size: 18px'>There's a way to reduce the **activation energy**, and that is with the use of a **catalyst**. \
     Catalysts make reactions faster, and even though there are various types, in one way or another they do \
-    so by reducing the activation energy, or **E__a__**.`,
+    so by reducing the activation energy, or **E__a__**.</p>`,
   ],
   [ // 14
     `Let's try that out!`,
@@ -87,27 +87,27 @@ export const tur_Text: TurTextType = [
     `**Shake your phone or tablet or just tap the shaker once again**.`,
   ],
   [ // 16
-    `Look! The E__a__ was reduced to **\(newEa.str(decimals: 0)) J** \
-    thanks to that catalyst. See that horizontal line? It represents the average kinetic energy of the molecules. \
-    Right now it's lower than E__a__, so no products are going to be formed just yet.`,
+    (val: string[]) => `Look! The E--a-- was reduced to **${val[0]}J** 
+    thanks to that catalyst. See that horizontal line? It represents the average kinetic energy of the molecules. 
+    Right now it's lower than E--a--, so no products are going to be formed just yet.`,
   ],
   [ // 17
-    `Take a look at the linear graph of ln(k) vs 1/T with a slope of \(slope.str(decimals: 0)). \
+    (val: string[]) => `<p style='font-size: 17px'>Take a look at the linear graph of ln(k) vs 1/T with a slope of ${-1083}. \
     This graph is very useful to determine the relation between the constant **k** and the temperature. \
-    Here you can see too that the higher **k** is, the higher **T** is.`,
+    Here you can see too that the higher **k** is, the higher **T** is.</p>`,
   ],
   [ // 18
-    `Points of that graph are being represented in this equation. As of now, **k** went up to **\(newK.str(decimals: 1))** \
-    when **T** is **\(temp.str(decimals: 0))K**, because the catalyst lowered the E__a__, making the constant **k** higher, thus making the **rate** higher too.`,
+    (val: string[]) => `<p style='font-size: 18px'>Points of that graph are being represented in this equation. As of now, **k** went up to **${1.3}** \
+    when **T** is **${400}K**, because the catalyst lowered the E--a--, making the constant **k** higher, thus making the **rate** higher too.`,
   ],
   [ // 19
-    `Let's try to produce C. **Use the flame slider to increase the temperature in the beaker**. \
+    `<p style='font-size: 17px'>Let's try to produce C. **Use the flame slider to increase the temperature in the beaker**. \
     This will make the kinetic energy of the molecules increase too, meaning they will go faster so that when they collide \
-    there's enough energy to overcome the E__a__.`,
+    there's enough energy to overcome the E--a--.</p>`,
   ],
   [ // 20
-    `Perfect! Successful collisions are taking place!`,
-    `Notice how the average kinetic bar goes up when the temperature goes up too. Also, notice how the rate constant can vary with the temperature.`,
+    `<p style='font-size: 17px'>Perfect! Successful collisions are taking place!</p>`,
+    `<p style='font-size: 17px'>Notice how the average kinetic bar goes up when the temperature goes up too. Also, notice how the rate constant can vary with the temperature.</p>`,
   ],
   [ // 21
     `It's all done! All of A and B has turned into C successfully.`,
@@ -123,14 +123,14 @@ export const tur_Text: TurTextType = [
     `**Shake your phone or tablet or just tap the shaker once again**.`,
   ],
   [ // 24
-    `Look! The E__a__ was reduced to **\(newEa.str(decimals: 0)) J** \
+    (val: string[]) => `Look! The E--a-- was reduced to **${8000} J** \
     thanks to that catalyst. See that horizontal line? It represents the average kinetic energy of the molecules. \
-    Right now it's lower than E__a__, so no products are going to be formed just yet.`,
+    Right now it's lower than E--a--, so no products are going to be formed just yet.`,
   ],
   [ // 25
-    `Let's try to produce C. **Use the flame slider to increase the temperature in the beaker**. \
+    `<p style='font-size: 17px'>Let's try to produce C. **Use the flame slider to increase the temperature in the beaker**. \
     This will make the kinetic energy of the molecules increase too, meaning they will go faster so that when they collide \
-    there's enough energy to overcome the E__a__.`,
+    there's enough energy to overcome the E--a--.</p>`,
   ],
   [ // 26
     `Perfect! Successful collisions are taking place!`,
@@ -146,18 +146,18 @@ export const tur_Text: TurTextType = [
     `**Tap a catalyst to select it**.`,
   ],
   [ // 29
-    `Look! The E__a__ was reduced to **\(newEa.str(decimals: 0)) J** \
+    `Look! The E--a-- was reduced to **${6000} J** \
     thanks to that catalyst. See that horizontal line? It represents the average kinetic energy of the molecules. \
-    Right now it's lower than E__a__, so no products are going to be formed just yet.`,
+    Right now it's lower than E--a--, so no products are going to be formed just yet.`,
   ],
   [ // 30
-    `Let's try to produce C. **Use the flame slider to increase the temperature in the beaker**. \
+    `<p style='font-size: 17px'>Let's try to produce C. **Use the flame slider to increase the temperature in the beaker**. \
     This will make the kinetic energy of the molecules increase too, meaning they will go faster so that when they collide \
-    there's enough energy to overcome the E__a__.`,
+    there's enough energy to overcome the E--a--.</p>`,
   ],
   [ // 31
-    `Perfect! Successful collisions are taking place!`,
-    `Notice how the average kinetic bar goes up when the temperature goes up too. Also, notice how the rate constant can vary with the temperature.`,
+    `<p style='font-size: 17px'>Perfect! Successful collisions are taking place!</p>`,
+    `<p style='font-size: 17px'>Notice how the average kinetic bar goes up when the temperature goes up too. Also, notice how the rate constant can vary with the temperature.</p>`,
   ],
   [ // 32
     `It's all done! All of A and B has turned into C successfully.`,
@@ -558,17 +558,84 @@ export const stepsActions = [
 
 export const tur_MathBlanks = [
   [
-    { left: -12, top: 94, width: 27 }, //0
-    { left: 38, top: 81, width: 33 }, //1
-    { left: 0, top: 180, width: 42 }, //2
-    { left: 84, top: 180, width: 33 }, //3
-    { left: 0, top: 248, width: 36 }, //4
-    { left: 57, top: 248, width: 41 }, //5
-    { left: 105, top: 248, width: 32 }, //6
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
   ],
   [
-    { left: 0, top: 248, width: 36 }, //4
-    { left: 105, top: 248, width: 32 }, //6
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
+  ],
+  [
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
+  ],
+  [
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
+  ],
+  [
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
+  ],
+  [
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
+  ],
+  [
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
+  ],
+  [
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
+  ],
+  [
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
+  ],
+  [
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
+  ],
+  [
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
+  ],
+  [
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
+  ],
+  [
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
+  ],
+  [
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
+  ],
+  [
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
+  ],
+  [
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
   ],
 ]
 

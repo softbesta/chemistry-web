@@ -143,6 +143,7 @@ export const convertExpToHtml = (exp: string | undefined) => {
   update = expressWithClass(exp, '__', 'sm-botom')
   update = expressWithClass(update, '^', 'sm-top')
   update = expressWithClass(update, '**', 'txt-red')
+  update = expressWithClass(update, '--', 'sm-botom txt-black')
   return update
 }
 

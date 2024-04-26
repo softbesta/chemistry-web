@@ -29,5 +29,8 @@ code {
   top: -7px;
 }
 .txt-red {
-  color: rgb(220, 84, 59);;
+  color: rgb(220, 84, 59);
+}
+.txt-black{
+  color: black !important;
 }

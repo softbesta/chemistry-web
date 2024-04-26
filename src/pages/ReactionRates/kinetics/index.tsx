@@ -101,20 +101,16 @@ const ReactionKinetics = () => {
     const t_12 = 1 / (k * A0)
     const rate = k * (At * At)
 
-    const exp0 = `\\[ k = \\frac{(1/[A_t]) - (1/[A_0])}{t}\\]`
-    const exp1 = `\\[ k = \\frac{${(1 / At).toFixed(2)} - ${(1 / A0).toFixed(2)}}{${t1.toFixed(2)}}\\]`
-    const exp2 = `\\[ t_{1/2} = 1/k[A_0] \\]`
-    const exp3 = `\\[ ${t_12.toFixed(2)} = 1/${k.toFixed(2)}(${A0.toFixed(2)}) \\]`
-    const exp4 = `\\[ Rate = k[A]^2 \\]`
-    const exp5 = `\\[ ${rate.toFixed(2)} = ${k.toFixed(3)}(${At.toFixed(2)})^2 \\]`
+    const exp0 = `\\[ k = A e^{-Ea/RT}\\]`
+    const exp1 = `\\[ ln(k) = ln(A) - \\frac{Ea}{RT}\\]`
+    const exp2 = `\\[ ln(\\frac{k1}{k2}) = \\frac{Ea}{R}(\\frac{T_1 - T_2}{T_1T_2}) \\]`
+    const exp4 = `\\[ ln(\\frac{1.3}{1.3}) = \\frac{9e3}{8.31}(\\frac{400 - 400}{400 x 400}) \\]`
 
     return {
       exp0,
       exp1,
       exp2,
-      exp3,
       exp4,
-      exp5,
     }
   }
 

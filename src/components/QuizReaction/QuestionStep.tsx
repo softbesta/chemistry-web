@@ -1,3 +1,4 @@
+import { convertExpToHtml } from "../../helper/functions"
 import { QuizItemType } from "../../helper/types"
 import styles from './styles.module.scss'
 
@@ -30,7 +31,7 @@ const QuestionStep = ({ quizItem, selectedAnswers, onSelectAnswers, isCorrectAns
     <h3
       className={`${styles.quizQuestion} ${question.length < 60 ? styles.textCenter : ''}`}
     >
-      {question}
+      <div dangerouslySetInnerHTML={{ __html: convertExpToHtml(question) || '' }} />
     </h3>
     <div>
       {allAnswerItems.map((item, index) => {
@@ -61,10 +62,10 @@ const QuestionStep = ({ quizItem, selectedAnswers, onSelectAnswers, isCorrectAns
             {answered === 2 && <div className={styles.wrongIcon}>
               <i className="fa fa-close"></i>
             </div>}
-            {item.answer}
+            <div dangerouslySetInnerHTML={{ __html: convertExpToHtml(item.answer) || '' }} />
           </div>
           {answered === 2 && <div className={styles.explanation}>
-            {item.explanation}
+            <div dangerouslySetInnerHTML={{ __html: convertExpToHtml(item.explanation) || '' }} />
           </div>}
         </div>
       })}

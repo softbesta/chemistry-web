@@ -18,11 +18,11 @@ const config = {
 
 interface MathContentProps {
   exp0: string,
-  exp1: string,
-  exp2: string,
-  exp3: string,
-  exp4: string,
-  exp5: string,
+  exp1?: string,
+  exp2?: string,
+  exp3?: string,
+  exp4?: string,
+  exp5?: string,
   blanks: (any | undefined)[]
   blanksCount: number
   className?: string

@@ -21,18 +21,18 @@ export const EnergyCatalystContainer = ({
   catalystTypes = [0, 1, 3],
   catalystItemStates,
   setCatalystItemStates,
-  regionWidth = 230,
+  regionWidth = 350,
   regionHeight = 230,
 }: EnergyCatalystContainerProps) => {
   const catItemWidth = 30, catItemHeight = 70
 
   // 0: hidden, 1: moveable, 2: menu item disabled, 3: menu item active
   const initialMenuPositions = [
-    { x: 40, y: 0 },
-    { x: 100, y: 0 },
-    { x: 160, y: 0 },
+    { x: regionWidth / 2 - 85, y: 0 },
+    { x: regionWidth / 2 - 25, y: 0 },
+    { x: regionWidth / 2 + 35, y: 0 },
   ]
-  const initialActivePosition = { x: 100, y: 100 }
+  const initialActivePosition = { x: regionWidth / 2 - 25, y: 100 }
 
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -221,8 +221,8 @@ export const EnergyCatalystMenuItem = ({
   position,
   onClick,
 }: EnergyCatalystMenuItemProps) => {
-  const catalystColor = disable ? 'gray' : catalystImgColors[catType]
-  // const catalystImg = disable ? catalystDisabled : catalystImgs[catType]
+  // const catalystColor = disable ? 'gray' : catalystImgColors[catType]
+  const catalystImg = disable ? catalystDisabled : catalystImgs[catType]
   // console.log({ catalystColor, catType })
 
   return <div
@@ -234,8 +234,8 @@ export const EnergyCatalystMenuItem = ({
       width,
       height,
       cursor: 'pointer',
-      backgroundColor: catalystColor,
-      // backgroundImage: `url(${catalystImg})`
+      // backgroundColor: catalystColor,
+      backgroundImage: `url(${catalystImg})`
     }}
     onClick={() => !disable && onClick()}
   />
@@ -307,8 +307,8 @@ export const EnergyCatalystMoveableItem = ({
       height,
       cursor: isDragging ? 'grabbing' : 'grab',
       ...(isDragging ? { zIndex: 123 } : {}),
-      backgroundColor: catalystImgColors[catIndex],
-      // backgroundImage: `url(${catalystImgs[catIndex]})`
+      // backgroundColor: catalystImgColors[catIndex],
+      backgroundImage: `url(${catalystImgs[catIndex]})`
     }}
     onMouseDown={_e => handleMouseDown(_e)}
     onClick={() => onClick?.()}
