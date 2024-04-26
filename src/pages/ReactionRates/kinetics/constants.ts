@@ -313,102 +313,74 @@ export const stepsActions = [
 
   // 0   Not so fast! ...
   { // 0
-    canvaTimeSliderC: [2, 0],
-    canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
     canvaBeakerState: 1,
     isEnableChooseMenu: false,
   },
   // 1   We now know that the concentration ...
   { // 1
-    canvaTimeSliderC: [1, 2],
-    canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
     canvaBeakerState: 1,
   },
   // 2   It states that the reaction, ...
   { // 2
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 1,
     canvaBeakerState: 1,
   },
   // 3   This minimum amount of...
   { // 3
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 1,
     canvaBeakerState: 1,
   },
   // 4   But how is the temperature...
   { // 4
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 1,
     canvaBeakerState: 1,
   },
   // 5   k is the rate constant...
   { // 5
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 2,
     canvaBeakerState: 2,
   },
   // 6   As you can tell by the equation....
   { // 6
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
   // 7   When applying logarithmic...
   { // 7
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
     // isEnableChooseMenu: false,
   },
   // 8   If the linear equation...
   { // 8
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
   // 9   For this reaction, **E__a__...
   { // 9
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
   // 10   One way to depict the reaction ...
   { // 10
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
   // 11   This is an **exothermic reaction...
   { // 11
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
   // 12   The hump or bell in the ...
   { // 12
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
     // isEnableChooseMenu: false,
   },
   // 13   There's a way to reduce... 
   { // 13
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
     activeDotIndex: 0,
@@ -416,8 +388,6 @@ export const stepsActions = [
   },
   // 14   Let's try that out! ...
   { // 14
-    canvaTimeSliderC: [2, 0],
-    canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
     canvaBeakerState: 1,
     activeDotIndex: 1,
@@ -425,30 +395,22 @@ export const stepsActions = [
   },
   // 15   Perfect! Now shake the catalyst ...
   { // 15
-    canvaTimeSliderC: [1, 0],
-    canvaTimeSliderT: [1, 2],
     canvaTimeState: 1,
     canvaBeakerState: 1,
   },
   // 16   Look! The E__a__ was reduced  ...
   { // 16
-    canvaTimeSliderC: [1, 0],
-    canvaTimeSliderT: [1, 1],
     canvaTimeState: 2,
     canvaBeakerState: 2,
   },
   // 17   Take a look at the linear  ...
   { // 17
-    canvaTimeSliderC: [1, 0],
-    canvaTimeSliderT: [1, 1],
     canvaTimeState: 3,
     canvaBeakerState: 3,
     // isEnableChooseMenu: false,
   },
   // 18   Points of that graph are ...
   { // 18
-    canvaTimeSliderC: [1, 0],
-    canvaTimeSliderT: [1, 1],
     canvaTimeState: 3,
     canvaBeakerState: 3,
     activeDotIndex: 1,
@@ -456,8 +418,6 @@ export const stepsActions = [
   },
   // 19   Let's try to produce C....
   { // 19
-    canvaTimeSliderC: [2, 0],
-    canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
     canvaBeakerState: 1,
     activeDotIndex: 2,
@@ -465,92 +425,66 @@ export const stepsActions = [
   },
   // 20   Perfect! Successful collisions ...
   { // 20
-    canvaTimeSliderC: [1, 2],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 1,
     canvaBeakerState: 1,
   },
   // 21   It's all done! All of ...
   { // 21
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 2,
     canvaBeakerState: 2,
   },
   // 22   Let's try that out! ...
   { // 22
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
   // 23   Perfect! Now shake the ...
   { // 23
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
   // 24   Look! The E__a__ was ...
   { // 24
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
   // 25   Let's try to produce C ...
   { // 25
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
   // 26   Perfect! Successful collisions ...
   { // 26
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
   // 27   It's all done! All of ...
   { // 27
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
   // 28   Let's try that out! ...
   { // 28
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
   // 29   Look! The E__a__ was ...
   { // 29
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
   // 30   Let's try to produce ...
   { // 30
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
   // 31   Perfect! Successful collisions ...
   { // 31
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
   // 32   It's all done! All of ...
   { // 32
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBeakerState: 3,
   },
