@@ -16,6 +16,10 @@ import ChapterMenu from "../../../layout/ChapterMenu"
 import ChartInA from "../../../components/ChartInA/ChartInA"
 import { convertExpToHtml } from "../../../helper/functions"
 import { EnergyCatalystContainer, EnergyCatalystMoveableItem } from "../../../components/EnergyCatalyst"
+import { BeakerSettings, BeakerShape } from "../../../components/CanvasBeaker/BeakerShape"
+import BeakerWater from "../../../components/CanvasBeaker/BeakerShape/BeakerWater"
+import { ChamberF } from "../../../components/CanvasBeaker/Chamber/ChamberF"
+import Chamber from "../../../components/CanvasBeaker/Chamber/Chamber"
 
 const ReactionKinetics = () => {
   const {
@@ -183,25 +187,93 @@ const ReactionKinetics = () => {
     return () => removeHighlightElement(tutorials[curStep]?.highlight)
   }, [])
 
+
+  const width = 290
+  const height = 320
+  const concentration = 0.4
+  const settings = new BeakerSettings(290, true)
+
+  console.log({ settings })
+
+  const activeGases = [
+    {
+      id: 3,
+      particleSize: 6,  // ** control gas cirle size
+      color: 0x00d0f0,  // ** control gas color
+      name: 'Oxygen',
+      symbol: <>O<sub>2</sub></>,
+      svgSymbol: <>O<tspan baselineShift="sub">2</tspan></>,
+      mass: 1
+    },
+    {
+      id: 9,
+      particleSize: 6,  // ** control gas cirle size
+      color: 0xff0000,  // ** control gas color
+      name: 'Hydrogen',
+      symbol: <>H<sub>2</sub></>,
+      svgSymbol: <>H<tspan baselineShift="sub">2</tspan></>,
+      mass: 1
+    },
+  ]
+  const gasProportions = [5, 5];  // ** control counts here
+  const isPlaying = true
+  const allowEscape = false
+  const escapeSpeed = 1000
+  const temperature = 0.01
+
+  const [count, setCount] = useState(0)
+
   return <div className={styles.container}>
     <ChapterMenu />
     <ChooseMenu isEnable={isEnableChooseMenu} onClickItem={() => handleClickChooseMenuItem()} />
     {/* <WatchMenu /> */}
 
     <div className={styles.reactionDrawContainer}>
+      <button
+        onClick={() => setCount(count + 1)}
+      >TEST</button>
       <EnergyCatalystContainer
         catalystTypes={[0, 1, 3]}
         catalystItemStates={catalystItemStates}
         setCatalystItemStates={(val) => setCatalystItemStates(val)}
       />
       <div className={styles.reactionBeaker}>
-        <EnergyProfile
+        <div style={{ position: 'relative' }}>
+          <BeakerShape
+            width={width}
+            height={height}
+            settings={settings}
+            waterlevel={0.4}
+          />
+          {/* <ChamberF
+            width={width}
+            height={height}
+            activeGases={activeGases}
+            gasProportions={gasProportions}
+            isPlaying={isPlaying}
+            allowEscape={allowEscape}
+            escapeSpeed={escapeSpeed}
+            temperature={temperature}
+            count={count}
+          /> */}
+          <Chamber
+            width={width}
+            height={height}
+            activeGases={activeGases}
+            gasProportions={gasProportions}
+            isPlaying={isPlaying}
+            allowEscape={allowEscape}
+            escapeSpeed={escapeSpeed}
+            temperature={temperature}
+          />
+        </div>
+        {/* <EnergyProfile
           valuesC={valuesC}
           valuesT={valuesT}
           beakerDotColor={dotColorList[activeDotIndex]}
           beakerState={canvaBeakerState}
           onEndPlay={() => onStepChange(1)}
-        />
+        /> */}
       </div>
     </div>
     <div className={styles.reactionContentContainer}>
