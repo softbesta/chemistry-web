@@ -206,16 +206,23 @@ export const EnergyCatalystContainer = ({
         onClick={() => onClickCatalystMenuItem(index)}
       />
     })}
-    {activeCatIdx > -1 && <EnergyCatalystMoveableItem
-      catIndex={activeCatIdx}
-      width={catItemWidth}
-      height={catItemHeight}
-      isDragging={dragIndex === activeCatIdx}
-      position={position}
-      onClick={() => onMovableItemClick()}
-      onDragStart={() => onItemDragStart(activeCatIdx)}
-      setDragOffset={setDragOffset}
-    />}
+    {activeCatIdx > -1 && <>
+      <EnergyCatalystMoveableItem
+        catIndex={activeCatIdx}
+        width={catItemWidth}
+        height={catItemHeight}
+        isDragging={dragIndex === activeCatIdx}
+        position={position}
+        onClick={() => onMovableItemClick()}
+        onDragStart={() => onItemDragStart(activeCatIdx)}
+        setDragOffset={setDragOffset}
+      />
+      <div className={styles.textShake}>
+        <span>&#9650;</span>
+        <span>shake</span>
+        <span>&#9660;</span>
+      </div>
+    </>}
     {/* <button onClick={() => animationStart()}>start</button>
     <button onClick={() => animationEnd()}>end</button> */}
     <ElementDroppingAnimation
