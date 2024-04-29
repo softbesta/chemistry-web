@@ -21,6 +21,14 @@ import BeakerWater from "../../../components/CanvasBeaker/BeakerShape/BeakerWate
 import { ChamberF } from "../../../components/CanvasBeaker/Chamber/ChamberF"
 import Chamber from "../../../components/CanvasBeaker/Chamber/Chamber"
 import SliderHoriz from "../../../components/CanvasBeaker/SliderHoriz/SliderHoriz"
+import {
+  ConcentrationPlotView,
+  FirstOrderConcentration,
+  ReactionRateChartLayoutSettings,
+  TimeChartLayoutSettings,
+  ZeroOrderConcentration
+} from "../../../components/ConcentrationPlotView"
+import { ReactionSettings, ReactionType } from "../../../components/ConcentrationPlotView/constants"
 
 const ReactionKinetics = () => {
   const {
@@ -189,6 +197,10 @@ const ReactionKinetics = () => {
   }, [])
 
 
+
+
+
+  // ** Beaker control variables
   const settings = new BeakerSettings(290, true)
 
   console.log({ settings })
@@ -220,6 +232,19 @@ const ReactionKinetics = () => {
   const waterLevel = 0.4          // ** control waterlevel here
 
   const [valueFire, setValueFire] = useState(50)
+
+
+  // ** Graph Chart control variables
+  const graphChartWidth = 280;
+  const graphChartHeight = 280;
+  const concentrationA = new ZeroOrderConcentration()
+  concentrationA.init4Params(0, 0.8, 10, 0.2)
+  const concentrationB = new ZeroOrderConcentration()
+  concentrationB.init4Params(0, 0.2, 10, 0.8)
+  // const concentrationA = new FirstOrderConcentration()
+  // concentrationA.init3Params(1, 3, 10)
+  // const concentrationB = new FirstOrderConcentration()
+  // concentrationB.init3Params(1, 3, 10)
 
   return <div className={styles.container}>
     <ChapterMenu />
@@ -282,29 +307,81 @@ const ReactionKinetics = () => {
     <div className={styles.reactionContentContainer}>
       <div className={styles.reactionChartRow}>
         <div className={styles.chartInA}>
-          <ChartInA
-            valuesC={valuesC}
-            canvaTimeSliderC={canvaTimeSliderC}
-            valuesT={valuesT}
-            canvaTimeSliderT={canvaTimeSliderT}
-            canvaTimeState={canvaTimeState}
-            onTimeframeChange={val => setTimeframe(val)}
-            colors={dotColorList[activeDotIndex]}
-            textVert={`In(${'A'})`}
-            textHoriz={`Time`}
+          <ConcentrationPlotView
+            width={graphChartWidth}
+            height={graphChartHeight}
+            settings={
+              new ReactionRateChartLayoutSettings(
+                graphChartWidth,
+                ReactionSettings.Axis.minC,
+                ReactionSettings.Axis.maxC,
+                ReactionSettings.Axis.minT,
+                ReactionSettings.Axis.maxT,
+                true,
+                {} as TimeChartLayoutSettings
+              )
+            }
+            concentrationA={concentrationA}
+            concentrationB={concentrationB}
+            initialTime={0}
+            currentTime={10}
+            finalTime={10}
+            canSetCurrentTime={true}
+            highlightChart={false}
+            highlightLhsCurve={true}
+            highlightRhsCurve={false}
+            display={
+              {
+                reactant: {
+                  name: ReactionType.reactantName.A,
+                  color: ReactionType.reactantColor.A,
+                },
+                product: {
+                  name: ReactionType.productName.A,
+                  color: ReactionType.productColor.A,
+                }
+              }
+            }
+            includeAxis={true}
           />
         </div>
         <div className={styles.chartInA}>
-          <ChartInA
-            valuesC={valuesC}
-            canvaTimeSliderC={canvaTimeSliderC}
-            valuesT={valuesT}
-            canvaTimeSliderT={canvaTimeSliderT}
-            canvaTimeState={canvaTimeState}
-            onTimeframeChange={val => setTimeframe(val)}
-            colors={dotColorList[activeDotIndex]}
-            textVert={`In(${'A'})`}
-            textHoriz={`Time`}
+          <ConcentrationPlotView
+            width={graphChartWidth}
+            height={graphChartHeight}
+            settings={
+              new ReactionRateChartLayoutSettings(
+                graphChartWidth,
+                ReactionSettings.Axis.minC,
+                ReactionSettings.Axis.maxC,
+                ReactionSettings.Axis.minT,
+                ReactionSettings.Axis.maxT,
+                true,
+                {} as TimeChartLayoutSettings
+              )
+            }
+            concentrationA={concentrationA}
+            concentrationB={concentrationB}
+            initialTime={0}
+            currentTime={10}
+            finalTime={10}
+            canSetCurrentTime={true}
+            highlightChart={false}
+            highlightLhsCurve={true}
+            highlightRhsCurve={false}
+            display={
+              {
+                reactant: {
+                  name: ReactionType.reactantName.A,
+                  color: ReactionType.reactantColor.A,
+                },
+                product: {
+                  name: ReactionType.productName.A,
+                  color: ReactionType.productColor.A,
+                }
+              }
+            }
+            includeAxis={true}
           />
         </div>
       </div>
