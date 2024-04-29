@@ -324,106 +324,129 @@ export const stepsActions = [
     canvaTimeState: 0,
     canvaBeakerState: 1,
     isEnableChooseMenu: false,
+    isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
-    isBurnerActive: false,
   },
   // 1   We now know that the concentration ...
   { // 1
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    isBurnerActive: true,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
-    isBurnerActive: true,
   },
   // 2   It states that the reaction, ...
   { // 2
     canvaTimeState: 1,
     canvaBeakerState: 1,
+    isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
-    isBurnerActive: false,
+    showCatalystMoveItem: false,
   },
   // 3   This minimum amount of...
   { // 3
     canvaTimeState: 1,
     canvaBeakerState: 1,
+    isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
+    showCatalystMoveItem: false,
   },
   // 4   But how is the temperature...
   { // 4
     canvaTimeState: 1,
     canvaBeakerState: 1,
+    isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
+    showCatalystMoveItem: false,
   },
   // 5   k is the rate constant...
   { // 5
     canvaTimeState: 2,
     canvaBeakerState: 2,
+    isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
+    showCatalystMoveItem: false,
   },
   // 6   As you can tell by the equation....
   { // 6
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
+    showCatalystMoveItem: false,
   },
   // 7   When applying logarithmic...
   { // 7
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
+    showCatalystMoveItem: false,
     // isEnableChooseMenu: false,
   },
   // 8   If the linear equation...
   { // 8
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
+    showCatalystMoveItem: false,
   },
   // 9   For this reaction, **E__a__...
   { // 9
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
+    showCatalystMoveItem: false,
   },
   // 10   One way to depict the reaction ...
   { // 10
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
+    showCatalystMoveItem: false,
   },
   // 11   This is an **exothermic reaction...
   { // 11
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
+    showCatalystMoveItem: false,
   },
   // 12   The hump or bell in the ...
   { // 12
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
+    showCatalystMoveItem: false,
     // isEnableChooseMenu: false,
   },
   // 13   There's a way to reduce... 
   { // 13
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 0,
+    showCatalystMoveItem: false,
     activeDotIndex: 0,
     // isEnableChooseMenu: true,
   },
@@ -431,6 +454,7 @@ export const stepsActions = [
   { // 14
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    isBurnerActive: false,
     catalystItemStates: [4, 4, 4],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
@@ -441,6 +465,7 @@ export const stepsActions = [
   { // 15
     canvaTimeState: 1,
     canvaBeakerState: 1,
+    isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: true,
@@ -449,6 +474,7 @@ export const stepsActions = [
   { // 16
     canvaTimeState: 2,
     canvaBeakerState: 2,
+    isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
     showCatalystMoveItem: false,
@@ -457,6 +483,7 @@ export const stepsActions = [
   { // 17
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
     showCatalystMoveItem: false,
@@ -466,6 +493,7 @@ export const stepsActions = [
   { // 18
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
     showCatalystMoveItem: false,
@@ -476,6 +504,7 @@ export const stepsActions = [
   { // 19
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    isBurnerActive: true,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
     showCatalystMoveItem: false,
@@ -486,6 +515,7 @@ export const stepsActions = [
   { // 20
     canvaTimeState: 1,
     canvaBeakerState: 1,
+    isBurnerActive: true,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
     showCatalystMoveItem: false,
@@ -494,6 +524,7 @@ export const stepsActions = [
   { // 21
     canvaTimeState: 2,
     canvaBeakerState: 2,
+    isBurnerActive: true,
     catalystItemStates: [4, 4, 4],
     curCatShakingOrderIdx: 1,
     showCatalystMoveItem: false,
@@ -502,6 +533,7 @@ export const stepsActions = [
   { // 22
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
     showCatalystMoveItem: true,
@@ -510,6 +542,7 @@ export const stepsActions = [
   { // 23
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 2,
     showCatalystMoveItem: false,
@@ -518,6 +551,7 @@ export const stepsActions = [
   { // 24
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 2,
     showCatalystMoveItem: false,
@@ -526,6 +560,7 @@ export const stepsActions = [
   { // 25
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: true,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 2,
     showCatalystMoveItem: false,
@@ -534,6 +569,7 @@ export const stepsActions = [
   { // 26
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: true,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 2,
     showCatalystMoveItem: false,
@@ -542,6 +578,7 @@ export const stepsActions = [
   { // 27
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: true,
     catalystItemStates: [4, 4, 4],
     curCatShakingOrderIdx: 2,
     showCatalystMoveItem: false,
@@ -550,6 +587,7 @@ export const stepsActions = [
   { // 28
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 2,
     showCatalystMoveItem: true,
@@ -558,6 +596,7 @@ export const stepsActions = [
   { // 29
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 3,
     showCatalystMoveItem: false,
@@ -566,6 +605,7 @@ export const stepsActions = [
   { // 30
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 3,
     showCatalystMoveItem: false,
@@ -574,6 +614,7 @@ export const stepsActions = [
   { // 31
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 3,
     showCatalystMoveItem: false,
@@ -582,6 +623,7 @@ export const stepsActions = [
   { // 32
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 3,
     showCatalystMoveItem: false,

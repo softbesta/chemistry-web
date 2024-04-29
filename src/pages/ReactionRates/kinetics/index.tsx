@@ -108,6 +108,7 @@ const ReactionKinetics = () => {
         setShowCatalystMoveItem(curActions.showCatalystMoveItem)
       }
       if (curActions?.isBurnerActive !== undefined) {
+        console.log('zzz curActions.isBurnerActive', curActions.isBurnerActive, {curActions})
         setIsBurnerActive(curActions.isBurnerActive)
       }
     }
