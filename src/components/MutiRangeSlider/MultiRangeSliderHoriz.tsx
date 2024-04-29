@@ -11,7 +11,7 @@ interface MultiRangeSliderProps {
   values: number[]
   onChange: (val: number, index: number) => void
 }
-const MultiRangeSlider = ({
+const MultiRangeSliderHoriz = ({
   max,
   width,
   distance = 13,
@@ -23,7 +23,7 @@ const MultiRangeSlider = ({
   // const [valRight, setValRight] = useState(showThumbIndex[1] === 0 ? max : values[1])
   const valLeft = values[0]
   const valRight = values[1]
-  console.log({ valLeft, valRight })
+  // console.log({ valLeft, valRight })
 
   // // Get min and max values when their state changes
   // useEffect(() => {
@@ -35,25 +35,25 @@ const MultiRangeSlider = ({
   const isLeftOverlap = maxDisabled || valLeft > max - 10
 
   const onChangeValue = (val: number, index: number) => {
-    console.log('ttt', { val, index })
+    // console.log('ttt', { val, index })
     onChange(val, index)
   }
 
   return (
     <div
-      className='slider-container'
+      className='h-slider-container'
       style={{
         ...(width ? { width } : {width: '100%'})
       }}
     >
-      <div className='slider-horiz-bar' />
-      <div className='slider-horiz'>
-        <div className='slider-horizontal-slider'>
+      <div className='h-slider-bar' />
+      <div className='h-slider-thumbs'>
+        <div className='h-slider-inputs'>
           <input
             className={classnames(
-              'horiz-thumb thumb--zindex-3',
+              'h-slider-thumb thumb--zindex-3',
               { 'thumb--zindex-5': isLeftOverlap },
-              { 'slider-thumb-hidden': showThumbIndex[0] === 0 },
+              { 'h-slider-thumb-hidden': showThumbIndex[0] === 0 },
             )}
             style={{
               ...(width ? { width } : {width: '100%'})
@@ -72,8 +72,8 @@ const MultiRangeSlider = ({
           />
           <input
             className={classnames(
-              'horiz-thumb thumb--zindex-4',
-              { 'slider-thumb-hidden': showThumbIndex[1] === 0 },
+              'h-slider-thumb thumb--zindex-4',
+              { 'thumb-hidden': showThumbIndex[1] === 0 },
             )}
             style={{
               ...(width ? { width } : {width: '100%'})
@@ -96,4 +96,4 @@ const MultiRangeSlider = ({
   )
 }
 
-export default MultiRangeSlider
+export default MultiRangeSliderHoriz

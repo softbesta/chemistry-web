@@ -164,7 +164,7 @@ export default class Chamber extends React.Component {
         const proportion = gasParticles.length /
           me.initialParticleCounts[idx];
 
-        me.props.onParticleCountUpdated(idx, proportion * 100);
+        // me.props.onParticleCountUpdated(idx, proportion * 100);
       }
     });
   }
@@ -592,5 +592,5 @@ Chamber.propTypes = {
   escapeSpeed: PropTypes.number.isRequired,
   temperature: PropTypes.number.isRequired,
   waterlevel: PropTypes.number.isRequired,
-  onParticleCountUpdated: PropTypes.func.isRequired
+  // onParticleCountUpdated: PropTypes.func.isRequired
 };

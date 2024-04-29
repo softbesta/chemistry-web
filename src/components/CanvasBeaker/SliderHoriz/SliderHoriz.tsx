@@ -1,7 +1,7 @@
 import ReactSlider from "react-slider"
 import styles from './SliderHoriz.module.scss'
 import { useMemo, useState } from "react"
-import MultiRangeSlider from "../../MutiRangeSlider/MultiRangeSlider"
+import MultiRangeSliderHoriz from "../../MutiRangeSlider/MultiRangeSliderHoriz"
 
 interface SliderHoriz {
   className?: string
@@ -21,7 +21,7 @@ const SliderHoriz = ({ className, width, max = 100, distance = 0, values, setVal
     setValues(update)
   }
 
-  return <MultiRangeSlider
+  return <MultiRangeSliderHoriz
       max={max}
       width={width}
       distance={distance}

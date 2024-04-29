@@ -177,6 +177,7 @@ export const EnergyCatalystContainer = ({
       // console.log({ catIdx, catalystTypes, catalystItemStates }, catalystItemStates[index])
       if (catalystItemStates[index] === undefined || catalystItemStates[index] < 2) return null
       return <EnergyCatalystMenuItem
+        key={index}
         disable={catalystItemStates[index] === 2}
         catType={catIdx}
         width={catItemWidth}
