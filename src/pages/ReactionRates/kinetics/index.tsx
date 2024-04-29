@@ -29,6 +29,7 @@ import {
   ZeroOrderConcentration
 } from "../../../components/ConcentrationPlotView"
 import { ReactionSettings, ReactionType } from "../../../components/ConcentrationPlotView/constants"
+import Burner from "../../../components/CanvasBeaker/Burner/Burner"
 
 const ReactionKinetics = () => {
   const {
@@ -285,7 +286,7 @@ const ReactionKinetics = () => {
             temperature={temperature}
           />
         </div>
-        <SliderHoriz
+        {/* <SliderHoriz
           className={styles.sliderHoriz}
           // width={300}
           max={100}
@@ -293,6 +294,10 @@ const ReactionKinetics = () => {
           values={[valueFire, 100]}
           setValues={(val) => setValueFire(val[0])}
           showThumbIndex={[2, 0]}
+        /> */}
+        <Burner
+          fireVal={valueFire}
+          onChange={(val) => setValueFire(val)}
         />
 
         {/* <EnergyProfile

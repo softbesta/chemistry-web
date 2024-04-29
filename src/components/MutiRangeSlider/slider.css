@@ -1,3 +1,4 @@
+/* Horizontal Slider styles */
 .h-slider-container {
   position: relative;
   display: flex;
@@ -85,6 +86,7 @@ input[type=range]:disabled::-webkit-slider-thumb {
 }
 
 
+/* Vertical Slider styles */
 .v-slider-container {
   position: relative;
   display: flex;
