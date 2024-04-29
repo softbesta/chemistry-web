@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import styles from './EnergyCatalyst.module.scss'
-import catalystOne from '../assets/ReactionRates/catone.png'
-import catalystTwo from '../assets/ReactionRates/cattwo.png'
-import catalystThree from '../assets/ReactionRates/catthree.png'
-import catalystDisabled from '../assets/ReactionRates/catdisable.png'
-import { Point } from '../helper/types'
-import { debounce, delay } from '../helper/functions'
+import { Point } from '../../helper/types'
+import { debounce, delay } from '../../helper/functions'
+import { catalystDisabled, catalystOne, catalystThree, catalystTwo } from '../Images'
+import Color from 'color'
+import { CatalystDropItemColors } from './constants'
 
 // Images for catalystType
 const catalystImgs = [catalystOne, catalystTwo, catalystThree]
@@ -25,20 +24,20 @@ export const EnergyCatalystContainer = ({
   regionWidth = 350,
   regionHeight = 230,
 }: EnergyCatalystContainerProps) => {
-  const catItemWidth = 30, catItemHeight = 70
+  const catItemWidth = 25, catItemHeight = 55
 
-  const initialMenuPositions = [
-    { x: regionWidth / 2 - 85, y: 0 },
-    { x: regionWidth / 2 - 25, y: 0 },
-    { x: regionWidth / 2 + 35, y: 0 },
+  const menuItemPositions = [
+    { x: regionWidth / 2 - catItemWidth / 2 - 60, y: 0 },
+    { x: regionWidth / 2 - catItemWidth / 2, y: 0 },
+    { x: regionWidth / 2 - catItemWidth / 2 + 60, y: 0 },
   ]
-  const initialActivePosition = { x: regionWidth / 2 - 25, y: 100 }
+  const initialMovableItemPositions = { x: regionWidth / 2 - catItemWidth / 2, y: catItemHeight + 20 }
 
   const containerRef = useRef<HTMLDivElement>(null)
 
   // const [enabledIndex, setEnabledIndex] = 
   const [activeCatIdx, setActiveCatIdx] = useState(-1)
-  const [position, setPosition] = useState<Point>(initialActivePosition)
+  const [position, setPosition] = useState<Point>(initialMovableItemPositions)
   const [dragIndex, setDragIndex] = useState(-1)
   const [dragOffset, setDragOffset] = useState<Point>({ x: 0, y: 0 })
 
@@ -160,7 +159,7 @@ export const EnergyCatalystContainer = ({
     const activeId = catalystItemStates.findIndex(item => item === 1) // find an item which is moveable
     setActiveCatIdx(activeId)
     setShakingCount(0)
-    setPosition(initialActivePosition)
+    setPosition(initialMovableItemPositions)
   }, [catalystItemStates])
 
   return <div
@@ -182,7 +181,7 @@ export const EnergyCatalystContainer = ({
         catType={catIdx}
         width={catItemWidth}
         height={catItemHeight}
-        position={initialMenuPositions[index]}
+        position={menuItemPositions[index]}
         onClick={() => onClickCatalystMenuItem(index)}
       />
     })}
@@ -287,8 +286,8 @@ export const EnergyCatalystMoveableItem = ({
         height,
         cursor: isDragging ? 'grabbing' : 'grab',
         ...(isDragging ? { zIndex: 123 } : {}),
-        backgroundColor: catalystImgColors[catIndex],
-        // backgroundImage: `url(${catalystDisabled})`
+        // backgroundColor: catalystImgColors[catIndex],
+        backgroundImage: `url(${catalystDisabled})`
       }}
     >
       {/* <img
@@ -388,9 +387,15 @@ export const ElementDroppingAnimation = ({
     {Array.from(Array(elementCount).fill(true)).map((item, index) => {
       return <div
         key={index}
-        className={`${styles.droppingElement} ${styles[`catType${elementType}`]}`}
-      />
+        className={`
+          ${styles.droppingElement}
+        `}
+        style={{
+          backgroundColor: Color(CatalystDropItemColors[elementType]).hex()
+        }}
+      >
+      </div>
     })}
-    <div className={styles.droppingElement}></div>
+    {/* <div className={styles.droppingElement}></div> */}
   </div>
 }

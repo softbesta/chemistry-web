@@ -316,73 +316,87 @@ export const stepsActions = [
     canvaTimeState: 0,
     canvaBeakerState: 1,
     isEnableChooseMenu: false,
+    catalystItemStates: [2, 2, 2],
   },
   // 1   We now know that the concentration ...
   { // 1
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    catalystItemStates: [3, 2, 2],
   },
   // 2   It states that the reaction, ...
   { // 2
     canvaTimeState: 1,
     canvaBeakerState: 1,
+    catalystItemStates: [2, 3, 2],
   },
   // 3   This minimum amount of...
   { // 3
     canvaTimeState: 1,
     canvaBeakerState: 1,
+    catalystItemStates: [2, 2, 3],
   },
   // 4   But how is the temperature...
   { // 4
     canvaTimeState: 1,
     canvaBeakerState: 1,
+    catalystItemStates: [2, 2, 2],
   },
   // 5   k is the rate constant...
   { // 5
     canvaTimeState: 2,
     canvaBeakerState: 2,
+    catalystItemStates: [2, 2, 2],
   },
   // 6   As you can tell by the equation....
   { // 6
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [2, 2, 2],
   },
   // 7   When applying logarithmic...
   { // 7
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [2, 2, 2],
     // isEnableChooseMenu: false,
   },
   // 8   If the linear equation...
   { // 8
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [2, 2, 2],
   },
   // 9   For this reaction, **E__a__...
   { // 9
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [2, 2, 2],
   },
   // 10   One way to depict the reaction ...
   { // 10
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [2, 2, 2],
   },
   // 11   This is an **exothermic reaction...
   { // 11
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [2, 2, 2],
   },
   // 12   The hump or bell in the ...
   { // 12
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [2, 2, 2],
     // isEnableChooseMenu: false,
   },
   // 13   There's a way to reduce... 
   { // 13
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [2, 2, 2],
     activeDotIndex: 0,
     // isEnableChooseMenu: true,
   },
@@ -390,6 +404,7 @@ export const stepsActions = [
   { // 14
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    catalystItemStates: [3, 2, 2],
     activeDotIndex: 1,
     // isEnableChooseMenu: false,
   },
@@ -397,22 +412,26 @@ export const stepsActions = [
   { // 15
     canvaTimeState: 1,
     canvaBeakerState: 1,
+    catalystItemStates: [3, 2, 2],
   },
   // 16   Look! The E__a__ was reduced  ...
   { // 16
     canvaTimeState: 2,
     canvaBeakerState: 2,
+    catalystItemStates: [3, 2, 2],
   },
   // 17   Take a look at the linear  ...
   { // 17
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [3, 2, 2],
     // isEnableChooseMenu: false,
   },
   // 18   Points of that graph are ...
   { // 18
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [3, 2, 2],
     activeDotIndex: 1,
     // isEnableChooseMenu: true,
   },
@@ -420,6 +439,7 @@ export const stepsActions = [
   { // 19
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    catalystItemStates: [3, 2, 2],
     activeDotIndex: 2,
     // isEnableChooseMenu: false,
   },
@@ -427,11 +447,13 @@ export const stepsActions = [
   { // 20
     canvaTimeState: 1,
     canvaBeakerState: 1,
+    catalystItemStates: [3, 2, 2],
   },
   // 21   It's all done! All of ...
   { // 21
     canvaTimeState: 2,
     canvaBeakerState: 2,
+    catalystItemStates: [3, 2, 2],
   },
   // 22   Let's try that out! ...
   { // 22

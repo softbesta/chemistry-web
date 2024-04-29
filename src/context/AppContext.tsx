@@ -59,6 +59,10 @@ interface IAppContext {
   activeDotIndex: number,   // need init action
   setActiveDotIndex: React.Dispatch<React.SetStateAction<number>>,
 
+  // *** Catalyst state controller
+  catalystItemStates: number[],   // need init action
+  setCatalystItemStates: React.Dispatch<React.SetStateAction<number[]>>,
+
   // test purpose
   count: number,
   setCount: React.Dispatch<React.SetStateAction<number>>,
@@ -90,6 +94,7 @@ const initialState = {
   //   [themeColors.none, themeColors.C, themeColors.D], // C to D
   //   [themeColors.none, themeColors.E, themeColors.F], // E to F
   // ],
+  catalystItemStates: [3, 2, 2],
   activeDotIndex: 0
 }
 
@@ -142,6 +147,9 @@ export const AppDataProvider = (props: any) => {
   const [isEnableChooseMenu, setIsEnableChooseMenu] = useState<boolean>(true)
   const [activeDotIndex, setActiveDotIndex] = useState<number>(initialState.activeDotIndex)
 
+  // 0: hidden, 1: moveable, 2: menu item disabled, 3: menu item active
+  const [catalystItemStates, setCatalystItemStates] = useState(initialState.catalystItemStates)
+
   // need update, don't use yet
   const updateStepPlay = (step: number) => {
     let update = curStep + step
@@ -192,6 +200,10 @@ export const AppDataProvider = (props: any) => {
         setIsEnableChooseMenu,
         activeDotIndex,
         setActiveDotIndex,
+
+        // Catalyst State Controller
+        catalystItemStates,
+        setCatalystItemStates,
 
         // test purpose
         count, setCount,

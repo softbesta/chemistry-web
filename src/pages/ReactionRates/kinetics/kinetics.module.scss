@@ -34,7 +34,7 @@
 
   .reactionChartRow {
     display: flex;
-    gap: 30px;
+    justify-content: space-around;
 
     .chartInA {
       display: flex;

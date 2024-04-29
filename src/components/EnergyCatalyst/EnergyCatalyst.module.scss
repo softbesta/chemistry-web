@@ -1,7 +1,7 @@
 .catalystContainer {
   position: relative;
   // overflow: hidden;
-  border: 1px solid black;
+  // border: 1px solid black;
 }
 
 .catalystItem {
@@ -16,14 +16,16 @@
 
 .droppingElement {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 10px;
+  height: 10px;
   // background-color: chocolate;
   animation: moveAnimation 1.5s forwards;
   top: 400px;
   right: calc(50% - 15px);
   z-index: 10;
 
+  border: 1px solid rgb(219, 219, 219);
+  border-radius: 100%;
 }
 .catType0 {
   background-color: red;
@@ -38,7 +40,7 @@
 @keyframes moveAnimation {
   0% {
     opacity: 0;
-    top: 0px;
+    top: 80px;
     // transform: translate(0px, -400px);
   }
 

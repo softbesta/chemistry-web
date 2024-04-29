@@ -52,6 +52,8 @@ const ReactionKinetics = () => {
     setIsEnableChooseMenu,
     activeDotIndex,
     setActiveDotIndex,
+    catalystItemStates,
+    setCatalystItemStates,
   } = useAppData()
 
   const {
@@ -60,7 +62,6 @@ const ReactionKinetics = () => {
   } = useFunctions()
 
   const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
-  const [catalystItemStates, setCatalystItemStates] = useState([3, 2, 2])
 
   // *** Setup tutorial actions here
   const tutorials = Array.from(Array(tur_Text.length).keys()).map(idx => {
@@ -97,8 +98,10 @@ const ReactionKinetics = () => {
       if (Array.isArray(curActions?.canvaTimeSliderT)) {
         setCanvaTimeSliderT(curActions.canvaTimeSliderT)
       }
+      if (Array.isArray(curActions?.catalystItemStates)) {
+        setCatalystItemStates(curActions.catalystItemStates)
+      }
     }
-
   }, [curStep, curActions])
 
   const handleClickChooseMenuItem = () => {
@@ -223,14 +226,14 @@ const ReactionKinetics = () => {
   const gasCounts = [5, 5];  // ** control counts here
   const temperature = 0.01        // ** control movespeed here
 
-  const BeakerSize = { width: 260, height: 270 }
+  const beakerSize = { width: 240, height: 270 }
   const waterLevel = 0.4          // ** control waterlevel here
 
   const [valueFire, setValueFire] = useState(50)
 
   // ** Graph Chart control variables
-  const graphChartWidth = 280;
-  const graphChartHeight = 280;
+  const graphChartSize = { width: 220, height: 220 }
+
   const concentrationA = new ZeroOrderConcentration()
   concentrationA.init4Params(0, 0.8, 10, 0.2)
   const concentrationB = new ZeroOrderConcentration()
@@ -249,12 +252,14 @@ const ReactionKinetics = () => {
       <EnergyCatalystContainer
         catalystTypes={[0, 1, 2]}
         catalystItemStates={catalystItemStates}
+        regionWidth={300}
+        regionHeight={150}
         setCatalystItemStates={(val) => setCatalystItemStates(val)}
       />
       <div className={styles.reactionBeaker}>
         <div className={styles.beakerShape}>
           <BeakerShape
-            {...BeakerSize}
+            {...beakerSize}
             settings={settings}
             waterlevel={waterLevel}
           />
@@ -269,7 +274,7 @@ const ReactionKinetics = () => {
             temperature={temperature}
           /> */}
           <Chamber
-            {...BeakerSize}
+            {...beakerSize}
             waterlevel={waterLevel}
             activeGases={activeGases}
             gasCounts={gasCounts}
@@ -306,11 +311,10 @@ const ReactionKinetics = () => {
       <div className={styles.reactionChartRow}>
         <div className={styles.chartInA}>
           <ConcentrationPlotView
-            width={graphChartWidth}
-            height={graphChartHeight}
+            {...graphChartSize}
             settings={
               new ReactionRateChartLayoutSettings(
-                graphChartWidth,
+                graphChartSize.width,
                 ReactionSettings.Axis.minC,
                 ReactionSettings.Axis.maxC,
                 ReactionSettings.Axis.minT,
@@ -345,11 +349,10 @@ const ReactionKinetics = () => {
         </div>
         <div className={styles.chartInA}>
           <ConcentrationPlotView
-            width={graphChartWidth}
-            height={graphChartHeight}
+            {...graphChartSize}
             settings={
               new ReactionRateChartLayoutSettings(
-                graphChartWidth,
+                graphChartSize.width,
                 ReactionSettings.Axis.minC,
                 ReactionSettings.Axis.maxC,
                 ReactionSettings.Axis.minT,
