@@ -11,10 +11,18 @@
   // width: 100%;
   // gap: 30px;
 
-  .reactionCatalyst {
-  }
+  .reactionCatalyst {}
 
-  .reactionBeaker {}
+  .reactionBeaker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .beakerShape {
+      position: relative;
+    }
+
+  }
 }
 
 .reactionContentContainer {

@@ -5,13 +5,13 @@ import { useMemo } from "react"
 interface SliderHoriz {
   valuesT: number[]
   setValuesT: (val: number[]) => void
-  canvaTimeSliderT: number[]
+  showThumbIndex: number[]
 }
 
-const SliderHoriz = ({ valuesT, setValuesT, canvaTimeSliderT: showIndexT }: SliderHoriz) => {
+const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
   const infoT = useMemo(() => {
     let showCount = 0, disabledCount = 0
-    showIndexT.forEach(item => {
+    showThumbIndex.forEach(item => {
       item > 0 && showCount++
       item === 1 && disabledCount++
     })
@@ -19,36 +19,36 @@ const SliderHoriz = ({ valuesT, setValuesT, canvaTimeSliderT: showIndexT }: Slid
       showCount,
       disabledCount
     }
-  }, [showIndexT])
+  }, [showThumbIndex])
   const getValueT = () => {
     let update: number[] = []
-    if (showIndexT[0] > 0 && showIndexT[1] > 0) {
+    if (showThumbIndex[0] > 0 && showThumbIndex[1] > 0) {
       // console.log('===getValueT===', valuesT)
       update = [valuesT[0], valuesT[1]]
-    } else if (showIndexT[0] > 0) {
+    } else if (showThumbIndex[0] > 0) {
       // console.log('===getValueT===  000', valuesT[0])
       update = [valuesT[0]]
-    } else if (showIndexT[1] > 0) {
+    } else if (showThumbIndex[1] > 0) {
       // console.log('===getValueT===  111', valuesT[1])
       update = [valuesT[1]]
     } else update = []
     return update.map(item => item * 10)
   }
-  const handleChangeTime = (val: number[] | number) => {
+  const handleChangeVal = (val: number[] | number) => {
     console.log('===handleChangeAB=== ', { values: val, valuesT: valuesT })
     let update: number[] = [valuesT[0] * 10, valuesT[1] * 10]
     if (Array.isArray(val)) {
-      if (showIndexT[0] === 2) {
+      if (showThumbIndex[0] === 2) {
         update = [val[0], update[1]]
       }
-      if (showIndexT[1] === 2) {
+      if (showThumbIndex[1] === 2) {
         update = [update[0], val[1]]
       }
     } else {
-      if (showIndexT[0] === 2) {
+      if (showThumbIndex[0] === 2) {
         update = [val, update[1]]
       }
-      if (showIndexT[1] === 2) {
+      if (showThumbIndex[1] === 2) {
         update = [update[0], val]
       }
     }
@@ -80,15 +80,15 @@ const SliderHoriz = ({ valuesT, setValuesT, canvaTimeSliderT: showIndexT }: Slid
         step={1}
         onChange={(val, index) => {
           // console.log({ val, index })
-          handleChangeTime(val)
+          handleChangeVal(val)
         }}
         renderThumb={(props, state) => {
           const { index } = state
           let disabledclass = ''
-          if (index === 0 && showIndexT[0] === 1) {
+          if (index === 0 && showThumbIndex[0] === 1) {
             disabledclass = styles.disabled
           }
-          if (index === 1 && showIndexT[1] === 1) {
+          if (index === 1 && showThumbIndex[1] === 1) {
             disabledclass = styles.disabled
           }
           return <div

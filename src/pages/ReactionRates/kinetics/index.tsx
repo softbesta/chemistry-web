@@ -20,6 +20,7 @@ import { BeakerSettings, BeakerShape } from "../../../components/CanvasBeaker/Be
 import BeakerWater from "../../../components/CanvasBeaker/BeakerShape/BeakerWater"
 import { ChamberF } from "../../../components/CanvasBeaker/Chamber/ChamberF"
 import Chamber from "../../../components/CanvasBeaker/Chamber/Chamber"
+import SliderHoriz from "../../../components/CanvasBeaker/SliderHoriz/SliderHoriz"
 
 const ReactionKinetics = () => {
   const {
@@ -188,9 +189,6 @@ const ReactionKinetics = () => {
   }, [])
 
 
-  const width = 290
-  const height = 320
-  const concentration = 0.4
   const settings = new BeakerSettings(290, true)
 
   console.log({ settings })
@@ -215,13 +213,13 @@ const ReactionKinetics = () => {
       mass: 1
     },
   ]
-  const gasProportions = [5, 5];  // ** control counts here
-  const isPlaying = true
-  const allowEscape = false
-  const escapeSpeed = 1000
-  const temperature = 0.01
+  const gasCounts = [5, 5];  // ** control counts here
+  const temperature = 0.01        // ** control movespeed here
 
-  const [count, setCount] = useState(0)
+  const BeakerSize = { width: 290, height: 320 }
+  const waterLevel = 0.4          // ** control waterlevel here
+
+  const [valueFire, setValueFire] = useState(50)
 
   return <div className={styles.container}>
     <ChapterMenu />
@@ -229,21 +227,17 @@ const ReactionKinetics = () => {
     {/* <WatchMenu /> */}
 
     <div className={styles.reactionDrawContainer}>
-      <button
-        onClick={() => setCount(count + 1)}
-      >TEST</button>
       <EnergyCatalystContainer
         catalystTypes={[0, 1, 3]}
         catalystItemStates={catalystItemStates}
         setCatalystItemStates={(val) => setCatalystItemStates(val)}
       />
       <div className={styles.reactionBeaker}>
-        <div style={{ position: 'relative' }}>
+        <div className={styles.beakerShape}>
           <BeakerShape
-            width={width}
-            height={height}
+            {...BeakerSize}
             settings={settings}
-            waterlevel={0.4}
+            waterlevel={waterLevel}
           />
           {/* <ChamberF
             width={width}
@@ -254,19 +248,28 @@ const ReactionKinetics = () => {
             allowEscape={allowEscape}
             escapeSpeed={escapeSpeed}
             temperature={temperature}
-            count={count}
           /> */}
           <Chamber
-            width={width}
-            height={height}
+            {...BeakerSize}
+            waterlevel={waterLevel}
             activeGases={activeGases}
-            gasProportions={gasProportions}
-            isPlaying={isPlaying}
-            allowEscape={allowEscape}
-            escapeSpeed={escapeSpeed}
+            gasCounts={gasCounts}
+            isPlaying={true}
+            allowEscape={false}
+            escapeSpeed={1000}
             temperature={temperature}
           />
         </div>
+        <SliderHoriz
+          className={styles.sliderHoriz}
+          // width={300}
+          max={100}
+          distance={0}
+          values={[valueFire, 100]}
+          setValues={(val) => setValueFire(val[0])}
+          showThumbIndex={[2, 0]}
+        />
+
         {/* <EnergyProfile
           valuesC={valuesC}
           valuesT={valuesT}

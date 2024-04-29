@@ -4,8 +4,8 @@ import { useCallback, useMemo, useState } from "react"
 import useAppData from "../../hooks/useAppData"
 import CanvasTime from "../Canvas/CanvasTime"
 import { themeColors } from "../../constants"
-import SliderVert from "./SliderVert"
-import SliderHoriz from "./SliderHoriz"
+import SliderVert from "../SliderVert/SliderVert"
+import SliderHoriz from "../SliderHoriz/SliderHoriz"
 
 interface ChartTimeProps {
   valuesC: number[]
@@ -54,7 +54,7 @@ const ChartTime = ({
       <SliderHoriz
         valuesT={valuesT}
         setValuesT={setValuesT}
-        canvaTimeSliderT={canvaTimeSliderT}
+        showThumbIndex={canvaTimeSliderT}
       />
 
       <div

@@ -105,7 +105,7 @@ export default class Chamber extends React.Component {
     this.rightCornerRadius = 30;
     this.bottomGap = 1;
     this.rightGap = 1;
-    this.concentration = 0.4;
+    this.waterlevel = props.waterlevel;
 
     this.el = React.createRef();
 
@@ -214,7 +214,7 @@ export default class Chamber extends React.Component {
         me.updateParticleSpeeds(
           gasParticles,
           me.distributionBuckets[idx],
-          me.props.gasProportions[idx]);
+          me.props.gasCounts[idx]);
       }
     });
   }
@@ -256,12 +256,12 @@ export default class Chamber extends React.Component {
     return p;
   }
 
-  drawParticles(activeGases = [], gasProportions = [], distributionBuckets) {
+  drawParticles(activeGases = [], gasCounts = [], distributionBuckets) {
     const me = this;
     const particles = [];
 
     activeGases.forEach(function (gas, idx) {
-      const proportion = gasProportions[idx];
+      const proportion = gasCounts[idx];
       const buckets = distributionBuckets[idx];
 
       const p = [];
@@ -270,8 +270,7 @@ export default class Chamber extends React.Component {
         // The number of particles to create for a given
         // bucket depends on the pre-calculated distribution
         // bucket as well as this gas's proportion state.
-        const particleCount = bucket.particleCount * (
-          proportion / 100);
+        const particleCount = bucket.particleCount * (proportion / 100);
 
         for (let i = 0; i < particleCount; i++) {
           p.push(
@@ -289,12 +288,12 @@ export default class Chamber extends React.Component {
    * Adjust each particle's speed to keep the distributions even as
    * they escape.
    */
-  updateParticles(activeGases = [], gasProportions = [], distributionBuckets) {
+  updateParticles(activeGases = [], gasCounts = [], distributionBuckets) {
     const me = this;
     const particles = [];
 
     activeGases.forEach(function (gas, idx) {
-      const proportion = gasProportions[idx];
+      const proportion = gasCounts[idx];
       const buckets = distributionBuckets[idx];
 
       const p = [];
@@ -344,6 +343,8 @@ export default class Chamber extends React.Component {
       });
     }
 
+    // console.log({ distributionBuckets })
+
     return distributionBuckets;
   }
 
@@ -370,10 +371,12 @@ export default class Chamber extends React.Component {
       me.distributionBuckets.push(buckets);
     });
 
+    // console.log({ distributionBuckets: this.distributionBuckets })
+
     this.initialParticleCounts = initialParticleCounts;
     this.particles = this.drawParticles(
       this.props.activeGases,
-      this.props.gasProportions,
+      this.props.gasCounts,
       this.distributionBuckets);
 
     this.particles.forEach(function (gasParticles) {
@@ -389,7 +392,7 @@ export default class Chamber extends React.Component {
       isStatic: true,
       render: {
         fillStyle: 'transparent',
-        strokeStyle: 'black',
+        strokeStyle: 'red',
         lineWidth: 1
       },
       collisionFilter: {
@@ -398,8 +401,11 @@ export default class Chamber extends React.Component {
     };
 
     const height = this.height
-    const cY = height * (1 - this.concentration)
+    const cY = height * (1 - this.waterlevel)
     const width = this.width
+
+    const rlSpace = 28
+    const btSpace = 5
 
     return [
       // TOP wall
@@ -407,7 +413,7 @@ export default class Chamber extends React.Component {
         // x, y
         this.width / 2, cY - margin / 2,
         // width, height
-        this.width + 33, margin,
+        this.width + 33, margin + btSpace,
         wallOptions,
       ),
       // BOTTOM wall
@@ -415,7 +421,7 @@ export default class Chamber extends React.Component {
         // x, y
         this.width / 2, height + margin / 2,
         // width, height
-        this.width + 33, margin,
+        this.width + 33, margin + btSpace,
         wallOptions,
       ),
       // LEFT wall
@@ -423,7 +429,7 @@ export default class Chamber extends React.Component {
         // x, y
         0 - margin / 2, height / 2 + margin,
         // width, height
-        margin, height + margin*2,
+        margin + rlSpace, height + margin * 2,
         wallOptions,
       ),
       // RIGHT wall
@@ -431,7 +437,7 @@ export default class Chamber extends React.Component {
         // x, y
         width + margin / 2, height / 2 + margin,
         // width, height
-        margin, height + margin*2,
+        margin + rlSpace, height + margin * 2,
         wallOptions,
       ),
     ];
@@ -531,7 +537,7 @@ export default class Chamber extends React.Component {
 
     if (
       !this.props.isPlaying &&
-      prevProps.gasProportions !== this.props.gasProportions
+      prevProps.gasCounts !== this.props.gasCounts
     ) {
       this.refreshScene();
     }
@@ -580,10 +586,11 @@ Chamber.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   activeGases: PropTypes.array.isRequired,
-  gasProportions: PropTypes.array.isRequired,
+  gasCounts: PropTypes.array.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   allowEscape: PropTypes.bool.isRequired,
   escapeSpeed: PropTypes.number.isRequired,
   temperature: PropTypes.number.isRequired,
+  waterlevel: PropTypes.number.isRequired,
   onParticleCountUpdated: PropTypes.func.isRequired
 };
