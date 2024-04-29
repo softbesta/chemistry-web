@@ -101,6 +101,15 @@ const ReactionKinetics = () => {
       if (Array.isArray(curActions?.catalystItemStates)) {
         setCatalystItemStates(curActions.catalystItemStates)
       }
+      if (curActions?.curCatShakingOrderIdx !== undefined) {
+        setCurCatShakingOrderIdx(curActions.curCatShakingOrderIdx)
+      }
+      if (curActions?.showCatalystMoveItem !== undefined) {
+        setShowCatalystMoveItem(curActions.showCatalystMoveItem)
+      }
+      if (curActions?.isBurnerActive !== undefined) {
+        setIsBurnerActive(curActions.isBurnerActive)
+      }
     }
   }, [curStep, curActions])
 
@@ -208,7 +217,7 @@ const ReactionKinetics = () => {
       id: 3,
       particleSize: 4,  // ** control gas cirle size
       color: 0x00d0f0,  // ** control gas color
-      name: 'Oxygen',
+      // name: 'Oxygen',
       symbol: <>O<sub>2</sub></>,
       svgSymbol: <>O<tspan baselineShift="sub">2</tspan></>,
       mass: 1
@@ -217,7 +226,7 @@ const ReactionKinetics = () => {
       id: 9,
       particleSize: 4,  // ** control gas cirle size
       color: 0xff0000,  // ** control gas color
-      name: 'Hydrogen',
+      // name: 'Hydrogen',
       symbol: <>H<sub>2</sub></>,
       svgSymbol: <>H<tspan baselineShift="sub">2</tspan></>,
       mass: 1
@@ -243,6 +252,62 @@ const ReactionKinetics = () => {
   // const concentrationB = new FirstOrderConcentration()
   // concentrationB.init3Params(1, 3, 10)
 
+  // ** Beaker Burner state ;  'false': disable Burner, 'true': active Burner
+  const [isBurnerActive, setIsBurnerActive] = useState(false)
+
+  // ** Control Catalyst State
+  const [catShakingOrder, setCatShakingOrder] = useState<number[]>([0, 1, 2])
+  const [curCatShakingOrderIdx, setCurCatShakingOrderIdx] = useState<number>(0)
+  const [showCatalystMoveItem, setShowCatalystMoveItem] = useState<boolean>(false)
+  const onCatalystItemShake = (shakingCount: number, itemIndex: number) => {
+    console.log('===onCatalystItemShake===', { shakingCount, itemIndex, curCatShakingOrderIdx, catShakingOrder })
+    if (shakingCount > 10) {
+      // // if (!shakedOrder.includes(itemIndex)) {
+      // const restOrders = catShakingOrder.filter(s => s !== itemIndex)
+      // const update = [
+      //   ...restOrders.slice(0, curCatShakingOrderIdx),
+      //   itemIndex,
+      //   ...restOrders.slice(curCatShakingOrderIdx),
+      // ]
+      // console.log({ update })
+      // setCatShakingOrder(update)
+      // // }
+      onStepChange(1)
+    }
+  }
+  const onCatalystMenuItemClick = (index: number) => {
+    const others = [...catalystItemStates]
+    others.splice(index, 1)
+    const normalState = Math.max(...others) // find normal state from other which is disabled(2) or active(3)
+    const updatedState = [3, 3, 3]
+    updatedState[index] = 1  // change current state[index] as moveable(hide menu item and show moveable item).
+
+    // console.log('clicked catalyst menu item', { id, origin: catalystItemStates, update })
+    setCatalystItemStates(updatedState)
+
+
+    const restOrders = catShakingOrder.filter(s => s !== index)
+    const updatedOrder = [
+      ...restOrders.slice(0, curCatShakingOrderIdx),
+      index,
+      ...restOrders.slice(curCatShakingOrderIdx),
+    ]
+    console.log({ updatedOrder })
+    setCatShakingOrder(updatedOrder)
+    onStepChange(1)
+  }
+
+  const curCatalystItemState = catalystItemStates.map((state, index) => {
+    // hide menu item for shaking.
+    if (showCatalystMoveItem && index === catShakingOrder[curCatShakingOrderIdx]) {
+      return 1
+    }
+    // hide menu item which is completed shaking.
+    if (catShakingOrder.slice(0, curCatShakingOrderIdx).includes(index)) return 0
+    return state
+  })
+  console.log({curCatalystItemState, catShakingOrder, curCatShakingOrderIdx})
+
   return <div className={styles.container}>
     <ChapterMenu />
     <ChooseMenu isEnable={isEnableChooseMenu} onClickItem={() => handleClickChooseMenuItem()} />
@@ -251,10 +316,14 @@ const ReactionKinetics = () => {
     <div className={styles.reactionDrawContainer}>
       <EnergyCatalystContainer
         catalystTypes={[0, 1, 2]}
-        catalystItemStates={catalystItemStates}
+        catalystItemStates={curCatalystItemState}
+        setCatalystItemStates={(val) => setCatalystItemStates(val)}
+        onCatalystMenuItemClick={onCatalystMenuItemClick}
+        activeCatIdx={showCatalystMoveItem ? catShakingOrder[curCatShakingOrderIdx] : -1}
         regionWidth={300}
         regionHeight={150}
-        setCatalystItemStates={(val) => setCatalystItemStates(val)}
+        maxShakingCount={10}
+        onChangeShakingCount={(val, index) => onCatalystItemShake(val, index)}
       />
       <div className={styles.reactionBeaker}>
         <div className={styles.beakerShape}>
@@ -275,7 +344,7 @@ const ReactionKinetics = () => {
           /> */}
           <Chamber
             {...beakerSize}
-            waterlevel={waterLevel}
+            waterLevel={waterLevel}
             activeGases={activeGases}
             gasCounts={gasCounts}
             isPlaying={true}
@@ -294,6 +363,7 @@ const ReactionKinetics = () => {
           showThumbIndex={[2, 0]}
         /> */}
         <Burner
+          isActive={isBurnerActive}
           fireVal={valueFire}
           onChange={(val) => setValueFire(val)}
         />

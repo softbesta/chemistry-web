@@ -105,7 +105,7 @@ export default class Chamber extends React.Component {
     this.rightCornerRadius = 30;
     this.bottomGap = 1;
     this.rightGap = 1;
-    this.waterlevel = props.waterlevel;
+    this.waterLevel = props.waterLevel;
 
     this.el = React.createRef();
 
@@ -401,7 +401,7 @@ export default class Chamber extends React.Component {
     };
 
     const height = this.height
-    const cY = height * (1 - this.waterlevel)
+    const cY = height * (1 - this.waterLevel)
     const width = this.width
 
     const rlSpace = 28
@@ -444,6 +444,7 @@ export default class Chamber extends React.Component {
   }
 
   componentDidMount() {
+    console.log('===Chamber.DidMount===')
     const Engine = Matter.Engine,
       Render = Matter.Render,
       Runner = Matter.Runner,
@@ -528,6 +529,7 @@ export default class Chamber extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log('===Chamber.DidUpdate===')
     if (
       prevProps.activeGases !== this.props.activeGases ||
       prevProps.temperature !== this.props.temperature
@@ -591,6 +593,6 @@ Chamber.propTypes = {
   allowEscape: PropTypes.bool.isRequired,
   escapeSpeed: PropTypes.number.isRequired,
   temperature: PropTypes.number.isRequired,
-  waterlevel: PropTypes.number.isRequired,
+  waterLevel: PropTypes.number.isRequired,
   // onParticleCountUpdated: PropTypes.func.isRequired
 };

@@ -310,6 +310,14 @@ export const stepsActions = [
   //                    2 - Animation,       3 - AB dots
   // canvaTimeState;    0 - show Frame only, 1 - show Graph
   //                    2 - Animation,       3 - show End
+  // activeDotIndex;    Beaker Dot type
+  //                    0 - A/B,   1 - C/D,  2 - E/F
+  // catalystItemStates; Catalyst Menu/Item Showing State
+  //                    0: menu item - hidden, 1: menu item - hidden(movable item will be shown only in this case),
+  //                    2: menu item - disabled, 3: menu item - active, 4: menu item - active & clickable
+  // xxx (don't use for now) shakeCompletedItemIndex; Order of completed shaking Catalyst Item Index. 0~2
+  //                    ex: [1,0,2]
+  // curCatShakingOrderIdx;  used history of Catalyst Item index list.
 
   // 0   Not so fast! ...
   { // 0
@@ -317,48 +325,61 @@ export const stepsActions = [
     canvaBeakerState: 1,
     isEnableChooseMenu: false,
     catalystItemStates: [2, 2, 2],
+    curCatShakingOrderIdx: 0,
+    showCatalystMoveItem: false,
+    isBurnerActive: false,
   },
   // 1   We now know that the concentration ...
   { // 1
     canvaTimeState: 0,
     canvaBeakerState: 1,
-    catalystItemStates: [3, 2, 2],
+    catalystItemStates: [2, 2, 2],
+    curCatShakingOrderIdx: 0,
+    showCatalystMoveItem: false,
+    isBurnerActive: true,
   },
   // 2   It states that the reaction, ...
   { // 2
     canvaTimeState: 1,
     canvaBeakerState: 1,
-    catalystItemStates: [2, 3, 2],
+    catalystItemStates: [2, 2, 2],
+    curCatShakingOrderIdx: 0,
+    isBurnerActive: false,
   },
   // 3   This minimum amount of...
   { // 3
     canvaTimeState: 1,
     canvaBeakerState: 1,
-    catalystItemStates: [2, 2, 3],
+    catalystItemStates: [2, 2, 2],
+    curCatShakingOrderIdx: 0,
   },
   // 4   But how is the temperature...
   { // 4
     canvaTimeState: 1,
     canvaBeakerState: 1,
     catalystItemStates: [2, 2, 2],
+    curCatShakingOrderIdx: 0,
   },
   // 5   k is the rate constant...
   { // 5
     canvaTimeState: 2,
     canvaBeakerState: 2,
     catalystItemStates: [2, 2, 2],
+    curCatShakingOrderIdx: 0,
   },
   // 6   As you can tell by the equation....
   { // 6
     canvaTimeState: 3,
     canvaBeakerState: 3,
     catalystItemStates: [2, 2, 2],
+    curCatShakingOrderIdx: 0,
   },
   // 7   When applying logarithmic...
   { // 7
     canvaTimeState: 3,
     canvaBeakerState: 3,
     catalystItemStates: [2, 2, 2],
+    curCatShakingOrderIdx: 0,
     // isEnableChooseMenu: false,
   },
   // 8   If the linear equation...
@@ -366,37 +387,43 @@ export const stepsActions = [
     canvaTimeState: 3,
     canvaBeakerState: 3,
     catalystItemStates: [2, 2, 2],
+    curCatShakingOrderIdx: 0,
   },
   // 9   For this reaction, **E__a__...
   { // 9
     canvaTimeState: 3,
     canvaBeakerState: 3,
     catalystItemStates: [2, 2, 2],
+    curCatShakingOrderIdx: 0,
   },
   // 10   One way to depict the reaction ...
   { // 10
     canvaTimeState: 3,
     canvaBeakerState: 3,
     catalystItemStates: [2, 2, 2],
+    curCatShakingOrderIdx: 0,
   },
   // 11   This is an **exothermic reaction...
   { // 11
     canvaTimeState: 3,
     canvaBeakerState: 3,
     catalystItemStates: [2, 2, 2],
+    curCatShakingOrderIdx: 0,
   },
   // 12   The hump or bell in the ...
   { // 12
     canvaTimeState: 3,
     canvaBeakerState: 3,
     catalystItemStates: [2, 2, 2],
+    curCatShakingOrderIdx: 0,
     // isEnableChooseMenu: false,
   },
   // 13   There's a way to reduce... 
   { // 13
     canvaTimeState: 3,
     canvaBeakerState: 3,
-    catalystItemStates: [2, 2, 2],
+    catalystItemStates: [3, 3, 3],
+    curCatShakingOrderIdx: 0,
     activeDotIndex: 0,
     // isEnableChooseMenu: true,
   },
@@ -404,7 +431,9 @@ export const stepsActions = [
   { // 14
     canvaTimeState: 0,
     canvaBeakerState: 1,
-    catalystItemStates: [3, 2, 2],
+    catalystItemStates: [4, 4, 4],
+    curCatShakingOrderIdx: 0,
+    showCatalystMoveItem: false,
     activeDotIndex: 1,
     // isEnableChooseMenu: false,
   },
@@ -412,26 +441,34 @@ export const stepsActions = [
   { // 15
     canvaTimeState: 1,
     canvaBeakerState: 1,
-    catalystItemStates: [3, 2, 2],
+    catalystItemStates: [3, 3, 3],
+    curCatShakingOrderIdx: 0,
+    showCatalystMoveItem: true,
   },
   // 16   Look! The E__a__ was reduced  ...
   { // 16
     canvaTimeState: 2,
     canvaBeakerState: 2,
-    catalystItemStates: [3, 2, 2],
+    catalystItemStates: [3, 3, 3],
+    curCatShakingOrderIdx: 1,
+    showCatalystMoveItem: false,
   },
   // 17   Take a look at the linear  ...
   { // 17
     canvaTimeState: 3,
     canvaBeakerState: 3,
-    catalystItemStates: [3, 2, 2],
+    catalystItemStates: [3, 3, 3],
+    curCatShakingOrderIdx: 1,
+    showCatalystMoveItem: false,
     // isEnableChooseMenu: false,
   },
   // 18   Points of that graph are ...
   { // 18
     canvaTimeState: 3,
     canvaBeakerState: 3,
-    catalystItemStates: [3, 2, 2],
+    catalystItemStates: [3, 3, 3],
+    curCatShakingOrderIdx: 1,
+    showCatalystMoveItem: false,
     activeDotIndex: 1,
     // isEnableChooseMenu: true,
   },
@@ -439,7 +476,9 @@ export const stepsActions = [
   { // 19
     canvaTimeState: 0,
     canvaBeakerState: 1,
-    catalystItemStates: [3, 2, 2],
+    catalystItemStates: [3, 3, 3],
+    curCatShakingOrderIdx: 1,
+    showCatalystMoveItem: false,
     activeDotIndex: 2,
     // isEnableChooseMenu: false,
   },
@@ -447,68 +486,105 @@ export const stepsActions = [
   { // 20
     canvaTimeState: 1,
     canvaBeakerState: 1,
-    catalystItemStates: [3, 2, 2],
+    catalystItemStates: [3, 3, 3],
+    curCatShakingOrderIdx: 1,
+    showCatalystMoveItem: false,
   },
   // 21   It's all done! All of ...
   { // 21
     canvaTimeState: 2,
     canvaBeakerState: 2,
-    catalystItemStates: [3, 2, 2],
+    catalystItemStates: [4, 4, 4],
+    curCatShakingOrderIdx: 1,
+    showCatalystMoveItem: false,
   },
   // 22   Let's try that out! ...
   { // 22
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [3, 3, 3],
+    curCatShakingOrderIdx: 1,
+    showCatalystMoveItem: true,
   },
   // 23   Perfect! Now shake the ...
   { // 23
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [3, 3, 3],
+    curCatShakingOrderIdx: 2,
+    showCatalystMoveItem: false,
   },
   // 24   Look! The E__a__ was ...
   { // 24
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [3, 3, 3],
+    curCatShakingOrderIdx: 2,
+    showCatalystMoveItem: false,
   },
   // 25   Let's try to produce C ...
   { // 25
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [3, 3, 3],
+    curCatShakingOrderIdx: 2,
+    showCatalystMoveItem: false,
   },
   // 26   Perfect! Successful collisions ...
   { // 26
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [3, 3, 3],
+    curCatShakingOrderIdx: 2,
+    showCatalystMoveItem: false,
   },
   // 27   It's all done! All of ...
   { // 27
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [4, 4, 4],
+    curCatShakingOrderIdx: 2,
+    showCatalystMoveItem: false,
   },
   // 28   Let's try that out! ...
   { // 28
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [3, 3, 3],
+    curCatShakingOrderIdx: 2,
+    showCatalystMoveItem: true,
   },
   // 29   Look! The E__a__ was ...
   { // 29
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [3, 3, 3],
+    curCatShakingOrderIdx: 3,
+    showCatalystMoveItem: false,
   },
   // 30   Let's try to produce ...
   { // 30
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [3, 3, 3],
+    curCatShakingOrderIdx: 2,
+    showCatalystMoveItem: false,
   },
   // 31   Perfect! Successful collisions ...
   { // 31
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [3, 3, 3],
+    curCatShakingOrderIdx: 2,
+    showCatalystMoveItem: false,
   },
   // 32   It's all done! All of ...
   { // 32
     canvaTimeState: 3,
     canvaBeakerState: 3,
+    catalystItemStates: [3, 3, 3],
+    curCatShakingOrderIdx: 2,
+    showCatalystMoveItem: false,
   },
 ]
 

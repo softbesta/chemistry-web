@@ -14,15 +14,26 @@ interface EnergyCatalystContainerProps {
   catalystTypes: number[]
   catalystItemStates: number[]
   setCatalystItemStates: (val: number[]) => void
+  onCatalystMenuItemClick: (id: number) => void
+  activeCatIdx: number
   regionWidth?: number
   regionHeight?: number
+  maxShakingCount?: number
+  onChangeShakingCount?: (shakingCount: number, shakingItemIndex: number) => void
 }
 export const EnergyCatalystContainer = ({
   catalystTypes = [0, 1, 2],
-  catalystItemStates,  // 0: hidden, 1: moveable, 2: menu item disabled, 3: menu item active
+
+  // 0: menu item - hidden, 1: menu item - hidden(movable item will be shown only in this case),
+  // 2: menu item - disabled, 3: menu item - active, 4: menu item - active & clickable
+  catalystItemStates,
   setCatalystItemStates,
+  onCatalystMenuItemClick,
+  activeCatIdx = -1,
   regionWidth = 350,
   regionHeight = 230,
+  maxShakingCount = 30,
+  onChangeShakingCount,
 }: EnergyCatalystContainerProps) => {
   const catItemWidth = 25, catItemHeight = 55
 
@@ -36,7 +47,7 @@ export const EnergyCatalystContainer = ({
   const containerRef = useRef<HTMLDivElement>(null)
 
   // const [enabledIndex, setEnabledIndex] = 
-  const [activeCatIdx, setActiveCatIdx] = useState(-1)
+  // const [activeCatIdx, setActiveCatIdx] = useState(-1)
   const [position, setPosition] = useState<Point>(initialMovableItemPositions)
   const [dragIndex, setDragIndex] = useState(-1)
   const [dragOffset, setDragOffset] = useState<Point>({ x: 0, y: 0 })
@@ -93,7 +104,7 @@ export const EnergyCatalystContainer = ({
     setDragIndex(index)
     startTimer()
   }
-  const onItemDragEnd = (_e: any) => {
+  const onItemDragEnd = () => {
     setDragIndex(-1)
   }
   const onItemMove = (_e: any) => {
@@ -115,7 +126,7 @@ export const EnergyCatalystContainer = ({
   const [lastClickTime, setLastClickTime] = useState(0);
   const onMovableItemClick = async () => {
     // console.log('===onItemClick===', { shakingCount })
-    const droppingCountToAdd = 3
+    const droppingCountToAdd = 6
     const currentTime = new Date().getTime();
     if (currentTime - lastClickTime <= 300) {
       addMultipleDropping(droppingCountToAdd)
@@ -139,6 +150,8 @@ export const EnergyCatalystContainer = ({
 
     // console.log('clicked catalyst menu item', { id, origin: catalystItemStates, update })
     setCatalystItemStates(update)
+
+    onCatalystMenuItemClick(id)
   }
 
   useEffect(() => {
@@ -149,15 +162,22 @@ export const EnergyCatalystContainer = ({
       // console.log('===useEffect.shakings===  shaking count --- ', shakingCount + count)
     }
   }, [shakings.current])
+
+  // check shakingCount if movable item is shaked enough.
   useEffect(() => {
-    // console.log({ shakingCount })
+    if (shakingCount > maxShakingCount) {
+      onItemDragEnd()
+      onChangeShakingCount?.(shakingCount, activeCatIdx)
+    }
+    console.log({ shakingCount, activeCatIdx })
   }, [shakingCount])
 
   useEffect(() => {
     // initialize when active catalyst state changes
     // console.log('===useEffect.catalystItemStates===')
-    const activeId = catalystItemStates.findIndex(item => item === 1) // find an item which is moveable
-    setActiveCatIdx(activeId)
+    // const activeId = catalystItemStates.findIndex(item => item === 1) // find an item which is moveable
+    // setActiveCatIdx(activeId)
+
     setShakingCount(0)
     setPosition(initialMovableItemPositions)
   }, [catalystItemStates])
@@ -182,6 +202,7 @@ export const EnergyCatalystContainer = ({
         width={catItemWidth}
         height={catItemHeight}
         position={menuItemPositions[index]}
+        clickable={catalystItemStates[index] === 4}
         onClick={() => onClickCatalystMenuItem(index)}
       />
     })}
@@ -211,6 +232,7 @@ interface EnergyCatalystMenuItemProps {
   width?: number
   height?: number
   position: Point
+  clickable?: boolean
   onClick: () => void
 }
 export const EnergyCatalystMenuItem = ({
@@ -219,6 +241,7 @@ export const EnergyCatalystMenuItem = ({
   width = 50,
   height = 100,
   position,
+  clickable = false,
   onClick,
 }: EnergyCatalystMenuItemProps) => {
   // const catalystColor = disable ? 'gray' : catalystImgColors[catType]
@@ -233,11 +256,11 @@ export const EnergyCatalystMenuItem = ({
       top: position.y,
       width,
       height,
-      cursor: 'pointer',
+      ... (clickable ? { cursor: 'pointer' } : {}),
       // backgroundColor: catalystColor,
       backgroundImage: `url(${catalystImg})`
     }}
-    onClick={() => !disable && onClick()}
+    onClick={() => clickable && onClick()}
   />
 }
 

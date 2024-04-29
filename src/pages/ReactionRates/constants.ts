@@ -1,3 +1,11 @@
-export const energyDotsInfo = [
-  
+export const energyDotColors = [
+  'rgb(240, 148, 137)',
+  'rgb(242, 169, 141)',
+  'rgb(245, 193, 146)',
+  'rgb(227, 221, 164)',
+  'rgb(205, 251, 183)',
+  'rgb(190, 240, 218)',
+  'rgb(177, 228, 250)',
+  'rgb(173, 201, 247)',
+  'rgb(169, 174, 243)',
 ]

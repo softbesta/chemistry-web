@@ -98,8 +98,11 @@ interface ChamberFProps {
   escapeSpeed: number,
   activeGases: any[],
   temperature: number,
-  gasProportions: any[],
-  count: number
+  // gasProportions: any[],
+
+  count?: number,
+  waterLevel?: number,
+  gasCounts: number[],
 }
 export const ChamberF = ({
   width,
@@ -109,10 +112,11 @@ export const ChamberF = ({
   escapeSpeed,
   activeGases,
   temperature,
-  gasProportions,
+  // gasProportions,
   count,
+  waterLevel = 0.4,
+  gasCounts,
 }: ChamberFProps) => {
-  const concentration = 0.4;
 
   const margin = 20
 
@@ -223,10 +227,14 @@ export const ChamberF = ({
         counter1 = e.timestamp;
       }
     });
-  }, [count])
+  }, [])
 
   useEffect(() => {
-    if (!prevProps.current) return
+    // console.log('ttt', prevProps.current)
+    if (!prevProps.current) {
+      prevProps.current = { activeGases, temperature, isPlaying, gasCounts }
+      return
+    }
     console.log('===ChamberF.useEffect 222===')
     if (
       prevProps.current.activeGases !== activeGases ||
@@ -236,7 +244,7 @@ export const ChamberF = ({
     }
     if (
       !isPlaying &&
-      prevProps.current.gasProportions !== gasProportions
+      prevProps.current.gasCounts !== gasCounts
     ) {
       refreshScene();
     }
@@ -266,8 +274,13 @@ export const ChamberF = ({
       letParticlesEscape(particles.current, escapeSpeed);
     }
 
-    prevProps.current = { activeGases, temperature, isPlaying, gasProportions }
+    prevProps.current = { activeGases, temperature, isPlaying, gasCounts }
   }, [activeGases, temperature])
+
+  // useEffect(() => {
+  //   prevProps.current = { activeGases, temperature, isPlaying, gasCounts }
+  //   console.log('ttt 111', prevProps.current)
+  // }, [activeGases, temperature])
 
   const refreshRunner = (runner: Matter.Runner, engine: Matter.Engine, isPlaying: boolean) => {
     if (isPlaying) {
@@ -372,7 +385,9 @@ export const ChamberF = ({
         updateParticleSpeeds(
           gasParticles,
           distributionBuckets.current[idx],
-          gasProportions[idx]);
+          // gasProportions[idx]
+          gasCounts[idx],
+        )
       }
     });
   }
@@ -414,15 +429,15 @@ export const ChamberF = ({
     return p;
   }
 
-  const drawParticles = (activeGases: any[] = [], gasProportions: any[] = [], distributionBuckets: any[]) => {
+  const drawParticles = (activeGases: any[] = [], gasCounts: any[] = [], distributionBuckets: any[]) => {
     const me = this;
     const particles: any[] = [];
 
     activeGases.forEach(function (gas, idx) {
-      const proportion = gasProportions[idx];
+      const proportion = gasCounts[idx];
       const buckets = distributionBuckets[idx];
 
-      const p = [];
+      const p: Matter.Body[] = [];
 
       // buckets.forEach(function (bucket) {
       //   // The number of particles to create for a given
@@ -437,11 +452,13 @@ export const ChamberF = ({
       //   }
       // });
 
-      const particleCount = gasProportions[idx]
+      const particleCount = gasCounts[idx]
 
-      for (let i = 0; i < particleCount; i++) {
-        p.push(makeParticle(gas, 1));
-      }
+      // buckets.forEach(function (bucket: any) {
+        for (let i = 0; i < particleCount; i++) {
+          p.push(makeParticle(gas, 0.1));
+        }
+      // });
 
       particles[idx] = p;
     });
@@ -526,7 +543,7 @@ export const ChamberF = ({
     const initialPartCounts: any[] = [];
     activeGases.forEach(function (gas) {
       const buckets = generateBuckets(gas);
-      console.log({ gas, buckets })
+      console.log('refreshScene', { gas, buckets })
 
       const totalParticles = buckets.reduce(
         function (prev, cur) {
@@ -540,15 +557,15 @@ export const ChamberF = ({
     initialParticleCounts.current = initialPartCounts;
     particles.current = drawParticles(
       activeGases,
-      gasProportions,
+      gasCounts,
       distributionBuckets.current
     );
 
-    console.log({ initialParticleCounts: initialPartCounts })
-    console.log({ activeGases: activeGases, gasProportions: gasProportions, distributionBuckets: distributionBuckets.current })
-    console.log({ particles: particles })
+    // console.log('refreshScene', { initialParticleCounts: initialPartCounts })
+    // console.log('refreshScene', { activeGases: activeGases, gasCounts, distributionBuckets: distributionBuckets.current })
+    // console.log('refreshScene', { particles: particles })
 
-
+    if (!particles.current) return
     particles.current.forEach(function (gasParticles) {
       if (!engine.current) return
       Matter.Composite.add(engine.current.world, gasParticles);
@@ -570,7 +587,7 @@ export const ChamberF = ({
       }
     };
 
-    const cY = height * (1 - concentration)
+    const cY = height * (1 - waterLevel)
 
     return [
 
@@ -623,6 +640,6 @@ export const ChamberF = ({
   return <div
     id='ChamberPixiView'
     ref={elemRef}
-    // style={{ position: 'absolute', top: 0 }}
+    style={{ position: 'absolute', top: 0 }}
   />
 }
