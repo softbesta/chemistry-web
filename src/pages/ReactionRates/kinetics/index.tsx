@@ -203,7 +203,7 @@ const ReactionKinetics = () => {
   // ** Beaker control variables
   const settings = new BeakerSettings(290, true)
 
-  console.log({ settings })
+  // console.log({ settings })
 
   const activeGases = [
     {

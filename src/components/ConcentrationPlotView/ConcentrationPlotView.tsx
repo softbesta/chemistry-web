@@ -59,7 +59,6 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
     const ctx = canvas?.current?.getContext('2d');
     if (ctx) {
       const { height: rectHeight, width: rectWidth } = ctx.canvas;
-      console.log({rectWidth, rectHeight})
       const rect: Rect = {
         width: rectWidth,
         height: rectHeight
