@@ -197,19 +197,13 @@ const ReactionKinetics = () => {
     return () => removeHighlightElement(tutorials[curStep]?.highlight)
   }, [])
 
-
-
-
-
   // ** Beaker control variables
   const settings = new BeakerSettings(290, true)
-
   // console.log({ settings })
-
   const activeGases = [
     {
       id: 3,
-      particleSize: 6,  // ** control gas cirle size
+      particleSize: 4,  // ** control gas cirle size
       color: 0x00d0f0,  // ** control gas color
       name: 'Oxygen',
       symbol: <>O<sub>2</sub></>,
@@ -218,7 +212,7 @@ const ReactionKinetics = () => {
     },
     {
       id: 9,
-      particleSize: 6,  // ** control gas cirle size
+      particleSize: 4,  // ** control gas cirle size
       color: 0xff0000,  // ** control gas color
       name: 'Hydrogen',
       symbol: <>H<sub>2</sub></>,
@@ -229,11 +223,10 @@ const ReactionKinetics = () => {
   const gasCounts = [5, 5];  // ** control counts here
   const temperature = 0.01        // ** control movespeed here
 
-  const BeakerSize = { width: 290, height: 320 }
+  const BeakerSize = { width: 260, height: 270 }
   const waterLevel = 0.4          // ** control waterlevel here
 
   const [valueFire, setValueFire] = useState(50)
-
 
   // ** Graph Chart control variables
   const graphChartWidth = 280;
@@ -254,7 +247,7 @@ const ReactionKinetics = () => {
 
     <div className={styles.reactionDrawContainer}>
       <EnergyCatalystContainer
-        catalystTypes={[0, 1, 3]}
+        catalystTypes={[0, 1, 2]}
         catalystItemStates={catalystItemStates}
         setCatalystItemStates={(val) => setCatalystItemStates(val)}
       />

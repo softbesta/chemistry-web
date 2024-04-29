@@ -7,8 +7,9 @@ import catalystDisabled from '../assets/ReactionRates/catdisable.png'
 import { Point } from '../helper/types'
 import { debounce, delay } from '../helper/functions'
 
-const catalystImgs = [catalystOne, catalystTwo, catalystTwo, catalystThree]
-const catalystImgColors = ['red', 'green', 'blue', 'blue']
+// Images for catalystType
+const catalystImgs = [catalystOne, catalystTwo, catalystThree]
+const catalystImgColors = ['red', 'green', 'blue']
 
 interface EnergyCatalystContainerProps {
   catalystTypes: number[]
@@ -18,15 +19,14 @@ interface EnergyCatalystContainerProps {
   regionHeight?: number
 }
 export const EnergyCatalystContainer = ({
-  catalystTypes = [0, 1, 3],
-  catalystItemStates,
+  catalystTypes = [0, 1, 2],
+  catalystItemStates,  // 0: hidden, 1: moveable, 2: menu item disabled, 3: menu item active
   setCatalystItemStates,
   regionWidth = 350,
   regionHeight = 230,
 }: EnergyCatalystContainerProps) => {
   const catItemWidth = 30, catItemHeight = 70
 
-  // 0: hidden, 1: moveable, 2: menu item disabled, 3: menu item active
   const initialMenuPositions = [
     { x: regionWidth / 2 - 85, y: 0 },
     { x: regionWidth / 2 - 25, y: 0 },

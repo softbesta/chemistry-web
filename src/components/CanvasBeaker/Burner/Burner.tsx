@@ -19,7 +19,6 @@ const Burner = ({ fireVal, onChange }: BurnerProps) => {
       height={30}
     />
     <SliderHoriz
-      // width={300}
       max={100}
       distance={0}
       values={[fireVal, 100]}
