@@ -567,7 +567,7 @@ export const stepsActions = [
     canvaTimeState: 3,
     canvaBeakerState: 3,
     catalystItemStates: [3, 3, 3],
-    curCatShakingOrderIdx: 2,
+    curCatShakingOrderIdx: 3,
     showCatalystMoveItem: false,
   },
   // 31   Perfect! Successful collisions ...
@@ -575,7 +575,7 @@ export const stepsActions = [
     canvaTimeState: 3,
     canvaBeakerState: 3,
     catalystItemStates: [3, 3, 3],
-    curCatShakingOrderIdx: 2,
+    curCatShakingOrderIdx: 3,
     showCatalystMoveItem: false,
   },
   // 32   It's all done! All of ...
@@ -583,7 +583,7 @@ export const stepsActions = [
     canvaTimeState: 3,
     canvaBeakerState: 3,
     catalystItemStates: [3, 3, 3],
-    curCatShakingOrderIdx: 2,
+    curCatShakingOrderIdx: 3,
     showCatalystMoveItem: false,
   },
 ]

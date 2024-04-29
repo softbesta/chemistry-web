@@ -238,8 +238,6 @@ const ReactionKinetics = () => {
   const beakerSize = { width: 240, height: 270 }
   const waterLevel = 0.4          // ** control waterlevel here
 
-  const [valueFire, setValueFire] = useState(50)
-
   // ** Graph Chart control variables
   const graphChartSize = { width: 220, height: 220 }
 
@@ -254,6 +252,7 @@ const ReactionKinetics = () => {
 
   // ** Beaker Burner state ;  'false': disable Burner, 'true': active Burner
   const [isBurnerActive, setIsBurnerActive] = useState(false)
+  const [valueFire, setValueFire] = useState(10)
 
   // ** Control Catalyst State
   const [catShakingOrder, setCatShakingOrder] = useState<number[]>([0, 1, 2])
@@ -285,7 +284,6 @@ const ReactionKinetics = () => {
     // console.log('clicked catalyst menu item', { id, origin: catalystItemStates, update })
     setCatalystItemStates(updatedState)
 
-
     const restOrders = catShakingOrder.filter(s => s !== index)
     const updatedOrder = [
       ...restOrders.slice(0, curCatShakingOrderIdx),
@@ -296,7 +294,6 @@ const ReactionKinetics = () => {
     setCatShakingOrder(updatedOrder)
     onStepChange(1)
   }
-
   const curCatalystItemState = catalystItemStates.map((state, index) => {
     // hide menu item for shaking.
     if (showCatalystMoveItem && index === catShakingOrder[curCatShakingOrderIdx]) {
@@ -306,7 +303,7 @@ const ReactionKinetics = () => {
     if (catShakingOrder.slice(0, curCatShakingOrderIdx).includes(index)) return 0
     return state
   })
-  console.log({curCatalystItemState, catShakingOrder, curCatShakingOrderIdx})
+
 
   return <div className={styles.container}>
     <ChapterMenu />
