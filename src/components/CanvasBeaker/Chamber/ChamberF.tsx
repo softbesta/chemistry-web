@@ -181,10 +181,10 @@ export const ChamberF = ({
 
   const updateParticleSpeed = function (p: any, molecularSpeed: any) {
     p.molecularSpeed = molecularSpeed;
-  
+
     const baseSpeed = p.molecularSpeed * gasSpeed;
     let speedMultiplier = baseSpeed / p.speed;
-  
+
     Matter.Body.setVelocity(p, {
       x: p.velocity.x * speedMultiplier,
       y: p.velocity.y * speedMultiplier
@@ -195,25 +195,32 @@ export const ChamberF = ({
     // Convert matter.js speed back to the meters per second (m/s)
     // unit we're using in the graph.
     let molecularSpeed = particle.speed / gasSpeed;
-  
+
     // If the particle's current speed is 0, that means it hasn't
     // started moving yet. In this case, just use the molecularSpeed
     // we've assigned it on creation.
     if (particle.speed === 0) {
       molecularSpeed = particle.molecularSpeed;
     }
-  
+
     return molecularSpeed >= escapeSpeed;
   };
-    
+
   const makeParticle = (gas: any, molecularSpeed: number) => {
     const particleMargin = margin + 10;
     const particleColor = Color(gas.color);
     // TODO: need to draw pentagon shape here.
     // const p = Matter.Bodies.polygon()
+
+    const wx = Math.random() * width
+    const wy = Math.random() * (height * waterLevel) + height * (1 - waterLevel)
+    console.log({ wx, wy })
+
     const p = Matter.Bodies.circle(
-      width / 2,          // ** initial position for particles
-      height - 50,
+      // width / 2,          // ** initial position for particles
+      // height - 50,
+      wx,
+      wy,
       gas.particleSize, {
       render: {
         fillStyle: particleColor.hex(),

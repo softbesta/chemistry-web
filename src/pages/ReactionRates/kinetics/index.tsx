@@ -482,10 +482,6 @@ const ReactionKinetics = () => {
             height={250}
             settings={new EnergyRateChartSettings(250)}
             showTemperature={true}
-            highlightTop={true}
-            highlightBottom={true}
-            moleculeHightlightColor='white'
-            order={2}
             chartInput={new EnergyProfileChatInput(ReactionOrder.Second, 400, Catalyst.A)}
           />
         </div>
