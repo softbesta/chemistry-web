@@ -9,7 +9,7 @@ import { CatalystDropItemColors } from './constants'
 // Images for catalystType
 const catalystImgs = [catalystOne, catalystTwo, catalystThree]
 const catalystImgColors = ['red', 'green', 'blue']
-const ImgsPentagon = [ImgPentagonPink, ImgPentagonSky, ImgPentagonYellow]
+const ImgsPentagon = [ImgPentagonPink, ImgPentagonYellow, ImgPentagonSky]
 
 interface EnergyCatalystContainerProps {
   catalystTypes: number[]

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Matter from 'matter-js';
 import Color from 'color';
+import styles from './Chamber.module.scss'
 
 /**
  * Based on maxwell_gen's pdf function from scipy.
@@ -113,12 +114,13 @@ export default class Chamber extends React.Component {
   }
 
   render() {
-    return (
+    return (<div className={styles.chamberContainer}>
       <div
         id="ChamberPixiView"
         ref={this.el}
         style={{ position: 'absolute', top: 0 }}
       />
+      </div>
     );
   }
 
@@ -132,8 +134,6 @@ export default class Chamber extends React.Component {
   }
 
   removeEscapedParticles() {
-    const me = this;
-
     // Record the current particle counts in this callback, to
     // make it easy to determine whether any have escaped, based
     // on the criteria below.
@@ -489,9 +489,17 @@ export default class Chamber extends React.Component {
 
     const me = this;
     Matter.Events.on(render, 'afterRender', function () {
+      // console.log('===Matter.Events.afterRender===')
       // Draw box where the walls are, since the physical walls are
       // invisible.
       const ctx = render.context;
+
+      ctx.rect(50, 50, 150, 250)
+      ctx.strokeStyle = 'black'
+      ctx.stroke()
+      ctx.fillStyle = 'rgba(100, 100, 100, 0.5)'
+      ctx.fill()
+      ctx.clip()
 
       ctx.canvas.style.position = 'absolute';
       ctx.canvas.style.backgroundColor = 'transparent';
@@ -500,6 +508,7 @@ export default class Chamber extends React.Component {
 
     let counter0 = 0;
     Matter.Events.on(engine, 'beforeUpdate', function (e) {
+      // console.log('===Matter.Events.beforeUpdate===')
       if (e.timestamp >= counter0 + 500) {
         me.particles.forEach(function (gasParticles) {
           gasParticles.forEach(function (p) {
@@ -515,6 +524,7 @@ export default class Chamber extends React.Component {
 
     let counter1 = 0;
     Matter.Events.on(engine, 'afterUpdate', function (e) {
+      // console.log('===Matter.Events.afterUpdate===')
       if (e.timestamp >= counter1 + 200) {
         if (me.props.allowEscape) {
           me.removeEscapedParticles();
@@ -534,6 +544,7 @@ export default class Chamber extends React.Component {
       prevProps.activeGases !== this.props.activeGases ||
       prevProps.temperature !== this.props.temperature
     ) {
+      console.log('DidUpdate.111', {prevProps}, this.props)
       this.refreshScene();
     }
 
@@ -541,10 +552,12 @@ export default class Chamber extends React.Component {
       !this.props.isPlaying &&
       prevProps.gasCounts !== this.props.gasCounts
     ) {
+      console.log('DidUpdate.222')
       this.refreshScene();
     }
 
     if (prevProps.isPlaying !== this.props.isPlaying) {
+      console.log('DidUpdate.333')
       this.refreshRunner(
         this.runner, this.engine, this.props.isPlaying);
     }
@@ -553,6 +566,7 @@ export default class Chamber extends React.Component {
     if (prevProps.allowEscape !== this.props.allowEscape) {
       // Update all the particles' category to make them ignore
       // the walls.
+      console.log('DidUpdate.444')
       this.particles.forEach(function (gasParticles) {
         gasParticles.forEach(function (p) {
           if (!me.props.allowEscape) {
@@ -569,6 +583,7 @@ export default class Chamber extends React.Component {
     if (this.props.allowEscape &&
       prevProps.escapeSpeed !== this.props.escapeSpeed
     ) {
+      console.log('DidUpdate.555')
       letParticlesEscape(this.particles, this.props.escapeSpeed);
     }
   }

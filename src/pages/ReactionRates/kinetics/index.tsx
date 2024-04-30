@@ -213,17 +213,16 @@ const ReactionKinetics = () => {
     return () => removeHighlightElement(tutorials[curStep]?.highlight)
   }, [])
 
-  // ** Beaker control variables
-  const settings = new BeakerSettings(290, true)
-  // console.log({ settings })
-  const activeGases = [
+
+  // ** Chamber control variables
+  const initActiveGases = [
     {
       id: 3,
       particleSize: 4,  // ** control gas cirle size
       color: 0x00d0f0,  // ** control gas color
       // name: 'Oxygen',
-      symbol: <>O<sub>2</sub></>,
-      svgSymbol: <>O<tspan baselineShift="sub">2</tspan></>,
+      // symbol: <>O<sub>2</sub></>,
+      // svgSymbol: <>O<tspan baselineShift="sub">2</tspan></>,
       mass: 1
     },
     {
@@ -231,14 +230,38 @@ const ReactionKinetics = () => {
       particleSize: 4,  // ** control gas cirle size
       color: 0xff0000,  // ** control gas color
       // name: 'Hydrogen',
-      symbol: <>H<sub>2</sub></>,
-      svgSymbol: <>H<tspan baselineShift="sub">2</tspan></>,
+      // symbol: <>H<sub>2</sub></>,
+      // svgSymbol: <>H<tspan baselineShift="sub">2</tspan></>,
       mass: 1
     },
   ]
-  const gasCounts = [5, 5];  // ** control counts here
-  const temperature = 0.01        // ** control movespeed here
+  const [activeGases, setActiveGases] = useState(initActiveGases)
 
+  const initGasCounts = [1, 1];  // ** control counts here
+  const [gasCounts, setGasCounts] = useState(initGasCounts)
+
+  const handleGasIncrease = () => {
+    const update = [...gasCounts].map(g => g + 1)
+    console.log('handleGasIncrease', update)
+    setGasCounts(update)
+  }
+  const handleGasDecrease = () => {
+    const update = [...gasCounts].map(g => g - 1)
+    console.log('handleGasIncrease', update)
+    setGasCounts(update)
+  }
+  const handleTest = () => {
+    console.log('handleGasIncrease', {gasCounts})
+  }
+
+  const temperature = 0.01
+  // Speed constant used to convert between matter.js speed and meters
+  // per second (m/s)
+  const particleSpeed = 0.01      // ** control movespeed here
+
+  // ** Beaker control variables
+  const settings = new BeakerSettings(290, true)
+  // console.log({ settings })
   const beakerSize = { width: 240, height: 270 }
   const waterLevel = 0.4          // ** control waterlevel here
 
@@ -351,7 +374,7 @@ const ReactionKinetics = () => {
             escapeSpeed={escapeSpeed}
             temperature={temperature}
           /> */}
-          <Chamber
+          {/* <Chamber
             {...beakerSize}
             waterLevel={waterLevel}
             activeGases={activeGases}
@@ -360,6 +383,17 @@ const ReactionKinetics = () => {
             allowEscape={false}
             escapeSpeed={1000}
             temperature={temperature}
+          /> */}
+          <ChamberF
+            {...beakerSize}
+            waterLevel={waterLevel}
+            activeGases={activeGases}
+            gasCounts={gasCounts}
+            isPlaying={true}
+            allowEscape={false}
+            escapeSpeed={1000}
+            temperature={temperature}
+            gasSpeed={particleSpeed}
           />
         </div>
         {/* <SliderHoriz
@@ -384,6 +418,11 @@ const ReactionKinetics = () => {
           beakerState={canvaBeakerState}
           onEndPlay={() => onStepChange(1)}
         /> */}
+      </div>
+      <div style={{ position: 'relative', top: 50 }}>
+        <button onClick={handleGasIncrease}>Increase Gas</button>
+        <button onClick={handleGasDecrease}>Decrease Gas</button>
+        <button onClick={handleTest}>LogGas</button>
       </div>
     </div>
     <div className={styles.reactionContentContainer}>

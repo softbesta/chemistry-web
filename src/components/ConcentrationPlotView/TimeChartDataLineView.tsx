@@ -137,7 +137,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     const xValue = xEquation?.getValue(x) ?? x
     const xPosition = xAxis.shift(offset).getPosition(xValue)
     const yPosition = yAxis.getPosition(y)
-    console.log('aaa 111', {offset, xValue, xPosition, yPosition})
+    // console.log('aaa 111', {offset, xValue, xPosition, yPosition})
 
     ctx.beginPath()
     ctx.arc(xPosition, yPosition, radius, 0, 2 * Math.PI)
