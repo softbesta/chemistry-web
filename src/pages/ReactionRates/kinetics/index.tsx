@@ -30,6 +30,9 @@ import {
 } from "../../../components/ConcentrationPlotView"
 import { ReactionSettings, ReactionType } from "../../../components/ConcentrationPlotView/constants"
 import Burner from "../../../components/CanvasBeaker/Burner/Burner"
+import EnergyProfileChart from "../../../components/EnergyProfileChart/EnergyProfileChart"
+import { EnergyRateChartSettings, ReactionOrder } from "../../../components/EnergyProfileChart"
+import { EnergyProfileChatInput } from "../../../components/EnergyProfileChart/EnergyProfileChartInput"
 
 const ReactionKinetics = () => {
   const {
@@ -108,7 +111,7 @@ const ReactionKinetics = () => {
         setShowCatalystMoveItem(curActions.showCatalystMoveItem)
       }
       if (curActions?.isBurnerActive !== undefined) {
-        console.log('zzz curActions.isBurnerActive', curActions.isBurnerActive, {curActions})
+        console.log('zzz curActions.isBurnerActive', curActions.isBurnerActive, { curActions })
         setIsBurnerActive(curActions.isBurnerActive)
       }
     }
@@ -305,6 +308,14 @@ const ReactionKinetics = () => {
     return state
   })
 
+  const [chartTimingState, setChartTimingState] = useState(0)
+
+
+  enum Catalyst {
+    A = 1,
+    B,
+    C,
+  }
 
   return <div className={styles.container}>
     <ChapterMenu />
@@ -377,6 +388,14 @@ const ReactionKinetics = () => {
     </div>
     <div className={styles.reactionContentContainer}>
       <div className={styles.reactionChartRow}>
+        {/* <button onClick={() => {
+          console.log({chartTimingState: chartTimingState + 1})
+          setChartTimingState(v => v + 1)
+        }}>Test start</button>
+        <button onClick={() => {
+          console.log({chartTimingState: chartTimingState - 1})
+          setChartTimingState(v => v - 1)
+        }}>Test stop</button> */}
         <div className={styles.chartInA}>
           <ConcentrationPlotView
             {...graphChartSize}
@@ -393,8 +412,7 @@ const ReactionKinetics = () => {
             }
             concentrationA={concentrationA}
             concentrationB={concentrationB}
-            initialTime={0}
-            currentTime={10}
+            initialTime={5}
             finalTime={10}
             canSetCurrentTime={true}
             highlightChart={false}
@@ -413,44 +431,23 @@ const ReactionKinetics = () => {
               }
             }
             includeAxis={true}
+            timingState={chartTimingState}
+            onEndPlay={() => {
+              console.log('&&& timer ended &&& ')
+            }}
           />
         </div>
         <div className={styles.chartInA}>
-          <ConcentrationPlotView
-            {...graphChartSize}
-            settings={
-              new ReactionRateChartLayoutSettings(
-                graphChartSize.width,
-                ReactionSettings.Axis.minC,
-                ReactionSettings.Axis.maxC,
-                ReactionSettings.Axis.minT,
-                ReactionSettings.Axis.maxT,
-                true,
-                {} as TimeChartLayoutSettings
-              )
-            }
-            concentrationA={concentrationA}
-            concentrationB={concentrationB}
-            initialTime={0}
-            currentTime={10}
-            finalTime={10}
-            canSetCurrentTime={true}
-            highlightChart={false}
-            highlightLhsCurve={true}
-            highlightRhsCurve={false}
-            display={
-              {
-                reactant: {
-                  name: ReactionType.reactantName.A,
-                  color: ReactionType.reactantColor.A,
-                },
-                product: {
-                  name: ReactionType.productName.A,
-                  color: ReactionType.productColor.A,
-                }
-              }
-            }
-            includeAxis={true}
+          <EnergyProfileChart
+            width={250}
+            height={250}
+            settings={new EnergyRateChartSettings(250)}
+            showTemperature={true}
+            highlightTop={true}
+            highlightBottom={true}
+            moleculeHightlightColor='white'
+            order={2}
+            chartInput={new EnergyProfileChatInput(ReactionOrder.Second, 400, Catalyst.A)}
           />
         </div>
       </div>

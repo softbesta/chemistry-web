@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from 'react'
 import styles from './EnergyCatalyst.module.scss'
 import { Point } from '../../helper/types'
 import { debounce, delay } from '../../helper/functions'
-import { catalystDisabled, catalystOne, catalystThree, catalystTwo } from '../Images'
+import { ImgPentagonPink, ImgPentagonSky, ImgPentagonYellow, catalystDisabled, catalystOne, catalystThree, catalystTwo } from '../Images'
 import Color from 'color'
 import { CatalystDropItemColors } from './constants'
 
 // Images for catalystType
 const catalystImgs = [catalystOne, catalystTwo, catalystThree]
 const catalystImgColors = ['red', 'green', 'blue']
+const ImgsPentagon = [ImgPentagonPink, ImgPentagonSky, ImgPentagonYellow]
 
 interface EnergyCatalystContainerProps {
   catalystTypes: number[]
@@ -124,12 +125,14 @@ export const EnergyCatalystContainer = ({
 
   // Moveable Item: Detect multiple clicked count within 0.5s
   const [lastClickTime, setLastClickTime] = useState(0);
+  // const [droppingCountToAdd, setDroppingCountToAdd] = useState(0)
   const onMovableItemClick = async () => {
     // console.log('===onItemClick===', { shakingCount })
     const droppingCountToAdd = 6
     const currentTime = new Date().getTime();
     if (currentTime - lastClickTime <= 300) {
       addMultipleDropping(droppingCountToAdd)
+      // setDroppingCountToAdd(6)
     }
     setLastClickTime(currentTime);
   }
@@ -420,10 +423,15 @@ export const ElementDroppingAnimation = ({
         className={`
           ${styles.droppingElement}
         `}
-        style={{
-          backgroundColor: Color(CatalystDropItemColors[elementType]).hex()
-        }}
+      // style={{
+      //   backgroundColor: Color(CatalystDropItemColors[elementType]).hex()
+      // }}
       >
+        <img
+          src={ImgsPentagon[elementType]}
+          width={10}
+          height={10}
+        />
       </div>
     })}
     {/* <div className={styles.droppingElement}></div> */}

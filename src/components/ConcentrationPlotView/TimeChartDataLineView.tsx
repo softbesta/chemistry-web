@@ -64,6 +64,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
   React.useEffect(() => {
     const ctx = canvas?.current?.getContext('2d');
     if (ctx) {
+      ctx.clearRect(0, 0, 300, 300)
       ctx.canvas.style.position = 'absolute';
       ctx.canvas.style.left = '0px';
       ctx.canvas.style.backgroundColor = 'transparent';
@@ -73,33 +74,33 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
         height: rectHeight
       }
 
-      if (data.showFilledLine) {
-        dataLine(ctx, finalTime + offset, filledBarColor)
-      }
+      // if (data.showFilledLine) {
+      //   dataLine(ctx, finalTime + offset, filledBarColor)
+      // }
       dataLine(ctx, currentTime, data.headColor)
-      if (highlightLhs) {
-        highlightLine(ctx, initialTime, (initialTime + finalTime) / 2)
-      }
-      if (highlightRhs) {
-        highlightLine(ctx, (initialTime + finalTime) / 2, finalTime)
-      }
+      // if (highlightLhs) {
+      //   highlightLine(ctx, initialTime, (initialTime + finalTime) / 2)
+      // }
+      // if (highlightRhs) {
+      //   highlightLine(ctx, (initialTime + finalTime) / 2, finalTime)
+      // }
 
-      if (data.haloColor) {
-        head(
-          ctx,
-          settings.haloRadius,
-          data.haloColor!
-        )
-        // .contentShape(Rectangle())
-        // .gesture(canSetCurrentTime ? dragGesture : nil)
-      }
+      // if (data.haloColor) {
+      //   head(
+      //     ctx,
+      //     settings.haloRadius,
+      //     data.haloColor!
+      //   )
+      //   // .contentShape(Rectangle())
+      //   // .gesture(canSetCurrentTime ? dragGesture : nil)
+      // }
       head(
         ctx,
         data.headRadius,
         data.headColor
       )
     }
-  }, [])
+  }, [currentTime])
 
   const head = (
     ctx: CanvasRenderingContext2D,
@@ -136,6 +137,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     const xValue = xEquation?.getValue(x) ?? x
     const xPosition = xAxis.shift(offset).getPosition(xValue)
     const yPosition = yAxis.getPosition(y)
+    console.log('aaa 111', {offset, xValue, xPosition, yPosition})
 
     ctx.beginPath()
     ctx.arc(xPosition, yPosition, radius, 0, 2 * Math.PI)
@@ -180,6 +182,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     color: string,
     lineWidth: number
   ) => {
+      console.log('(((', {data, settings, startTime, time, color, lineWidth})
     chartLine(
       ctx,
       data.equation,
@@ -209,8 +212,9 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     lineWidth: number,
   ) => {
     if (discontinuity && discontinuity <= endX) {
-      addLinesWithDiscontinuity(ctx, discontinuity)
+      // addLinesWithDiscontinuity(ctx, discontinuity)
     } else {
+      console.log({equation, xEquation, startX, offset, endX})
       // debugger
       addLinesUpToAndIncluding(ctx, equation, xEquation, startX + offset, endX, startX)
     }

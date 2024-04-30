@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ReactionRateChartLayoutSettings } from './ReactionRateChartLayoutSettings';
 import { Equation } from './Equation';
 import TimeChartDataLineView from './TimeChartDataLineView';
@@ -22,7 +22,6 @@ type ConcentrationPlotViewProps = {
   concentrationA: Equation,
   concentrationB?: Equation,
   initialTime: number,
-  currentTime: number,
   finalTime: number,
   canSetCurrentTime: boolean,
   highlightChart: boolean,
@@ -30,6 +29,8 @@ type ConcentrationPlotViewProps = {
   highlightRhsCurve: boolean,
   display: ReactionPairDisplay,
   includeAxis: boolean
+  timingState: number
+  onEndPlay?: () => void
 }
 
 type Rect = {
@@ -45,7 +46,6 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
     concentrationA,
     concentrationB,
     initialTime,
-    currentTime,
     finalTime,
     canSetCurrentTime,
     highlightChart,
@@ -53,8 +53,12 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
     highlightRhsCurve,
     display,
     includeAxis,
+
+    timingState,
+    onEndPlay,
   } = props;
   const canvas = React.useRef<HTMLCanvasElement>(null);
+  const [currentTime, setCurrentTime] = useState(initialTime)
   React.useEffect(() => {
     const ctx = canvas?.current?.getContext('2d');
     if (ctx) {
@@ -165,8 +169,68 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
     ctx.stroke()
   }
 
+
+  useEffect(() => {
+    if (timingState === 2) {
+      setCurrentTime(initialTime)
+      startTimer()
+      return
+    } else {
+      stopTimer()
+    }
+    if (timingState === 0) {
+      setCurrentTime(initialTime)
+    } else if (timingState === 1) {
+      setCurrentTime(initialTime)
+    } else if (timingState === 3) {
+      setCurrentTime(finalTime)
+    }
+    return () => stopTimer()
+  }, [timingState])
+
+  const [timeCounter, setTimeCounter] = useState<number>(0)
+  const maxTime = finalTime - initialTime
+  const framesPerSecond = 3
+  const intervalTime = 1000 / framesPerSecond
+
+  const timerID = useRef<NodeJS.Timer>()
+  const startTimer = () => {
+    stopTimer()
+    setTimeCounter(0)
+    timerID.current = setInterval(() => {
+      console.log('interval', timeCounter)
+      setTimeCounter(v => v += 1 / framesPerSecond)
+    }, intervalTime)
+    console.log('started', timerID.current)
+  }
+  const stopTimer = () => {
+    if (timerID.current) {
+      clearInterval(timerID.current)
+      timerID.current = undefined
+      console.log('timer end')
+    }
+  }
+
+  // animation play
+  useEffect(() => {
+    if (timeCounter > maxTime) {
+      // animation ends
+      setCurrentTime(finalTime)
+      stopTimer()
+      onEndPlay?.()
+      return
+    }
+    setCurrentTime(timeCounter)
+  }, [timeCounter])
+
   return (
     <>
+      {/* <button onClick={() => {
+        const updatedCurrentTime = currentTime + 1
+        console.log('aaa 000', { updatedCurrentTime, initialTime, finalTime })
+        setCurrentTime(updatedCurrentTime)
+      }}>TestRender</button> */}
+      {/* <div style={{position: 'relative'}}> */}
       <canvas ref={canvas} height={width} width={height} />
       {concentrationB &&
         <TimeChartDataLineView
@@ -176,6 +240,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
             equation: concentrationB,
             headColor: display.product.color,
             headRadius: settings.chartHeadSecondarySize,
+            // showFilledLine: true,
           }}
           settings={settings.timeChartLayoutSettings}
           lineWidth={settings.timeChartLayoutSettings.lineWidth}
@@ -207,6 +272,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
         highlightLhs={highlightLhsCurve}
         highlightRhs={highlightRhsCurve}
       />
+      {/* </div> */}
     </>
   );
 };

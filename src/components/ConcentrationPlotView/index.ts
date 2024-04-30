@@ -12,8 +12,7 @@ import {
 import { Equation } from "./Equation"
 import { LinearAxis } from "./LinearAxis"
 import TimeChartDataLineView from "./TimeChartDataLineView"
-
-export * from './ReactionRateChartLayoutSettings'
+import { ReactionRateChartLayoutSettings, TimeChartLayoutSettings } from './ReactionRateChartLayoutSettings'
 
 export {
   ConcentrationPlotView,
@@ -28,4 +27,6 @@ export {
   Equation,
   LinearAxis,
   TimeChartDataLineView,
+  ReactionRateChartLayoutSettings
 }
+export type { TimeChartLayoutSettings }
