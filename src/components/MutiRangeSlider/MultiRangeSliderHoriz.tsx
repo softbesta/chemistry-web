@@ -32,7 +32,7 @@ const MultiRangeSliderHoriz = ({
 
   const minDisabled = showThumbIndex[0] === 1 ? true : false
   const maxDisabled = showThumbIndex[1] === 1 ? true : false
-  const isLeftOverlap = maxDisabled || valLeft > max - 10
+  const isLeftOverlap = maxDisabled || valLeft > max - max * 0.1
 
   const onChangeValue = (val: number, index: number) => {
     // console.log('ttt', { val, index })
@@ -43,7 +43,7 @@ const MultiRangeSliderHoriz = ({
     <div
       className='h-slider-container'
       style={{
-        ...(width ? { width } : {width: '100%'})
+        ...(width ? { width } : { width: '100%' })
       }}
     >
       <div className='h-slider-bar' />
@@ -56,7 +56,7 @@ const MultiRangeSliderHoriz = ({
               { 'h-slider-thumb-hidden': showThumbIndex[0] === 0 },
             )}
             style={{
-              ...(width ? { width } : {width: '100%'})
+              ...(width ? { width } : { width: '100%' })
             }}
             disabled={minDisabled}
             type='range'
@@ -76,7 +76,7 @@ const MultiRangeSliderHoriz = ({
               { 'thumb-hidden': showThumbIndex[1] === 0 },
             )}
             style={{
-              ...(width ? { width } : {width: '100%'})
+              ...(width ? { width } : { width: '100%' })
             }}
             disabled={maxDisabled}
             type='range'

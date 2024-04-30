@@ -67,8 +67,9 @@ export const ReactionType = {
   }
 }
 
-export const ReactionOrder = {
-  Zero: {
+export const ReactionOrder = [
+  // Zero
+  {
     peak: 0.9,
     leftAsymptote: 0.5,
     rightAsymptote: 0.2,
@@ -77,7 +78,8 @@ export const ReactionOrder = {
     minTempEnergy: 0.6,
     maxTempEnergy: 0.95
   },
-  First: {
+  // First
+  {
     peak: 0.85,
     leftAsymptote: 0.2,
     rightAsymptote: 0.4,
@@ -86,7 +88,8 @@ export const ReactionOrder = {
     minTempEnergy: 0.5,
     maxTempEnergy: 0.9
   },
-  Second: {
+  // Second
+  {
     peak: 0.7,
     leftAsymptote: 0.35,
     rightAsymptote: 0.25,
@@ -95,4 +98,4 @@ export const ReactionOrder = {
     minTempEnergy: 0.45,
     maxTempEnergy: 0.85
   }
-}
+]

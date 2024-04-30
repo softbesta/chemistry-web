@@ -114,6 +114,10 @@ const ReactionKinetics = () => {
         console.log('zzz curActions.isBurnerActive', curActions.isBurnerActive, { curActions })
         setIsBurnerActive(curActions.isBurnerActive)
       }
+      if (curActions?.energyProfileChartState !== undefined) {
+        console.log('zzz curActions.energyProfileChartState', curActions.energyProfileChartState, { curActions })
+        setEnergyProfileChartState(curActions.energyProfileChartState)
+      }
     }
   }, [curStep, curActions])
 
@@ -279,7 +283,7 @@ const ReactionKinetics = () => {
 
   // ** Beaker Burner state ;  'false': disable Burner, 'true': active Burner
   const [isBurnerActive, setIsBurnerActive] = useState(false)
-  const [valueFire, setValueFire] = useState(10)
+  const [valueFire, setValueFire] = useState(400)
 
   // ** Control Catalyst State
   const [catShakingOrder, setCatShakingOrder] = useState<number[]>([0, 1, 2])
@@ -341,6 +345,10 @@ const ReactionKinetics = () => {
   }
 
   const [chooseMenuIndex, setChooseMenuIndex] = useState(0)
+
+  // ** EnergyProfileChart variables.
+  const energyProfileInput = new EnergyProfileChatInput(ReactionOrder[chooseMenuIndex], valueFire, chooseMenuIndex + 1)
+  const [energyProfileChartState, setEnergyProfileChartState] = useState(0)
 
   return <div className={styles.container}>
     <ChapterMenu />
@@ -414,8 +422,14 @@ const ReactionKinetics = () => {
         /> */}
         <Burner
           isActive={isBurnerActive}
+          min={400}
+          max={600}
           fireVal={valueFire}
-          onChange={(val) => setValueFire(val)}
+          onChange={(val) => {
+            console.log({ val })
+            setValueFire(val)
+          }
+          }
         />
 
         {/* <EnergyProfile
@@ -484,12 +498,19 @@ const ReactionKinetics = () => {
           />
         </div>
         <div className={styles.chartInA}>
+          <div>
+            {/* <span className={styles.txtEnergy}>Energy</span>
+            <span className={styles.txtReactants}>Reactants</span>
+            <span className={styles.txtProducts}>Products</span> */}
+          </div>
           <EnergyProfileChart
+            kind={chooseMenuIndex}
             width={250}
             height={250}
+            // {...graphChartSize}
             settings={new EnergyRateChartSettings(250)}
-            showTemperature={true}
-            chartInput={new EnergyProfileChatInput(ReactionOrder.Second, 400, Catalyst.A)}
+            state={energyProfileChartState}
+            chartInput={energyProfileInput}
           />
         </div>
       </div>

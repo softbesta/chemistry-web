@@ -13,7 +13,7 @@ interface SliderHoriz {
   showThumbIndex: number[]
 }
 
-const SliderHoriz = ({ className, width, max = 100, distance = 0, values, setValues, showThumbIndex }: SliderHoriz) => {
+const SliderHoriz = ({ className, width, max = 1000, distance = 0, values, setValues, showThumbIndex }: SliderHoriz) => {
   const handleChangeVal = (val: number, index: number) => {
     console.log('===handleChangeAB=== ', { val, index, valuesT: values, showThumbIndex })
     const update: number[] = [...values]

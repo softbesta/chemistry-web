@@ -328,6 +328,7 @@ export const stepsActions = [
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
+    energyProfileChartState: 0,
   },
   // 1   We now know that the concentration ...
   { // 1
@@ -337,15 +338,17 @@ export const stepsActions = [
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
+    energyProfileChartState: 1,
   },
   // 2   It states that the reaction, ...
   { // 2
     canvaTimeState: 1,
     canvaBeakerState: 1,
-    isBurnerActive: false,
+    isBurnerActive: true,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
+    energyProfileChartState: 2,
   },
   // 3   This minimum amount of...
   { // 3

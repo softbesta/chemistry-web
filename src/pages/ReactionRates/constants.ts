@@ -1,11 +1,15 @@
-export const energyDotColors = [
-  'rgb(240, 148, 137)',
-  'rgb(242, 169, 141)',
-  'rgb(245, 193, 146)',
-  'rgb(227, 221, 164)',
-  'rgb(205, 251, 183)',
-  'rgb(190, 240, 218)',
-  'rgb(177, 228, 250)',
-  'rgb(173, 201, 247)',
-  'rgb(169, 174, 243)',
-]
+export const dotColors = {
+  black: 'rgb(0, 0, 0)',
+  A: 'rgb(  8, 168, 232)',
+  B: 'rgb(255,  19,  19)',
+  C: 'rgb(255, 132,  19)',
+  D: 'rgb(213, 111,  62)',
+  E: 'rgb( 99, 105, 209)',
+  F: 'rgb( 84,  35,  68)',
+  G: 'rgb(156, 109, 138)',
+  H: 'rgb( 27, 153, 139)',
+  I: 'rgb(221, 183, 113)',
+  beakerLiquid: 'rgb(218, 238, 245)',
+  primaryLightBlue: 'rgb(169, 204, 229)',
+  primaryDarkBlue: 'rgb(97, 147, 201)',
+}

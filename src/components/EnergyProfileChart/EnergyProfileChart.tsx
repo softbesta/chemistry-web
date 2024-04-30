@@ -2,12 +2,16 @@ import React from 'react';
 import { EnergyRateChartSettings } from './EnergyRateChartSettings';
 import Color from 'color';
 import { EnergyProfileChatInput } from './EnergyProfileChartInput';
+import { dotColors } from '../../pages/ReactionRates/constants';
+
+
 
 type EnergyProfileChartProps = {
-  height: number,
+  state: number,
+  kind: number,
   width: number,
+  height: number,
   settings: EnergyRateChartSettings,
-  showTemperature: boolean,
   chartInput: EnergyProfileChatInput,
 }
 
@@ -18,16 +22,32 @@ type Rect = {
 
 const EnergyProfileChart = (props: EnergyProfileChartProps) => {
   const {
+    state,
+    kind,
     width,
     height,
     settings,
-    showTemperature,
     chartInput,
   } = props;
+  const energyProfileChartText = [
+    {
+      name: 'A + B',
+      textC: 'C',
+    },
+    {
+      name: 'D + E',
+      textC: 'F',
+    },
+    {
+      name: 'G + H',
+      textC: 'I',
+    }
+  ]
   const canvas = React.useRef<HTMLCanvasElement>(null);
   const canvas1 = React.useRef<HTMLCanvasElement>(null);
   React.useEffect(() => {
     const ctx = canvas?.current?.getContext('2d');
+    ctx?.clearRect(0, 0, width, height)
     if (ctx) {
       const { height: rectHeight, width: rectWidth } = ctx.canvas;
       const rect: Rect = {
@@ -37,14 +57,16 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
 
       ctx.rect(0, 0, rect.width, rect.height)
       ctx.stroke()
-      if (showTemperature) {
+      if (state > 1) {
         // tempLine
         tempLine(ctx, rect)
       }
 
       const chartSize = settings.chartSize
 
-      energyProfileChartShape(ctx, chartInput.initialPeak, chartInput.leftAsymptote, chartInput.rightAsymptote, rect, 'gray')
+      if (state > 0) {
+        energyProfileChartShape(ctx, chartInput.initialPeak, chartInput.leftAsymptote, chartInput.rightAsymptote, rect, 'gray')
+      }
       energyProfileChartShape(ctx, chartInput.reducedPeak, chartInput.leftAsymptote, chartInput.rightAsymptote, rect, 'orange')
 
       const startY = absoluteY(0, rectWidth, rectHeight, chartInput.leftAsymptote, chartInput.rightAsymptote, chartInput.reducedPeak)
@@ -78,7 +100,7 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
       ctx.strokeStyle = 'black'
       ctx.stroke()
     }
-  })
+  }, [kind, chartInput])
 
   const tempLine = (ctx: CanvasRenderingContext2D, rect: Rect) => {
     const peak = chartInput.currentEnergy
@@ -103,25 +125,33 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
 
     ctx.beginPath()
     ctx.moveTo(0, absoluteY(0, frameWidth, frameHeight, leftAsymptote, rightAsymptote, peak))
+
+    const colors = [
+      [dotColors.A, dotColors.B, dotColors.C],
+      [dotColors.D, dotColors.E, dotColors.F],
+      [dotColors.G, dotColors.H, dotColors.I],
+    ]
+
     const dx = frameWidth / points
     const ctx1 = canvas1?.current?.getContext('2d');
+    ctx1?.clearRect(0, 0, width, height)
     for (let x = 0; x < frameWidth; x += dx) {
       const y = absoluteY(x, frameWidth, frameHeight, leftAsymptote, rightAsymptote, peak)
       if (x === 0 && ctx1) {
         ctx1.beginPath()
         ctx1.arc(10, y + settings.annotationMoleculeSize, settings.annotationMoleculeSize / 2, 0, 2 * Math.PI)
-        ctx1.fillStyle = Color.rgb(156, 109, 138).toString()
+        ctx1.fillStyle = Color.rgb(colors[kind][0]).toString()
         ctx1.fill()
 
         ctx1.beginPath()
         ctx1.arc(36, y + settings.annotationMoleculeSize, settings.annotationMoleculeSize / 2, 0, 2 * Math.PI)
-        ctx1.fillStyle = Color.rgb(27, 153, 139).toString()
+        ctx1.fillStyle = Color.rgb(colors[kind][1]).toString()
         ctx1.fill()
         ctx1.canvas.style.position = 'absolute'
         ctx1.canvas.style.left = '0px'
         ctx1.font = 'bold 14px Arial'
         ctx1.fillStyle = 'black'
-        ctx1.fillText('G + H', 4, y + settings.annotationMoleculeSize + 20)
+        ctx1.fillText(energyProfileChartText[kind].name, 4, y + settings.annotationMoleculeSize + 20)
         ctx1.closePath()
       }
 
@@ -129,13 +159,13 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
         ctx1.beginPath()
         ctx1.arc(x + 9, y + settings.annotationMoleculeSize, settings.annotationMoleculeSize / 2, 0, 2 * Math.PI)
         ctx1.arc(x + 20, y + settings.annotationMoleculeSize, settings.annotationMoleculeSize / 2, 0, 2 * Math.PI)
-        ctx1.fillStyle = Color.rgb(221, 183, 113).toString()
+        ctx1.fillStyle = Color.rgb(colors[kind][2]).toString()
         ctx1.fill()
         ctx1.canvas.style.position = 'absolute'
         ctx1.canvas.style.left = '0px'
         ctx1.font = 'bold 14px Arial'
         ctx1.fillStyle = 'black'
-        ctx1.fillText('I', x + 12, y + settings.annotationMoleculeSize + 20)
+        ctx1.fillText(energyProfileChartText[kind].textC, x + 12, y + settings.annotationMoleculeSize + 20)
         ctx1.closePath()
       }
 
@@ -161,12 +191,16 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
     return (height * Math.pow(Math.E, exponent)) + asymptote
   }
 
-
   return (
-    <>
+    <div style={{position: 'relative'}}>
       <canvas ref={canvas} height={height} width={width} />
       <canvas ref={canvas1} height={height} width={width} />
-    </>
+      {/* <button onClick={() => {
+        const ctx = canvas?.current?.getContext('2d');
+        if (!ctx) return
+        ctx.clearRect(0, 0, width, height)
+      }}>Test</button> */}
+    </div>
   );
 };
 export default EnergyProfileChart;
