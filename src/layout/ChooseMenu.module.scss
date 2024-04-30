@@ -63,7 +63,8 @@
     position: absolute;
     right: 28px;
     top: 5px;
-    width: 200px;
+    width: max-content;
+    // width: 200px;
     font-size: 16px;
     font-weight: 600;
 
@@ -83,6 +84,7 @@
     .ChooseMenuItemContainer {
       border: 2px solid black;
       margin-top: -2px;
+      min-width: max-content;
 
       .ChooseMenuItem {
         display: flex;
@@ -100,6 +102,7 @@
           color: grey;
           cursor: default;
         }
+
         &.activated {
           background-color: grey;
           color: white;

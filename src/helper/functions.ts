@@ -147,3 +147,7 @@ export const convertExpToHtml = (exp: string | undefined) => {
   return update
 }
 
+export const getRandom = (a: number, b: number) => {
+  const r = Math.random() * b + a
+  return r
+}

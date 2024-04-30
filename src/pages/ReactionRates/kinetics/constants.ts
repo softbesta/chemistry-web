@@ -323,7 +323,7 @@ export const stepsActions = [
   { // 0
     canvaTimeState: 0,
     canvaBeakerState: 1,
-    isEnableChooseMenu: false,
+    isEnableChooseMenu: true,
     isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
@@ -714,3 +714,9 @@ export const tur_MathBlanks = [
 ]
 
 export const maxStep_Kinetics = tur_Text.length // 23 steps
+
+export const chooseMenuItems = [
+  { title: 'Zero Order Reactions' },
+  { title: 'First Order Reactions' },
+  { title: 'Second Order Reactions' },
+]

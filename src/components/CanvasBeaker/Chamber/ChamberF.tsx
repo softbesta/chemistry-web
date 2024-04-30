@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Matter from 'matter-js';
 import Color from 'color';
 import styles from './Chamber.module.scss'
+import { getRandom } from '../../../helper/functions';
 
 /**
  * Based on maxwell_gen's pdf function from scipy.
@@ -212,8 +213,13 @@ export const ChamberF = ({
     // TODO: need to draw pentagon shape here.
     // const p = Matter.Bodies.polygon()
 
-    const wx = Math.random() * width
-    const wy = Math.random() * (height * waterLevel) + height * (1 - waterLevel)
+    const wx = getRandom(0, width)
+    const wy = getRandom(height * (1 - waterLevel), height * waterLevel)
+
+    const angle = getRandom(0.2, 0.8) * Math.PI
+    const direct = Math.round(Math.random()) === 0 ? -1 : 1
+    const dx = Math.sin(angle) * direct
+    const dy = Math.cos(angle) * direct
     console.log({ wx, wy })
 
     const p = Matter.Bodies.circle(

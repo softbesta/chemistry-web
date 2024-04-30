@@ -7,7 +7,7 @@ import ChartBar from "../../../components/ChartBar"
 import MathContent from "../../../components/MathContent"
 import TutorialControl from "../../../components/TutorialControl"
 import { useHighLight } from "../../../hooks/useHighlight"
-import { maxStep_Kinetics, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text } from "./constants"
+import { maxStep_Kinetics, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text, chooseMenuItems } from "./constants"
 import useFunctions from "../../../hooks/useFunctions"
 import ChooseMenu from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
@@ -251,13 +251,13 @@ const ReactionKinetics = () => {
     setGasCounts(update)
   }
   const handleTest = () => {
-    console.log('handleGasIncrease', {gasCounts})
+    console.log('handleGasIncrease', { gasCounts })
   }
 
   const temperature = 0.01
   // Speed constant used to convert between matter.js speed and meters
   // per second (m/s)
-  const particleSpeed = 0.01      // ** control movespeed here
+  const particleSpeed = 0.11      // ** control movespeed here
 
   // ** Beaker control variables
   const settings = new BeakerSettings(290, true)
@@ -340,9 +340,14 @@ const ReactionKinetics = () => {
     C,
   }
 
+
   return <div className={styles.container}>
     <ChapterMenu />
-    <ChooseMenu isEnable={isEnableChooseMenu} onClickItem={() => handleClickChooseMenuItem()} />
+    <ChooseMenu
+      menuItems={chooseMenuItems}
+      isEnable={isEnableChooseMenu}
+      onClickItem={() => handleClickChooseMenuItem()}
+    />
     {/* <WatchMenu /> */}
 
     <div className={styles.reactionDrawContainer}>

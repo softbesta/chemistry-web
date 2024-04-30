@@ -16,16 +16,17 @@ const chooseMenuItems = [
 ]
 
 interface ChooseMenuProps {
+  menuItems?: { title: string }[]
   isEnable?: boolean
   onClickItem?: () => void
 }
-const ChooseMenu = ({ isEnable = false, onClickItem }: ChooseMenuProps) => {
+const ChooseMenu = ({ menuItems = chooseMenuItems, isEnable = false, onClickItem }: ChooseMenuProps) => {
   const { activeDotIndex, setActiveDotIndex } = useAppData()
   const [isActive, setIsActive] = useState(false)
 
   useEffect(() => {
     console.log('===ChooseMenu.useEffect===')
-    console.log({isEnable})
+    console.log({ isEnable })
     setIsActive(isEnable)
   }, [isEnable])
 
@@ -55,7 +56,7 @@ const ChooseMenu = ({ isEnable = false, onClickItem }: ChooseMenuProps) => {
     </div>
     <ChooseMenuPanel
       visible={isActive}
-      items={chooseMenuItems}
+      items={menuItems}
       activeItemIndex={activeDotIndex}
       onItemClick={handleItemClick}
     />
