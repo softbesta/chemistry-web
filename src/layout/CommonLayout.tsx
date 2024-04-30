@@ -1,9 +1,6 @@
 import { ReactNode } from "react"
 import styles from './CommonLayout.module.scss'
 import NavMenu from "./NavMenu"
-import ChapterMenu from "./ChapterMenu"
-import WatchMenu from "./WatchMenu"
-import ChooseMenu from "./ChooseMenu"
 import useAppData from "../hooks/useAppData"
 import { MenuList, routes } from "../constants"
 

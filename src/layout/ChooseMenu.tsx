@@ -20,7 +20,7 @@ interface ChooseMenuProps {
   isEnable?: boolean
   onClickItem?: () => void
 }
-const ChooseMenu = ({ menuItems = chooseMenuItems, isEnable = false, onClickItem }: ChooseMenuProps) => {
+export const ChooseMenu = ({ menuItems = chooseMenuItems, isEnable = false, onClickItem }: ChooseMenuProps) => {
   const { activeDotIndex, setActiveDotIndex } = useAppData()
   const [isActive, setIsActive] = useState(false)
 
@@ -62,7 +62,6 @@ const ChooseMenu = ({ menuItems = chooseMenuItems, isEnable = false, onClickItem
     />
   </div>
 }
-export default ChooseMenu
 
 interface ChooseMenuPanelProps {
   visible: boolean
@@ -92,7 +91,90 @@ const ChooseMenuPanel = ({
             ${isActiveItem ? styles.activated : ''} 
           `}
           onClick={() => onItemClick(index)}
-          disabled={!(activeItemIndex + 1 === index)}
+        // disabled={!(activeItemIndex + 1 === index)}
+        >
+          {item.title}
+        </button>
+      })}
+    </div>
+  </div >
+}
+
+
+interface ChooseMenuSelProps {
+  selectedIndex?: number
+  menuItems?: { title: string }[]
+  isEnable?: boolean
+  onClickItem?: (index: number) => void
+}
+export const ChooseMenuSel = ({ selectedIndex = 0, menuItems = chooseMenuItems, isEnable = false, onClickItem }: ChooseMenuSelProps) => {
+  const [isActive, setIsActive] = useState(false)
+
+  useEffect(() => {
+    console.log('===ChooseMenu.useEffect===')
+    console.log({ isEnable })
+    if (!isEnable) setIsActive(false)
+  }, [isEnable])
+
+  const toogleShowChapterPanel = () => {
+    console.log("===ChooseMenu.toogleShowChapterPanel===", { isEnable })
+    if (!isEnable) {
+      setIsActive(false)
+      return
+    }
+    setIsActive(!isActive)
+  }
+  const handleItemClick = (index: number) => {
+    console.log('ChooseMenu.handleItemClick', { index })
+    onClickItem?.(index)
+    toogleShowChapterPanel()
+  }
+  return <div
+    id='tur_chooseMenuIcon'
+    className={styles.ChooseMenuContainer}
+  >
+    <div
+      className={`${styles.chooseDropDownBtn} ${isActive ? styles.active : ''}`}
+      onClick={() => toogleShowChapterPanel()}
+    >
+      <span className={styles.arrow} />
+    </div>
+    <ChooseMenuSelPanel
+      visible={isActive}
+      items={menuItems}
+      activeItemIndex={selectedIndex}
+      onItemClick={handleItemClick}
+    />
+  </div>
+}
+
+interface ChooseMenuPanelProps {
+  visible: boolean
+  items: { title: string, disabled?: boolean }[]
+  activeItemIndex: number,
+  onItemClick: (val: number) => void
+}
+const ChooseMenuSelPanel = ({
+  visible,
+  items,
+  activeItemIndex,
+  onItemClick
+}: ChooseMenuPanelProps) => {
+  return <div className={`${styles.ChooseMenuPanel} ${visible ? styles.active : ''}`}>
+    {/* <p>This is Order Menu Panel</p> */}
+    <div className={styles.ChooseMenuHeader}>
+      Choose a reaction
+    </div>
+    <div className={styles.ChooseMenuItemContainer}>
+      {items.map((item, index) => {
+        const isActiveItem = index === activeItemIndex
+        return <button
+          key={index}
+          className={`
+            ${styles.ChooseMenuItem} 
+            ${isActiveItem ? styles.activated : ''} 
+          `}
+          onClick={() => onItemClick(index)}
         >
           {item.title}
         </button>

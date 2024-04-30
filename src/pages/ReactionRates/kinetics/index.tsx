@@ -9,7 +9,7 @@ import TutorialControl from "../../../components/TutorialControl"
 import { useHighLight } from "../../../hooks/useHighlight"
 import { maxStep_Kinetics, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text, chooseMenuItems } from "./constants"
 import useFunctions from "../../../hooks/useFunctions"
-import ChooseMenu from "../../../layout/ChooseMenu"
+import { ChooseMenuSel } from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
 import { dotColorList, sliderVertText } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
@@ -117,8 +117,8 @@ const ReactionKinetics = () => {
     }
   }, [curStep, curActions])
 
-  const handleClickChooseMenuItem = () => {
-    onStepChange(1)
+  const handleClickChooseMenuItem = (index: number) => {
+    setChooseMenuIndex(index)
   }
 
   const getFormula = () => {
@@ -340,13 +340,15 @@ const ReactionKinetics = () => {
     C,
   }
 
+  const [chooseMenuIndex, setChooseMenuIndex] = useState(0)
 
   return <div className={styles.container}>
     <ChapterMenu />
-    <ChooseMenu
+    <ChooseMenuSel
+      selectedIndex={chooseMenuIndex}
       menuItems={chooseMenuItems}
       isEnable={isEnableChooseMenu}
-      onClickItem={() => handleClickChooseMenuItem()}
+      onClickItem={handleClickChooseMenuItem}
     />
     {/* <WatchMenu /> */}
 
@@ -501,7 +503,7 @@ const ReactionKinetics = () => {
         <TutorialControl
           turText={getTurTextByStep()}
           onStepChange={onStepChange}
-          isDisableNextButton={isEnableChooseMenu}
+          isDisableNextButton={false}
         />
       </div>
     </div>

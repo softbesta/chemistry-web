@@ -9,7 +9,7 @@ import TutorialControl from "../../../components/TutorialControl"
 import { useHighLight } from "../../../hooks/useHighlight"
 import { maxStep_Zero, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text } from "./constants"
 import useFunctions from "../../../hooks/useFunctions"
-import ChooseMenu from "../../../layout/ChooseMenu"
+import { ChooseMenu } from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
 import { dotColorList, sliderVertText } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
@@ -139,8 +139,8 @@ const ReactionZero = () => {
     const k = -(c / t)
     const deltaT = t2 - t1
     const deltaC = c2 - c1
-    const rateConstant = -deltaC / deltaT     
-    const a0Numerator = (t1 * c2) - (t2 * c1) 
+    const rateConstant = -deltaC / deltaT
+    const a0Numerator = (t1 * c2) - (t2 * c1)
     const A0 = a0Numerator / (t1 - t2)
     const t_12 = A0 / (2 * rateConstant)
     // console.log({c1, c2, t1, t2, c, t, k, deltaC, deltaT, rateConstant, a0Numerator, A0, t_12})
