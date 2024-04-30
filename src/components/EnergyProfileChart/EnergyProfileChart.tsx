@@ -55,6 +55,7 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
         height: rectHeight
       }
 
+      ctx.clearRect(0, 0, width, height)
       ctx.rect(0, 0, rect.width, rect.height)
       ctx.stroke()
       if (state > 1) {
@@ -137,44 +138,47 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
     ctx1?.clearRect(0, 0, width, height)
     for (let x = 0; x < frameWidth; x += dx) {
       const y = absoluteY(x, frameWidth, frameHeight, leftAsymptote, rightAsymptote, peak)
-      if (x === 0 && ctx1) {
-        ctx1.beginPath()
-        ctx1.arc(10, y + settings.annotationMoleculeSize, settings.annotationMoleculeSize / 2, 0, 2 * Math.PI)
-        ctx1.fillStyle = Color.rgb(colors[kind][0]).toString()
-        ctx1.fill()
-
-        ctx1.beginPath()
-        ctx1.arc(36, y + settings.annotationMoleculeSize, settings.annotationMoleculeSize / 2, 0, 2 * Math.PI)
-        ctx1.fillStyle = Color.rgb(colors[kind][1]).toString()
-        ctx1.fill()
-        ctx1.canvas.style.position = 'absolute'
-        ctx1.canvas.style.left = '0px'
-        ctx1.font = 'bold 14px Arial'
-        ctx1.fillStyle = 'black'
-        ctx1.fillText(energyProfileChartText[kind].name, 4, y + settings.annotationMoleculeSize + 20)
-        ctx1.closePath()
-      }
-
-      if (x === frameWidth - 30 && ctx1) {
-        ctx1.beginPath()
-        ctx1.arc(x + 9, y + settings.annotationMoleculeSize, settings.annotationMoleculeSize / 2, 0, 2 * Math.PI)
-        ctx1.arc(x + 20, y + settings.annotationMoleculeSize, settings.annotationMoleculeSize / 2, 0, 2 * Math.PI)
-        ctx1.fillStyle = Color.rgb(colors[kind][2]).toString()
-        ctx1.fill()
-        ctx1.canvas.style.position = 'absolute'
-        ctx1.canvas.style.left = '0px'
-        ctx1.font = 'bold 14px Arial'
-        ctx1.fillStyle = 'black'
-        ctx1.fillText(energyProfileChartText[kind].textC, x + 12, y + settings.annotationMoleculeSize + 20)
-        ctx1.closePath()
-      }
 
       ctx.strokeStyle = color
       ctx.lineWidth = 1
       ctx.lineTo(x, y)
       ctx.stroke();
-
     }
+    
+    if (!ctx1) return
+    const xx1 = 0, yy1 = absoluteY(xx1, frameWidth, frameHeight, leftAsymptote, rightAsymptote, peak)
+    ctx1.beginPath()
+    ctx1.arc(10, yy1 + settings.annotationMoleculeSize, settings.annotationMoleculeSize / 2, 0, 2 * Math.PI)
+    ctx1.fillStyle = Color.rgb(colors[kind][0]).toString()
+    ctx1.fill()
+
+    ctx1.beginPath()
+    ctx1.arc(36, yy1 + settings.annotationMoleculeSize, settings.annotationMoleculeSize / 2, 0, 2 * Math.PI)
+    ctx1.fillStyle = Color.rgb(colors[kind][1]).toString()
+    ctx1.fill()
+
+    ctx1.canvas.style.position = 'absolute'
+    ctx1.canvas.style.left = '0px'
+    ctx1.font = 'bold 14px Arial'
+    ctx1.fillStyle = 'black'
+    ctx1.fillText(energyProfileChartText[kind].name, 4, yy1 + settings.annotationMoleculeSize + 20)
+    ctx1.closePath()
+
+
+    const xx2 = frameWidth - 30, yy2 = absoluteY(xx2, frameWidth, frameHeight, leftAsymptote, rightAsymptote, peak)
+    ctx1.beginPath()
+    ctx1.arc(xx2 + 9, yy2 + settings.annotationMoleculeSize, settings.annotationMoleculeSize / 2, 0, 2 * Math.PI)
+    ctx1.arc(xx2 + 20, yy2 + settings.annotationMoleculeSize, settings.annotationMoleculeSize / 2, 0, 2 * Math.PI)
+    ctx1.fillStyle = Color.rgb(colors[kind][2]).toString()
+    ctx1.fill()
+    ctx1.canvas.style.position = 'absolute'
+    ctx1.canvas.style.left = '0px'
+    ctx1.font = 'bold 14px Arial'
+    ctx1.fillStyle = 'black'
+    ctx1.fillText(energyProfileChartText[kind].textC, xx2 + 12, yy2 + settings.annotationMoleculeSize + 20)
+    ctx1.closePath()
+    
+
   }
 
   const absoluteY = (absoluteX: number, frameWidth: number, frameHeight: number, leftAsymptote: number, rightAsymptote: number, peak: number) => {

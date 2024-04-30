@@ -224,7 +224,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
   }, [timeCounter])
 
   return (
-    <>
+    <div style={{ position: 'relative' }}>
       {/* <button onClick={() => {
         const updatedCurrentTime = currentTime + 1
         console.log('aaa 000', { updatedCurrentTime, initialTime, finalTime })
@@ -273,7 +273,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
         highlightRhs={highlightRhsCurve}
       />
       {/* </div> */}
-    </>
+    </div>
   );
 };
 export default ConcentrationPlotView;

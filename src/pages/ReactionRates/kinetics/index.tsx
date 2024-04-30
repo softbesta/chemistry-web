@@ -33,6 +33,7 @@ import Burner from "../../../components/CanvasBeaker/Burner/Burner"
 import EnergyProfileChart from "../../../components/EnergyProfileChart/EnergyProfileChart"
 import { EnergyRateChartSettings, ReactionOrder } from "../../../components/EnergyProfileChart"
 import { EnergyProfileChatInput } from "../../../components/EnergyProfileChart/EnergyProfileChartInput"
+import EnergyProfileRateChart from "../../../components/EnergyProfileRateChart/EnergyProfileRateChart"
 
 const ReactionKinetics = () => {
   const {
@@ -350,6 +351,10 @@ const ReactionKinetics = () => {
   const energyProfileInput = new EnergyProfileChatInput(ReactionOrder[chooseMenuIndex], valueFire, chooseMenuIndex + 1)
   const [energyProfileChartState, setEnergyProfileChartState] = useState(0)
 
+  // ** EnergyProfileRateChart variables
+  const concentrationC = new ZeroOrderConcentration()
+  concentrationC.init2Params(0.1, 0.1)
+
   return <div className={styles.container}>
     <ChapterMenu />
     <ChooseMenuSel
@@ -457,7 +462,15 @@ const ReactionKinetics = () => {
           setChartTimingState(v => v - 1)
         }}>Test stop</button> */}
         <div className={styles.chartInA}>
-          <ConcentrationPlotView
+          <EnergyProfileRateChart 
+            width={250}
+            height={250}
+            settings={new EnergyRateChartSettings(250)}
+            equation={concentrationC}
+            currentTempInverse={1 / 500}
+            highlightChart={true}
+          />
+          {/* <ConcentrationPlotView
             {...graphChartSize}
             settings={
               new ReactionRateChartLayoutSettings(
@@ -495,8 +508,8 @@ const ReactionKinetics = () => {
             onEndPlay={() => {
               console.log('&&& timer ended &&& ')
             }}
-          />
-        </div>
+          /> */}
+          </div>
         <div className={styles.chartInA}>
           <div>
             {/* <span className={styles.txtEnergy}>Energy</span>
@@ -505,10 +518,10 @@ const ReactionKinetics = () => {
           </div>
           <EnergyProfileChart
             kind={chooseMenuIndex}
-            width={250}
-            height={250}
-            // {...graphChartSize}
-            settings={new EnergyRateChartSettings(250)}
+            // width={250}
+            // height={250}
+            {...graphChartSize}
+            settings={new EnergyRateChartSettings(graphChartSize.width)}
             state={energyProfileChartState}
             chartInput={energyProfileInput}
           />
