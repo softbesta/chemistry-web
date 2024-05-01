@@ -65,7 +65,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     const ctx = canvas?.current?.getContext('2d');
     if (ctx) {
       ctx.canvas.style.position = 'absolute';
-      ctx.canvas.style.left = '0px';
+      ctx.canvas.style.right = '0px';
       ctx.canvas.style.backgroundColor = 'transparent';
       const { height: rectHeight, width: rectWidth } = ctx.canvas;
       const rect: Rect = {

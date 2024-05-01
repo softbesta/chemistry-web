@@ -17,16 +17,75 @@ const Burner = ({ isActive = false, fireVal, min, max, onChange }: BurnerProps) 
     onChange(update)
   }
 
+  const fireLevel = fireVal > 550 ? 3 : fireVal > 500 ? 2 : fireVal > 450 ? 1 : 0
+  console.log({fireLevel})
+
   return <div className={styles.burnerContainer}>
     <img
       src={BurnerPan}
       height={50}
     />
-    <img
-      className={styles.burnerFire}
-      src={BurnerFire}
-      height={30}
-    />
+    <div className={styles.burnerFire}>
+      <div className={`${styles.fire} ${fireLevel % 2 === 0 ? styles.small : ''}`}>
+        {fireLevel < 2 ?
+          <div className={styles.fireCenter}>
+            <div className={styles['fire-main']}>
+              <div className={styles['corefire']}></div>
+            </div>
+            <div className={styles['fire-main-bottom']}>
+              <div className={styles['corefire']}></div>
+            </div>
+          </div>
+          :
+          <>
+        <div className={styles.fireLeft}>
+          <div className={styles['fire-main']}>
+            <div className={styles['corefire']}></div>
+          </div>
+          <div className={styles['fire-main-bottom']}>
+            <div className={styles['corefire']}></div>
+          </div>
+        </div>
+        <div className={styles.fireRight}>
+          <div className={styles['fire-main']}>
+            <div className={styles['corefire']}></div>
+          </div>
+          <div className={styles['fire-main-bottom']}>
+            <div className={styles['corefire']}></div>
+          </div>
+        </div>
+        <div className={styles.fireCenter}>
+          <div className={styles['fire-main']}>
+            <div className={styles['corefire']}></div>
+          </div>
+          <div className={styles['fire-main-bottom']}>
+            <div className={styles['corefire']}></div>
+          </div>
+        </div>
+        </>
+        }
+        {/* <div className={styles['fire-left']}>
+          <div className={styles['corefire']}></div>
+        </div>
+        <div className={styles['fire-main']}>
+          <div className={styles['corefire']}></div>
+        </div>
+        <div className={styles['fire-main-bottom']}>
+          <div className={styles['corefire']}></div>
+        </div>
+        <div className={styles['fire-right']}>
+          <div className={styles['corefire']}></div>
+        </div>
+        <div className={styles['fire-right-bottom']}>
+          <div className={styles['corefire']}></div>
+        </div> */}
+      </div>
+      {/* <img
+        // className={styles.burnerFire}
+        src={BurnerFire}
+        height={30}
+      /> */}
+    </div>
     <SliderHoriz
       max={1000}
       distance={0}

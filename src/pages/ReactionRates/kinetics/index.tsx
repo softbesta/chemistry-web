@@ -433,8 +433,7 @@ const ReactionKinetics = () => {
           onChange={(val) => {
             console.log({ val })
             setValueFire(val)
-          }
-          }
+          }}
         />
 
         {/* <EnergyProfile
@@ -462,14 +461,20 @@ const ReactionKinetics = () => {
           setChartTimingState(v => v - 1)
         }}>Test stop</button> */}
         <div className={styles.chartInA}>
-          <EnergyProfileRateChart 
-            width={250}
-            height={250}
-            settings={new EnergyRateChartSettings(250)}
+          <EnergyProfileRateChart
+            {...graphChartSize}
+            // width={250}
+            // height={250}
+            settings={new EnergyRateChartSettings(graphChartSize.width)}
             equation={concentrationC}
             currentTempInverse={1 / 500}
             highlightChart={true}
           />
+          <div>
+            <span className={styles.txtInK}> In(k) </span>
+            <span className={styles.txtT}> 1/T </span>
+            <span className={styles.txtSlope}> Slope=-Ea/R </span>
+          </div>
           {/* <ConcentrationPlotView
             {...graphChartSize}
             settings={
@@ -509,13 +514,8 @@ const ReactionKinetics = () => {
               console.log('&&& timer ended &&& ')
             }}
           /> */}
-          </div>
+        </div>
         <div className={styles.chartInA}>
-          <div>
-            {/* <span className={styles.txtEnergy}>Energy</span>
-            <span className={styles.txtReactants}>Reactants</span>
-            <span className={styles.txtProducts}>Products</span> */}
-          </div>
           <EnergyProfileChart
             kind={chooseMenuIndex}
             // width={250}
@@ -525,6 +525,11 @@ const ReactionKinetics = () => {
             state={energyProfileChartState}
             chartInput={energyProfileInput}
           />
+          <div>
+            <span className={styles.txtEnergy}> Energy </span>
+            <span className={styles.txtReactants}> Reactants </span>
+            <span className={styles.txtProducts}> Products </span>
+          </div>
         </div>
       </div>
       <div className={styles.reactionContentRow}>
