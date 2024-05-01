@@ -431,7 +431,6 @@ const ReactionKinetics = () => {
           max={600}
           fireVal={valueFire}
           onChange={(val) => {
-            console.log({ val })
             setValueFire(val)
           }}
         />
