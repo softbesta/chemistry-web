@@ -114,6 +114,7 @@ export const ChamberF = ({
       runner.current = Runner.create();
 
       addParticles()
+      console.log('')
 
       let counter1 = 0;
       Matter.Events.on(engine.current, 'afterUpdate', function (e) {
@@ -209,10 +210,7 @@ export const ChamberF = ({
   };
 
   const makeParticle = (gas: any, molecularSpeed: number) => {
-    const particleMargin = margin + 10;
     const particleColor = Color(gas.color);
-    // TODO: need to draw pentagon shape here.
-    // const p = Matter.Bodies.polygon()
 
     const wx = getRandom(20, width - 20)
     const wy = getRandom(height * (1 - waterLevel) + 20, height - 20,)
@@ -221,7 +219,6 @@ export const ChamberF = ({
     const direct = Math.round(Math.random()) === 0 ? -1 : 1
     const dx = Math.sin(angle) * direct
     const dy = Math.cos(angle) * direct
-    console.log({ wx, wy })
 
     let p
     if (gas.particleType === 'pentagon') {
@@ -248,15 +245,17 @@ export const ChamberF = ({
         // height - 50,
         wx,
         wy,
-        gas.particleSize, {
-        render: {
-          fillStyle: particleColor.hex(),
-          lineWidth: 1
-        },
-        restitution: 1,
-        friction: 0,            // ** control friction
-        frictionAir: 0        // ** control air friction
-      })
+        gas.particleSize,
+        {
+          render: {
+            fillStyle: particleColor.hex(),
+            lineWidth: 1
+          },
+          restitution: 1,
+          friction: 0,            // ** control friction
+          frictionAir: 0        // ** control air friction
+        }
+      )
     }
 
     Matter.Body.setInertia(p, Infinity);
@@ -280,13 +279,10 @@ export const ChamberF = ({
     return p;
   }
 
-  const drawParticles = (activeGases: any[] = [], gasCounts: any[] = [], distributionBuckets: any[]) => {
-    const me = this;
+  const drawParticles = (activeGases: any[] = [], gasCounts: any[] = []) => {
     const particles: any[] = [];
 
     activeGases.forEach(function (gas, idx) {
-      const proportion = gasCounts[idx];
-      const buckets = distributionBuckets[idx];
 
       const p: Matter.Body[] = [];
 
@@ -336,8 +332,8 @@ export const ChamberF = ({
     console.log('===ChamberF.useEffect 222===')
     try {
       prevProps.current = { activeGases, temperature, isPlaying, gasCounts }
-      removeParticles()
-      addParticles()
+      // removeParticles()
+      // addParticles()
     } catch (error) {
       console.warn('kkk111', { error })
     }
@@ -355,36 +351,36 @@ export const ChamberF = ({
   const addParticles = () => {
     console.log('===addParticles===')
     distributionBuckets.current = [];
-    const initialPartCounts: any[] = [];
     activeGases.forEach(function (gas) {
       const buckets = generateBuckets(gas);
       console.log('addParticles 1', { gas, buckets })
-
-      const totalParticles = buckets.reduce(
-        function (prev, cur) {
-          return prev + cur.particleCount;
-        }, 0);
-
-      initialPartCounts.push(totalParticles);
       distributionBuckets.current.push(buckets);
     });
 
-    initialParticleCounts.current = initialPartCounts;
     particles.current = drawParticles(
       activeGases,
       gasCounts,
-      distributionBuckets.current
     );
 
-    console.log('addParticles 2', { initialParticleCounts: initialPartCounts })
-    console.log('addParticles 3', { activeGases: activeGases, gasCounts, distributionBuckets: distributionBuckets.current })
-    console.log('addParticles 4', { particles: particles.current })
+    console.log('addParticles 3', { activeGases, gasCounts })
+    console.log('addParticles 4', { particles: particles.current, distributionBuckets: distributionBuckets.current })
 
     if (!particles.current) return
     particles.current.forEach(function (gasParticles) {
       if (!engine.current) return
       Matter.Composite.add(engine.current.world, gasParticles);
     });
+  }
+
+  const addOneParticle = (gasType: number) => {
+    const activeGas = activeGases[gasType]
+    const newGas = makeParticle(activeGas, 0.1)
+    const gasParticles = particles.current[gasType]
+    console.log({gasParticles})
+    particles.current[gasType] = [...gasParticles, newGas]
+    console.log({newGas})
+    if (!engine.current) return
+    Matter.Composite.add(engine.current.world, [newGas])
   }
 
   const drawWalls = () => {
@@ -464,7 +460,7 @@ export const ChamberF = ({
       Bodies.rectangle(
         rlSpace / 2,
         cY,
-        25, 25,
+        15, 15,
         {
           isStatic: true,
           render: {
@@ -480,7 +476,7 @@ export const ChamberF = ({
       Bodies.rectangle(
         width - rlSpace / 2,
         cY,
-        25, 25,
+        15, 15,
         {
           isStatic: true,
           render: {
@@ -541,10 +537,11 @@ export const ChamberF = ({
     Runner.stop(runner.current)
   }
   const handleEffect = () => {
-    // const update = counter + 1
-    // console.log('effect button clicked ', update)
-    // setCounter(update)
-    addParticles()
+    console.log('effect button clicked ')
+    // addParticles()
+
+
+    addOneParticle(1)
   }
 
   return <div className={styles.chamberContainer}>
@@ -553,7 +550,7 @@ export const ChamberF = ({
       ref={elemRef}
       style={{ position: 'absolute', top: 0 }}
     />
-    {/* <button
+    <button
       onClick={handleStart}
       style={{ position: 'absolute', top: 450 }}
     >Test Start</button>
@@ -564,6 +561,6 @@ export const ChamberF = ({
     <button
       onClick={handleEffect}
       style={{ position: 'absolute', top: 450, left: 160 }}
-    >Test useEffect</button> */}
+    >Test useEffect</button>
   </div>
 }

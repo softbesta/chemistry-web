@@ -35,6 +35,7 @@ type TimeChartDataLineViewProps = {
   clipData?: boolean
   offset?: number
   minDragTime?: number
+  showOnlyView?: boolean
 }
 
 type Rect = {
@@ -59,6 +60,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     clipData = false,
     offset = 0,
     minDragTime = null,
+    showOnlyView = false,
   } = props;
   const canvas = React.useRef<HTMLCanvasElement>(null);
   React.useEffect(() => {
@@ -71,6 +73,12 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
       const rect: Rect = {
         width: rectWidth,
         height: rectHeight
+      }
+
+      if (showOnlyView) {
+        ctx.rect(0, rectHeight * 0.28, rectWidth * 0.72, rectHeight * (1 - 0.28))
+        ctx.strokeStyle = 'black'
+        ctx.stroke()
       }
 
       if (data.showFilledLine) {
@@ -99,7 +107,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
         data.headColor
       )
     }
-  }, [])
+  }, [currentTime])
 
   const head = (
     ctx: CanvasRenderingContext2D,
@@ -234,7 +242,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     for (let x = from; x < to; x += dx(startX, to, ctx.canvas.width)) {
       addLine(ctx, x, equation, xEquation, x === from)
     }
-    addLine(ctx, to, equation, xEquation, false)
+    // addLine(ctx, to, equation, xEquation, false)
   }
 
   const addLine = (
@@ -249,12 +257,11 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     const xPosition = settings.xAxis.shift(offset).getPosition(xValue)
     const yPosition = settings.yAxis.shift(offset).getPosition(y)
     if (isMoveTo) {
+      ctx.beginPath()
       ctx.moveTo(xPosition, yPosition)
     } else {
-      ctx.lineTo(xPosition, yPosition)
-      ctx.fillStyle = data.haloColor ?? 'rgba(0,0,0,0.1)'
       ctx.strokeStyle = data.headColor
-      ctx.fill()
+      ctx.lineTo(xPosition, yPosition)
       ctx.stroke()
     }
   }

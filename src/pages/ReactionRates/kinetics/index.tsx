@@ -265,7 +265,7 @@ const ReactionKinetics = () => {
   ]
   const [activeGases, setActiveGases] = useState(initActiveGases)
 
-  const initGasCounts = [15, 15, 5];  // ** control counts here
+  const initGasCounts = [2, 2, 1];  // ** control counts here
   const [gasCounts, setGasCounts] = useState(initGasCounts)
 
   const handleGasIncrease = () => {
@@ -466,11 +466,11 @@ const ReactionKinetics = () => {
           onEndPlay={() => onStepChange(1)}
         /> */}
       </div>
-      {/* <div style={{ position: 'relative', top: 50 }}>
+      <div style={{ position: 'relative', top: 50 }}>
         <button onClick={handleGasIncrease}>Increase Gas</button>
         <button onClick={handleGasDecrease}>Decrease Gas</button>
         <button onClick={handleTest}>LogGas</button>
-      </div> */}
+      </div>
     </div>
     <div className={styles.reactionContentContainer}>
       <div className={styles.reactionChartRow}>

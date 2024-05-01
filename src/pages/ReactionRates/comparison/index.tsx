@@ -17,6 +17,9 @@ import OrderCardItem from "../../../components/OrderCardItem"
 import HandDragOrderItem from "../../../components/HandDragOrderItem"
 import Buttons from "../../../components/Buttons/Buttons"
 import { convertExpToHtml } from "../../../helper/functions"
+import { ConcentrationPlotView, ReactionRateChartLayoutSettings, TimeChartLayoutSettings } from "../../../components/ConcentrationPlotView"
+import { ReactionSettings, ReactionType } from "../../../components/ConcentrationPlotView/constants"
+import { ReactionComparisonViewModel } from "../../../components/ConcentrationPlotView/ReactionComparisonViewModel"
 
 const ReactionComparison = () => {
   const {
@@ -178,7 +181,8 @@ const ReactionComparison = () => {
   }
 
   const beakerSize: SizeStyle = { width: 170, height: 170 }
-  const timeInASize: SizeStyle = { width: 130, height: 130 }
+  const timeInASize: SizeStyle = { width: 220, height: 220 }
+  const reaction = new ReactionComparisonViewModel()
 
   return <div className={styles.container}>
     <ChapterMenu />
@@ -216,7 +220,49 @@ const ReactionComparison = () => {
           id="chartTimeItem0"
           className={styles.chartTimeItem}
         >
-          <ChartInA
+          <div className={styles.chartInA}>
+            <ConcentrationPlotView
+              {...timeInASize}
+              settings={
+                new ReactionRateChartLayoutSettings(
+                  timeInASize.width!,
+                  ReactionSettings.Axis.minC,
+                  ReactionSettings.Axis.maxC,
+                  ReactionSettings.Axis.minT,
+                  ReactionSettings.Axis.maxT,
+                  true,
+                  {} as TimeChartLayoutSettings
+                )
+              }
+              concentrationA={reaction.zeroOrder}
+              concentrationB={reaction.zeroOrderB}
+              initialTime={reaction.initialTime}
+              finalTime={reaction.finalTime0}
+              canSetCurrentTime={true}
+              highlightChart={false}
+              highlightLhsCurve={true}
+              highlightRhsCurve={false}
+              display={
+                {
+                  reactant: {
+                    name: ReactionType.reactantName.A,
+                    color: ReactionType.reactantColor.A,
+                  },
+                  product: {
+                    name: ReactionType.productName.A,
+                    color: ReactionType.productColor.A,
+                  }
+                }
+              }
+              includeAxis={false}
+              timingState={1}
+              onEndPlay={() => {
+                console.log('&&& timer ended &&& ')
+              }}
+              showOnlyView={true}
+            />
+          </div>
+          {/* <ChartInA
             turIndex={'0'}
             className={styles.chartInA}
             valuesC={valuesC}
@@ -229,7 +275,7 @@ const ReactionComparison = () => {
             textVert={`[${'A'}]`}
             textHoriz={`Time`}
             canvasSize={timeInASize}
-          />
+          /> */}
           {playButtonStatus > 0 && <div
             className={styles.playBtnContainer}
           >
@@ -243,7 +289,50 @@ const ReactionComparison = () => {
           id="chartTimeItem1"
           className={styles.chartTimeItem}
         >
-          <ChartInA
+
+          <div className={styles.chartInA}>
+            <ConcentrationPlotView
+              {...timeInASize}
+              settings={
+                new ReactionRateChartLayoutSettings(
+                  timeInASize.width!,
+                  ReactionSettings.Axis.minC,
+                  ReactionSettings.Axis.maxC,
+                  ReactionSettings.Axis.minT,
+                  ReactionSettings.Axis.maxT,
+                  true,
+                  {} as TimeChartLayoutSettings
+                )
+              }
+              concentrationA={reaction.firstOrder}
+              concentrationB={reaction.firstOrderB}
+              initialTime={reaction.initialTime}
+              finalTime={reaction.finalTime1}
+              canSetCurrentTime={true}
+              highlightChart={false}
+              highlightLhsCurve={true}
+              highlightRhsCurve={false}
+              display={
+                {
+                  reactant: {
+                    name: ReactionType.reactantName.A,
+                    color: ReactionType.reactantColor.A,
+                  },
+                  product: {
+                    name: ReactionType.productName.A,
+                    color: ReactionType.productColor.A,
+                  }
+                }
+              }
+              includeAxis={false}
+              timingState={1}
+              onEndPlay={() => {
+                console.log('&&& timer ended &&& ')
+              }}
+              showOnlyView={true}
+            />
+          </div>
+          {/* <ChartInA
             turIndex={'1'}
             className={styles.chartInA}
             valuesC={valuesC}
@@ -256,7 +345,7 @@ const ReactionComparison = () => {
             textVert={`[${'A'}]`}
             textHoriz={`Time`}
             canvasSize={timeInASize}
-          />
+          /> */}
           {playButtonStatus > 0 && <div
             className={styles.playBtnContainer}
           >
@@ -270,7 +359,49 @@ const ReactionComparison = () => {
           id="chartTimeItem2"
           className={styles.chartTimeItem}
         >
-          <ChartInA
+          <div className={styles.chartInA}>
+            <ConcentrationPlotView
+              {...timeInASize}
+              settings={
+                new ReactionRateChartLayoutSettings(
+                  timeInASize.width!,
+                  ReactionSettings.Axis.minC,
+                  ReactionSettings.Axis.maxC,
+                  ReactionSettings.Axis.minT,
+                  ReactionSettings.Axis.maxT,
+                  true,
+                  {} as TimeChartLayoutSettings
+                )
+              }
+              concentrationA={reaction.secondOrder}
+              concentrationB={reaction.secondOrderB}
+              initialTime={reaction.initialTime}
+              finalTime={reaction.finalTime2}
+              canSetCurrentTime={true}
+              highlightChart={false}
+              highlightLhsCurve={true}
+              highlightRhsCurve={false}
+              display={
+                {
+                  reactant: {
+                    name: ReactionType.reactantName.A,
+                    color: ReactionType.reactantColor.A,
+                  },
+                  product: {
+                    name: ReactionType.productName.A,
+                    color: ReactionType.productColor.A,
+                  }
+                }
+              }
+              includeAxis={false}
+              timingState={1}
+              onEndPlay={() => {
+                console.log('&&& timer ended &&& ')
+              }}
+              showOnlyView={true}
+            />
+          </div>
+          {/* <ChartInA
             turIndex={'2'}
             className={styles.chartInA}
             valuesC={valuesC}
@@ -283,7 +414,7 @@ const ReactionComparison = () => {
             textVert={`[${'A'}]`}
             textHoriz={`Time`}
             canvasSize={timeInASize}
-          />
+          /> */}
           {playButtonStatus > 0 && <div
             className={styles.playBtnContainer}
           >

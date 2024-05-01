@@ -27,6 +27,7 @@
 
       .chartTimeItem{
         position: relative;
+        overflow: hidden;
 
         .chartInA {
           display: flex;
@@ -35,11 +36,13 @@
           width: 175px;
           height: 170px;
           margin-top: 0;
+          left: 60px;
+          top: -60px;
         }
         .playBtnContainer {
           position: absolute;
           top: 5px;
-          left: 46%;
+          left: 40%;
         }
       }
     }

@@ -31,6 +31,7 @@ type ConcentrationPlotViewProps = {
   includeAxis: boolean
   timingState: number
   onEndPlay?: () => void
+  showOnlyView?: boolean
 }
 
 type Rect = {
@@ -56,6 +57,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
 
     timingState,
     onEndPlay,
+    showOnlyView,
   } = props;
   const canvas = React.useRef<HTMLCanvasElement>(null);
   const [currentTime, setCurrentTime] = useState(initialTime)
@@ -240,7 +242,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
             equation: concentrationB,
             headColor: display.product.color,
             headRadius: settings.chartHeadSecondarySize,
-            // showFilledLine: true,
+            showFilledLine: true,
           }}
           settings={settings.timeChartLayoutSettings}
           lineWidth={settings.timeChartLayoutSettings.lineWidth}
@@ -261,6 +263,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
           headColor: display.reactant.color,
           haloColor: Color(display.reactant.color).alpha(0.3).toString(),
           headRadius: settings.chartHeadPrimarySize,
+          showFilledLine: true,
         }}
         settings={settings.timeChartLayoutSettings}
         lineWidth={settings.timeChartLayoutSettings.lineWidth}
@@ -271,6 +274,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
         canSetCurrentTime={canSetCurrentTime}
         highlightLhs={highlightLhsCurve}
         highlightRhs={highlightRhsCurve}
+        showOnlyView={showOnlyView}
       />
       {/* </div> */}
     </div>

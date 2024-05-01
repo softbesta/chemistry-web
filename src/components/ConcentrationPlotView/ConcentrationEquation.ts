@@ -227,10 +227,26 @@ class RateEquation extends Equation {
   }
 }
 
+class ConcentrationBEquation extends Equation {
+  concentrationA: ZeroOrderConcentration | FirstOrderConcentration | SecondOrderConcentration
+  initialAConcentration: number
+
+  constructor(concentrationA: ZeroOrderConcentration | FirstOrderConcentration | SecondOrderConcentration, initialAConcentration: number) {
+    super()
+    this.concentrationA = concentrationA
+    this.initialAConcentration = initialAConcentration
+  }
+
+  getValue(x: number): number {
+    return this.initialAConcentration - this.concentrationA.getConcentration(x)
+  }
+}
+
 export {
   ZeroOrderConcentration,
   FirstOrderConcentration,
   SecondOrderConcentration,
   InverseEquation,
   RateEquation,
+  ConcentrationBEquation,
 }
