@@ -222,27 +222,50 @@ const ReactionKinetics = () => {
   // ** Chamber control variables
   const initActiveGases = [
     {
-      id: 3,
-      particleSize: 4,  // ** control gas cirle size
+      id: 1,
+      particleSize: 4.5,  // ** control gas cirle size
       color: 0x00d0f0,  // ** control gas color
       // name: 'Oxygen',
       // symbol: <>O<sub>2</sub></>,
       // svgSymbol: <>O<tspan baselineShift="sub">2</tspan></>,
-      mass: 1
+      mass: 1,
+      particleType: 'circle',
     },
     {
-      id: 9,
-      particleSize: 4,  // ** control gas cirle size
+      id: 2,
+      particleSize: 4.5,  // ** control gas cirle size
       color: 0xff0000,  // ** control gas color
       // name: 'Hydrogen',
       // symbol: <>H<sub>2</sub></>,
       // svgSymbol: <>H<tspan baselineShift="sub">2</tspan></>,
-      mass: 1
+      mass: 1,
+      particleType: 'circle',
     },
+    {
+      id: 10,
+      particleSize: 4,
+      color: 0xffff00,
+      mass: 1,
+      particleType: 'pentagon',
+    },
+    {
+      id: 11,
+      particleSize: 4,
+      color: 0x00ffff,
+      mass: 1,
+      particleType: 'pentagon',
+    },
+    {
+      id: 12,
+      particleSize: 4,
+      color: 0xff00ff,
+      mass: 1,
+      particleType: 'pentagon',
+    }
   ]
   const [activeGases, setActiveGases] = useState(initActiveGases)
 
-  const initGasCounts = [1, 1];  // ** control counts here
+  const initGasCounts = [15, 15, 5];  // ** control counts here
   const [gasCounts, setGasCounts] = useState(initGasCounts)
 
   const handleGasIncrease = () => {
@@ -262,7 +285,7 @@ const ReactionKinetics = () => {
   const temperature = 0.01
   // Speed constant used to convert between matter.js speed and meters
   // per second (m/s)
-  const particleSpeed = 0.11      // ** control movespeed here
+  const particleSpeed = 0.05      // ** control movespeed here
 
   // ** Beaker control variables
   const settings = new BeakerSettings(290, true)
@@ -443,11 +466,11 @@ const ReactionKinetics = () => {
           onEndPlay={() => onStepChange(1)}
         /> */}
       </div>
-      <div style={{ position: 'relative', top: 50 }}>
+      {/* <div style={{ position: 'relative', top: 50 }}>
         <button onClick={handleGasIncrease}>Increase Gas</button>
         <button onClick={handleGasDecrease}>Decrease Gas</button>
         <button onClick={handleTest}>LogGas</button>
-      </div>
+      </div> */}
     </div>
     <div className={styles.reactionContentContainer}>
       <div className={styles.reactionChartRow}>

@@ -148,6 +148,8 @@ export const convertExpToHtml = (exp: string | undefined) => {
 }
 
 export const getRandom = (a: number, b: number) => {
-  const r = Math.random() * b + a
+  const min = Math.min(a, b)
+  const max = Math.max(a, b)
+  const r = Math.random() * (max - min) + min
   return r
 }

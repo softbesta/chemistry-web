@@ -66,7 +66,7 @@ export const ChamberF = ({
   const prevProps = useRef<Partial<ChamberFProps>>()
 
   // Test purpose
-  const [counter, setCounter] = useState(0)
+  // const [counter, setCounter] = useState(0)
 
   useEffect(() => {
     if (!elemRef.current) return
@@ -124,6 +124,7 @@ export const ChamberF = ({
           counter1 = _e.timestamp;
         }
       });
+      Runner.start(runner.current, engine.current)
     } catch (error) {
       console.error('aaa111', { error })
     }
@@ -213,8 +214,8 @@ export const ChamberF = ({
     // TODO: need to draw pentagon shape here.
     // const p = Matter.Bodies.polygon()
 
-    const wx = getRandom(0, width)
-    const wy = getRandom(height * (1 - waterLevel), height * waterLevel)
+    const wx = getRandom(20, width - 20)
+    const wy = getRandom(height * (1 - waterLevel) + 20, height - 20,)
 
     const angle = getRandom(0.2, 0.8) * Math.PI
     const direct = Math.round(Math.random()) === 0 ? -1 : 1
@@ -222,20 +223,41 @@ export const ChamberF = ({
     const dy = Math.cos(angle) * direct
     console.log({ wx, wy })
 
-    const p = Matter.Bodies.circle(
-      // width / 2,          // ** initial position for particles
-      // height - 50,
-      wx,
-      wy,
-      gas.particleSize, {
-      render: {
-        fillStyle: particleColor.hex(),
-        lineWidth: 1
-      },
-      restitution: 1,
-      friction: 0,            // ** control friction
-      frictionAir: 0        // ** control air friction
-    });
+    let p
+    if (gas.particleType === 'pentagon') {
+      p = Matter.Bodies.polygon(
+        // width / 2,          // ** initial position for particles
+        // height - 50,
+        wx,
+        wy,
+        5,
+        gas.particleSize,
+        {
+          render: {
+            fillStyle: particleColor.hex(),
+            lineWidth: 1
+          },
+          restitution: 1,
+          friction: 0,            // ** control friction
+          frictionAir: 0        // ** control air friction
+        }
+      )
+    } else {
+      p = Matter.Bodies.circle(
+        // width / 2,          // ** initial position for particles
+        // height - 50,
+        wx,
+        wy,
+        gas.particleSize, {
+        render: {
+          fillStyle: particleColor.hex(),
+          lineWidth: 1
+        },
+        restitution: 1,
+        friction: 0,            // ** control friction
+        frictionAir: 0        // ** control air friction
+      })
+    }
 
     Matter.Body.setInertia(p, Infinity);
     // p.molecularSpeed = molecularSpeed;
@@ -356,7 +378,7 @@ export const ChamberF = ({
 
     console.log('addParticles 2', { initialParticleCounts: initialPartCounts })
     console.log('addParticles 3', { activeGases: activeGases, gasCounts, distributionBuckets: distributionBuckets.current })
-    console.log('addParticles 4', { particles: particles })
+    console.log('addParticles 4', { particles: particles.current })
 
     if (!particles.current) return
     particles.current.forEach(function (gasParticles) {
@@ -366,23 +388,35 @@ export const ChamberF = ({
   }
 
   const drawWalls = () => {
-    const { Bodies, Vertices } = Matter;
+    const { Body, Bodies, Vertices } = Matter;
+
+    // const vertices = [
+    //   { x: 10, y: 123 },
+    //   { x: 120, y: 100 },
+    //   { x: 130, y: 100 },
+    //   { x: 140, y: 130 },
+    // ]
+
+    const wallColor = 'transparent'
+    const cornerColor = 'transparent'
+
     const wallOptions = {
       isStatic: true,
       render: {
         fillStyle: 'transparent',
-        strokeStyle: 'red',
+        strokeStyle: wallColor,
         lineWidth: 1
       },
       collisionFilter: {
         // mask: 1
-      }
+      },
+      friction: 0,
     };
 
     const cY = height * (1 - waterLevel)
 
-    const rlSpace = 28
-    const btSpace = 5
+    const rlSpace = 28 // offset x
+    const btSpace = 5  // offset y
 
     return [
       // TOP wall
@@ -417,6 +451,80 @@ export const ChamberF = ({
         margin + rlSpace, height + margin * 2,
         wallOptions,
       ),
+
+      // Bodies.fromVertices(100, 100, [vertices], {
+      //   isStatic: true,
+      //   render: {
+      //     fillStyle: '#ff0000',
+      //     strokeStyle: '#00ff00'
+      //   }
+      // })
+
+      // Left-Top Corner 
+      Bodies.rectangle(
+        rlSpace / 2,
+        cY,
+        25, 25,
+        {
+          isStatic: true,
+          render: {
+            fillStyle: 'transparent',
+            strokeStyle: cornerColor,
+            lineWidth: 1,
+          },
+          friction: 0,
+          angle: Math.PI * 0.25,
+        }
+      ),
+      // Right-Top Corner 
+      Bodies.rectangle(
+        width - rlSpace / 2,
+        cY,
+        25, 25,
+        {
+          isStatic: true,
+          render: {
+            fillStyle: 'transparent',
+            strokeStyle: cornerColor,
+            lineWidth: 1,
+          },
+          friction: 0,
+          angle: Math.PI * 0.25,
+        }
+      ),
+      // Left-Bottom Corner 
+      Bodies.rectangle(
+        rlSpace / 2,
+        height,
+        25, 25,
+        {
+          isStatic: true,
+          render: {
+            fillStyle: 'transparent',
+            strokeStyle: cornerColor,
+            lineWidth: 1,
+          },
+          friction: 0,
+          angle: Math.PI * 0.25,
+        }
+      ),
+      // Right-Bottom Corner 
+      Bodies.rectangle(
+        width - rlSpace / 2,
+        height,
+        25, 25,
+        {
+          isStatic: true,
+          render: {
+            fillStyle: 'transparent',
+            strokeStyle: cornerColor,
+            lineWidth: 1,
+          },
+          friction: 0,
+          angle: Math.PI * 0.25,
+        }
+      ),
+
     ];
   }
 
@@ -433,8 +541,8 @@ export const ChamberF = ({
     Runner.stop(runner.current)
   }
   const handleEffect = () => {
-    const update = counter + 1
-    console.log('effect button clicked ', update)
+    // const update = counter + 1
+    // console.log('effect button clicked ', update)
     // setCounter(update)
     addParticles()
   }
@@ -445,7 +553,7 @@ export const ChamberF = ({
       ref={elemRef}
       style={{ position: 'absolute', top: 0 }}
     />
-    <button
+    {/* <button
       onClick={handleStart}
       style={{ position: 'absolute', top: 450 }}
     >Test Start</button>
@@ -456,6 +564,6 @@ export const ChamberF = ({
     <button
       onClick={handleEffect}
       style={{ position: 'absolute', top: 450, left: 160 }}
-    >Test useEffect</button>
+    >Test useEffect</button> */}
   </div>
 }
