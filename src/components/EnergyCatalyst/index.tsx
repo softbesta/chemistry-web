@@ -6,6 +6,8 @@ import { ImgPentagonPink, ImgPentagonSky, ImgPentagonYellow, catalystDisabled, c
 import Color from 'color'
 import { CatalystDropItemColors } from './constants'
 
+const log_EnergyCatalyst = true
+
 // Images for catalystType
 const catalystImgs = [catalystOne, catalystTwo, catalystThree]
 const catalystImgColors = ['red', 'green', 'blue']
@@ -55,9 +57,9 @@ export const EnergyCatalystContainer = ({
 
   const shakeThreshold = 30
   const [prevPosition, setPrevPosition] = useState<Point>({ x: 0, y: 0 })
-  const shakings = useRef<number>(0)
+  const shakings = useRef<number>(0)  // shaking element count
   // const [shakingDirection, setShakingDirection] = useState(0)
-  const [shakingCount, setShakingCount] = useState<number>(0) // count of ElementDroppingAnimation
+  const [curShakingCount, setCurShakingCount] = useState<number>(0) // ** dropped Element count
 
   // timer to count the shakings
   const timerID = useRef<NodeJS.Timer>()
@@ -71,20 +73,16 @@ export const EnergyCatalystContainer = ({
     timerID.current = setInterval(() => {
       setTimeCounter(v => v += intervalTime)
     }, intervalTime)
-    // console.log('started', timerID.current)
   }
   const stopTimer = () => {
     if (timerID.current) {
-      // console.log('timer end', timerID.current)
       clearInterval(timerID.current)
       timerID.current = undefined
     }
   }
   const onTimer = () => {
-    // console.log('timer count', { timeCounter })
     const distance = Math.sqrt((prevPosition.x - position.x) ** 2 + (prevPosition.y - position.y))
     if (distance > shakeThreshold) {
-      // console.log('shaking detected - ', { shakeThreshold })
       shakings.current++
     }
     setPrevPosition(position)
@@ -101,7 +99,7 @@ export const EnergyCatalystContainer = ({
   }, [])
 
   const onItemDragStart = (index: number) => {
-    // console.log('===handleMouseUp=== drag start')
+    // log_EnergyCatalyst && console.log('===handleMouseUp=== drag start')
     setDragIndex(index)
     startTimer()
   }
@@ -110,7 +108,7 @@ export const EnergyCatalystContainer = ({
   }
   const onItemMove = (_e: any) => {
     if (dragIndex > -1) {
-      // console.log('=== handleMouseMove ===', {dragIndex})
+      // log_EnergyCatalyst && console.log('=== handleMouseMove ===', {dragIndex})
       let update = position
       let newX = _e.clientX - dragOffset.x
       let newY = _e.clientY - dragOffset.y
@@ -125,20 +123,30 @@ export const EnergyCatalystContainer = ({
 
   // Moveable Item: Detect multiple clicked count within 0.5s
   const [lastClickTime, setLastClickTime] = useState(0);
-  // const [droppingCountToAdd, setDroppingCountToAdd] = useState(0)
+  const [isDroppingMultiple, setIsDroppingMultiple] = useState<boolean>(false)
   const onMovableItemClick = async () => {
-    // console.log('===onItemClick===', { shakingCount })
-    const droppingCountToAdd = 6
+    // log_EnergyCatalyst && console.log('===onItemClick===', { shakingCount })
+
     const currentTime = new Date().getTime();
-    if (currentTime - lastClickTime <= 300) {
-      addMultipleDropping(droppingCountToAdd)
-      // setDroppingCountToAdd(6)
-    }
     setLastClickTime(currentTime);
+    if (currentTime - lastClickTime > 300) return
+
+    // When double clicked
+    if (isDroppingMultiple) return
+    let droppingCountToAdd = 10
+    if (maxShakingCount - curShakingCount < droppingCountToAdd) {
+      droppingCountToAdd = maxShakingCount - curShakingCount
+    }
+
+    setIsDroppingMultiple(true)
+    await addMultipleDropping(droppingCountToAdd)
+    await delay(300)                        // delay until last animation ends.
+    setIsDroppingMultiple(false)
+    // log_EnergyCatalyst && console.log('addMultipleDropping', { isDroppingMultiple })
   }
   const addMultipleDropping = async (count: number) => {
     if (count < 1) return
-    setShakingCount(v => v + 1)
+    setCurShakingCount(v => v + 1)
     await delay(100)
     await addMultipleDropping(count - 1)
   }
@@ -151,7 +159,7 @@ export const EnergyCatalystContainer = ({
     const update = [normalState, normalState, normalState]
     update[id] = 1  // show item as moveable
 
-    // console.log('clicked catalyst menu item', { id, origin: catalystItemStates, update })
+    // log_EnergyCatalyst && console.log('debug --- 000', {catalystItemStates: update})
     setCatalystItemStates(update)
 
     onCatalystMenuItemClick(id)
@@ -161,27 +169,34 @@ export const EnergyCatalystContainer = ({
     const count = Math.floor(shakings.current)
     if (count > 0) {
       shakings.current = 0
-      setShakingCount(v => v + count)
-      // console.log('===useEffect.shakings===  shaking count --- ', shakingCount + count)
+      const update = curShakingCount + count
+      setCurShakingCount(update)
     }
   }, [shakings.current])
 
-  // check shakingCount if movable item is shaked enough.
+  // Check shakingCount if movable item is shaked enough.
   useEffect(() => {
-    if (shakingCount > maxShakingCount) {
+    if (isDroppingMultiple) return
+    if (curShakingCount >= maxShakingCount) {
       onItemDragEnd()
-      onChangeShakingCount?.(shakingCount, activeCatIdx)
+      return
     }
-    console.log({ shakingCount, activeCatIdx })
-  }, [shakingCount])
+  }, [curShakingCount, isDroppingMultiple])
 
+  // Trigger shaking event to parent.
   useEffect(() => {
-    // initialize when active catalyst state changes
-    // console.log('===useEffect.catalystItemStates===')
+    if (curShakingCount <= 0) return
+    onChangeShakingCount?.(curShakingCount, activeCatIdx)
+  }, [curShakingCount])
+
+  // Initialize shaking count to be 0 when active catalyst state changes
+  useEffect(() => {
+    // log_EnergyCatalyst && console.log('===useEffect.catalystItemStates===')
     // const activeId = catalystItemStates.findIndex(item => item === 1) // find an item which is moveable
     // setActiveCatIdx(activeId)
-
-    setShakingCount(0)
+    // log_EnergyCatalyst && console.log('!!! 111', {catalystItemStates})
+    // log_EnergyCatalyst && console.log('!!! 222', {curShakingCount})
+    setCurShakingCount(0)
     setPosition(initialMovableItemPositions)
   }, [catalystItemStates])
 
@@ -196,7 +211,7 @@ export const EnergyCatalystContainer = ({
     onMouseMove={onItemMove}
   >
     {catalystTypes.map((catIdx, index) => {
-      // console.log({ catIdx, catalystTypes, catalystItemStates }, catalystItemStates[index])
+      // log_EnergyCatalyst && console.log({ catIdx, catalystTypes, catalystItemStates }, catalystItemStates[index])
       if (catalystItemStates[index] === undefined || catalystItemStates[index] < 2) return null
       return <EnergyCatalystMenuItem
         key={index}
@@ -230,7 +245,7 @@ export const EnergyCatalystContainer = ({
     <button onClick={() => animationEnd()}>end</button> */}
     <ElementDroppingAnimation
       elementType={activeCatIdx}
-      elementCount={shakingCount}
+      elementCount={curShakingCount}
     />
   </div>
 }
@@ -256,7 +271,7 @@ export const EnergyCatalystMenuItem = ({
 }: EnergyCatalystMenuItemProps) => {
   // const catalystColor = disable ? 'gray' : catalystImgColors[catType]
   const catalystImg = disable ? catalystDisabled : catalystImgs[catType]
-  // console.log({ catalystColor, catType })
+  // log_EnergyCatalyst && console.log({ catalystColor, catType })
 
   return <div
     className={`${styles.catalystItem}`}
@@ -299,7 +314,7 @@ export const EnergyCatalystMoveableItem = ({
   setDragOffset,
 }: EnergyCatalystMoveableItemProps) => {
 
-  // console.log({ catIndex, position, disable })
+  // log_EnergyCatalyst && console.log({ catIndex, position, disable })
 
   const handleMouseDown = (_e: any) => {
     const offsetX = _e.clientX - position.x;
@@ -380,13 +395,13 @@ export const ElementDroppingAnimation = ({
   //   timerID.current = setInterval(() => {
   //     setTimeCounter(v => v += intervalTime)
   //   }, intervalTime)
-  //   console.log('started', timerID.current)
+  //   log_EnergyCatalyst && console.log('started', timerID.current)
   // }
   // const stopTimer = () => {
   //   if (timerID.current) {
   //     clearInterval(timerID.current)
   //     timerID.current = undefined
-  //     console.log('timer end')
+  //     log_EnergyCatalyst && console.log('timer end')
   //   }
   // }
 
@@ -398,7 +413,7 @@ export const ElementDroppingAnimation = ({
   //     onEnd?.()
   //     return
   //   }
-  //   console.log('timer count', { timeCounter, isStart })
+  //   log_EnergyCatalyst && console.log('timer count', { timeCounter, isStart })
   // }, [timeCounter])
 
   // useEffect(() => {
@@ -410,11 +425,11 @@ export const ElementDroppingAnimation = ({
   //   startTimer()
   // }, [isStart])
   // useEffect(() => {
-  //   console.log({ elementCount, counter })
+  //   log_EnergyCatalyst && console.log({ elementCount, counter })
   //   setCounter(v => v + 1)
   // }, [elementCount])
 
-  // console.log({ elementType })
+  // log_EnergyCatalyst && console.log({ elementType })
 
   return <div>
     {Array.from(Array(elementCount).fill(true)).map((item, index) => {

@@ -1,6 +1,6 @@
 import useAppData from "../../../hooks/useAppData"
 import styles from './kinetics.module.scss'
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import EnergyProfile from "../../../components/EnergyProfile"
 import ChartTime from "../../../components/ChartTime/ChartTime"
 import ChartBar from "../../../components/ChartBar"
@@ -34,6 +34,8 @@ import EnergyProfileChart from "../../../components/EnergyProfileChart/EnergyPro
 import { EnergyRateChartSettings, ReactionOrder } from "../../../components/EnergyProfileChart"
 import { EnergyProfileChatInput } from "../../../components/EnergyProfileChart/EnergyProfileChartInput"
 import EnergyProfileRateChart from "../../../components/EnergyProfileRateChart/EnergyProfileRateChart"
+
+const log_Kinetics = true
 
 const ReactionKinetics = () => {
   const {
@@ -79,8 +81,8 @@ const ReactionKinetics = () => {
   // *** Tutorial-ACTIONS  - curStep changes
   const curActions = tutorials[curStep]?.actions as any
   useEffect(() => {
-    console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep })
-    // console.log('curActions: ', { curActions, curStep })
+    log_Kinetics && console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep })
+    // log_Kinetics && console.log('curActions: ', { curActions, curStep })
     if (curActions) {
       if (curActions?.canvaTimeState !== undefined) {
         setCanvaTimeState(curActions.canvaTimeState)
@@ -89,11 +91,9 @@ const ReactionKinetics = () => {
         setCanvaBeakerState(curActions.canvaBeakerState)
       }
       if (curActions?.isEnableChooseMenu !== undefined) {
-        console.log('zzz curActions.isEnableChooseMenu', curActions.isEnableChooseMenu)
         setIsEnableChooseMenu(curActions.isEnableChooseMenu)
       }
       if (curActions?.activeDotIndex !== undefined) {
-        console.log('zzz curActions.activeDotIndex', curActions.activeDotIndex)
         setActiveDotIndex(curActions.activeDotIndex)
       }
       if (Array.isArray(curActions?.canvaTimeSliderC)) {
@@ -112,11 +112,9 @@ const ReactionKinetics = () => {
         setShowCatalystMoveItem(curActions.showCatalystMoveItem)
       }
       if (curActions?.isBurnerActive !== undefined) {
-        console.log('zzz curActions.isBurnerActive', curActions.isBurnerActive, { curActions })
         setIsBurnerActive(curActions.isBurnerActive)
       }
       if (curActions?.energyProfileChartState !== undefined) {
-        console.log('zzz curActions.energyProfileChartState', curActions.energyProfileChartState, { curActions })
         setEnergyProfileChartState(curActions.energyProfileChartState)
       }
     }
@@ -158,7 +156,7 @@ const ReactionKinetics = () => {
     const k = ((1 / At) - (1 / A0)) / t1
     const t_12 = 1 / (k * A0)
     const rate = k * (At * At)
-    // console.log({c1, c2, t1, t2, lnA0, lnAt, k, t_12, rate})
+    // log_Kinetics && console.log({c1, c2, t1, t2, lnA0, lnAt, k, t_12, rate})
 
     // turText can be undefined on new page due to curStep(lazy changes of state variable)
     const turTxt = tur_Text[curStep]
@@ -185,7 +183,7 @@ const ReactionKinetics = () => {
     let update = curStep + step
     if (update < 0) {
       update = 0
-      console.log('getNextStep 0', { update })
+      // log_Kinetics && console.log('getNextStep 0', { update })
       updatePageFromMenu(getNextMenu(-1))
       return
     }
@@ -199,9 +197,8 @@ const ReactionKinetics = () => {
   }
   // call when click prev step
   const onStepChange = (step: number) => {
-    console.log('===onStepChange===', { step })
+    log_Kinetics && console.log('===onStepChange===', { step })
     const nextStep = getNextStep(step)
-    console.log({ nextStep })
     if (nextStep === undefined) return
     if (curStep === nextStep) return
     // Tutorial-Highlight
@@ -210,14 +207,22 @@ const ReactionKinetics = () => {
       highlightElement(tutorials[nextStep].highlight)
     }
 
-    console.log({ curStep })
+    log_Kinetics && console.log({ curStep, nextStep })
     setCurStep(nextStep)
   }
-  // remove highlighted elements when page opens
+  // remove/init highlighted elements when page opens
   useEffect(() => {
+    removeHighlightElement(tutorials[0]?.highlight)
+    if (tutorials[0]?.highlight?.length > 0) {
+      highlightElement(tutorials[0].highlight)
+    }
     return () => removeHighlightElement(tutorials[curStep]?.highlight)
   }, [])
 
+
+  // ** Beaker Burner state ;  'false': disable Burner, 'true': active Burner
+  const [isBurnerActive, setIsBurnerActive] = useState(false)
+  const [valueFire, setValueFire] = useState(400)
 
   // ** Chamber control variables
   const initActiveGases = [
@@ -263,33 +268,30 @@ const ReactionKinetics = () => {
       particleType: 'pentagon',
     }
   ]
-  const [activeGases, setActiveGases] = useState(initActiveGases)
+  const [activeGases, setActiveGases] = useState(initActiveGases)   // ** control Gas Types here.
 
   const initGasCounts = [2, 2, 1];  // ** control counts here
-  const [gasCounts, setGasCounts] = useState(initGasCounts)
-  const gasCountsRef = useRef<number[]>([2, 2, 1])
-  // Speed constant used to convert between matter.js speed and meters
-  // per second (m/s)
+  const [gasCounts, setGasCounts] = useState(initGasCounts)   // ** control Beaker Gas Counts here.
+  const beakerGasSpeed = (valueFire / 100 - 4) * 5 + 1      // ** control Gas Speed here  1-11
 
   const handleGasIncrease = () => {
     const update = [...gasCounts].map(g => g + 1)
-    console.log('handleGasIncrease', update)
+    // log_Kinetics && console.log('handleGasIncrease', update)
     setGasCounts(update)
-    // gasCountsRef.current = [...gasCountsRef.current].map(g => g + 1)
-    // console.log('handleGasIncrease', {update: gasCountsRef.current})
   }
   const handleGasDecrease = () => {
     const update = [...gasCounts].map(g => g - 1)
-    console.log('handleGasIncrease', update)
+    // log_Kinetics && console.log('handleGasIncrease', update)
     setGasCounts(update)
   }
   const handleTest = () => {
-    console.log('handleGasIncrease', { gasCounts })
+    // log_Kinetics && console.log('handleGasIncrease', { gasCounts })
+    setGasCounts(initGasCounts)
   }
 
   // ** Beaker control variables
   const settings = new BeakerSettings(290, true)
-  // console.log({ settings })
+  // log_Kinetics && console.log({ settings })
   const beakerSize = { width: 240, height: 270 }
   const waterLevel = 0.4          // ** control waterlevel here
 
@@ -305,18 +307,20 @@ const ReactionKinetics = () => {
   // const concentrationB = new FirstOrderConcentration()
   // concentrationB.init3Params(1, 3, 10)
 
-  // ** Beaker Burner state ;  'false': disable Burner, 'true': active Burner
-  const [isBurnerActive, setIsBurnerActive] = useState(false)
-  const [valueFire, setValueFire] = useState(400)
-  const speedGas = (valueFire / 100 - 4) * 5 + 1      // ** control movespeed here  1 ~ 11
-
   // ** Control Catalyst State
   const [catShakingOrder, setCatShakingOrder] = useState<number[]>([0, 1, 2])
   const [curCatShakingOrderIdx, setCurCatShakingOrderIdx] = useState<number>(0)
   const [showCatalystMoveItem, setShowCatalystMoveItem] = useState<boolean>(false)
+  const maxShakingCount = 1000
+
   const onCatalystItemShake = (shakingCount: number, itemIndex: number) => {
-    console.log('===onCatalystItemShake===', { shakingCount, itemIndex, curCatShakingOrderIdx, catShakingOrder })
-    if (shakingCount > 10) {
+    log_Kinetics && console.log('===onCatalystItemShake===', { shakingCount, itemIndex, curCatShakingOrderIdx, catShakingOrder })
+
+    // const update = [...gasCounts]
+    const update = [...gasCounts]
+    update[itemIndex] += 1
+    setGasCounts(update)
+    if (shakingCount >= maxShakingCount) {
       // // if (!shakedOrder.includes(itemIndex)) {
       // const restOrders = catShakingOrder.filter(s => s !== itemIndex)
       // const update = [
@@ -324,20 +328,21 @@ const ReactionKinetics = () => {
       //   itemIndex,
       //   ...restOrders.slice(curCatShakingOrderIdx),
       // ]
-      // console.log({ update })
+      // log_Kinetics && console.log({ update })
       // setCatShakingOrder(update)
       // // }
       onStepChange(1)
     }
   }
   const onCatalystMenuItemClick = (index: number) => {
+    log_Kinetics && console.log('error --- 111', { index, catalystItemStates })
+
     const others = [...catalystItemStates]
     others.splice(index, 1)
     const normalState = Math.max(...others) // find normal state from other which is disabled(2) or active(3)
     const updatedState = [3, 3, 3]
     updatedState[index] = 1  // change current state[index] as moveable(hide menu item and show moveable item).
-
-    // console.log('clicked catalyst menu item', { id, origin: catalystItemStates, update })
+    // log_Kinetics && console.log('clicked catalyst menu item', { id, origin: catalystItemStates, update })
     setCatalystItemStates(updatedState)
 
     const restOrders = catShakingOrder.filter(s => s !== index)
@@ -346,28 +351,25 @@ const ReactionKinetics = () => {
       index,
       ...restOrders.slice(curCatShakingOrderIdx),
     ]
-    console.log({ updatedOrder })
+    log_Kinetics && console.log({ updatedOrder })
     setCatShakingOrder(updatedOrder)
     onStepChange(1)
   }
-  const curCatalystItemState = catalystItemStates.map((state, index) => {
-    // hide menu item for shaking.
-    if (showCatalystMoveItem && index === catShakingOrder[curCatShakingOrderIdx]) {
-      return 1
-    }
-    // hide menu item which is completed shaking.
-    if (catShakingOrder.slice(0, curCatShakingOrderIdx).includes(index)) return 0
-    return state
-  })
+
+  // ! important to use 'useMemo' to avoid re-renderting and show animation.
+  const curCatalystItemState = useMemo(() => {
+    return catalystItemStates.map((state, index) => {
+      // hide menu item for shaking.
+      if (showCatalystMoveItem && index === catShakingOrder[curCatShakingOrderIdx]) {
+        return 1
+      }
+      // hide menu item which is completed shaking.
+      if (catShakingOrder.slice(0, curCatShakingOrderIdx).includes(index)) return 0
+      return state
+    })
+  }, [catalystItemStates])
 
   const [chartTimingState, setChartTimingState] = useState(0)
-
-
-  enum Catalyst {
-    A = 1,
-    B,
-    C,
-  }
 
   const [chooseMenuIndex, setChooseMenuIndex] = useState(0)
 
@@ -398,8 +400,10 @@ const ReactionKinetics = () => {
         activeCatIdx={showCatalystMoveItem ? catShakingOrder[curCatShakingOrderIdx] : -1}
         regionWidth={300}
         regionHeight={150}
-        maxShakingCount={10}
-        onChangeShakingCount={(val, index) => onCatalystItemShake(val, index)}
+        maxShakingCount={maxShakingCount}
+        onChangeShakingCount={(val, index) => {
+          onCatalystItemShake(val, index)
+        }}
       />
       <div className={styles.reactionBeaker}>
         <div className={styles.beakerShape}>
@@ -415,7 +419,7 @@ const ReactionKinetics = () => {
             gasCounts={gasCounts}
             allowEscape={false}
             escapeSpeed={1000}
-            gasSpeed={speedGas}
+            gasSpeed={beakerGasSpeed}
           />
         </div>
         <Burner
@@ -437,9 +441,9 @@ const ReactionKinetics = () => {
         /> */}
       </div>
       <div style={{ position: 'relative', top: 50 }}>
-        <button onClick={handleGasIncrease}>Increase Gas</button>
-        <button onClick={handleGasDecrease}>Decrease Gas</button>
-        <button onClick={handleTest}>LogGas</button>
+        <button onClick={handleGasIncrease}>GasDecrease</button>
+        <button onClick={handleGasDecrease}>GasDecrease</button>
+        <button onClick={handleTest}>Test</button>
       </div>
     </div>
     <div className={styles.reactionContentContainer}>
@@ -495,7 +499,7 @@ const ReactionKinetics = () => {
             includeAxis={true}
             timingState={chartTimingState}
             onEndPlay={() => {
-              console.log('&&& timer ended &&& ')
+              log_Kinetics && console.log('&&& timer ended &&& ')
             }}
           /> */}
         </div>
@@ -521,7 +525,6 @@ const ReactionKinetics = () => {
           className={styles.mathContent}
           {...getFormula()}
           blanks={tur_MathBlanks[curStep]}
-          blanksCount={11}
         />
         <TutorialControl
           turText={getTurTextByStep()}

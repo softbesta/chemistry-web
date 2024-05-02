@@ -193,49 +193,49 @@ export const tur_Hightlights = [
 
   // 2   It states that the reaction, ...
   [],
-  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__math1', 'tur__math2'],
+  // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math1', 'tur_math2'],
 
   // 3   This minimum amount of...
   [],
-  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__canvasTime', 'tur__math4'],
+  // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime', 'tur_math4'],
 
   // 4   But how is the temperature...
   [],
-  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__math3'],
+  // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math3'],
 
   // 5   k is the rate constant...
   [], // +
 
   // 6   As you can tell by the equation....
   [],
-  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__canvasTime'], // Choose reaction 'C to D'
+  // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'], // Choose reaction 'C to D'
 
   // 7   When applying logarithmic...
   [],
-  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__canvasTime'],
+  // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
 
   // 8   If the linear equation...
   [],
-  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__canvasTime'],
+  // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
 
   // 9   For this reaction, **E__a__...
   [],
-  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__canvasTime'],
+  // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
 
   // 10   One way to depict the reaction ...
   [],
-  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__canvasTime'],
+  // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
 
   // 11   This is an **exothermic reaction...
   [],
-  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__canvasTime'],
+  // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
 
   // 12   The hump or bell in the ...
   [],
 
   // 13   There's a way to reduce... 
   [],
-  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__chooseMenuIcon'],
+  // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_chooseMenuIcon'],
 
   // 14   Let's try that out! ...
   [],
@@ -251,7 +251,7 @@ export const tur_Hightlights = [
 
   // 18   Points of that graph are ...
   [],
-  // ['tur__tutorialText', 'tur__stepPrevButton', 'tur__stepNextButton', 'tur__chooseMenuIcon'],
+  // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_chooseMenuIcon'],
 
   // 19   Let's try to produce C....
   [],
@@ -338,7 +338,6 @@ export const stepsActions = [
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
-    energyProfileChartState: 1,
   },
   // 2   It states that the reaction, ...
   { // 2
@@ -348,7 +347,6 @@ export const stepsActions = [
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
-    energyProfileChartState: 2,
   },
   // 3   This minimum amount of...
   { // 3

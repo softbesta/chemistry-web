@@ -5,6 +5,8 @@ import Color from 'color';
 import styles from './Chamber.module.scss'
 import { getRandom } from '../../../helper/functions';
 
+const log_ChamberF = false
+
 interface ChamberFProps {
   width: number,
   height: number,
@@ -106,11 +108,15 @@ export const ChamberF = ({
     return molecularSpeed >= escapeSpeed;
   };
 
-  const makeParticle = (gas: any, molecularSpeed: number) => {
+  const makeParticle = (gas: any, molecularSpeed: number, isDroppedElem: boolean = false) => {
     const particleColor = Color(gas.color);
 
-    const wx = getRandom(20, width - 20)
-    const wy = getRandom(height * (1 - waterLevel) + 20, height - 20,)
+    let wx = getRandom(20, width - 20)
+    let wy = getRandom(height * (1 - waterLevel) + 20, height - 20)
+    if (isDroppedElem) {
+      wx = width / 2
+      wy = height * (1 - waterLevel)
+    }
 
     const angle = getRandom(0.2, 0.8) * Math.PI
     const direct = Math.round(Math.random()) === 0 ? -1 : 1
@@ -168,7 +174,7 @@ export const ChamberF = ({
     //   y: Math.cos(direction) * (gasSpeedRef.current * -molecularSpeed)
     // }
 
-    // console.log('qqq 111', { p, gasSpeedRef.current, molecularSpeed, update111 })
+    // log_ChamberF && console.log('qqq 111', { p, gasSpeedRef.current, molecularSpeed, update111 })
 
     // const baseSpeed = molecularSpeed * gasSpeedRef.current;
     // let speedMultiplier = baseSpeed / p.speed;
@@ -176,7 +182,7 @@ export const ChamberF = ({
     //   x: p.velocity.x * speedMultiplier,
     //   y: p.velocity.y * speedMultiplier
     // }
-    // console.log('qqq 222', { p, gasSpeedRef.current, molecularSpeed, update222 })
+    // log_ChamberF && console.log('qqq 222', { p, gasSpeedRef.current, molecularSpeed, update222 })
 
 
     Matter.Body.setVelocity(p, {
@@ -212,7 +218,7 @@ export const ChamberF = ({
     if (!elemRef.current) return
 
     try {
-      console.log('===ChamberF.useEffect 111===')
+      // log_ChamberF && console.log('===ChamberF.useEffect 111===')
 
       const Engine = Matter.Engine,
         Render = Matter.Render,
@@ -258,7 +264,7 @@ export const ChamberF = ({
 
       let counter1 = 0;
       Matter.Events.on(engine.current, 'afterUpdate', function (e) {
-        // console.log('F===Matter.Events.afterUpdate===')
+        // log_ChamberF && console.log('F===Matter.Events.afterUpdate===')
         const _e = e as Matter.IEventTimestamped<Matter.Engine>
         if (_e.timestamp >= counter1 + 200) {
           refreshParticleSpeedDistribution();
@@ -272,11 +278,11 @@ export const ChamberF = ({
   }, [])
 
   useEffect(() => {
-    console.log('===ChamberF.useEffect 222===')
+    // log_ChamberF && console.log('===ChamberF.useEffect 222===')
     try {
       particleCounts.current = gasCounts
 
-      console.log({ gasCounts: particleCounts.current })
+      log_ChamberF && console.log({ gasCounts: particleCounts.current })
       for (let gasType = 0; gasType < particles.current.length; gasType++) {
         const diffCount = particleCounts.current[gasType] - particles.current[gasType].length
         if (diffCount > 0) {
@@ -291,7 +297,7 @@ export const ChamberF = ({
   }, [gasCounts])
 
   const removeParticles = () => {
-    console.log('===removeParticles===')
+    log_ChamberF && console.log('===removeParticles===')
     if (particles.current) {
       particles.current.forEach(function (gasParticles) {
         if (!engine.current) return
@@ -300,7 +306,7 @@ export const ChamberF = ({
     }
   }
   const addParticles = () => {
-    console.log('===addParticles===')
+    log_ChamberF && console.log('===addParticles===')
 
     particles.current = drawParticles(
       activeGases,
@@ -315,25 +321,25 @@ export const ChamberF = ({
   }
 
   const f_addParticle = (gasType: number, addCount: number) => {
-    console.log('===f_addParticle===', { gasType, addCount })
+    log_ChamberF && console.log('===f_addParticle===', { gasType, addCount })
     const activeGas = activeGases[gasType]
     const newGases: Matter.Body[] = []
     for (let c = 0; c < addCount; c++) {
-      const newGas = makeParticle(activeGas, 21)
+      const newGas = makeParticle(activeGas, 21, true)
       newGases.push(newGas)
     }
     const gasParticles = particles.current[gasType]
     particles.current[gasType] = [...gasParticles, ...newGases]
-    console.log({ updatedParticles: particles.current[gasType] })
+    log_ChamberF && console.log({ updatedParticles: particles.current[gasType] })
     if (!engine.current) return
     Matter.Composite.add(engine.current.world, newGases)
   }
 
   const f_removeParticle = (gasType: number, removeCount: number) => {
-    console.log('===f_removeParticle===', { gasType, removeCount })
+    log_ChamberF && console.log('===f_removeParticle===', { gasType, removeCount })
     if (!particles.current || !particles.current[gasType]) return
     const removeParticle = particles.current[gasType].splice(-removeCount)
-    console.log({ updatedParticles: particles.current[gasType] })
+    log_ChamberF && console.log({ updatedParticles: particles.current[gasType] })
     if (!engine.current) return
     Matter.Composite.remove(engine.current.world, removeParticle)
   }
@@ -480,29 +486,29 @@ export const ChamberF = ({
   }
 
   const handleStart = () => {
-    console.log('start button clicked ')
+    log_ChamberF && console.log('start button clicked ')
     // if (!runner.current || !engine.current) return
     // const Runner = Matter.Runner
     // Runner.start(runner.current, engine.current)
 
     gasSpeedRef.current = 0.1
-    console.log(particles.current)
-    console.log(particleCounts.current)
+    log_ChamberF && console.log(particles.current)
+    log_ChamberF && console.log(particleCounts.current)
   }
   const handleStop = () => {
-    console.log('start button clicked ')
+    log_ChamberF && console.log('start button clicked ')
     // if (!runner.current) return
     // const Runner = Matter.Runner
     // Runner.stop(runner.current)
 
     f_removeParticle(1, 2)
-    console.log(particles.current)
+    log_ChamberF && console.log(particles.current)
   }
   const handleEffect = () => {
-    console.log('effect button clicked ')
+    log_ChamberF && console.log('effect button clicked ')
 
     f_addParticle(1, 3)
-    console.log(particles.current)
+    log_ChamberF && console.log(particles.current)
   }
 
   return <div className={styles.chamberContainer}>

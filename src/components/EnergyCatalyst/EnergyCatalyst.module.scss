@@ -34,7 +34,7 @@
   width: 10px;
   height: 10px;
   // background-color: chocolate;
-  animation: moveAnimation 1.5s forwards;
+  animation: moveAnimation 0.5s forwards;
   top: 400px;
   right: calc(50% - 5px);
   z-index: 10;
@@ -64,15 +64,15 @@
     // transform: translate(0px, -400px);
   }
 
-  50% {
+  90% {
     opacity: 1;
-    top: 380px;
+    top: 305px;                             // ** control element move position
     // transform: translate(0px, 0px);
   }
 
   100% {
     opacity: 0;
-    top: 380px;
+    top: 305px;                             // ** control element move position
     // transform: translate(0px, 0px);
     // transform: translate(0px, 400px);
   }

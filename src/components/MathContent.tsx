@@ -24,7 +24,6 @@ interface MathContentProps {
   exp4?: string,
   exp5?: string,
   blanks: (any | undefined)[]
-  blanksCount: number
   className?: string
 }
 const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, className = '' }: MathContentProps) => {

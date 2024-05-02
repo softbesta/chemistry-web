@@ -69,11 +69,9 @@ const ReactionFirst = () => {
         setCanvaBeakerState(curActions.canvaBeakerState)
       }
       if (curActions?.isEnableChooseMenu !== undefined) {
-        console.log('zzz curActions.isEnableChooseMenu', curActions.isEnableChooseMenu)
         setIsEnableChooseMenu(curActions.isEnableChooseMenu)
       }
       if (curActions?.activeDotIndex !== undefined) {
-        console.log('zzz curActions.activeDotIndex', curActions.activeDotIndex)
         setActiveDotIndex(curActions.activeDotIndex)
       }
       if (Array.isArray(curActions?.canvaTimeSliderC)) {
@@ -240,7 +238,6 @@ const ReactionFirst = () => {
         className={styles.mathContent}
         {...getFormula()}
         blanks={tur_MathBlanks[curStep]}
-        blanksCount={11}
       />
       <TutorialControl
         turText={getTurTextByStep()}
