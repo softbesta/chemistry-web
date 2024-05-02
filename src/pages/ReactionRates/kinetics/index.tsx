@@ -444,11 +444,11 @@ const ReactionKinetics = () => {
           onEndPlay={() => onStepChange(1)}
         /> */}
       </div>
-      <div style={{ position: 'relative', top: 50 }}>
+      {/* <div style={{ position: 'relative', top: 50 }}>
         <button onClick={handleGasIncrease}>GasDecrease</button>
         <button onClick={handleGasDecrease}>GasDecrease</button>
         <button onClick={handleTest}>Test</button>
-      </div>
+      </div> */}
     </div>
     <div className={styles.reactionContentContainer}>
       <div className={styles.reactionChartRow}>

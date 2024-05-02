@@ -336,7 +336,7 @@ export const ChamberF = ({
   }
 
   const f_removeParticle = (gasType: number, removeCount: number) => {
-    console.log({gasType, removeCount})
+    log_ChamberF && console.log({gasType, removeCount})
     log_ChamberF && console.log('===f_removeParticle===', { gasType, removeCount })
     if (!particles.current || !particles.current[gasType]) return
     const removeParticle = particles.current[gasType].splice(-removeCount)
@@ -355,8 +355,8 @@ export const ChamberF = ({
     //   { x: 140, y: 130 },
     // ]
 
-    const wallColor = 'red'
-    const cornerColor = 'blue'
+    const wallColor = 'transparent'
+    const cornerColor = 'transparent'
 
     const wallOptions = {
       isStatic: true,
@@ -518,7 +518,7 @@ export const ChamberF = ({
       ref={elemRef}
       style={{ position: 'absolute', top: 0 }}
     />
-    <button
+    {/* <button
       onClick={handleStart}
       style={{ position: 'absolute', top: 450 }}
     >Chamber 111</button>
@@ -529,6 +529,6 @@ export const ChamberF = ({
     <button
       onClick={handleEffect}
       style={{ position: 'absolute', top: 450, left: 160 }}
-    >Chamber 333</button>
+    >Chamber 333</button> */}
   </div>
 }
