@@ -249,28 +249,28 @@ const ReactionKinetics = () => {
     {
       id: 10,
       particleSize: 4,
-      color: 0xffff00,
+      color: 0xef519d,
       mass: 1,
       particleType: 'pentagon',
     },
     {
       id: 11,
       particleSize: 4,
-      color: 0x00ffff,
+      color: 0xffee55,
       mass: 1,
       particleType: 'pentagon',
     },
     {
       id: 12,
       particleSize: 4,
-      color: 0xff00ff,
+      color: 0x88e9ff,
       mass: 1,
       particleType: 'pentagon',
     }
   ]
   const [activeGases, setActiveGases] = useState(initActiveGases)   // ** control Gas Types here.
 
-  const initGasCounts = [2, 2, 1];  // ** control counts here
+  const initGasCounts = [15, 15];  // ** control counts here
   const [gasCounts, setGasCounts] = useState(initGasCounts)   // ** control Beaker Gas Counts here.
   const beakerGasSpeed = (valueFire / 100 - 4) * 5 + 1      // ** control Gas Speed here  1-11
 
@@ -318,8 +318,12 @@ const ReactionKinetics = () => {
 
     // const update = [...gasCounts]
     const update = [...gasCounts]
-    update[itemIndex] += 1
+    if (update[itemIndex + 2] === undefined) {
+      update[itemIndex + 2] = 0
+    }
+    update[itemIndex + 2] += 1
     setGasCounts(update)
+    console.log({ update })
     if (shakingCount >= maxShakingCount) {
       // // if (!shakedOrder.includes(itemIndex)) {
       // const restOrders = catShakingOrder.filter(s => s !== itemIndex)

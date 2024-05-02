@@ -288,7 +288,7 @@ export const ChamberF = ({
         if (diffCount > 0) {
           f_addParticle(gasType, diffCount)
         } else if (diffCount < 0) {
-          f_removeParticle(gasType, diffCount)
+          f_removeParticle(gasType, -diffCount)
         }
       }
     } catch (error) {
@@ -336,6 +336,7 @@ export const ChamberF = ({
   }
 
   const f_removeParticle = (gasType: number, removeCount: number) => {
+    console.log({gasType, removeCount})
     log_ChamberF && console.log('===f_removeParticle===', { gasType, removeCount })
     if (!particles.current || !particles.current[gasType]) return
     const removeParticle = particles.current[gasType].splice(-removeCount)
@@ -354,8 +355,8 @@ export const ChamberF = ({
     //   { x: 140, y: 130 },
     // ]
 
-    const wallColor = 'transparent'
-    const cornerColor = 'transparent'
+    const wallColor = 'red'
+    const cornerColor = 'blue'
 
     const wallOptions = {
       isStatic: true,
