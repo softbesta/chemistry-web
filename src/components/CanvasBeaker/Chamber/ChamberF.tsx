@@ -5,35 +5,13 @@ import Color from 'color';
 import styles from './Chamber.module.scss'
 import { getRandom } from '../../../helper/functions';
 
-/**
- * Based on maxwell_gen's pdf function from scipy.
- * https://github.com/scipy/scipy/blob/4833a293e7790dd244b2530b74d1a6718cf385d0/scipy/stats/_continuous_distns.py#L5305
- */
-const maxwellPDF = function (x: number, mass: number, temp: number) {
-  const m = mass / 1000;
-  const k = 8.61733262145 * (10 ** (-5));
-  const T = temp;
-  const a = Math.sqrt(k * T / m);
-
-  return Math.sqrt(2 / Math.PI) * (
-    (
-      (x ** 2) * Math.exp(-(x ** 2) / (2 * (a ** 2)))
-    ) / (a ** 3)
-  );
-};
-
-
 interface ChamberFProps {
   width: number,
   height: number,
-  isPlaying: boolean,
   allowEscape: boolean,
   escapeSpeed: number,
   activeGases: any[],
-  temperature: number,
-  // gasProportions: any[],
 
-  count?: number,
   waterLevel?: number,
   gasCounts: number[],
   gasSpeed: number,
@@ -41,12 +19,9 @@ interface ChamberFProps {
 export const ChamberF = ({
   width,
   height,
-  isPlaying,
   allowEscape,
   escapeSpeed,
   activeGases,
-  temperature,
-  // gasProportions,
   waterLevel = 0.4,
   gasCounts,
   gasSpeed,
@@ -60,13 +35,178 @@ export const ChamberF = ({
   const runner = useRef<Matter.Runner>()
 
   const particles = useRef<any[]>([])
-  const initialParticleCounts = useRef<number[]>([])
-  const distributionBuckets = useRef<any[]>([])
+  const particleCounts = useRef<number[]>(gasCounts)
+  const gasSpeedRef = useRef<number>(gasSpeed / 50)
 
-  const prevProps = useRef<Partial<ChamberFProps>>()
+  useEffect(() => {
+    gasSpeedRef.current = gasSpeed / 50
+  }, [gasSpeed])
 
-  // Test purpose
-  // const [counter, setCounter] = useState(0)
+  /**
+   * Adjust each particle's speed to keep the distributions even as
+   * they escape.
+   */
+  const refreshParticleSpeedDistribution = () => {
+    particles.current.forEach(function (gasParticles, idx) {
+      // if (initialCount !== gasParticleCount) {
+      updateParticleSpeeds(
+        gasParticles,
+        particleCounts.current[idx],
+      )
+      // }
+    });
+  }
+
+  /**
+   * Update particle speeds based on the new proportion, and the
+   * original distribution bucket.
+   */
+  const updateParticleSpeeds = (particles: any[], gasCount: any) => {
+
+    let pIdx = 0
+    if (gasCount > 0) {
+      let i = 0
+      for (i; i < gasCount; i++) {
+        const idx = pIdx + i
+        if (idx > particles.length) {
+          break
+        }
+        const p = particles[pIdx + i]
+        if (p) {
+          updateParticleSpeed(p, 21)
+        }
+      }
+    }
+  }
+
+  const updateParticleSpeed = function (p: any, molecularSpeed: any) {
+    p.molecularSpeed = molecularSpeed;
+
+    const baseSpeed = p.molecularSpeed * gasSpeedRef.current;
+    let speedMultiplier = baseSpeed / p.speed;
+
+    Matter.Body.setVelocity(p, {
+      x: p.velocity.x * speedMultiplier,
+      y: p.velocity.y * speedMultiplier
+    });
+  };
+
+  const isParticleAboveEscapeSpeed = function (particle: any, escapeSpeed: any) {
+    // Convert matter.js speed back to the meters per second (m/s)
+    // unit we're using in the graph.
+    let molecularSpeed = particle.speed / gasSpeedRef.current;
+
+    // If the particle's current speed is 0, that means it hasn't
+    // started moving yet. In this case, just use the molecularSpeed
+    // we've assigned it on creation.
+    if (particle.speed === 0) {
+      molecularSpeed = particle.molecularSpeed;
+    }
+
+    return molecularSpeed >= escapeSpeed;
+  };
+
+  const makeParticle = (gas: any, molecularSpeed: number) => {
+    const particleColor = Color(gas.color);
+
+    const wx = getRandom(20, width - 20)
+    const wy = getRandom(height * (1 - waterLevel) + 20, height - 20,)
+
+    const angle = getRandom(0.2, 0.8) * Math.PI
+    const direct = Math.round(Math.random()) === 0 ? -1 : 1
+    const dx = Math.sin(angle) * direct
+    const dy = Math.cos(angle) * direct
+
+    let p
+    if (gas.particleType === 'pentagon') {
+      p = Matter.Bodies.polygon(
+        wx,                     // ** initial position for particles
+        wy,
+        5,
+        gas.particleSize,
+        {
+          render: {
+            fillStyle: particleColor.hex(),
+            lineWidth: 1
+          },
+          restitution: 1,
+          friction: 0,          // ** control friction
+          frictionAir: 0        // ** control air friction
+        }
+      )
+    } else {
+      p = Matter.Bodies.circle(
+        wx,                     // ** initial position for particles
+        wy,
+        gas.particleSize,
+        {
+          render: {
+            fillStyle: particleColor.hex(),
+            lineWidth: 1
+          },
+          restitution: 1,
+          friction: 0,          // ** control friction
+          frictionAir: 0        // ** control air friction
+        }
+      )
+    }
+
+    Matter.Body.setInertia(p, Infinity);
+
+    if (allowEscape &&
+      isParticleAboveEscapeSpeed(p, escapeSpeed)
+    ) {
+      p.collisionFilter.category = 0;
+    } else {
+      p.collisionFilter.category = 1;
+    }
+
+    const direction = Math.random() * Math.PI * 2;
+    // p.direction = direction;
+    // const update111 = {
+    //   x: Math.sin(direction) * (gasSpeedRef.current * molecularSpeed),
+    //   y: Math.cos(direction) * (gasSpeedRef.current * -molecularSpeed)
+    // }
+
+    // console.log('qqq 111', { p, gasSpeedRef.current, molecularSpeed, update111 })
+
+    // const baseSpeed = molecularSpeed * gasSpeedRef.current;
+    // let speedMultiplier = baseSpeed / p.speed;
+    // const update222 = {
+    //   x: p.velocity.x * speedMultiplier,
+    //   y: p.velocity.y * speedMultiplier
+    // }
+    // console.log('qqq 222', { p, gasSpeedRef.current, molecularSpeed, update222 })
+
+
+    Matter.Body.setVelocity(p, {
+      x: Math.sin(direction) * (gasSpeedRef.current * molecularSpeed),
+      y: Math.cos(direction) * (gasSpeedRef.current * -molecularSpeed)
+    });
+
+    return p;
+  }
+
+  const drawParticles = (activeGases: any[] = [], gasCounts: any[] = []) => {
+    const particles: any[] = [];
+
+    activeGases.forEach(function (gas, idx) {
+
+      const p: Matter.Body[] = [];
+
+      const particleCount = gasCounts[idx]
+
+      // buckets.forEach(function (bucket: any) {
+      for (let i = 0; i < particleCount; i++) {
+        p.push(makeParticle(gas, 21));
+      }
+      // });
+
+      particles[idx] = p;
+    });
+
+    return particles;
+  }
 
   useEffect(() => {
     if (!elemRef.current) return
@@ -113,8 +253,8 @@ export const ChamberF = ({
 
       runner.current = Runner.create();
 
+      removeParticles()
       addParticles()
-      console.log('')
 
       let counter1 = 0;
       Matter.Events.on(engine.current, 'afterUpdate', function (e) {
@@ -131,213 +271,24 @@ export const ChamberF = ({
     }
   }, [])
 
-  /**
-   * Adjust each particle's speed to keep the distributions even as
-   * they escape.
-   */
-  const refreshParticleSpeedDistribution = () => {
-    particles.current.forEach(function (gasParticles, idx) {
-      const gasParticleCount = gasParticles.length;
-      const initialCount = initialParticleCounts.current[idx];
-      if (initialCount !== gasParticleCount) {
-        updateParticleSpeeds(
-          gasParticles,
-          distributionBuckets.current[idx],
-          // gasProportions[idx]
-          gasCounts[idx],
-        )
-      }
-    });
-  }
-
-  /**
-   * Update particle speeds based on the new proportion, and the
-   * original distribution bucket.
-   */
-  const updateParticleSpeeds = (particles: any[], distributionBucket: any[], proportion: any) => {
-    let pIdx = 0;
-    distributionBucket.forEach(function (bucket) {
-      const particlesAtThisSpeed = Math.round(
-        bucket.particleCount * (proportion / 100)
-      );
-
-      // If there are some particles set to this speed bucket,
-      // update the particles array.
-      if (particlesAtThisSpeed > 0) {
-        let i = 0;
-        for (i; i < particlesAtThisSpeed; i++) {
-          const idx = pIdx + i;
-          if (idx > particles.length) {
-            continue;
-          }
-          const p = particles[pIdx + i];
-          if (p) {
-            updateParticleSpeed(p, bucket.speed);
-          }
-        }
-        pIdx += particlesAtThisSpeed;
-      }
-    });
-
-    return particles;
-  }
-
-  const updateParticleSpeed = function (p: any, molecularSpeed: any) {
-    p.molecularSpeed = molecularSpeed;
-
-    const baseSpeed = p.molecularSpeed * gasSpeed;
-    let speedMultiplier = baseSpeed / p.speed;
-
-    Matter.Body.setVelocity(p, {
-      x: p.velocity.x * speedMultiplier,
-      y: p.velocity.y * speedMultiplier
-    });
-  };
-
-  const isParticleAboveEscapeSpeed = function (particle: any, escapeSpeed: any) {
-    // Convert matter.js speed back to the meters per second (m/s)
-    // unit we're using in the graph.
-    let molecularSpeed = particle.speed / gasSpeed;
-
-    // If the particle's current speed is 0, that means it hasn't
-    // started moving yet. In this case, just use the molecularSpeed
-    // we've assigned it on creation.
-    if (particle.speed === 0) {
-      molecularSpeed = particle.molecularSpeed;
-    }
-
-    return molecularSpeed >= escapeSpeed;
-  };
-
-  const makeParticle = (gas: any, molecularSpeed: number) => {
-    const particleColor = Color(gas.color);
-
-    const wx = getRandom(20, width - 20)
-    const wy = getRandom(height * (1 - waterLevel) + 20, height - 20,)
-
-    const angle = getRandom(0.2, 0.8) * Math.PI
-    const direct = Math.round(Math.random()) === 0 ? -1 : 1
-    const dx = Math.sin(angle) * direct
-    const dy = Math.cos(angle) * direct
-
-    let p
-    if (gas.particleType === 'pentagon') {
-      p = Matter.Bodies.polygon(
-        // width / 2,          // ** initial position for particles
-        // height - 50,
-        wx,
-        wy,
-        5,
-        gas.particleSize,
-        {
-          render: {
-            fillStyle: particleColor.hex(),
-            lineWidth: 1
-          },
-          restitution: 1,
-          friction: 0,            // ** control friction
-          frictionAir: 0        // ** control air friction
-        }
-      )
-    } else {
-      p = Matter.Bodies.circle(
-        // width / 2,          // ** initial position for particles
-        // height - 50,
-        wx,
-        wy,
-        gas.particleSize,
-        {
-          render: {
-            fillStyle: particleColor.hex(),
-            lineWidth: 1
-          },
-          restitution: 1,
-          friction: 0,            // ** control friction
-          frictionAir: 0        // ** control air friction
-        }
-      )
-    }
-
-    Matter.Body.setInertia(p, Infinity);
-    // p.molecularSpeed = molecularSpeed;
-
-    if (allowEscape &&
-      isParticleAboveEscapeSpeed(p, escapeSpeed)
-    ) {
-      p.collisionFilter.category = 0;
-    } else {
-      p.collisionFilter.category = 1;
-    }
-
-    const direction = Math.random() * Math.PI * 2;
-    // p.direction = direction;
-    Matter.Body.setVelocity(p, {
-      x: Math.sin(direction) * (gasSpeed * molecularSpeed),
-      y: Math.cos(direction) * (gasSpeed * -molecularSpeed)
-    });
-
-    return p;
-  }
-
-  const drawParticles = (activeGases: any[] = [], gasCounts: any[] = []) => {
-    const particles: any[] = [];
-
-    activeGases.forEach(function (gas, idx) {
-
-      const p: Matter.Body[] = [];
-
-      const particleCount = gasCounts[idx]
-
-      // buckets.forEach(function (bucket: any) {
-      for (let i = 0; i < particleCount; i++) {
-        p.push(makeParticle(gas, 0.1));
-      }
-      // });
-
-      particles[idx] = p;
-    });
-
-    return particles;
-  }
-
-  /**
-   * Generate Maxwell PDF distribution buckets for the given gas
-   * type.
-   *
-   * Returns an array of the numbers of particles we want to create
-   * at each speed interval.
-   */
-  const generateBuckets = (gas: any) => {
-    const distributionBuckets = [];
-
-    for (let i = 0; i < 2100; i += 20) {
-      let particleCount = maxwellPDF(
-        i / (460 / 1.5),
-        gas.mass,
-        temperature);
-
-      particleCount *= 10;
-      particleCount = Math.round(particleCount);
-
-      distributionBuckets.push({
-        speed: i,
-        particleCount: particleCount
-      });
-    }
-
-    return distributionBuckets;
-  }
-
   useEffect(() => {
     console.log('===ChamberF.useEffect 222===')
     try {
-      prevProps.current = { activeGases, temperature, isPlaying, gasCounts }
-      // removeParticles()
-      // addParticles()
+      particleCounts.current = gasCounts
+
+      console.log({ gasCounts: particleCounts.current })
+      for (let gasType = 0; gasType < particles.current.length; gasType++) {
+        const diffCount = particleCounts.current[gasType] - particles.current[gasType].length
+        if (diffCount > 0) {
+          f_addParticle(gasType, diffCount)
+        } else if (diffCount < 0) {
+          f_removeParticle(gasType, diffCount)
+        }
+      }
     } catch (error) {
-      console.warn('kkk111', { error })
+      console.warn('fail', { error })
     }
-  }, [gasCounts, activeGases, temperature])
+  }, [gasCounts])
 
   const removeParticles = () => {
     console.log('===removeParticles===')
@@ -350,20 +301,11 @@ export const ChamberF = ({
   }
   const addParticles = () => {
     console.log('===addParticles===')
-    distributionBuckets.current = [];
-    activeGases.forEach(function (gas) {
-      const buckets = generateBuckets(gas);
-      console.log('addParticles 1', { gas, buckets })
-      distributionBuckets.current.push(buckets);
-    });
 
     particles.current = drawParticles(
       activeGases,
       gasCounts,
     );
-
-    console.log('addParticles 3', { activeGases, gasCounts })
-    console.log('addParticles 4', { particles: particles.current, distributionBuckets: distributionBuckets.current })
 
     if (!particles.current) return
     particles.current.forEach(function (gasParticles) {
@@ -372,19 +314,32 @@ export const ChamberF = ({
     });
   }
 
-  const addOneParticle = (gasType: number) => {
+  const f_addParticle = (gasType: number, addCount: number) => {
+    console.log('===f_addParticle===', { gasType, addCount })
     const activeGas = activeGases[gasType]
-    const newGas = makeParticle(activeGas, 0.1)
+    const newGases: Matter.Body[] = []
+    for (let c = 0; c < addCount; c++) {
+      const newGas = makeParticle(activeGas, 21)
+      newGases.push(newGas)
+    }
     const gasParticles = particles.current[gasType]
-    console.log({gasParticles})
-    particles.current[gasType] = [...gasParticles, newGas]
-    console.log({newGas})
+    particles.current[gasType] = [...gasParticles, ...newGases]
+    console.log({ updatedParticles: particles.current[gasType] })
     if (!engine.current) return
-    Matter.Composite.add(engine.current.world, [newGas])
+    Matter.Composite.add(engine.current.world, newGases)
+  }
+
+  const f_removeParticle = (gasType: number, removeCount: number) => {
+    console.log('===f_removeParticle===', { gasType, removeCount })
+    if (!particles.current || !particles.current[gasType]) return
+    const removeParticle = particles.current[gasType].splice(-removeCount)
+    console.log({ updatedParticles: particles.current[gasType] })
+    if (!engine.current) return
+    Matter.Composite.remove(engine.current.world, removeParticle)
   }
 
   const drawWalls = () => {
-    const { Body, Bodies, Vertices } = Matter;
+    const { Bodies, Vertices } = Matter;
 
     // const vertices = [
     //   { x: 10, y: 123 },
@@ -526,22 +481,28 @@ export const ChamberF = ({
 
   const handleStart = () => {
     console.log('start button clicked ')
-    if (!runner.current || !engine.current) return
-    const Runner = Matter.Runner
-    Runner.start(runner.current, engine.current)
+    // if (!runner.current || !engine.current) return
+    // const Runner = Matter.Runner
+    // Runner.start(runner.current, engine.current)
+
+    gasSpeedRef.current = 0.1
+    console.log(particles.current)
+    console.log(particleCounts.current)
   }
   const handleStop = () => {
     console.log('start button clicked ')
-    if (!runner.current) return
-    const Runner = Matter.Runner
-    Runner.stop(runner.current)
+    // if (!runner.current) return
+    // const Runner = Matter.Runner
+    // Runner.stop(runner.current)
+
+    f_removeParticle(1, 2)
+    console.log(particles.current)
   }
   const handleEffect = () => {
     console.log('effect button clicked ')
-    // addParticles()
 
-
-    addOneParticle(1)
+    f_addParticle(1, 3)
+    console.log(particles.current)
   }
 
   return <div className={styles.chamberContainer}>
@@ -553,14 +514,14 @@ export const ChamberF = ({
     <button
       onClick={handleStart}
       style={{ position: 'absolute', top: 450 }}
-    >Test Start</button>
+    >Chamber 111</button>
     <button
       onClick={handleStop}
       style={{ position: 'absolute', top: 450, left: 80 }}
-    >Test Stop</button>
+    >Chamber 222</button>
     <button
       onClick={handleEffect}
       style={{ position: 'absolute', top: 450, left: 160 }}
-    >Test useEffect</button>
+    >Chamber 333</button>
   </div>
 }

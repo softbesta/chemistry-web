@@ -1,6 +1,6 @@
 import useAppData from "../../../hooks/useAppData"
 import styles from './kinetics.module.scss'
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import EnergyProfile from "../../../components/EnergyProfile"
 import ChartTime from "../../../components/ChartTime/ChartTime"
 import ChartBar from "../../../components/ChartBar"
@@ -267,11 +267,16 @@ const ReactionKinetics = () => {
 
   const initGasCounts = [2, 2, 1];  // ** control counts here
   const [gasCounts, setGasCounts] = useState(initGasCounts)
+  const gasCountsRef = useRef<number[]>([2, 2, 1])
+  // Speed constant used to convert between matter.js speed and meters
+  // per second (m/s)
 
   const handleGasIncrease = () => {
     const update = [...gasCounts].map(g => g + 1)
     console.log('handleGasIncrease', update)
     setGasCounts(update)
+    // gasCountsRef.current = [...gasCountsRef.current].map(g => g + 1)
+    // console.log('handleGasIncrease', {update: gasCountsRef.current})
   }
   const handleGasDecrease = () => {
     const update = [...gasCounts].map(g => g - 1)
@@ -281,11 +286,6 @@ const ReactionKinetics = () => {
   const handleTest = () => {
     console.log('handleGasIncrease', { gasCounts })
   }
-
-  const temperature = 0.01
-  // Speed constant used to convert between matter.js speed and meters
-  // per second (m/s)
-  const particleSpeed = 0.05      // ** control movespeed here
 
   // ** Beaker control variables
   const settings = new BeakerSettings(290, true)
@@ -308,6 +308,7 @@ const ReactionKinetics = () => {
   // ** Beaker Burner state ;  'false': disable Burner, 'true': active Burner
   const [isBurnerActive, setIsBurnerActive] = useState(false)
   const [valueFire, setValueFire] = useState(400)
+  const speedGas = (valueFire / 100 - 4) * 5 + 1      // ** control movespeed here  1 ~ 11
 
   // ** Control Catalyst State
   const [catShakingOrder, setCatShakingOrder] = useState<number[]>([0, 1, 2])
@@ -407,47 +408,16 @@ const ReactionKinetics = () => {
             settings={settings}
             waterlevel={waterLevel}
           />
-          {/* <ChamberF
-            width={width}
-            height={height}
-            activeGases={activeGases}
-            gasProportions={gasProportions}
-            isPlaying={isPlaying}
-            allowEscape={allowEscape}
-            escapeSpeed={escapeSpeed}
-            temperature={temperature}
-          /> */}
-          {/* <Chamber
-            {...beakerSize}
-            waterLevel={waterLevel}
-            activeGases={activeGases}
-            gasCounts={gasCounts}
-            isPlaying={true}
-            allowEscape={false}
-            escapeSpeed={1000}
-            temperature={temperature}
-          /> */}
           <ChamberF
             {...beakerSize}
             waterLevel={waterLevel}
             activeGases={activeGases}
             gasCounts={gasCounts}
-            isPlaying={true}
             allowEscape={false}
             escapeSpeed={1000}
-            temperature={temperature}
-            gasSpeed={particleSpeed}
+            gasSpeed={speedGas}
           />
         </div>
-        {/* <SliderHoriz
-          className={styles.sliderHoriz}
-          // width={300}
-          max={100}
-          distance={0}
-          values={[valueFire, 100]}
-          setValues={(val) => setValueFire(val[0])}
-          showThumbIndex={[2, 0]}
-        /> */}
         <Burner
           isActive={isBurnerActive}
           min={400}
@@ -474,14 +444,6 @@ const ReactionKinetics = () => {
     </div>
     <div className={styles.reactionContentContainer}>
       <div className={styles.reactionChartRow}>
-        {/* <button onClick={() => {
-          console.log({chartTimingState: chartTimingState + 1})
-          setChartTimingState(v => v + 1)
-        }}>Test start</button>
-        <button onClick={() => {
-          console.log({chartTimingState: chartTimingState - 1})
-          setChartTimingState(v => v - 1)
-        }}>Test stop</button> */}
         <div className={styles.chartInA}>
           <EnergyProfileRateChart
             {...graphChartSize}
