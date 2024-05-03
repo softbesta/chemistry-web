@@ -278,13 +278,16 @@ export const ChamberF = ({
   }, [])
 
   useEffect(() => {
-    // log_ChamberF && console.log('===ChamberF.useEffect 222===')
+    console.log('----------------')
+    log_ChamberF && console.log('===ChamberF.useEffect 222===')
     try {
       particleCounts.current = gasCounts
 
-      log_ChamberF && console.log({ gasCounts: particleCounts.current })
+      log_ChamberF && console.log({ particleCounts: particleCounts.current, particles: particles.current })
       for (let gasType = 0; gasType < particles.current.length; gasType++) {
-        const diffCount = particleCounts.current[gasType] - particles.current[gasType].length
+        const diffCount = (particleCounts.current[gasType] || 0) - (particles.current[gasType].length || 0)
+
+        console.log({gasType, diffCount}, particleCounts.current[gasType], particles.current[gasType].length)
         if (diffCount > 0) {
           f_addParticle(gasType, diffCount)
         } else if (diffCount < 0) {

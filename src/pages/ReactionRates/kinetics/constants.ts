@@ -329,24 +329,31 @@ export const stepsActions = [
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
     energyProfileChartState: 0,
+    initGasCounts: true,
+    // activeDotIndex: 0,
   },
   // 1   We now know that the concentration ...
   { // 1
     canvaTimeState: 0,
     canvaBeakerState: 1,
-    isBurnerActive: true,
+    isEnableChooseMenu: false,
+    isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
+    energyProfileChartState: 0,
+    initGasCounts: true,
   },
   // 2   It states that the reaction, ...
   { // 2
     canvaTimeState: 1,
     canvaBeakerState: 1,
-    isBurnerActive: true,
+    isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
+    energyProfileChartState: 0,
+    initGasCounts: true,
   },
   // 3   This minimum amount of...
   { // 3
@@ -356,6 +363,8 @@ export const stepsActions = [
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
+    energyProfileChartState: 0,
+    initGasCounts: true,
   },
   // 4   But how is the temperature...
   { // 4
@@ -365,6 +374,8 @@ export const stepsActions = [
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
+    energyProfileChartState: 0,
+    initGasCounts: true,
   },
   // 5   k is the rate constant...
   { // 5
@@ -374,6 +385,8 @@ export const stepsActions = [
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
+    energyProfileChartState: 0,
+    initGasCounts: true,
   },
   // 6   As you can tell by the equation....
   { // 6
@@ -383,6 +396,8 @@ export const stepsActions = [
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
+    energyProfileChartState: 0,
+    initGasCounts: true,
   },
   // 7   When applying logarithmic...
   { // 7
@@ -392,7 +407,8 @@ export const stepsActions = [
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
-    // isEnableChooseMenu: false,
+    energyProfileChartState: 0,
+    initGasCounts: true,
   },
   // 8   If the linear equation...
   { // 8
@@ -402,6 +418,8 @@ export const stepsActions = [
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
+    energyProfileChartState: 0,
+    initGasCounts: true,
   },
   // 9   For this reaction, **E__a__...
   { // 9
@@ -411,6 +429,8 @@ export const stepsActions = [
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
+    energyProfileChartState: 0,
+    initGasCounts: true,
   },
   // 10   One way to depict the reaction ...
   { // 10
@@ -420,6 +440,8 @@ export const stepsActions = [
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
+    energyProfileChartState: 0,
+    initGasCounts: true,
   },
   // 11   This is an **exothermic reaction...
   { // 11
@@ -429,6 +451,8 @@ export const stepsActions = [
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
+    energyProfileChartState: 0,
+    initGasCounts: true,
   },
   // 12   The hump or bell in the ...
   { // 12
@@ -438,7 +462,8 @@ export const stepsActions = [
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
-    // isEnableChooseMenu: false,
+    energyProfileChartState: 0,
+    initGasCounts: true,
   },
   // 13   There's a way to reduce... 
   { // 13
@@ -448,8 +473,8 @@ export const stepsActions = [
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
-    activeDotIndex: 0,
-    // isEnableChooseMenu: true,
+    energyProfileChartState: 0,
+    initGasCounts: true,
   },
   // 14   Let's try that out! ...
   { // 14
@@ -459,8 +484,8 @@ export const stepsActions = [
     catalystItemStates: [4, 4, 4],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: false,
-    activeDotIndex: 1,
-    // isEnableChooseMenu: false,
+    energyProfileChartState: 0,
+    initGasCounts: true,
   },
   // 15   Perfect! Now shake the catalyst ...
   { // 15
@@ -470,6 +495,8 @@ export const stepsActions = [
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 0,
     showCatalystMoveItem: true,
+    energyProfileChartState: 0,
+    initGasCounts: true,
   },
   // 16   Look! The E__a__ was reduced  ...
   { // 16
@@ -479,6 +506,8 @@ export const stepsActions = [
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
     showCatalystMoveItem: false,
+    energyProfileChartState: 2,
+    initGasCounts: false,
   },
   // 17   Take a look at the linear  ...
   { // 17
@@ -488,7 +517,8 @@ export const stepsActions = [
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
     showCatalystMoveItem: false,
-    // isEnableChooseMenu: false,
+    energyProfileChartState: 2,
+    initGasCounts: false,
   },
   // 18   Points of that graph are ...
   { // 18
@@ -498,8 +528,8 @@ export const stepsActions = [
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
     showCatalystMoveItem: false,
-    activeDotIndex: 1,
-    // isEnableChooseMenu: true,
+    energyProfileChartState: 2,
+    initGasCounts: false,
   },
   // 19   Let's try to produce C....
   { // 19
@@ -509,8 +539,8 @@ export const stepsActions = [
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
     showCatalystMoveItem: false,
-    activeDotIndex: 2,
-    // isEnableChooseMenu: false,
+    energyProfileChartState: 2,
+    initGasCounts: false,
   },
   // 20   Perfect! Successful collisions ...
   { // 20
@@ -520,6 +550,8 @@ export const stepsActions = [
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
     showCatalystMoveItem: false,
+    energyProfileChartState: 2,
+    initGasCounts: false,
   },
   // 21   It's all done! All of ...
   { // 21
@@ -529,6 +561,8 @@ export const stepsActions = [
     catalystItemStates: [4, 4, 4],
     curCatShakingOrderIdx: 1,
     showCatalystMoveItem: false,
+    energyProfileChartState: 2,
+    initGasCounts: false,
   },
   // 22   Let's try that out! ...
   { // 22
@@ -538,6 +572,8 @@ export const stepsActions = [
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
     showCatalystMoveItem: true,
+    energyProfileChartState: 0,
+    initGasCounts: true,
   },
   // 23   Perfect! Now shake the ...
   { // 23
@@ -547,6 +583,8 @@ export const stepsActions = [
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 2,
     showCatalystMoveItem: false,
+    energyProfileChartState: 0,
+    initGasCounts: false,
   },
   // 24   Look! The E__a__ was ...
   { // 24
@@ -556,6 +594,8 @@ export const stepsActions = [
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 2,
     showCatalystMoveItem: false,
+    energyProfileChartState: 2,
+    initGasCounts: false,
   },
   // 25   Let's try to produce C ...
   { // 25
@@ -565,6 +605,8 @@ export const stepsActions = [
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 2,
     showCatalystMoveItem: false,
+    energyProfileChartState: 2,
+    initGasCounts: false,
   },
   // 26   Perfect! Successful collisions ...
   { // 26
@@ -574,6 +616,8 @@ export const stepsActions = [
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 2,
     showCatalystMoveItem: false,
+    energyProfileChartState: 2,
+    initGasCounts: false,
   },
   // 27   It's all done! All of ...
   { // 27
@@ -583,6 +627,8 @@ export const stepsActions = [
     catalystItemStates: [4, 4, 4],
     curCatShakingOrderIdx: 2,
     showCatalystMoveItem: false,
+    energyProfileChartState: 2,
+    initGasCounts: false,
   },
   // 28   Let's try that out! ...
   { // 28
@@ -592,6 +638,8 @@ export const stepsActions = [
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 2,
     showCatalystMoveItem: true,
+    energyProfileChartState: 0,
+    initGasCounts: true,
   },
   // 29   Look! The E__a__ was ...
   { // 29
@@ -601,6 +649,8 @@ export const stepsActions = [
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 3,
     showCatalystMoveItem: false,
+    energyProfileChartState: 2,
+    initGasCounts: false,
   },
   // 30   Let's try to produce ...
   { // 30
@@ -610,6 +660,8 @@ export const stepsActions = [
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 3,
     showCatalystMoveItem: false,
+    energyProfileChartState: 2,
+    initGasCounts: false,
   },
   // 31   Perfect! Successful collisions ...
   { // 31
@@ -619,6 +671,8 @@ export const stepsActions = [
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 3,
     showCatalystMoveItem: false,
+    energyProfileChartState: 2,
+    initGasCounts: false,
   },
   // 32   It's all done! All of ...
   { // 32
@@ -628,6 +682,8 @@ export const stepsActions = [
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 3,
     showCatalystMoveItem: false,
+    energyProfileChartState: 2,
+    initGasCounts: false,
   },
 ]
 

@@ -117,6 +117,16 @@ const ReactionKinetics = () => {
       if (curActions?.energyProfileChartState !== undefined) {
         setEnergyProfileChartState(curActions.energyProfileChartState)
       }
+
+      if (curActions?.initGasCounts) {
+        setGasCounts(initGasCounts)
+      } else {
+        const update = [...initGasCounts]
+        const gasType = catShakingOrder[curActions.curCatShakingOrderIdx - 1] + 2
+        update[gasType] = 7
+        console.log('000 gas updated', { update, Action_CurCatShakingOrderIdx: curActions.curCatShakingOrderIdx })
+        setGasCounts(update)
+      }
     }
   }, [curStep, curActions])
 
@@ -275,18 +285,21 @@ const ReactionKinetics = () => {
   const beakerGasSpeed = (valueFire / 100 - 4) * 5 + 1      // ** control Gas Speed here  1-11
 
   const handleGasIncrease = () => {
-    const update = [...gasCounts].map(g => g + 1)
+    const update = [...gasCounts]
+    update[3] = 10
     // log_Kinetics && console.log('handleGasIncrease', update)
-    setGasCounts(update)
+    // setGasCounts(update)
   }
   const handleGasDecrease = () => {
-    const update = [...gasCounts].map(g => g - 1)
+    const update = [...initGasCounts]
+    update[3] = 0
     // log_Kinetics && console.log('handleGasIncrease', update)
-    setGasCounts(update)
+    // setGasCounts(update)
   }
   const handleTest = () => {
     // log_Kinetics && console.log('handleGasIncrease', { gasCounts })
-    setGasCounts(initGasCounts)
+    // setGasCounts([...initGasCounts])
+    console.log({ gasCounts })
   }
 
   // ** Beaker control variables
