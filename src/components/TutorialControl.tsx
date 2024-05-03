@@ -1,6 +1,7 @@
 import styles from './TutorialControl.module.scss'
 import ImgBeacky from '../assets/ReactionRates/reaction_boxes/beaky.png'
 import Buttons from './Buttons/Buttons'
+import SpeechBubble from './SpeechBubble'
 
 interface TutorialControlProps {
   turText: string[]
@@ -20,6 +21,10 @@ const TutorialControl = ({
       id='tur_tutorialText'
       className={styles.tutorialTextContainer}
     >
+      <SpeechBubble
+        width={300}
+        height={250}
+      />
       <div className={styles.tutorialText}>
         {turText?.map((val, index) => <div
           key={index}
