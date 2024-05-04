@@ -11,7 +11,7 @@ import { maxStep_Kinetics, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Te
 import useFunctions from "../../../hooks/useFunctions"
 import { ChooseMenuSel } from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
-import { dotColorList, sliderVertText } from "../../../constants"
+import { dotCatalystColors, dotColorList, sliderVertText } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
 import ChartInA from "../../../components/ChartInA/ChartInA"
 import { convertExpToHtml } from "../../../helper/functions"
@@ -34,6 +34,7 @@ import EnergyProfileChart from "../../../components/EnergyProfileChart/EnergyPro
 import { EnergyRateChartSettings, ReactionOrder } from "../../../components/EnergyProfileChart"
 import { EnergyProfileChatInput } from "../../../components/EnergyProfileChart/EnergyProfileChartInput"
 import EnergyProfileRateChart from "../../../components/EnergyProfileRateChart/EnergyProfileRateChart"
+import { dotKineticsColors } from "../constants"
 
 const log_Kinetics = true
 
@@ -69,6 +70,9 @@ const ReactionKinetics = () => {
 
   const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
 
+  const [chooseMenuIndex, setChooseMenuIndex] = useState(0)
+  const [isDisableNextButton, setIsDisableNextButton] = useState<boolean>(false)
+
   // *** Setup tutorial actions here
   const tutorials = Array.from(Array(tur_Text.length).keys()).map(idx => {
     return {
@@ -81,7 +85,7 @@ const ReactionKinetics = () => {
   // *** Tutorial-ACTIONS  - curStep changes
   const curActions = tutorials[curStep]?.actions as any
   useEffect(() => {
-    log_Kinetics && console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep })
+    log_Kinetics && console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep, curActions })
     // log_Kinetics && console.log('curActions: ', { curActions, curStep })
     if (curActions) {
       if (curActions?.canvaTimeState !== undefined) {
@@ -120,6 +124,10 @@ const ReactionKinetics = () => {
       if (curActions?.valueFire !== undefined) {
         setValueFire(curActions.valueFire)
       }
+      console.log(curActions?.isDisableNextButton)
+      if (curActions?.isDisableNextButton !== undefined) {
+        setIsDisableNextButton(curActions.isDisableNextButton)
+      }
 
       if (curActions?.initGasCounts) {
         setGasCounts(initGasCounts)
@@ -127,7 +135,6 @@ const ReactionKinetics = () => {
         const update = [...initGasCounts]
         const gasType = catShakingOrder[curActions.curCatShakingOrderIdx - 1] + 2
         update[gasType] = 7
-        console.log('000 gas updated', { update, Action_CurCatShakingOrderIdx: curActions.curCatShakingOrderIdx })
         setGasCounts(update)
       }
     }
@@ -241,8 +248,9 @@ const ReactionKinetics = () => {
   const initActiveGases = [
     {
       id: 1,
-      particleSize: 4.5,  // ** control gas cirle size
-      color: 0x00d0f0,  // ** control gas color
+      particleSize: 4.5,  // ** control gas cirle sizez
+      color: dotKineticsColors[chooseMenuIndex][0],  // ** control gas color
+
       // name: 'Oxygen',
       // symbol: <>O<sub>2</sub></>,
       // svgSymbol: <>O<tspan baselineShift="sub">2</tspan></>,
@@ -252,7 +260,8 @@ const ReactionKinetics = () => {
     {
       id: 2,
       particleSize: 4.5,  // ** control gas cirle size
-      color: 0xff0000,  // ** control gas color
+      color: dotKineticsColors[chooseMenuIndex][1],  // ** control gas color
+
       // name: 'Hydrogen',
       // symbol: <>H<sub>2</sub></>,
       // svgSymbol: <>H<tspan baselineShift="sub">2</tspan></>,
@@ -262,21 +271,21 @@ const ReactionKinetics = () => {
     {
       id: 10,
       particleSize: 4,
-      color: 0xef519d,
+      color: dotCatalystColors[0],
       mass: 1,
       particleType: 'pentagon',
     },
     {
       id: 11,
       particleSize: 4,
-      color: 0xffee55,
+      color: dotCatalystColors[1],
       mass: 1,
       particleType: 'pentagon',
     },
     {
       id: 12,
       particleSize: 4,
-      color: 0x88e9ff,
+      color: dotCatalystColors[2],
       mass: 1,
       particleType: 'pentagon',
     }
@@ -288,21 +297,15 @@ const ReactionKinetics = () => {
   const beakerGasSpeed = (valueFire / 100 - 4) * 5 + 1      // ** control Gas Speed here  1-11
 
   const handleGasIncrease = () => {
-    const update = [...gasCounts]
-    update[3] = 10
-    // log_Kinetics && console.log('handleGasIncrease', update)
-    // setGasCounts(update)
+    // setGasCounts([5, 5])
+    setCanvaBeakerState(0)
   }
   const handleGasDecrease = () => {
-    const update = [...initGasCounts]
-    update[3] = 0
-    // log_Kinetics && console.log('handleGasIncrease', update)
-    // setGasCounts(update)
+    // setGasCounts([10, 10])
+    setCanvaBeakerState(1)
   }
   const handleTest = () => {
-    // log_Kinetics && console.log('handleGasIncrease', { gasCounts })
-    // setGasCounts([...initGasCounts])
-    console.log({ gasCounts })
+    setCanvaBeakerState(2)
   }
 
   // ** Beaker control variables
@@ -391,8 +394,6 @@ const ReactionKinetics = () => {
 
   const [chartTimingState, setChartTimingState] = useState(0)
 
-  const [chooseMenuIndex, setChooseMenuIndex] = useState(0)
-
   // ** EnergyProfileChart variables.
   const energyProfileInput = new EnergyProfileChatInput(ReactionOrder[chooseMenuIndex], valueFire, chooseMenuIndex + 1)
   const [energyProfileChartState, setEnergyProfileChartState] = useState(0)
@@ -440,6 +441,11 @@ const ReactionKinetics = () => {
             allowEscape={false}
             escapeSpeed={1000}
             gasSpeed={beakerGasSpeed}
+
+            beakerState={canvaBeakerState}
+            beakerColors={dotKineticsColors[chooseMenuIndex]}
+            onMiddlePlay={() => { onStepChange(1) }}
+            onEndPlay={() => { onStepChange(1) }}
           />
         </div>
         <Burner
@@ -460,7 +466,7 @@ const ReactionKinetics = () => {
           onEndPlay={() => onStepChange(1)}
         /> */}
       </div>
-      {/* <div style={{ position: 'relative', top: 50 }}>
+      {/* <div style={{ position: 'relative', top: 80 }}>
         <button onClick={handleGasIncrease}>GasDecrease</button>
         <button onClick={handleGasDecrease}>GasDecrease</button>
         <button onClick={handleTest}>Test</button>
@@ -549,7 +555,7 @@ const ReactionKinetics = () => {
         <TutorialControl
           turText={getTurTextByStep()}
           onStepChange={onStepChange}
-          isDisableNextButton={false}
+          isDisableNextButton={isDisableNextButton}
         />
       </div>
     </div>

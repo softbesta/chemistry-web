@@ -153,3 +153,47 @@ export const getRandom = (a: number, b: number) => {
   const r = Math.random() * (max - min) + min
   return r
 }
+
+// Similar function with above 'generateEnergyArray()'
+// input: arr = [false, false, true, false, true, false], percentage = 50
+// result:      [false,  true, true, false, true, false]
+// percentage -> 0 : goes to false array,   percentage -> 100 : goes to true array.
+export const generateBinaryArr = (arr: boolean[], percentage: number) => {
+  const len = arr.length
+  const finalCount = Math.floor(len * Math.min(percentage, 100) / 100)
+  const originCount = arr.reduce((res, cur) => res + (cur ? 1 : 0), 0)
+  const updateCount = finalCount - originCount
+  const update = [...arr]
+  const arrIdx: number[] = []  // array indexrd which can be updated.
+
+  if (updateCount > 0) {
+    update.forEach((item, index) => {
+      if (item === false) {
+        arrIdx.push(index)
+      }
+    })
+
+    Array(Math.abs(updateCount)).fill(0).forEach(() => {
+      if (arrIdx.length <= 0) return
+      // rand: array's index number to be updated.
+      const rand = Math.floor(Math.random() * arrIdx.length)
+      const idx = arrIdx.splice(rand, 1)[0]
+      update[idx] = true
+    })
+  } else if (updateCount < 0) {
+    update.forEach((item, index) => {
+      if (item === true) {
+        arrIdx.push(index)
+      }
+    })
+
+    Array(Math.abs(updateCount)).fill(0).forEach(() => {
+      if (arrIdx.length <= 0) return
+      // rand: array's index number to be updated.
+      const rand = Math.floor(Math.random() * arrIdx.length)
+      const idx = arrIdx.splice(rand, 1)[0]
+      update[idx] = false
+    })
+  }
+  return update
+}

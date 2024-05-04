@@ -13,3 +13,9 @@ export const dotColors = {
   primaryLightBlue: 'rgb(169, 204, 229)',
   primaryDarkBlue: 'rgb(97, 147, 201)',
 }
+
+export const dotKineticsColors = [
+  [dotColors.A, dotColors.B, dotColors.C],
+  [dotColors.D, dotColors.E, dotColors.F],
+  [dotColors.G, dotColors.H, dotColors.I],
+]

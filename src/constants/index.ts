@@ -227,9 +227,19 @@ export const themeColors = {
   bgE: 'rgba(156, 109, 138, 0.05)',
   bgF: 'rgba(27, 153, 139, 0.05)',
   grey: 'rgba(209, 209, 214, 0.8)',
+  kA: 'rgb(0, 208, 240)',
+  kB: 'rgb(255, 0, 0)',
+  kC: 'rgb(0, 0, 0)',
+  kD: 'rgb(255, 222, 0)',
+  kE: 'rgb(255, 0, 0)',
+  kF: 'rgb(0, 208, 240)',
+  kR: 'rgb(225, 132, 19)',
+  catalystA: 'rgb(239, 81, 157)',
+  catalystB: 'rgb(255, 238, 85)',
+  catalystC: 'rgb(136, 233, 255)',
 }
 export const dotColors = [
-                     // dot Index
+  // dot Index
   themeColors.none,  // 0
   themeColors.A,     // 1
   themeColors.B,     // 2
@@ -239,7 +249,7 @@ export const dotColors = [
   themeColors.F,     // 6
 ]
 export const dotBgColors = [
-                     // dot Index
+  // dot Index
   themeColors.none,  // 0
   themeColors.bgA,   // 1
   themeColors.bgB,   // 2
@@ -253,6 +263,12 @@ export const dotColorList = [
   [themeColors.none, themeColors.C, themeColors.D], // C to D
   [themeColors.none, themeColors.E, themeColors.F], // E to F
 ]
+export const dotCatalystColors = [
+  themeColors.catalystA,
+  themeColors.catalystB,
+  themeColors.catalystC,
+]
+
 export const sliderVertText = [
   'A', 'C', 'E'
 ]

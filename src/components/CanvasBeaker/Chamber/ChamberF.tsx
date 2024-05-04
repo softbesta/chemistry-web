@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import Matter from 'matter-js';
 import Color from 'color';
 import styles from './Chamber.module.scss'
-import { getRandom } from '../../../helper/functions';
+import { generateBinaryArr, getRandom } from '../../../helper/functions';
 
-const log_ChamberF = false
+const log_ChamberF = true
 
 interface ChamberFProps {
   width: number,
@@ -17,6 +17,11 @@ interface ChamberFProps {
   waterLevel?: number,
   gasCounts: number[],
   gasSpeed: number,
+
+  beakerState: number,
+  beakerColors: string[],
+  onMiddlePlay?: () => void
+  onEndPlay?: () => void
 }
 export const ChamberF = ({
   width,
@@ -27,6 +32,11 @@ export const ChamberF = ({
   waterLevel = 0.4,
   gasCounts,
   gasSpeed,
+
+  beakerState,
+  beakerColors,
+  onMiddlePlay,
+  onEndPlay,
 }: ChamberFProps) => {
 
   const margin = 100
@@ -39,10 +49,23 @@ export const ChamberF = ({
   const particles = useRef<any[]>([])
   const particleCounts = useRef<number[]>(gasCounts)
   const gasSpeedRef = useRef<number>(gasSpeed / 50)
+  const gasColorsRef = useRef<string[]>(beakerColors)
+
+  const gasConvPercent = useRef<number>(0)
+  const isConvOverMiddle = useRef<boolean>(false)
+  const initGasConvArr: boolean[] = Array.from(Array((gasCounts[0] + gasCounts[1]) || 0).fill(false))
+  // const finalGasConvArr: boolean[] = Array.from(Array((gasCounts[0] + gasCounts[1]) || 0).fill(false))
+  const gasConvArr = useRef<boolean[]>(initGasConvArr)
+
+  log_ChamberF && console.log({ activeGases, gasSpeed, gasConvPercent: gasConvPercent.current })
 
   useEffect(() => {
     gasSpeedRef.current = gasSpeed / 50
   }, [gasSpeed])
+  useEffect(() => {
+    gasColorsRef.current = beakerColors
+    updateParticleStyle()
+  }, [beakerColors])
 
   /**
    * Adjust each particle's speed to keep the distributions even as
@@ -80,7 +103,6 @@ export const ChamberF = ({
       }
     }
   }
-
   const updateParticleSpeed = function (p: any, molecularSpeed: any) {
     p.molecularSpeed = molecularSpeed;
 
@@ -93,6 +115,8 @@ export const ChamberF = ({
     });
   };
 
+
+  // Initialize speed & direction
   const isParticleAboveEscapeSpeed = function (particle: any, escapeSpeed: any) {
     // Convert matter.js speed back to the meters per second (m/s)
     // unit we're using in the graph.
@@ -107,7 +131,6 @@ export const ChamberF = ({
 
     return molecularSpeed >= escapeSpeed;
   };
-
   const makeParticle = (gas: any, molecularSpeed: number, isDroppedElem: boolean = false) => {
     const particleColor = Color(gas.color);
 
@@ -192,7 +215,6 @@ export const ChamberF = ({
 
     return p;
   }
-
   const drawParticles = (activeGases: any[] = [], gasCounts: any[] = []) => {
     const particles: any[] = [];
 
@@ -214,6 +236,26 @@ export const ChamberF = ({
     return particles;
   }
 
+  // Update particle style
+  const updateParticleStyle = () => {
+
+    if (particles.current.length <= 0) return
+    for (let idx = 0; idx < gasConvArr.current.length; idx++) {
+      const partGroup0 = particles.current[0]
+      const partGroup1 = particles.current[1]
+      if (idx < partGroup0.length) {
+        const color = gasConvArr.current[idx] ? gasColorsRef.current[2] : gasColorsRef.current[0]
+        partGroup0[idx].render.fillStyle = color
+      } else if (idx < partGroup0.length + partGroup1.length) {
+        const idx1 = idx - partGroup0.length
+        const color = gasConvArr.current[idx] ? gasColorsRef.current[2] : gasColorsRef.current[1]
+        partGroup1[idx1].render.fillStyle = color
+      }
+    }
+
+  }
+
+  // initalizing elements to move.
   useEffect(() => {
     if (!elemRef.current) return
 
@@ -266,19 +308,30 @@ export const ChamberF = ({
       Matter.Events.on(engine.current, 'afterUpdate', function (e) {
         // log_ChamberF && console.log('F===Matter.Events.afterUpdate===')
         const _e = e as Matter.IEventTimestamped<Matter.Engine>
-        if (_e.timestamp >= counter1 + 200) {
+        if (_e.timestamp >= counter1 + 500) {
           refreshParticleSpeedDistribution();
           counter1 = _e.timestamp;
         }
+
       });
+      let counter2 = 0;
+      Matter.Events.on(engine.current, 'beforeUpdate', function (_e) {
+        if (_e.timestamp >= counter2 + 500) {
+
+          // log_ChamberF && console.log('===beforeUpdate===', _e.timestamp)
+          updateParticleStyle()
+          counter2 = _e.timestamp;
+        }
+      })
       Runner.start(runner.current, engine.current)
     } catch (error) {
       console.error('aaa111', { error })
     }
   }, [])
 
+  // update element counts
   useEffect(() => {
-    console.log('----------------')
+    log_ChamberF && console.log('----------------')
     log_ChamberF && console.log('===ChamberF.useEffect 222===')
     try {
       particleCounts.current = gasCounts
@@ -287,7 +340,7 @@ export const ChamberF = ({
       for (let gasType = 0; gasType < particles.current.length; gasType++) {
         const diffCount = (particleCounts.current[gasType] || 0) - (particles.current[gasType].length || 0)
 
-        console.log({gasType, diffCount}, particleCounts.current[gasType], particles.current[gasType].length)
+        log_ChamberF && console.log({ gasType, diffCount }, particleCounts.current[gasType], particles.current[gasType].length)
         if (diffCount > 0) {
           f_addParticle(gasType, diffCount)
         } else if (diffCount < 0) {
@@ -298,6 +351,80 @@ export const ChamberF = ({
       console.warn('fail', { error })
     }
   }, [gasCounts])
+
+  const [timeCounter, setTimeCounter] = useState<number>(0)
+  const framesPerSecond = 2
+  const intervalTime = 1 / framesPerSecond
+
+  const timerID = useRef<NodeJS.Timer>()
+  const startTimer = () => {
+    stopTimer()
+    setTimeCounter(0)
+    timerID.current = setInterval(() => {
+      setTimeCounter(v => v += intervalTime)
+    }, intervalTime * 1000)
+    log_ChamberF && console.log('started', timerID.current)
+  }
+  const stopTimer = () => {
+    if (timerID.current) {
+      clearInterval(timerID.current)
+      timerID.current = undefined
+      log_ChamberF && console.log('timer end')
+    }
+  }
+
+  useEffect(() => {
+    log_ChamberF && console.log({ beakerState })
+    if (beakerState === 1) {
+      // setEnergyDots(beakerDots.current)
+      gasConvPercent.current = 0
+      isConvOverMiddle.current = false
+
+      gasConvArr.current = initGasConvArr
+      startTimer()
+      return
+    } else {
+      stopTimer()
+    }
+    if (beakerState === 0) {
+      gasConvPercent.current = 0
+      isConvOverMiddle.current = false
+      gasConvArr.current = initGasConvArr
+      updateParticleStyle()
+    } else if (beakerState === 2) {
+      gasConvPercent.current = 100
+      isConvOverMiddle.current = true
+      gasConvArr.current = generateBinaryArr(initGasConvArr, 100)
+      updateParticleStyle()
+    }
+    return () => stopTimer()
+  }, [beakerState])
+
+  useEffect(() => {
+    // check timer
+    if (gasConvPercent.current >= 30) {
+      if (!isConvOverMiddle.current) {
+        isConvOverMiddle.current = true
+        onMiddlePlay?.()
+        return
+      }
+    }
+    if (gasConvPercent.current >= 100) {
+      // animation ends
+      stopTimer()
+      onEndPlay?.()
+      return
+    }
+    log_ChamberF && console.log('timer count', { timeCounter, beakerState })
+
+    // animation play actions here.
+    log_ChamberF && console.log('timer: ', { timeCounter })
+    if (gasConvPercent.current < 100) {
+      gasConvPercent.current = Math.min(gasConvPercent.current + (gasSpeed * gasSpeed) / 15, 100)
+      gasConvArr.current = generateBinaryArr(gasConvArr.current, gasConvPercent.current)
+    }
+  }, [timeCounter])
+
 
   const removeParticles = () => {
     log_ChamberF && console.log('===removeParticles===')
@@ -339,7 +466,7 @@ export const ChamberF = ({
   }
 
   const f_removeParticle = (gasType: number, removeCount: number) => {
-    log_ChamberF && console.log({gasType, removeCount})
+    log_ChamberF && console.log({ gasType, removeCount })
     log_ChamberF && console.log('===f_removeParticle===', { gasType, removeCount })
     if (!particles.current || !particles.current[gasType]) return
     const removeParticle = particles.current[gasType].splice(-removeCount)
@@ -489,30 +616,42 @@ export const ChamberF = ({
     ];
   }
 
-  const handleStart = () => {
+  const chamber111 = () => {
     log_ChamberF && console.log('start button clicked ')
     // if (!runner.current || !engine.current) return
     // const Runner = Matter.Runner
     // Runner.start(runner.current, engine.current)
 
-    gasSpeedRef.current = 0.1
-    log_ChamberF && console.log(particles.current)
-    log_ChamberF && console.log(particleCounts.current)
+    // gasSpeedRef.current = 0.1
+    // log_ChamberF && console.log(particles.current)
+    // log_ChamberF && console.log(particleCounts.current)
+
+
+    log_ChamberF && console.log(beakerColors)
   }
-  const handleStop = () => {
+  const chamber222 = () => {
     log_ChamberF && console.log('start button clicked ')
     // if (!runner.current) return
     // const Runner = Matter.Runner
     // Runner.stop(runner.current)
 
-    f_removeParticle(1, 2)
-    log_ChamberF && console.log(particles.current)
+    // f_removeParticle(1, 2)
+    // log_ChamberF && console.log(particles.current)
+
+
+    log_ChamberF && console.log(beakerColors)
   }
-  const handleEffect = () => {
+  const chamber333 = () => {
     log_ChamberF && console.log('effect button clicked ')
 
-    f_addParticle(1, 3)
-    log_ChamberF && console.log(particles.current)
+    // f_addParticle(1, 3)
+    // log_ChamberF && console.log(particles.current)
+
+
+
+    // updateParticleStyle()
+
+
   }
 
   return <div className={styles.chamberContainer}>
@@ -522,16 +661,16 @@ export const ChamberF = ({
       style={{ position: 'absolute', top: 0 }}
     />
     {/* <button
-      onClick={handleStart}
-      style={{ position: 'absolute', top: 450 }}
+      onClick={chamber111}
+      style={{ position: 'absolute', top: 380 }}
     >Chamber 111</button>
     <button
-      onClick={handleStop}
-      style={{ position: 'absolute', top: 450, left: 80 }}
+      onClick={chamber222}
+      style={{ position: 'absolute', top: 380, left: 80 }}
     >Chamber 222</button>
     <button
-      onClick={handleEffect}
-      style={{ position: 'absolute', top: 450, left: 160 }}
+      onClick={chamber333}
+      style={{ position: 'absolute', top: 380, left: 160 }}
     >Chamber 333</button> */}
   </div>
 }
