@@ -330,6 +330,7 @@ export const stepsActions = [
     showCatalystMoveItem: false,
     energyProfileChartState: 0,
     initGasCounts: true,
+    valueFire: 420,
     // activeDotIndex: 0,
   },
   // 1   We now know that the concentration ...
@@ -541,6 +542,7 @@ export const stepsActions = [
     showCatalystMoveItem: false,
     energyProfileChartState: 2,
     initGasCounts: false,
+    valueFire: 420,
   },
   // 20   Perfect! Successful collisions ...
   { // 20
@@ -558,7 +560,7 @@ export const stepsActions = [
     canvaTimeState: 2,
     canvaBeakerState: 2,
     isBurnerActive: true,
-    catalystItemStates: [4, 4, 4],
+    catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
     showCatalystMoveItem: false,
     energyProfileChartState: 2,
@@ -569,11 +571,12 @@ export const stepsActions = [
     canvaTimeState: 3,
     canvaBeakerState: 3,
     isBurnerActive: false,
-    catalystItemStates: [3, 3, 3],
+    catalystItemStates: [4, 4, 4],
     curCatShakingOrderIdx: 1,
-    showCatalystMoveItem: true,
+    showCatalystMoveItem: false,
     energyProfileChartState: 0,
     initGasCounts: true,
+    valueFire: 420,
   },
   // 23   Perfect! Now shake the ...
   { // 23
@@ -581,10 +584,10 @@ export const stepsActions = [
     canvaBeakerState: 3,
     isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
-    curCatShakingOrderIdx: 2,
-    showCatalystMoveItem: false,
+    curCatShakingOrderIdx: 1,
+    showCatalystMoveItem: true,
     energyProfileChartState: 0,
-    initGasCounts: false,
+    initGasCounts: true,
   },
   // 24   Look! The E__a__ was ...
   { // 24
@@ -607,6 +610,7 @@ export const stepsActions = [
     showCatalystMoveItem: false,
     energyProfileChartState: 2,
     initGasCounts: false,
+    valueFire: 420,
   },
   // 26   Perfect! Successful collisions ...
   { // 26
@@ -651,6 +655,7 @@ export const stepsActions = [
     showCatalystMoveItem: false,
     energyProfileChartState: 2,
     initGasCounts: false,
+    valueFire: 420,
   },
   // 30   Let's try to produce ...
   { // 30
@@ -662,6 +667,7 @@ export const stepsActions = [
     showCatalystMoveItem: false,
     energyProfileChartState: 2,
     initGasCounts: false,
+    valueFire: 420,
   },
   // 31   Perfect! Successful collisions ...
   { // 31

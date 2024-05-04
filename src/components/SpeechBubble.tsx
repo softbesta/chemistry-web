@@ -45,7 +45,11 @@ const SpeechBubble = (props: BeakerTicksProps) => {
   })
 
   return (
-    <div style={{ position: 'absolute' }}>
+    <div style={{
+      position: 'absolute',
+      width: '350px',
+      overflow: 'hidden',
+    }}>
       <canvas ref={canvas1} height={height} width={width} />
       <canvas ref={canvas} height={height} width={width} />
     </div>

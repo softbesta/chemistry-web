@@ -117,6 +117,9 @@ const ReactionKinetics = () => {
       if (curActions?.energyProfileChartState !== undefined) {
         setEnergyProfileChartState(curActions.energyProfileChartState)
       }
+      if (curActions?.valueFire !== undefined) {
+        setValueFire(curActions.valueFire)
+      }
 
       if (curActions?.initGasCounts) {
         setGasCounts(initGasCounts)
@@ -232,7 +235,7 @@ const ReactionKinetics = () => {
 
   // ** Beaker Burner state ;  'false': disable Burner, 'true': active Burner
   const [isBurnerActive, setIsBurnerActive] = useState(false)
-  const [valueFire, setValueFire] = useState(400)
+  const [valueFire, setValueFire] = useState(400) // [400 - 600]
 
   // ** Chamber control variables
   const initActiveGases = [
@@ -324,7 +327,7 @@ const ReactionKinetics = () => {
   const [catShakingOrder, setCatShakingOrder] = useState<number[]>([0, 1, 2])
   const [curCatShakingOrderIdx, setCurCatShakingOrderIdx] = useState<number>(0)
   const [showCatalystMoveItem, setShowCatalystMoveItem] = useState<boolean>(false)
-  const maxShakingCount = 1000
+  const maxShakingCount = 7
 
   const onCatalystItemShake = (shakingCount: number, itemIndex: number) => {
     log_Kinetics && console.log('===onCatalystItemShake===', { shakingCount, itemIndex, curCatShakingOrderIdx, catShakingOrder })
