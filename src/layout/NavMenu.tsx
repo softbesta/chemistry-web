@@ -257,14 +257,6 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
               isActive={curMenu === MenuList.comparisonQuiz}
             />
           </div>
-          <div>
-            <SvgArchive
-              fillColor={'rgb(68, 150, 247)'}
-              width={40}
-              height={40}
-              isActive={curMenu === MenuList.comparisonReview}
-            />
-          </div>
         </div>
         <div className={styles.navMenuItem}>
           <img
