@@ -192,17 +192,17 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
 
   const [timeCounter, setTimeCounter] = useState<number>(0)
   const maxTime = finalTime - initialTime
-  const framesPerSecond = 3
-  const intervalTime = 1000 / framesPerSecond
+  const framesPerSecond = 10
+  const intervalTime = 1 / framesPerSecond
 
   const timerID = useRef<NodeJS.Timer>()
   const startTimer = () => {
     stopTimer()
     setTimeCounter(0)
     timerID.current = setInterval(() => {
-      console.log('interval', timeCounter)
-      setTimeCounter(v => v += 1 / framesPerSecond)
-    }, intervalTime)
+      console.log('interval')
+      setTimeCounter(v => v += intervalTime)
+    }, intervalTime * 1000)
     console.log('started', timerID.current)
   }
   const stopTimer = () => {
@@ -233,7 +233,12 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
         setCurrentTime(updatedCurrentTime)
       }}>TestRender</button> */}
       {/* <div style={{position: 'relative'}}> */}
-      <canvas ref={canvas} height={width} width={height} />
+      <canvas
+        style={{ backgroundColor: 'white' }}
+        ref={canvas}
+        height={width}
+        width={height}
+      />
       {concentrationB &&
         <TimeChartDataLineView
           width={width}

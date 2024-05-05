@@ -8,13 +8,13 @@ export const tur_Text: TurTextType = [
     `**Let's dig in!**`,
   ],
   [ // 1
-    `These equations on the top seem pretty familiar right? They are the same equations we've encountered before, just solved for **[A]** which is a very useful form. Notice how the constants **k** are the ones we already got from the **previous reactions**.`,
+    `<p style='font-size: 17px'>These equations on the top seem pretty familiar right? They are the same equations we've encountered before, just solved for **[A]** which is a very useful form. Notice how the constants **k** are the ones we already got from the **previous reactions**.</p>`,
   ],
   [ // 2
     `On the left, we have 3 beakers with a reaction of **A** to **B** taking place in each one, all paired to an ([A] vs t) graph. Each reaction will represent an order: zero order, first order, and second order.`,
   ],
   [ // 3
-    `<p style='font-size: 17px'>Let's try something out now! We know that plotting an \([A] vs t) graph for each order results in different types of line (straight line, curved line and more accentuated curve). When the reaction starts running, **try dragging the right equations and dropping them into the proper graphs**.</p>`,
+    `<p style='font-size: 16px'>Let's try something out now! We know that plotting an \([A] vs t) graph for each order results in different types of line (straight line, curved line and more accentuated curve). When the reaction starts running, **try dragging the right equations and dropping them into the proper graphs**.</p>`,
   ],
   [ // 4
     `Tap next or press play on any of the graphs to start the reactions.`,

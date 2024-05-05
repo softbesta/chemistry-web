@@ -74,19 +74,15 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
         width: rectWidth,
         height: rectHeight
       }
+      ctx.clearRect(0, 0, rectWidth, rectHeight)
 
-      if (showOnlyView) {
-        ctx.rect(0, rectHeight * 0.28, rectWidth * 0.72, rectHeight * (1 - 0.28))
-        ctx.strokeStyle = 'black'
-        ctx.stroke()
-      }
-
+      ctx.beginPath()
       if (data.showFilledLine) {
         dataLine(ctx, finalTime + offset, filledBarColor)
       }
       dataLine(ctx, currentTime, data.headColor)
       if (highlightLhs) {
-        highlightLine(ctx, initialTime, (initialTime + finalTime) / 2)
+        // highlightLine(ctx, initialTime, (initialTime + finalTime) / 2)
       }
       if (highlightRhs) {
         highlightLine(ctx, (initialTime + finalTime) / 2, finalTime)
@@ -106,6 +102,13 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
         data.headRadius,
         data.headColor
       )
+      if (showOnlyView) {
+        ctx.beginPath()
+        ctx.strokeStyle = 'transparent'
+        ctx.rect(0, rectHeight * 0.28, rectWidth * 0.72, rectHeight * (1 - 0.28))
+        ctx.strokeStyle = 'black'
+        ctx.stroke()
+      }
     }
   }, [currentTime])
 
