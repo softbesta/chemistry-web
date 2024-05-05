@@ -32,6 +32,20 @@ export const useHighLight = () => {
     })
     setIsHighlight(true);
   };
+  // const highlightElementByRect = (targetIDs: any[]) => {
+  //   const elems: any[] = []
+  //   targetIDs.forEach(targetID => {
+  //     if (!document.getElementById(targetID)) return
+  //     elems.push(document.getElementById(targetID))
+  //   })
+  //   // console.log({elems})
+  //   elems.forEach(elem => {
+  //     if (elem) {
+  //       setOverlayOnElement(elem, "overlayID");
+  //     }
+  //   })
+  //   setIsHighlight(true);
+  // };
   const removeHighlightElement = (targetID: any) => {
     const elems = document.querySelectorAll('[id^="tur_"]')
     // const elem = document.getElementById(targetID);

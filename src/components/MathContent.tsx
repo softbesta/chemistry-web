@@ -24,9 +24,11 @@ interface MathContentProps {
   exp4?: string,
   exp5?: string,
   blanks: (any | undefined)[]
+  highlights?: (any | undefined)[]
   className?: string
 }
-const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, className = '' }: MathContentProps) => {
+const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, highlights, className = '' }: MathContentProps) => {
+  // console.log({highlights})
   return <div className={`${styles.mathContentContainer} ${className}`}>
     <MathJaxContext config={config}>
       <div
@@ -106,7 +108,20 @@ const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, className = ''
         style={item}
       />
     })}
-    
+    {/* {highlights && highlights.map((item, index) => {
+      if (!item) return null
+      const className = `
+        ${styles.blank} 
+        ${item ? styles.active : ''}
+      `
+      return <div
+        key={index}
+        id={`tur_mathHighlight${index}`}
+        className={className}
+        style={item}
+      />
+    })} */}
+
     {/* <div className={`
       ${styles.blank} 
       ${styles.blank_test} 

@@ -201,6 +201,7 @@ export const EnergyCatalystContainer = ({
   }, [catalystItemStates])
 
   return <div
+    id='tur_catalystItems'
     ref={containerRef}
     className={styles.catalystContainer}
     style={{

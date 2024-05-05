@@ -7,7 +7,7 @@ import ChartBar from "../../../components/ChartBar"
 import MathContent from "../../../components/MathContent"
 import TutorialControl from "../../../components/TutorialControl"
 import { useHighLight } from "../../../hooks/useHighlight"
-import { maxStep_Kinetics, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text, chooseMenuItems } from "./constants"
+import { maxStep_Kinetics, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text, chooseMenuItems, tur_MathHighlights } from "./constants"
 import useFunctions from "../../../hooks/useFunctions"
 import { ChooseMenuSel } from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
@@ -35,6 +35,8 @@ import { EnergyRateChartSettings, ReactionOrder } from "../../../components/Ener
 import { EnergyProfileChatInput } from "../../../components/EnergyProfileChart/EnergyProfileChartInput"
 import EnergyProfileRateChart from "../../../components/EnergyProfileRateChart/EnergyProfileRateChart"
 import { dotKineticsColors } from "../constants"
+import { Mask } from '@reactour/mask'
+import { RectResult } from '@reactour/utils';
 
 const log_Kinetics = true
 
@@ -402,6 +404,9 @@ const ReactionKinetics = () => {
   const concentrationC = new ZeroOrderConcentration()
   concentrationC.init2Params(0.1, 0.1)
 
+
+  const rectangle = { id: 1, x: 10, y: 10, width: 50, height: 50 }
+
   return <div className={styles.container}>
     <ChapterMenu />
     <ChooseMenuSel
@@ -427,7 +432,10 @@ const ReactionKinetics = () => {
         }}
       />
       <div className={styles.reactionBeaker}>
-        <div className={styles.beakerShape}>
+        <div
+          id='tur_beakerShape'
+          className={styles.beakerShape}
+        >
           <BeakerShape
             {...beakerSize}
             settings={settings}
@@ -551,6 +559,7 @@ const ReactionKinetics = () => {
           className={styles.mathContent}
           {...getFormula()}
           blanks={tur_MathBlanks[curStep]}
+          highlights={tur_MathHighlights[curStep]}
         />
         <TutorialControl
           turText={getTurTextByStep()}
@@ -559,6 +568,56 @@ const ReactionKinetics = () => {
         />
       </div>
     </div>
+    {/* <div
+      style={{
+        position: 'absolute',
+        width: 300,
+        height: 300,
+        backgroundColor: 'rgb(0, 0, 0, 0.5)',
+        overflow: 'hidden',
+      }}
+    >
+      <div
+        style={{
+          position: 'absolute',
+          top: 10,
+          left: 10,
+          width: 50,
+          height: 50,
+          backgroundColor: 'transparent',
+          border: '2px solid black',
+          clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%)',
+        }}
+      />
+      <div className="content">
+        <p>This is the underlying content.</p>
+      </div>
+      <div
+        style={{
+          backgroundColor: 'white'
+        }}
+      >
+        dsfkljdasfkljdaskfjklsdfjdklsfjklsdfj
+      </div>
+    </div> */}
+    {/* <div
+      style={{
+        position: 'relative',
+      }}
+    >
+      
+      <Mask
+        highlightedAreaClassName={'kinetics_reactionDrawContainer__R8mSu'}
+        sizes={{
+          width: 150,
+          height: 50,
+          left: 100,
+          top: 100,
+        } as RectResult}
+        // wrapperPadding={0}
+        padding={0}
+      />
+    </div> */}
     {isHighlight && <div className='overlay'></div>}
   </div>
 }

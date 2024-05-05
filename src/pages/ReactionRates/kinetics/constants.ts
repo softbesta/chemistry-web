@@ -186,6 +186,7 @@ export const tur_Text: TurTextType = [
 
 export const tur_Hightlights = [
   // 0   Not so fast! ...
+  // [],
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_chooseMenuIcon'],
 
   // 1   We now know that the concentration ...
@@ -200,61 +201,61 @@ export const tur_Hightlights = [
   // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime', 'tur_math4'],
 
   // 4   But how is the temperature...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton'],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math1'],
   // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math3'],
 
   // 5   k is the rate constant...
-  [], // +
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math1'],
 
   // 6   As you can tell by the equation....
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math1'],
   // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'], // Choose reaction 'C to D'
 
   // 7   When applying logarithmic...
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math1', 'tur_math2'],
   // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
 
   // 8   If the linear equation...
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math1', 'tur_math2', 'tur_math3'],
   // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
 
   // 9   For this reaction, **E__a__...
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math3', 'tur_math4'],
   // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
 
   // 10   One way to depict the reaction ...
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_energyProfileChart'],
   // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
 
   // 11   This is an **exothermic reaction...
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_energyProfileChart'],
   // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
 
   // 12   The hump or bell in the ...
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_energyProfileChart'],
 
   // 13   There's a way to reduce... 
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_energyProfileChart', 'tur_catalystItems'],
   // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_chooseMenuIcon'],
 
   // 14   Let's try that out! ...
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_catalystItems', 'tur_beakerShape'],
 
   // 15   Perfect! Now shake the catalyst ...
   [],
 
   // 16   Look! The E__a__ was reduced  ...
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_energyProfileChart'],
 
   // 17   Take a look at the linear  ...
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_energyProfileRateChart'],
 
   // 18   Points of that graph are ...
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math3', 'tur_math4', 'tur_energyProfileRateChart'],
   // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_chooseMenuIcon'],
 
   // 19   Let's try to produce C....
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_beakerShape', 'tur_burnerSlider'],
 
   // 20   Perfect! Successful collisions ...
   [],
@@ -269,10 +270,10 @@ export const tur_Hightlights = [
   [],
 
   // 24   Look! The E__a__ was ...
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_energyProfileChart'],
 
   // 25   Let's try to produce C ...
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_beakerShape', 'tur_burnerSlider'],
 
   // 26   Perfect! Successful collisions ...
   [],
@@ -284,10 +285,10 @@ export const tur_Hightlights = [
   [],
 
   // 29   Look! The E__a__ was ...
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_energyProfileChart'],
 
   // 30   Let's try to produce ...
-  [],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_beakerShape', 'tur_burnerSlider'],
 
   // 31   Perfect! Successful collisions ...
   [],
@@ -794,6 +795,24 @@ export const tur_MathBlanks = [
     { left: 24, top: 231, width: 30 },  //2
     { left: 180, top: 231, width: 30 }, //3
   ],
+  [
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
+  ],
+  [
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
+  ],
+  [
+    { left: 185, top: 198, width: 30 }, //1
+    { left: 24, top: 231, width: 30 },  //2
+    { left: 180, top: 231, width: 30 }, //3
+  ],
+]
+
+export const tur_MathHighlights = [
   [
     { left: 185, top: 198, width: 30 }, //1
     { left: 24, top: 231, width: 30 },  //2

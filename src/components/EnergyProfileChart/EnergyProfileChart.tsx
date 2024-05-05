@@ -196,7 +196,26 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
   }
 
   return (
-    <div style={{position: 'relative'}}>
+    <div
+      id='tur_energyProfileChart'
+      style={{
+        // display: 'flex',
+        position: 'absolute',
+        backgroundColor: 'white',
+        height: 220,
+        right: 0,
+      }}
+    >
+      {/* <div
+        id='tur_energyProfileChartHalf'
+        style={{
+          position: 'absolute',
+          backgroundColor: 'white',
+          width: 220,
+          left: 0,
+          height: '50%',
+        }}
+      > */}
       <canvas ref={canvas} height={height} width={width} />
       <canvas ref={canvas1} height={height} width={width} />
       {/* <button onClick={() => {
@@ -204,7 +223,8 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
         if (!ctx) return
         ctx.clearRect(0, 0, width, height)
       }}>Test</button> */}
-    </div>
+      </div>
+    // </div>
   );
 };
 export default EnergyProfileChart;

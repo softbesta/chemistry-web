@@ -70,13 +70,22 @@ const Burner = ({ isActive = false, fireVal, min, max, onChange }: BurnerProps) 
         height={30}
       /> */}
     </div>
-    <SliderHoriz
-      max={1000}
-      distance={0}
-      values={[value, 1000]}
-      setValues={(val) => onChangeValue(val[0])}
-      showThumbIndex={showThumbIndex}
-    />
+    <div
+      id='tur_burnerSlider'
+      style={{
+        width: '100%',
+        backgroundColor: 'white',
+        padding: 8,
+      }}
+    >
+      <SliderHoriz
+        max={1000}
+        distance={0}
+        values={[value, 1000]}
+        setValues={(val) => onChangeValue(val[0])}
+        showThumbIndex={showThumbIndex}
+      />
+    </div>
   </div>
 }
 

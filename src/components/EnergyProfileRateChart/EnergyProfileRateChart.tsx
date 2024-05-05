@@ -67,7 +67,14 @@ const EnergyProfileRateChart = (props: EnergyProfileRateChartProps) => {
   }
 
   return (
-    <div style={{position: 'relative'}}>
+    <div
+      id='tur_energyProfileRateChart'
+      style={{
+        position: 'relative',
+        backgroundColor: 'white',
+        height: 220,
+      }}
+    >
       <canvas ref={canvas} height={height} width={width} />
       <TimeChartDataLineView
         width={width}
