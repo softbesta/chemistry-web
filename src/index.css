@@ -6,6 +6,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
+  overflow: hidden;
+  /* background-color: gray; */
+}
+#root {
+  background-color: white;
 }
 
 code {

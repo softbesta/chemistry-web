@@ -197,7 +197,7 @@ export const tur_Hightlights = [
   // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math1', 'tur_math2'],
 
   // 3   This minimum amount of...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton'],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_energyProfileChartHalf'],
   // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime', 'tur_math4'],
 
   // 4   But how is the temperature...

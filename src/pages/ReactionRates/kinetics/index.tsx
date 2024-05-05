@@ -491,6 +491,7 @@ const ReactionKinetics = () => {
             equation={concentrationC}
             currentTempInverse={1 / 500}
             highlightChart={true}
+            rateChartState={0}
           />
           <div>
             <span className={styles.txtInK}> In(k) </span>

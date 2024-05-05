@@ -144,7 +144,7 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
       ctx.lineTo(x, y)
       ctx.stroke();
     }
-    
+
     if (!ctx1) return
     const xx1 = 0, yy1 = absoluteY(xx1, frameWidth, frameHeight, leftAsymptote, rightAsymptote, peak)
     ctx1.beginPath()
@@ -177,7 +177,7 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
     ctx1.fillStyle = 'black'
     ctx1.fillText(energyProfileChartText[kind].textC, xx2 + 12, yy2 + settings.annotationMoleculeSize + 20)
     ctx1.closePath()
-    
+
 
   }
 
@@ -206,25 +206,32 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
         right: 0,
       }}
     >
-      {/* <div
+      <div
         id='tur_energyProfileChartHalf'
         style={{
-          position: 'absolute',
-          backgroundColor: 'white',
-          width: 220,
-          left: 0,
-          height: '50%',
+          // position: 'absolute',
+          // backgroundColor: 'white',
+          // width: 220,
+          // left: 0,
+          // height: '50%',
         }}
-      > */}
-      <canvas ref={canvas} height={height} width={width} />
-      <canvas ref={canvas1} height={height} width={width} />
-      {/* <button onClick={() => {
+      >
+        {/* <div
+          style={{
+            backgroundColor: 'white',
+            width: '100%',
+            height: 50,
+          }}
+        ></div> */}
+        <canvas ref={canvas} height={height} width={width} />
+        <canvas ref={canvas1} height={height} width={width} />
+        {/* <button onClick={() => {
         const ctx = canvas?.current?.getContext('2d');
         if (!ctx) return
         ctx.clearRect(0, 0, width, height)
       }}>Test</button> */}
       </div>
-    // </div>
+    </div>
   );
 };
 export default EnergyProfileChart;

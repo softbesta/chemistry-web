@@ -10,6 +10,7 @@ type EnergyProfileRateChartProps = {
   equation?: ZeroOrderConcentration | FirstOrderConcentration | SecondOrderConcentration,
   currentTempInverse?: number,
   highlightChart: boolean,
+  rateChartState: number,
 }
 
 type Rect = {
@@ -25,6 +26,7 @@ const EnergyProfileRateChart = (props: EnergyProfileRateChartProps) => {
     equation,
     currentTempInverse,
     highlightChart,
+    rateChartState,
   } = props;
   const canvas = React.useRef<HTMLCanvasElement>(null);
   React.useEffect(() => {
