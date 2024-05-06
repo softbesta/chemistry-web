@@ -20,6 +20,7 @@ interface CanvasTimeProps {
   colorB: string
   colorA_blur: string
   canvasSize?: SizeStyle
+  showOneGraph?: boolean
   onTimeframeChange?: (val: number) => void
 }
 const CanvasTime = ({
@@ -38,6 +39,7 @@ const CanvasTime = ({
   colorB,
   colorA_blur,
   canvasSize = { width: 212, height: 212 },
+  showOneGraph,
   onTimeframeChange,
 }: CanvasTimeProps) => {
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -180,8 +182,10 @@ const CanvasTime = ({
     ctx.beginPath()
     ctx.moveTo(sX, sY)
     ctx.lineTo(eX, eY)
-    ctx.moveTo(sX, height)
-    ctx.lineTo(eX, height - (eY - sY))
+    if (!showOneGraph) {
+      ctx.moveTo(sX, height)
+      ctx.lineTo(eX, height - (eY - sY))
+    }
     ctx.strokeStyle = "gray"
     ctx.stroke()
     // draw Blue dot
@@ -209,16 +213,18 @@ const CanvasTime = ({
     ctx.fillStyle = colorA
     ctx.fill()
 
-    //draw Red dot
-    ctx.beginPath()
-    ctx.moveTo(sX, height)
-    ctx.lineTo(ptRed.x, ptRed.y)
-    ctx.strokeStyle = colorB
-    ctx.stroke()
-    ctx.moveTo(ptRed.x, ptRed.y)
-    ctx.arc(ptRed.x, ptRed.y, 2, 0, Math.PI * 2)
-    ctx.fillStyle = colorB
-    ctx.fill()
+    if (!showOneGraph) {
+      //draw Red dot
+      ctx.beginPath()
+      ctx.moveTo(sX, height)
+      ctx.lineTo(ptRed.x, ptRed.y)
+      ctx.strokeStyle = colorB
+      ctx.stroke()
+      ctx.moveTo(ptRed.x, ptRed.y)
+      ctx.arc(ptRed.x, ptRed.y, 2, 0, Math.PI * 2)
+      ctx.fillStyle = colorB
+      ctx.fill()
+    }
 
   }
   const endPlay = () => {

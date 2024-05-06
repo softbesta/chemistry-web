@@ -38,6 +38,7 @@ const ChartInA = ({
     top: canvasSize?.height ? canvasSize.height : 230,
     right: canvasSize?.width ? canvasSize.width / 2 - 15 : 80,
   }
+  const valC2 = valuesC[1] + (valuesC[0] - valuesC[1]) / 5
 
   return (
     <div
@@ -70,7 +71,7 @@ const ChartInA = ({
           showTimeGraph={showTimeGraph}
           onTimeframeChange={onTimeframeChange}
           c1={valuesC[0]}
-          c2={valuesC[1]}
+          c2={valuesC[1] + (valuesC[0] - valuesC[1]) / 3 * 2}
           t1={valuesT[0]}
           t2={valuesT[1]}
           maxC={100}
@@ -81,6 +82,7 @@ const ChartInA = ({
           colorB={colors[2]}
           colorA_blur={colors[0]}
           canvasSize={canvasSize}
+          showOneGraph={true}
         />
       </div>
     </div>

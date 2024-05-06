@@ -46,6 +46,11 @@ class ReactionComparisonViewModel {
       this.secondOrderInput = ReactionComparisonDefaults.input
     }
   }
+  initParams(initInput: ReactionInput) {
+    this.zeroOrderInput = initInput
+    this.firstOrderInput = initInput
+    this.secondOrderInput = initInput
+  }
 
   // var navigation: NavigationModel<ReactionComparisonState>?
 
