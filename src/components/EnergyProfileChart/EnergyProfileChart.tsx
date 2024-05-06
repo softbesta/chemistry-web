@@ -57,8 +57,6 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
     }
 
     ctx.clearRect(0, 0, rectWidth, rectHeight)
-    ctx.rect(0, 0, rect.width, rect.height)
-    ctx.stroke()
     if (state > 1) {
       // tempLine
       tempLine(ctx, rect)
@@ -84,6 +82,7 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
     ctx.beginPath()
     ctx.moveTo(midX, startY)
     ctx.lineTo(midX, midY + padding)
+
     // draw Arrow
 
     ctx.font = 'bold 16px Arial'
@@ -104,6 +103,10 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
     ctx.lineTo(midX + 0.65 * padding, midY + 2 * padding)
 
     ctx.strokeStyle = 'black'
+    ctx.stroke()
+
+    // draw Outlines
+    ctx.rect(0, 0, rect.width, rect.height)
     ctx.stroke()
 
 
