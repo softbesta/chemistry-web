@@ -66,18 +66,21 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
 
     const chartSize = settings.chartSize
 
-    const startY = absoluteY(0, rectWidth, rectHeight, chartInput.leftAsymptote, chartInput.rightAsymptote, chartInput.reducedPeak)
+    const peakVal = state === 0 ? chartInput.initialPeak : chartInput.reducedPeak
+
+    const startY = absoluteY(0, rectWidth, rectHeight, chartInput.leftAsymptote, chartInput.rightAsymptote, peakVal)
     const midX = chartSize / 2
-    const midY = absoluteY(midX, rectWidth, rectHeight, chartInput.leftAsymptote, chartInput.rightAsymptote, chartInput.reducedPeak)
+    const midY = absoluteY(midX, rectWidth, rectHeight, chartInput.leftAsymptote, chartInput.rightAsymptote, peakVal)
     const padding = chartSize * 0.04
 
-    if (state > 0) {
+    if (state === 0) {
+      energyProfileChartShape(ctx, chartInput.initialPeak, chartInput.leftAsymptote, chartInput.rightAsymptote, rect, 'orange')
+      // energyProfileChartShape(ctx, chartInput.reducedPeak, chartInput.leftAsymptote, chartInput.rightAsymptote, rect, 'gray')
+    } else if (state > 0) {
       energyProfileChartShape(ctx, chartInput.initialPeak, chartInput.leftAsymptote, chartInput.rightAsymptote, rect, 'gray')
+      energyProfileChartShape(ctx, chartInput.reducedPeak, chartInput.leftAsymptote, chartInput.rightAsymptote, rect, 'orange')
     }
-    energyProfileChartShape(ctx, chartInput.reducedPeak, chartInput.leftAsymptote, chartInput.rightAsymptote, rect, 'orange')
 
-    console.log({ kind, chartInput, state })
-    console.log({ midX, midY, startY })
     ctx.beginPath()
     ctx.moveTo(midX, startY)
     ctx.lineTo(midX, midY + padding)
