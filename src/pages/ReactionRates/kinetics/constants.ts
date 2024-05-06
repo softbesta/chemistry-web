@@ -324,6 +324,7 @@ export const stepsActions = [
   { // 0
     canvaTimeState: 0,
     canvaBeakerState: 0,
+    rateChartState: 0,
     isEnableChooseMenu: true,
     isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
@@ -340,6 +341,7 @@ export const stepsActions = [
   { // 1
     canvaTimeState: 0,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isEnableChooseMenu: false,
     isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
@@ -353,6 +355,7 @@ export const stepsActions = [
   { // 2
     canvaTimeState: 1,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
@@ -365,6 +368,7 @@ export const stepsActions = [
   { // 3
     canvaTimeState: 1,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
@@ -377,6 +381,7 @@ export const stepsActions = [
   { // 4
     canvaTimeState: 1,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
@@ -389,6 +394,7 @@ export const stepsActions = [
   { // 5
     canvaTimeState: 2,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
@@ -401,6 +407,7 @@ export const stepsActions = [
   { // 6
     canvaTimeState: 3,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
@@ -413,6 +420,7 @@ export const stepsActions = [
   { // 7
     canvaTimeState: 3,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
@@ -425,6 +433,7 @@ export const stepsActions = [
   { // 8
     canvaTimeState: 3,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
@@ -437,6 +446,7 @@ export const stepsActions = [
   { // 9
     canvaTimeState: 3,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
@@ -449,6 +459,7 @@ export const stepsActions = [
   { // 10
     canvaTimeState: 3,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
@@ -461,6 +472,7 @@ export const stepsActions = [
   { // 11
     canvaTimeState: 3,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
@@ -473,6 +485,7 @@ export const stepsActions = [
   { // 12
     canvaTimeState: 3,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [2, 2, 2],
     curCatShakingOrderIdx: 0,
@@ -485,6 +498,7 @@ export const stepsActions = [
   { // 13
     canvaTimeState: 3,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 0,
@@ -497,6 +511,7 @@ export const stepsActions = [
   { // 14
     canvaTimeState: 0,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [4, 4, 4],
     curCatShakingOrderIdx: 0,
@@ -509,6 +524,7 @@ export const stepsActions = [
   { // 15
     canvaTimeState: 1,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 0,
@@ -521,6 +537,7 @@ export const stepsActions = [
   { // 16
     canvaTimeState: 2,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
@@ -533,6 +550,7 @@ export const stepsActions = [
   { // 17
     canvaTimeState: 3,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
@@ -545,6 +563,7 @@ export const stepsActions = [
   { // 18
     canvaTimeState: 3,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
@@ -557,6 +576,7 @@ export const stepsActions = [
   { // 19
     canvaTimeState: 0,
     canvaBeakerState: 1,
+    rateChartState: 1,
     isBurnerActive: true,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
@@ -570,6 +590,7 @@ export const stepsActions = [
   { // 20
     canvaTimeState: 1,
     canvaBeakerState: 1,
+    rateChartState: 1,
     isBurnerActive: true,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
@@ -582,6 +603,7 @@ export const stepsActions = [
   { // 21
     canvaTimeState: 2,
     canvaBeakerState: 2,
+    rateChartState: 1,
     isBurnerActive: true,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
@@ -594,6 +616,7 @@ export const stepsActions = [
   { // 22
     canvaTimeState: 3,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [4, 4, 4],
     curCatShakingOrderIdx: 1,
@@ -607,6 +630,7 @@ export const stepsActions = [
   { // 23
     canvaTimeState: 3,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 1,
@@ -619,6 +643,7 @@ export const stepsActions = [
   { // 24
     canvaTimeState: 3,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 2,
@@ -631,6 +656,7 @@ export const stepsActions = [
   { // 25
     canvaTimeState: 3,
     canvaBeakerState: 1,
+    rateChartState: 1,
     isBurnerActive: true,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 2,
@@ -644,6 +670,7 @@ export const stepsActions = [
   { // 26
     canvaTimeState: 3,
     canvaBeakerState: 1,
+    rateChartState: 1,
     isBurnerActive: true,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 2,
@@ -656,6 +683,7 @@ export const stepsActions = [
   { // 27
     canvaTimeState: 3,
     canvaBeakerState: 2,
+    rateChartState: 1,
     isBurnerActive: true,
     catalystItemStates: [4, 4, 4],
     curCatShakingOrderIdx: 2,
@@ -668,6 +696,7 @@ export const stepsActions = [
   { // 28
     canvaTimeState: 3,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 2,
@@ -681,6 +710,7 @@ export const stepsActions = [
   { // 29
     canvaTimeState: 3,
     canvaBeakerState: 0,
+    rateChartState: 1,
     isBurnerActive: false,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 3,
@@ -694,6 +724,7 @@ export const stepsActions = [
   { // 30
     canvaTimeState: 3,
     canvaBeakerState: 1,
+    rateChartState: 1,
     isBurnerActive: true,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 3,
@@ -707,6 +738,7 @@ export const stepsActions = [
   { // 31
     canvaTimeState: 3,
     canvaBeakerState: 1,
+    rateChartState: 1,
     isBurnerActive: true,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 3,
@@ -719,6 +751,7 @@ export const stepsActions = [
   { // 32
     canvaTimeState: 3,
     canvaBeakerState: 2,
+    rateChartState: 1,
     isBurnerActive: true,
     catalystItemStates: [3, 3, 3],
     curCatShakingOrderIdx: 3,

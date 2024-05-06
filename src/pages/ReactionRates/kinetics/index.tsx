@@ -74,6 +74,8 @@ const ReactionKinetics = () => {
 
   const [chooseMenuIndex, setChooseMenuIndex] = useState(0)
   const [isDisableNextButton, setIsDisableNextButton] = useState<boolean>(false)
+  const [rateChartState, setRateChartState] = useState<number>(0)
+  const val_Ea = [12, 10, 8][chooseMenuIndex]
 
   // *** Setup tutorial actions here
   const tutorials = Array.from(Array(tur_Text.length).keys()).map(idx => {
@@ -130,6 +132,9 @@ const ReactionKinetics = () => {
       if (curActions?.isDisableNextButton !== undefined) {
         setIsDisableNextButton(curActions.isDisableNextButton)
       }
+      if (curActions?.rateChartState !== undefined) {
+        setRateChartState(curActions.rateChartState)
+      }
 
       if (curActions?.initGasCounts) {
         setGasCounts(initGasCounts)
@@ -147,19 +152,16 @@ const ReactionKinetics = () => {
   }
 
   const getFormula = () => {
-    const c1 = (valuesC[0] ?? 0) / 100
+    const a0 = 1
     const c2 = (valuesC[1] ?? 0) / 100
-    const t1 = valuesT[0]
-    const At = c2
-    const A0 = c1
-    const k = ((1 / At) - (1 / A0)) / t1
-    const t_12 = 1 / (k * A0)
-    const rate = k * (At * At)
+    const t1 = 400
+    const t2 = 600
+    const rate = val_Ea
 
     const exp0 = `\\[ k = A e^{-Ea/RT}\\]`
     const exp1 = `\\[ ln(k) = ln(A) - \\frac{Ea}{RT}\\]`
     const exp2 = `\\[ ln(\\frac{k1}{k2}) = \\frac{Ea}{R}(\\frac{T_1 - T_2}{T_1T_2}) \\]`
-    const exp4 = `\\[ ln(\\frac{1.3}{1.3}) = \\frac{9e3}{8.31}(\\frac{400 - 400}{400 x 400}) \\]`
+    const exp4 = `\\[ ln(\\frac{1.3}{1.3}) = \\frac{${rate}e3}{8.31}(\\frac{400 - 400}{400 x 400}) \\]`
 
     return {
       exp0,
@@ -402,7 +404,11 @@ const ReactionKinetics = () => {
 
   // ** EnergyProfileRateChart variables
   const concentrationC = new ZeroOrderConcentration()
-  concentrationC.init2Params(0.1, 0.1)
+  concentrationC.init2Params(1, 0.1)
+  const rateChartEquation = concentrationC
+
+
+  console.log({ chooseMenuIndex, val_Ea })
 
 
   const rectangle = { id: 1, x: 10, y: 10, width: 50, height: 50 }
@@ -488,15 +494,16 @@ const ReactionKinetics = () => {
             // width={250}
             // height={250}
             settings={new EnergyRateChartSettings(graphChartSize.width)}
-            equation={concentrationC}
+            equation={rateChartEquation}
+            currentTime={1 / valueFire}
             currentTempInverse={1 / 500}
             highlightChart={true}
-            rateChartState={0}
+            rateChartState={rateChartState}
           />
           <div>
             <span className={styles.txtInK}> In(k) </span>
             <span className={styles.txtT}> 1/T </span>
-            <span className={styles.txtSlope}> Slope=-Ea/R </span>
+            {rateChartState !== 0 && <span className={styles.txtSlope}> Slope=-Ea/R </span>}
           </div>
           {/* <ConcentrationPlotView
             {...graphChartSize}

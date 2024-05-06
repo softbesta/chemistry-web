@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { EnergyRateChartSettings } from './EnergyRateChartSettings';
 import Color from 'color';
 import { EnergyProfileChatInput } from './EnergyProfileChartInput';
@@ -47,60 +47,74 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
   const canvas1 = React.useRef<HTMLCanvasElement>(null);
   React.useEffect(() => {
     const ctx = canvas?.current?.getContext('2d');
-    ctx?.clearRect(0, 0, width, height)
-    if (ctx) {
-      const { height: rectHeight, width: rectWidth } = ctx.canvas;
-      const rect: Rect = {
-        width: rectWidth,
-        height: rectHeight
-      }
+    if (!ctx) return
+    ctx.clearRect(0, 0, width, height)
 
-      ctx.clearRect(0, 0, width, height)
-      ctx.rect(0, 0, rect.width, rect.height)
-      ctx.stroke()
-      if (state > 1) {
-        // tempLine
-        tempLine(ctx, rect)
-      }
-
-      const chartSize = settings.chartSize
-
-      if (state > 0) {
-        energyProfileChartShape(ctx, chartInput.initialPeak, chartInput.leftAsymptote, chartInput.rightAsymptote, rect, 'gray')
-      }
-      energyProfileChartShape(ctx, chartInput.reducedPeak, chartInput.leftAsymptote, chartInput.rightAsymptote, rect, 'orange')
-
-      const startY = absoluteY(0, rectWidth, rectHeight, chartInput.leftAsymptote, chartInput.rightAsymptote, chartInput.reducedPeak)
-      const midX = chartSize / 2
-      const midY = absoluteY(midX, rectWidth, rectHeight, chartInput.leftAsymptote, chartInput.rightAsymptote, chartInput.reducedPeak)
-      const padding = chartSize * 0.04
-
-      ctx.beginPath()
-      ctx.moveTo(midX, startY)
-      ctx.lineTo(midX, midY + padding)
-
-      // draw Arrow
-      ctx.moveTo(midX, startY)
-
-      ctx.font = 'bold 16px Arial'
-      ctx.fillText('E', midX - 0.8 * padding, startY + 15)
-      ctx.font = '12px Arial'
-      ctx.fillText('a', midX + 0.3 * padding, startY + 19)
-
-      ctx.lineTo(midX - 0.65 * padding, startY - padding)
-
-      ctx.moveTo(midX, startY)
-      ctx.lineTo(midX + 0.65 * padding, startY - padding)
-
-      ctx.moveTo(midX, midY + padding)
-      ctx.lineTo(midX - 0.65 * padding, midY + 2 * padding)
-
-      ctx.moveTo(midX, midY + padding)
-      ctx.lineTo(midX + 0.65 * padding, midY + 2 * padding)
-
-      ctx.strokeStyle = 'black'
-      ctx.stroke()
+    const { height: rectHeight, width: rectWidth } = ctx.canvas;
+    const rect: Rect = {
+      width: rectWidth,
+      height: rectHeight
     }
+
+    ctx.clearRect(0, 0, rectWidth, rectHeight)
+    ctx.rect(0, 0, rect.width, rect.height)
+    ctx.stroke()
+    if (state > 1) {
+      // tempLine
+      tempLine(ctx, rect)
+    }
+
+    const chartSize = settings.chartSize
+
+    const startY = absoluteY(0, rectWidth, rectHeight, chartInput.leftAsymptote, chartInput.rightAsymptote, chartInput.reducedPeak)
+    const midX = chartSize / 2
+    const midY = absoluteY(midX, rectWidth, rectHeight, chartInput.leftAsymptote, chartInput.rightAsymptote, chartInput.reducedPeak)
+    const padding = chartSize * 0.04
+
+    if (state > 0) {
+      energyProfileChartShape(ctx, chartInput.initialPeak, chartInput.leftAsymptote, chartInput.rightAsymptote, rect, 'gray')
+    }
+    energyProfileChartShape(ctx, chartInput.reducedPeak, chartInput.leftAsymptote, chartInput.rightAsymptote, rect, 'orange')
+
+    console.log({ kind, chartInput, state })
+    console.log({ midX, midY, startY })
+    ctx.beginPath()
+    ctx.moveTo(midX, startY)
+    ctx.lineTo(midX, midY + padding)
+    // draw Arrow
+
+    ctx.font = 'bold 16px Arial'
+    ctx.fillText('E', midX - 0.8 * padding, startY + 15)
+    ctx.font = '12px Arial'
+    ctx.fillText('a', midX + 0.3 * padding, startY + 19)
+
+    ctx.moveTo(midX, startY)
+    ctx.lineTo(midX - 0.65 * padding, startY - padding)
+
+    ctx.moveTo(midX, startY)
+    ctx.lineTo(midX + 0.65 * padding, startY - padding)
+
+    ctx.moveTo(midX, midY + padding)
+    ctx.lineTo(midX - 0.65 * padding, midY + 2 * padding)
+
+    ctx.moveTo(midX, midY + padding)
+    ctx.lineTo(midX + 0.65 * padding, midY + 2 * padding)
+
+    ctx.strokeStyle = 'black'
+    ctx.stroke()
+
+
+  }, [kind, chartInput, state])
+  useEffect(() => {
+    const ctx = canvas?.current?.getContext('2d');
+    if (!ctx) return
+    // ctx.clearRect(0, 0, width, height)
+    const { height: rectHeight, width: rectWidth } = ctx.canvas;
+    const rect: Rect = {
+      width: rectWidth,
+      height: rectHeight
+    }
+
   }, [kind, chartInput])
 
   const tempLine = (ctx: CanvasRenderingContext2D, rect: Rect) => {
@@ -135,7 +149,8 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
 
     const dx = frameWidth / points
     const ctx1 = canvas1?.current?.getContext('2d');
-    ctx1?.clearRect(0, 0, width, height)
+    if (!ctx1) return
+    ctx1.clearRect(0, 0, width, height)
     for (let x = 0; x < frameWidth; x += dx) {
       const y = absoluteY(x, frameWidth, frameHeight, leftAsymptote, rightAsymptote, peak)
 
@@ -145,7 +160,6 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
       ctx.stroke();
     }
 
-    if (!ctx1) return
     const xx1 = 0, yy1 = absoluteY(xx1, frameWidth, frameHeight, leftAsymptote, rightAsymptote, peak)
     ctx1.beginPath()
     ctx1.arc(10, yy1 + settings.annotationMoleculeSize, settings.annotationMoleculeSize / 2, 0, 2 * Math.PI)

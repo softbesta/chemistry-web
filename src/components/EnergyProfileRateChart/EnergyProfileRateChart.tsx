@@ -8,6 +8,7 @@ type EnergyProfileRateChartProps = {
   width: number,
   settings: EnergyRateChartSettings,
   equation?: ZeroOrderConcentration | FirstOrderConcentration | SecondOrderConcentration,
+  currentTime: number,
   currentTempInverse?: number,
   highlightChart: boolean,
   rateChartState: number,
@@ -24,11 +25,13 @@ const EnergyProfileRateChart = (props: EnergyProfileRateChartProps) => {
     height,
     settings,
     equation,
+    currentTime,
     currentTempInverse,
     highlightChart,
     rateChartState,
   } = props;
   const canvas = React.useRef<HTMLCanvasElement>(null);
+  console.log({settings, equation})
   React.useEffect(() => {
     const ctx = canvas?.current?.getContext('2d');
     if (ctx) {
@@ -78,25 +81,26 @@ const EnergyProfileRateChart = (props: EnergyProfileRateChartProps) => {
       }}
     >
       <canvas ref={canvas} height={height} width={width} />
-      <TimeChartDataLineView
+      {rateChartState !== 0 && <TimeChartDataLineView
         width={width}
         height={width}
         data={{
           equation: equation!,
-          headColor: 'red',
+          headColor: 'rgb(220, 84, 59)',
           haloColor: Color.rgb(255, 0, 0).alpha(0.3).toString(),
           headRadius: settings.chartHeadSize,
         }}
         settings={settings}
         lineWidth={1}
         initialTime={1 / 600}
-        currentTime={0} //$currentTime
+        currentTime={currentTime} //$currentTime
         finalTime={1 / 400}
-        filledBarColor={'red'} //Styling.timeAxisCompleteBar
+        filledBarColor={'rgb(220, 84, 59)'} //Styling.timeAxisCompleteBar
         canSetCurrentTime={true}
         highlightLhs={true}
         highlightRhs={true}
-      />
+        showFullLine={true}
+      />}
     </div>
   );
 };

@@ -36,6 +36,7 @@ type TimeChartDataLineViewProps = {
   offset?: number
   minDragTime?: number
   showOnlyView?: boolean
+  showFullLine?: boolean
 }
 
 type Rect = {
@@ -61,6 +62,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     offset = 0,
     minDragTime = null,
     showOnlyView = false,
+    showFullLine = false,
   } = props;
   const canvas = React.useRef<HTMLCanvasElement>(null);
   React.useEffect(() => {
@@ -80,7 +82,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
       if (data.showFilledLine) {
         dataLine(ctx, finalTime + offset, filledBarColor)
       }
-      dataLine(ctx, currentTime, data.headColor)
+      dataLine(ctx, showFullLine ? finalTime : currentTime, data.headColor)
       if (highlightLhs) {
         // highlightLine(ctx, initialTime, (initialTime + finalTime) / 2)
       }
@@ -219,6 +221,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     color: string,
     lineWidth: number,
   ) => {
+    console.log({equation, xEquation})
     if (discontinuity && discontinuity <= endX) {
       addLinesWithDiscontinuity(ctx, discontinuity)
     } else {
@@ -259,6 +262,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     const xValue = xEquation?.getValue(x) ?? x
     const xPosition = settings.xAxis.shift(offset).getPosition(xValue)
     const yPosition = settings.yAxis.shift(offset).getPosition(y)
+    console.log({y, xValue, xPosition, yPosition})
     if (isMoveTo) {
       ctx.beginPath()
       ctx.moveTo(xPosition, yPosition)
