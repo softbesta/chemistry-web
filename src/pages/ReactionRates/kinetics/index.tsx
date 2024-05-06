@@ -410,8 +410,7 @@ const ReactionKinetics = () => {
 
   console.log({ chooseMenuIndex, val_Ea })
 
-
-  const rectangle = { id: 1, x: 10, y: 10, width: 50, height: 50 }
+  // const rectangle = { id: 1, x: 10, y: 10, width: 50, height: 50 }
 
   return <div className={styles.container}>
     <ChapterMenu />

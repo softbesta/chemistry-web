@@ -213,32 +213,42 @@ const EnergyProfileChart = (props: EnergyProfileChartProps) => {
     <div
       id='tur_energyProfileChart'
       style={{
-        // display: 'flex',
-        position: 'absolute',
+        width: width,
+        height: height,
+        position: 'relative',
         backgroundColor: 'white',
-        height: 220,
-        right: 0,
       }}
     >
       <div
         id='tur_energyProfileChartHalf'
         style={{
-          // position: 'absolute',
-          // backgroundColor: 'white',
-          // width: 220,
-          // left: 0,
-          // height: '50%',
+          width: width,
+          height: '100%',
         }}
       >
-        {/* <div
+        <div
           style={{
+            height: '50%',
+            position: 'absolute',
             backgroundColor: 'white',
             width: '100%',
-            height: 50,
+            bottom: '0',
           }}
-        ></div> */}
-        <canvas ref={canvas} height={height} width={width} />
-        <canvas ref={canvas1} height={height} width={width} />
+        ></div>
+        <canvas
+          style={{
+            zIndex: 5,
+            position: 'absolute'
+          }}
+          ref={canvas}
+          height={height}
+          width={width}
+        />
+        <canvas
+          ref={canvas1}
+          height={height}
+          width={width}
+        />
         {/* <button onClick={() => {
         const ctx = canvas?.current?.getContext('2d');
         if (!ctx) return

@@ -80,9 +80,26 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
 
       ctx.beginPath()
       if (data.showFilledLine) {
-        dataLine(ctx, finalTime + offset, filledBarColor)
+        // dataLine(ctx, finalTime + offset, filledBarColor)
+        addLinesUpToAndIncluding(ctx,
+          data.equation,
+          data.xEquation!,
+          initialTime,                              // from
+          finalTime + offset,                       // to
+          initialTime                               // startX
+        )
       }
-      dataLine(ctx, showFullLine ? finalTime : currentTime, data.headColor)
+      // dataLine(ctx, showFullLine ? finalTime : currentTime, data.headColor)
+      addLinesUpToAndIncluding(
+        ctx,
+        data.equation,
+        data.xEquation!,
+        initialTime,                              // from
+        showFullLine ? finalTime : currentTime,   // to
+        initialTime                               // startX
+      )
+
+
       if (highlightLhs) {
         // highlightLine(ctx, initialTime, (initialTime + finalTime) / 2)
       }
@@ -177,12 +194,26 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     time: number,
     color: string
   ) => {
-    line(
+    /* origin code */
+    // line(
+    //   ctx,
+    //   initialTime,
+    //   time,
+    //   color,
+    //   lineWidth
+    // )
+    chartLine(
       ctx,
+      data.equation,
+      data.xEquation!,
+      settings.yAxis,
+      settings.xAxis,
       initialTime,
       time,
+      0,
+      data.discontinuity!,
       color,
-      lineWidth
+      lineWidth,
     )
   }
 
@@ -221,21 +252,20 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     color: string,
     lineWidth: number,
   ) => {
-    console.log({equation, xEquation})
-    if (discontinuity && discontinuity <= endX) {
-      addLinesWithDiscontinuity(ctx, discontinuity)
-    } else {
-      // debugger
-      addLinesUpToAndIncluding(ctx, equation, xEquation, startX + offset, endX, startX)
-    }
+    // if (discontinuity && discontinuity <= endX) {
+    //   addLinesWithDiscontinuity(ctx, discontinuity)
+    // } else {
+    // debugger
+    addLinesUpToAndIncluding(ctx, equation, xEquation, startX + offset, endX, startX)
+    // }
   }
 
-  const addLinesWithDiscontinuity = (
-    ctx: CanvasRenderingContext2D,
-    discontinuity: number,
-  ) => {
+  // const addLinesWithDiscontinuity = (
+  //   ctx: CanvasRenderingContext2D,
+  //   discontinuity: number,
+  // ) => {
 
-  }
+  // }
 
   const addLinesUpToAndIncluding = (
     ctx: CanvasRenderingContext2D,
@@ -262,7 +292,6 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     const xValue = xEquation?.getValue(x) ?? x
     const xPosition = settings.xAxis.shift(offset).getPosition(xValue)
     const yPosition = settings.yAxis.shift(offset).getPosition(y)
-    console.log({y, xValue, xPosition, yPosition})
     if (isMoveTo) {
       ctx.beginPath()
       ctx.moveTo(xPosition, yPosition)
