@@ -1,13 +1,13 @@
 import React from 'react';
 import Color from 'color';
-import { EnergyRateChartSettings } from '../EnergyProfileChart';
+import { EnergyRateChartSettings, LinearEquation } from '../EnergyProfileChart';
 import { ChartAxisShapeSettings, FirstOrderConcentration, SecondOrderConcentration, TimeChartDataLineView, ZeroOrderConcentration } from '../ConcentrationPlotView';
 
 type EnergyProfileRateChartProps = {
   height: number,
   width: number,
   settings: EnergyRateChartSettings,
-  equation?: ZeroOrderConcentration | FirstOrderConcentration | SecondOrderConcentration,
+  equation?: ZeroOrderConcentration | FirstOrderConcentration | SecondOrderConcentration | LinearEquation,
   currentTime: number,
   currentTempInverse?: number,
   highlightChart: boolean,

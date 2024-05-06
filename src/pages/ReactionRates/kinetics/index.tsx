@@ -31,7 +31,7 @@ import {
 import { ReactionSettings, ReactionType } from "../../../components/ConcentrationPlotView/constants"
 import Burner from "../../../components/CanvasBeaker/Burner/Burner"
 import EnergyProfileChart from "../../../components/EnergyProfileChart/EnergyProfileChart"
-import { EnergyRateChartSettings, ReactionOrder } from "../../../components/EnergyProfileChart"
+import { EnergyRateChartSettings, LinearEquation, ReactionOrder } from "../../../components/EnergyProfileChart"
 import { EnergyProfileChatInput } from "../../../components/EnergyProfileChart/EnergyProfileChartInput"
 import EnergyProfileRateChart from "../../../components/EnergyProfileRateChart/EnergyProfileRateChart"
 import { dotKineticsColors } from "../constants"
@@ -403,9 +403,31 @@ const ReactionKinetics = () => {
   const [energyProfileChartState, setEnergyProfileChartState] = useState(0)
 
   // ** EnergyProfileRateChart variables
-  const concentrationC = new ZeroOrderConcentration()
-  concentrationC.init2Params(1, 0.1)
-  const rateChartEquation = concentrationC
+  // const concentrationC = new ZeroOrderConcentration()
+  // concentrationC.init2Params(1, 0.1)
+  // const rateChartEquation = concentrationC
+  const rateChartEquation = new LinearEquation()
+  const minTemp = 400
+  const gasConstant = 8.314
+  const activationEnergy = useMemo(() => {
+    switch (chooseMenuIndex) {
+      case 0: return 12000
+      case 1: return 10000
+      case 2: return 8000
+      default: return 12000
+    }
+  }, [chooseMenuIndex])
+  const preExponentFactor = useMemo(() => {
+    switch (chooseMenuIndex) {
+      case 0: return 20
+      case 1: return 10
+      case 2: return 5
+      default: return 20
+    }
+  }, [chooseMenuIndex])
+  const k1 = preExponentFactor * Math.pow(Math.E, (-1 * activationEnergy) / (minTemp * gasConstant))
+  const slope = (-1 * activationEnergy) / gasConstant
+  rateChartEquation.init3Params(slope, 1 / minTemp, Math.log(k1))
 
 
   console.log({ chooseMenuIndex, val_Ea })
