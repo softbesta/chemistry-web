@@ -100,6 +100,7 @@ const EnergyProfileRateChart = (props: EnergyProfileRateChartProps) => {
         highlightLhs={true}
         highlightRhs={true}
         showFullLine={true}
+        order={-1}
       />}
     </div>
   );

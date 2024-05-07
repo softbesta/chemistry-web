@@ -3,6 +3,7 @@ import styles from './OrderCardItem.module.scss'
 
 interface OrderCardItemProps {
   orderType: number // 0, 1, 2
+  matches: number[]
   title: string
   exp0?: string
   exp1?: string
@@ -12,6 +13,7 @@ interface OrderCardItemProps {
 }
 const OrderCardItem = ({
   orderType,
+  matches,
   title,
   exp0,
   exp1,
@@ -19,9 +21,11 @@ const OrderCardItem = ({
   exp3,
   onClick,
 }: OrderCardItemProps) => {
+  let type = orderType
+  if (matches[orderType]) type = 3
   return <div
     id={`tur_orderCardItem${orderType}`}
-    className={`${styles.orderItemCard} ${styles[`type${orderType}`]}`}
+    className={`${styles.orderItemCard} ${styles[`type${type}`]}`}
     onClick={() => onClick?.()}
   >
     <div className={styles.orderTitle}>

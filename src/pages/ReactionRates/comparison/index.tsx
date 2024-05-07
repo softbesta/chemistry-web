@@ -20,6 +20,9 @@ import { convertExpToHtml } from "../../../helper/functions"
 import { ConcentrationPlotView, ReactionRateChartLayoutSettings, TimeChartLayoutSettings } from "../../../components/ConcentrationPlotView"
 import { ReactionSettings, ReactionType } from "../../../components/ConcentrationPlotView/constants"
 import { ReactionComparisonViewModel } from "../../../components/ConcentrationPlotView/ReactionComparisonViewModel"
+import { DndContext } from '@dnd-kit/core';
+import Draggable from "./Draggable"
+import Droppable from "./Droppable"
 
 const ReactionComparison = () => {
   const {
@@ -42,6 +45,9 @@ const ReactionComparison = () => {
     setIsEnableChooseMenu,
     activeDotIndex,
     setActiveDotIndex,
+    setHoverOrder,
+    hoverOrder,
+    dragOrder,
   } = useAppData()
   const valuesC = [100, 0]
   const valuesT = [0, 20]
@@ -94,6 +100,25 @@ const ReactionComparison = () => {
       }
     }
   }, [curStep, curActions])
+
+  const [orderMatches, setOrderMatches] = useState([0, 0, 0])
+  useEffect(() => { console.log({ orderMatches }) }, [orderMatches])
+
+  const handleDragEnd = ({ over }: any) => {
+    // setParent(over ? over.id : null);
+    // setHoverOrder(0)
+    if (hoverOrder === dragOrder) {
+      setOrderMatches((matches: number[]) => {
+        matches[hoverOrder - 1] = 1;
+        return [...matches]
+      })
+    }
+  }
+
+  const handleDragOver = ({ over }: any) => {
+    console.log({ over })
+    setHoverOrder(over ? over.id : 0);
+  }
 
   const getTurTextByStep = useCallback(() => {
     // turText can be undefined on new page due to curStep(lazy changes of state variable)
@@ -187,269 +212,297 @@ const ReactionComparison = () => {
   return <div className={styles.container}>
     <ChapterMenu />
 
-    <div className={styles.reactionDrawContainer}>
-      <div className={styles.chartBeakerCol}>
-        <EnergyProfile
-          index={'0'}
-          valuesC={valuesC}
-          valuesT={valuesT}
-          beakerDotColor={dotColorList[activeDotIndex]}
-          beakerState={canvaBeakerState}
-          canvasSize={beakerSize}
-          onEndPlay={() => onStepChange(1)}
-        />
-        <EnergyProfile
-          index={'1'}
-          valuesC={valuesC}
-          valuesT={valuesT}
-          beakerDotColor={dotColorList[activeDotIndex]}
-          beakerState={canvaBeakerState}
-          canvasSize={beakerSize}
-        />
-        <EnergyProfile
-          index={'2'}
-          valuesC={valuesC}
-          valuesT={valuesT}
-          beakerDotColor={dotColorList[activeDotIndex]}
-          beakerState={canvaBeakerState}
-          canvasSize={beakerSize}
-        />
-      </div>
-      <div className={styles.chartTimeCol}>
-        <div
-          id="chartTimeItem0"
-          className={styles.chartTimeItem}
-        >
-          <div className={styles.chartInA}>
-            <ConcentrationPlotView
-              {...timeInASize}
-              settings={
-                new ReactionRateChartLayoutSettings(
-                  timeInASize.width!,
-                  ReactionSettings.Axis.minC,
-                  ReactionSettings.Axis.maxC,
-                  ReactionSettings.Axis.minT,
-                  ReactionSettings.Axis.maxT,
-                  true,
-                  {} as TimeChartLayoutSettings
-                )
-              }
-              concentrationA={reaction.zeroOrder}
-              concentrationB={reaction.zeroOrderB}
-              initialTime={reaction.initialTime}
-              finalTime={reaction.finalTime0}
-              canSetCurrentTime={true}
-              highlightChart={false}
-              highlightLhsCurve={true}
-              highlightRhsCurve={false}
-              display={
-                {
-                  reactant: {
-                    name: ReactionType.reactantName.A,
-                    color: ReactionType.reactantColor.A,
-                  },
-                  product: {
-                    name: ReactionType.productName.A,
-                    color: ReactionType.productColor.A,
-                  }
-                }
-              }
-              includeAxis={false}
-              timingState={canvaTimeState}
-              onEndPlay={() => {
-                console.log('&&& timer ended &&& ')
-              }}
-              showOnlyView={true}
-            />
-          </div>
-          {/* <ChartInA
-            turIndex={'0'}
-            className={styles.chartInA}
+    <DndContext onDragEnd={handleDragEnd} onDragOver={handleDragOver}>
+      <div className={styles.reactionDrawContainer}>
+        <div className={styles.chartBeakerCol}>
+          <EnergyProfile
+            index={'0'}
             valuesC={valuesC}
-            canvaTimeSliderC={canvaTimeSliderC}
             valuesT={valuesT}
-            canvaTimeSliderT={canvaTimeSliderT}
-            canvaTimeState={canvaTimeState}
-            onTimeframeChange={val => setTimeframe(val)}
-            colors={dotColorList[activeDotIndex]}
-            textVert={`[${'A'}]`}
-            textHoriz={`Time`}
-            canvasSize={timeInASize}
-          /> */}
-          {playButtonStatus > 0 && <div
-            className={styles.playBtnContainer}
-          >
-            <Buttons.PlayButton
-              isActive={playButtonStatus === 2}
-              onPlay={() => handleClickPlayButton()}
-            />
-          </div>}
+            beakerDotColor={dotColorList[activeDotIndex]}
+            beakerState={canvaBeakerState}
+            canvasSize={beakerSize}
+            onEndPlay={() => onStepChange(1)}
+          />
+          <EnergyProfile
+            index={'1'}
+            valuesC={valuesC}
+            valuesT={valuesT}
+            beakerDotColor={dotColorList[activeDotIndex]}
+            beakerState={canvaBeakerState}
+            canvasSize={beakerSize}
+          />
+          <EnergyProfile
+            index={'2'}
+            valuesC={valuesC}
+            valuesT={valuesT}
+            beakerDotColor={dotColorList[activeDotIndex]}
+            beakerState={canvaBeakerState}
+            canvasSize={beakerSize}
+          />
         </div>
-        <div
-          id="chartTimeItem1"
-          className={styles.chartTimeItem}
-        >
+        <div className={styles.chartTimeCol}>
+          <Droppable id={1}>
+            <div
+              id="chartTimeItem0"
+              className={styles.chartTimeItem}
+            >
+              <div className={styles.chartInA}>
+                <ConcentrationPlotView
+                  {...timeInASize}
+                  settings={
+                    new ReactionRateChartLayoutSettings(
+                      timeInASize.width!,
+                      ReactionSettings.Axis.minC,
+                      ReactionSettings.Axis.maxC,
+                      ReactionSettings.Axis.minT,
+                      ReactionSettings.Axis.maxT,
+                      true,
+                      {} as TimeChartLayoutSettings
+                    )
+                  }
+                  concentrationA={reaction.zeroOrder}
+                  concentrationB={reaction.zeroOrderB}
+                  initialTime={reaction.initialTime}
+                  finalTime={reaction.finalTime0}
+                  canSetCurrentTime={true}
+                  highlightChart={false}
+                  highlightLhsCurve={true}
+                  highlightRhsCurve={false}
+                  display={
+                    {
+                      reactant: {
+                        name: ReactionType.reactantName.A,
+                        color: ReactionType.reactantColor.A,
+                      },
+                      product: {
+                        name: ReactionType.productName.A,
+                        color: ReactionType.productColor.A,
+                      }
+                    }
+                  }
+                  includeAxis={false}
+                  timingState={canvaTimeState}
+                  onEndPlay={() => {
+                    console.log('&&& timer ended &&& ')
+                  }}
+                  showOnlyView={true}
+                  order={0}
+                />
+              </div>
+              {/* <ChartInA
+              turIndex={'0'}
+              className={styles.chartInA}
+              valuesC={valuesC}
+              canvaTimeSliderC={canvaTimeSliderC}
+              valuesT={valuesT}
+              canvaTimeSliderT={canvaTimeSliderT}
+              canvaTimeState={canvaTimeState}
+              onTimeframeChange={val => setTimeframe(val)}
+              colors={dotColorList[activeDotIndex]}
+              textVert={`[${'A'}]`}
+              textHoriz={`Time`}
+              canvasSize={timeInASize}
+            /> */}
+              {playButtonStatus > 0 && <div
+                className={styles.playBtnContainer}
+              >
+                <Buttons.PlayButton
+                  isActive={playButtonStatus === 2}
+                  onPlay={() => handleClickPlayButton()}
+                />
+              </div>}
+            </div>
+          </Droppable>
+          <Droppable id={2}>
+            <div
+              id="chartTimeItem1"
+              className={styles.chartTimeItem}
+            >
 
-          <div className={styles.chartInA}>
-            <ConcentrationPlotView
-              {...timeInASize}
-              settings={
-                new ReactionRateChartLayoutSettings(
-                  timeInASize.width!,
-                  ReactionSettings.Axis.minC,
-                  ReactionSettings.Axis.maxC,
-                  ReactionSettings.Axis.minT,
-                  ReactionSettings.Axis.maxT,
-                  true,
-                  {} as TimeChartLayoutSettings
-                )
-              }
-              concentrationA={reaction.firstOrder}
-              concentrationB={reaction.firstOrderB}
-              initialTime={reaction.initialTime}
-              finalTime={reaction.finalTime1}
-              canSetCurrentTime={true}
-              highlightChart={false}
-              highlightLhsCurve={true}
-              highlightRhsCurve={false}
-              display={
-                {
-                  reactant: {
-                    name: ReactionType.reactantName.A,
-                    color: ReactionType.reactantColor.A,
-                  },
-                  product: {
-                    name: ReactionType.productName.A,
-                    color: ReactionType.productColor.A,
+              <div className={styles.chartInA}>
+                <ConcentrationPlotView
+                  {...timeInASize}
+                  settings={
+                    new ReactionRateChartLayoutSettings(
+                      timeInASize.width!,
+                      ReactionSettings.Axis.minC,
+                      ReactionSettings.Axis.maxC,
+                      ReactionSettings.Axis.minT,
+                      ReactionSettings.Axis.maxT,
+                      true,
+                      {} as TimeChartLayoutSettings
+                    )
                   }
-                }
-              }
-              includeAxis={false}
-              timingState={canvaTimeState}
-              onEndPlay={() => {
-                console.log('&&& timer ended &&& ')
-              }}
-              showOnlyView={true}
-            />
-          </div>
-          {/* <ChartInA
-            turIndex={'1'}
-            className={styles.chartInA}
-            valuesC={valuesC}
-            canvaTimeSliderC={canvaTimeSliderC}
-            valuesT={valuesT}
-            canvaTimeSliderT={canvaTimeSliderT}
-            canvaTimeState={canvaTimeState}
-            onTimeframeChange={val => setTimeframe(val)}
-            colors={dotColorList[activeDotIndex]}
-            textVert={`[${'A'}]`}
-            textHoriz={`Time`}
-            canvasSize={timeInASize}
-          /> */}
-          {playButtonStatus > 0 && <div
-            className={styles.playBtnContainer}
-          >
-            <Buttons.PlayButton
-              isActive={playButtonStatus === 2}
-              onPlay={() => handleClickPlayButton()}
-            />
-          </div>}
-        </div>
-        <div
-          id="chartTimeItem2"
-          className={styles.chartTimeItem}
-        >
-          <div className={styles.chartInA}>
-            <ConcentrationPlotView
-              {...timeInASize}
-              settings={
-                new ReactionRateChartLayoutSettings(
-                  timeInASize.width!,
-                  ReactionSettings.Axis.minC,
-                  ReactionSettings.Axis.maxC,
-                  ReactionSettings.Axis.minT,
-                  ReactionSettings.Axis.maxT,
-                  true,
-                  {} as TimeChartLayoutSettings
-                )
-              }
-              concentrationA={reaction.secondOrder}
-              concentrationB={reaction.secondOrderB}
-              initialTime={reaction.initialTime}
-              finalTime={reaction.finalTime2}
-              canSetCurrentTime={true}
-              highlightChart={false}
-              highlightLhsCurve={true}
-              highlightRhsCurve={false}
-              display={
-                {
-                  reactant: {
-                    name: ReactionType.reactantName.A,
-                    color: ReactionType.reactantColor.A,
-                  },
-                  product: {
-                    name: ReactionType.productName.A,
-                    color: ReactionType.productColor.A,
+                  concentrationA={reaction.firstOrder}
+                  concentrationB={reaction.firstOrderB}
+                  initialTime={reaction.initialTime}
+                  finalTime={reaction.finalTime1}
+                  canSetCurrentTime={true}
+                  highlightChart={false}
+                  highlightLhsCurve={true}
+                  highlightRhsCurve={false}
+                  display={
+                    {
+                      reactant: {
+                        name: ReactionType.reactantName.A,
+                        color: ReactionType.reactantColor.A,
+                      },
+                      product: {
+                        name: ReactionType.productName.A,
+                        color: ReactionType.productColor.A,
+                      }
+                    }
                   }
-                }
-              }
-              includeAxis={false}
-              timingState={canvaTimeState}
-              onEndPlay={() => {
-                console.log('&&& timer ended &&& ')
-              }}
-              showOnlyView={true}
-            />
-          </div>
-          {/* <ChartInA
-            turIndex={'2'}
-            className={styles.chartInA}
-            valuesC={valuesC}
-            canvaTimeSliderC={canvaTimeSliderC}
-            valuesT={valuesT}
-            canvaTimeSliderT={canvaTimeSliderT}
-            canvaTimeState={canvaTimeState}
-            onTimeframeChange={val => setTimeframe(val)}
-            colors={dotColorList[activeDotIndex]}
-            textVert={`[${'A'}]`}
-            textHoriz={`Time`}
-            canvasSize={timeInASize}
-          /> */}
-          {playButtonStatus > 0 && <div
-            className={styles.playBtnContainer}
-          >
-            <Buttons.PlayButton
-              isActive={playButtonStatus === 2}
-              onPlay={() => handleClickPlayButton()}
-            />
-          </div>}
+                  includeAxis={false}
+                  timingState={canvaTimeState}
+                  onEndPlay={() => {
+                    console.log('&&& timer ended &&& ')
+                  }}
+                  showOnlyView={true}
+                  order={1}
+                />
+              </div>
+              {/* <ChartInA
+              turIndex={'1'}
+              className={styles.chartInA}
+              valuesC={valuesC}
+              canvaTimeSliderC={canvaTimeSliderC}
+              valuesT={valuesT}
+              canvaTimeSliderT={canvaTimeSliderT}
+              canvaTimeState={canvaTimeState}
+              onTimeframeChange={val => setTimeframe(val)}
+              colors={dotColorList[activeDotIndex]}
+              textVert={`[${'A'}]`}
+              textHoriz={`Time`}
+              canvasSize={timeInASize}
+            /> */}
+              {playButtonStatus > 0 && <div
+                className={styles.playBtnContainer}
+              >
+                <Buttons.PlayButton
+                  isActive={playButtonStatus === 2}
+                  onPlay={() => handleClickPlayButton()}
+                />
+              </div>}
+            </div>
+          </Droppable>
+          <Droppable id={3}>
+            <div
+              id="chartTimeItem2"
+              className={styles.chartTimeItem}
+            >
+              <div className={styles.chartInA}>
+                <ConcentrationPlotView
+                  {...timeInASize}
+                  settings={
+                    new ReactionRateChartLayoutSettings(
+                      timeInASize.width!,
+                      ReactionSettings.Axis.minC,
+                      ReactionSettings.Axis.maxC,
+                      ReactionSettings.Axis.minT,
+                      ReactionSettings.Axis.maxT,
+                      true,
+                      {} as TimeChartLayoutSettings
+                    )
+                  }
+                  concentrationA={reaction.secondOrder}
+                  concentrationB={reaction.secondOrderB}
+                  initialTime={reaction.initialTime}
+                  finalTime={reaction.finalTime2}
+                  canSetCurrentTime={true}
+                  highlightChart={false}
+                  highlightLhsCurve={true}
+                  highlightRhsCurve={false}
+                  display={
+                    {
+                      reactant: {
+                        name: ReactionType.reactantName.A,
+                        color: ReactionType.reactantColor.A,
+                      },
+                      product: {
+                        name: ReactionType.productName.A,
+                        color: ReactionType.productColor.A,
+                      }
+                    }
+                  }
+                  includeAxis={false}
+                  timingState={canvaTimeState}
+                  onEndPlay={() => {
+                    console.log('&&& timer ended &&& ')
+                  }}
+                  showOnlyView={true}
+                  order={2}
+                />
+              </div>
+              {/* <ChartInA
+              turIndex={'2'}
+              className={styles.chartInA}
+              valuesC={valuesC}
+              canvaTimeSliderC={canvaTimeSliderC}
+              valuesT={valuesT}
+              canvaTimeSliderT={canvaTimeSliderT}
+              canvaTimeState={canvaTimeState}
+              onTimeframeChange={val => setTimeframe(val)}
+              colors={dotColorList[activeDotIndex]}
+              textVert={`[${'A'}]`}
+              textHoriz={`Time`}
+              canvasSize={timeInASize}
+            /> */}
+              {playButtonStatus > 0 && <div
+                className={styles.playBtnContainer}
+              >
+                <Buttons.PlayButton
+                  isActive={playButtonStatus === 2}
+                  onPlay={() => handleClickPlayButton()}
+                />
+              </div>}
+            </div>
+          </Droppable>
         </div>
       </div>
-    </div>
-    <div className={styles.reactionContentContainer}>
-      <div className={styles.orderListContainer}>
-        {orderListItems.map((item, index) => <OrderCardItem
-          key={index}
-          orderType={index}
-          {...item}
-        />)}
+      <div className={styles.reactionContentContainer}>
+        <div className={styles.orderListContainer}>
+          {orderListItems.map((item, index) => {
+            if (orderMatches[index]) {
+              return (
+                <OrderCardItem
+                  key={index}
+                  orderType={index}
+                  {...item}
+                  matches={orderMatches}
+                />
+              )
+            } else {
+              return (
+                <Draggable id={index + 1} key={index}>
+                  <OrderCardItem
+                    orderType={index}
+                    {...item}
+                    matches={orderMatches}
+                  />
+                </Draggable>
+              )
+            }
+          })}
 
-        {isOrderItemMove && <HandDragOrderItem
-          isAnimate={isOrderItemMove}
-        />}
-        {/* <button onClick={() => {
-          console.log({ isOrderItemMove })
-          console.log({ valuesC, valuesT })
-          // setIsOrderItemMove(v => !v)
-        }}>TestAnimation</button> */}
+          {isOrderItemMove && <HandDragOrderItem
+            isAnimate={isOrderItemMove}
+          />}
+          {/* <button onClick={() => {
+            console.log({ isOrderItemMove })
+            console.log({ valuesC, valuesT })
+            // setIsOrderItemMove(v => !v)
+          }}>TestAnimation</button> */}
+        </div>
+        <TutorialControl
+          className={styles.tutorial}
+          turText={getTurTextByStep()}
+          onStepChange={onStepChange}
+          isDisableNextButton={isEnableChooseMenu}
+        />
       </div>
-      <TutorialControl
-        className={styles.tutorial}
-        turText={getTurTextByStep()}
-        onStepChange={onStepChange}
-        isDisableNextButton={isEnableChooseMenu}
-      />
-    </div>
+    </DndContext>
     {isHighlight && <div className='overlay'></div>}
   </div>
 }

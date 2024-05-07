@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { Equation } from './Equation';
 import { LinearAxis } from './LinearAxis';
+import useAppData from '../../hooks/useAppData';
 
 type TimeChartDataLine = {
   equation: Equation
@@ -37,6 +38,7 @@ type TimeChartDataLineViewProps = {
   minDragTime?: number
   showOnlyView?: boolean
   showFullLine?: boolean
+  order: number
 }
 
 type Rect = {
@@ -63,7 +65,9 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     minDragTime = null,
     showOnlyView = false,
     showFullLine = false,
+    order
   } = props;
+  const { hoverOrder, isOver, dragOrder } = useAppData()
   const canvas = React.useRef<HTMLCanvasElement>(null);
   React.useEffect(() => {
     const ctx = canvas?.current?.getContext('2d');
@@ -125,11 +129,24 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
         ctx.beginPath()
         ctx.strokeStyle = 'transparent'
         ctx.rect(0, rectHeight * 0.28, rectWidth * 0.72, rectHeight * (1 - 0.28))
-        ctx.strokeStyle = 'black'
+        let color = 'black'
+        console.log({hoverOrder})
+        ctx.lineWidth = 1
+        if (isOver && hoverOrder === (order + 1)) {
+          switch(dragOrder) {          
+            case 0: color = 'black'; break;
+            case 1: color = 'rgb(84, 187, 239)'; break;
+            case 2: color = 'rgb(222, 55, 42)'; break;
+            case 3: color = 'rgb(248, 208, 72)'; break;
+            default: color = 'black'
+          }
+          ctx.lineWidth = 2
+        }
+        ctx.strokeStyle = color
         ctx.stroke()
       }
     }
-  }, [currentTime])
+  }, [currentTime, hoverOrder, dragOrder, isOver, order])
 
   const head = (
     ctx: CanvasRenderingContext2D,

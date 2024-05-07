@@ -66,6 +66,17 @@ interface IAppContext {
   // test purpose
   count: number,
   setCount: React.Dispatch<React.SetStateAction<number>>,
+
+  // drag n drop hover color
+  hoverOrder: number,
+  setHoverOrder: React.Dispatch<React.SetStateAction<number>>,
+
+  dragOrder: number,
+  setDragOrder: React.Dispatch<React.SetStateAction<number>>,
+  
+  // hover Status
+  isOver: boolean,
+  setIsOver: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const initialState = {
@@ -150,6 +161,10 @@ export const AppDataProvider = (props: any) => {
   // 0: hidden, 1: moveable, 2: menu item disabled, 3: menu item active
   const [catalystItemStates, setCatalystItemStates] = useState(initialState.catalystItemStates)
 
+  const [hoverOrder, setHoverOrder] = useState(0)
+  const [dragOrder, setDragOrder] = useState(0)
+  const [isOver, setIsOver] = useState(false)
+
   // need update, don't use yet
   const updateStepPlay = (step: number) => {
     let update = curStep + step
@@ -207,6 +222,11 @@ export const AppDataProvider = (props: any) => {
 
         // test purpose
         count, setCount,
+        // drag n drop hover color
+        hoverOrder, setHoverOrder,
+        // hover Status
+        isOver, setIsOver,
+        dragOrder, setDragOrder,
       }}
     >
       {children}

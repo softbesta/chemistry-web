@@ -32,6 +32,7 @@ type ConcentrationPlotViewProps = {
   timingState: number
   onEndPlay?: () => void
   showOnlyView?: boolean
+  order: number
 }
 
 type Rect = {
@@ -58,6 +59,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
     timingState,
     onEndPlay,
     showOnlyView,
+    order,
   } = props;
   const canvas = React.useRef<HTMLCanvasElement>(null);
   const [currentTime, setCurrentTime] = useState(initialTime)
@@ -258,6 +260,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
           canSetCurrentTime={canSetCurrentTime}
           highlightLhs={false}
           highlightRhs={false}
+          order={order}
         />
       }
       <TimeChartDataLineView
@@ -280,6 +283,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
         highlightLhs={highlightLhsCurve}
         highlightRhs={highlightRhsCurve}
         showOnlyView={showOnlyView}
+        order={order}
       />
       {/* </div> */}
     </div>
