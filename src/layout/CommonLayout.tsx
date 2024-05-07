@@ -22,7 +22,7 @@ const CommonLayout = ({
   // console.log({ isQuiz, curMenu, curMenuType: routes[curMenu].type })
   const scaleX = window.innerWidth / contentSize.width
   const scaleY = window.innerHeight / contentSize.height
-  const [scale, setScale] = useState<number | undefined>(Math.min(scaleX, scaleY))
+  const [scale, setScale] = useState<number | undefined>(1)
   console.log({ window })
 
   useEffect(() => {
