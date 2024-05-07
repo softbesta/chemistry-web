@@ -1,6 +1,7 @@
-import ReactSlider from "react-slider"
 import styles from './SliderHoriz.module.scss'
 import { useMemo } from "react"
+import MultiRangeSliderHoriz from "../MutiRangeSlider/MultiRangeSliderHoriz"
+import ReactSlider from 'react-slider'
 
 interface SliderHoriz {
   valuesT: number[]
@@ -9,6 +10,7 @@ interface SliderHoriz {
 }
 
 const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
+
   const infoT = useMemo(() => {
     let showCount = 0, disabledCount = 0
     showThumbIndex.forEach(item => {
@@ -20,6 +22,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
       disabledCount
     }
   }, [showThumbIndex])
+
   const getValueT = () => {
     let update: number[] = []
     if (showThumbIndex[0] > 0 && showThumbIndex[1] > 0) {
@@ -34,8 +37,9 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
     } else update = []
     return update.map(item => item * 10)
   }
+
   const handleChangeVal = (val: number[] | number) => {
-    console.log('===handleChangeAB=== ', { values: val, valuesT: valuesT })
+    // console.log('===handleChangeAB=== ', { values: val, valuesT: valuesT })
     let update: number[] = [valuesT[0] * 10, valuesT[1] * 10]
     if (Array.isArray(val)) {
       if (showThumbIndex[0] === 2) {
@@ -67,49 +71,56 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
     }
     return res / 10
   }, [getValueT])
-  return <div className={styles.container}>
-    <div className={styles.sliceHorizontalBar} />
-    <div className={styles.sliceHorizontal}>
-      {infoT.showCount > 0 && <ReactSlider
-        className={styles['horizontal-slider']}
-        thumbClassName={styles['example-thumb']}
-        trackClassName={styles['example-track']}
-        value={getValueT()}
-        min={0}
-        max={200}
-        step={1}
-        onChange={(val, index) => {
-          // console.log({ val, index })
-          handleChangeVal(val)
-        }}
-        renderThumb={(props, state) => {
-          const { index } = state
-          let disabledclass = ''
-          if (index === 0 && showThumbIndex[0] === 1) {
-            disabledclass = styles.disabled
-          }
-          if (index === 1 && showThumbIndex[1] === 1) {
-            disabledclass = styles.disabled
-          }
-          return <div
-            {...props}
-            className={`${disabledclass} ${props.className}`}
-          ></div>
-        }}
-      // disabled
-      // renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
-      />}
+
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.sliceHorizontal}>
+        {
+          infoT.showCount > 0 &&
+          <>
+            <ReactSlider
+              className={styles['horizontal-slider']}
+              thumbClassName={styles['example-thumb']}
+              trackClassName={styles['example-track']}
+              value={getValueT()}
+              min={0}
+              max={200}
+              step={1}
+              onChange={(val, index) => {
+                // console.log({ val, index })
+                handleChangeVal(val)
+              }}
+              renderThumb={(props, state) => {
+                const { index } = state
+                let disabledclass = ''
+                if (index === 0 && showThumbIndex[0] === 1) {
+                  disabledclass = styles.disabled
+                }
+                if (index === 1 && showThumbIndex[1] === 1) {
+                  disabledclass = styles.disabled
+                }
+                return <div
+                  {...props}
+                  className={`${disabledclass} ${props.className}`}
+                ></div>
+              }}
+            />
+            <MultiRangeSliderHoriz
+              max={200}
+              width={230}
+              distance={20}
+              showThumbIndex={showThumbIndex}
+              values={getValueT()}
+              onChange={(val, index) => handleChangeVal(val)}
+            />
+          </>
+        }
+      </div>
+      <div className={styles.textHoriz}>
+        <p>{`Time:`} <span className='txt-red'>{textT?.toFixed(1)} s</span></p>
+      </div>
     </div>
-    <div className={styles.textHoriz}>
-      <p>{`Time:`} <span className='txt-red'>{textT?.toFixed(1)} s</span></p>
-    </div>
-    {/* <button
-      className={styles.test1}
-      onClick={() => {
-        console.log(getValueT())
-        console.log({ valuesT, showIndexT, infoT })
-      }}
-    >555</button> */}
-  </div>
+  )
 }
 export default SliderHoriz

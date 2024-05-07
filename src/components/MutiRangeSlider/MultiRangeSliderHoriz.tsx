@@ -11,6 +11,7 @@ interface MultiRangeSliderProps {
   values: number[]
   onChange: (val: number, index: number) => void
 }
+
 const MultiRangeSliderHoriz = ({
   max,
   width,
