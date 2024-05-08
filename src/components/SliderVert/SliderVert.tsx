@@ -57,8 +57,9 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, textVer
     }
     // console.log({ update })
     if (update[0] < 27) update[0] = 27
+    if (update[1] < 10) update[1] = 10
     if (update[1] > update[0] - 13) update[1] = update[0] - 13
-    
+
     setValuesC(update)
   }
 
