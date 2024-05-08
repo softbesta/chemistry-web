@@ -23,15 +23,17 @@ interface PrevButtonProps {
   className?: string
   onClick: () => void
 }
-export const NextButton = ({ className, onClick, disabled, ...restProps }: PrevButtonProps) => {
-  return <button
-    className={`${styles.nextBtn} ${disabled ? styles.disabledNext : ''} ${className || ''}`}
-    onClick={() => onClick()}
-    disabled={disabled}
-    {...restProps}
-  >
-    Next <span>&#9654;</span>
-  </button>
+export const NextButton = ({ id, className, onClick, disabled, ...restProps }: PrevButtonProps) => {
+  return <div id={id}>
+    <button
+      className={`${styles.nextBtn} ${disabled ? styles.disabledNext : ''} ${className || ''}`}
+      onClick={() => onClick()}
+      disabled={disabled}
+      {...restProps}
+    >
+      Next <span>&#9654;</span>
+    </button>
+  </div>
 }
 
 interface PlayButtonProps {

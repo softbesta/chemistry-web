@@ -22,7 +22,7 @@ const OrderCardItem = ({
   onClick,
 }: OrderCardItemProps) => {
   let type = orderType
-  if (matches[orderType]) type = 3
+  if (matches[orderType] === 2) type = 3  // gray
   return <div
     id={`tur_orderCardItem${orderType}`}
     className={`${styles.orderItemCard} ${styles[`type${type}`]}`}

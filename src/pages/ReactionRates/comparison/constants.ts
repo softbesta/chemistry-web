@@ -99,6 +99,8 @@ export const stepsActions = [
     isEnableChooseMenu: false,
     orderItemMove: false,
     playButtonStatus: 1,
+    draggableOrder: [0, 0, 0],
+    isDisableNextButton: false,
   },
   // 1   These equations on the...
   { // 1
@@ -107,6 +109,8 @@ export const stepsActions = [
     isEnableChooseMenu: false,
     orderItemMove: false,
     playButtonStatus: 1,
+    draggableOrder: [0, 0, 0],
+    isDisableNextButton: false,
   },
   // 2   On the left, we have...
   { // 2
@@ -115,6 +119,8 @@ export const stepsActions = [
     isEnableChooseMenu: false,
     orderItemMove: false,
     playButtonStatus: 1,
+    draggableOrder: [0, 0, 0],
+    isDisableNextButton: false,
   },
   // 3   Let's try something...
   { // 3
@@ -123,6 +129,8 @@ export const stepsActions = [
     isEnableChooseMenu: false,
     orderItemMove: true,
     playButtonStatus: 1,
+    draggableOrder: [0, 0, 0],
+    isDisableNextButton: false,
   },
   // 4   Tap next or press play...
   { // 4
@@ -131,6 +139,8 @@ export const stepsActions = [
     isEnableChooseMenu: false,
     orderItemMove: false,
     playButtonStatus: 2,
+    draggableOrder: [0, 0, 0],
+    isDisableNextButton: false,
   },
   // 5   Let's see how long...
   { // 5
@@ -139,6 +149,8 @@ export const stepsActions = [
     isEnableChooseMenu: false,
     orderItemMove: false,
     playButtonStatus: 0,
+    draggableOrder: [1, 1, 1],
+    isDisableNextButton: true,
   },
   // 6   Awesome!...
   { // 6
@@ -147,6 +159,7 @@ export const stepsActions = [
     isEnableChooseMenu: false,
     orderItemMove: false,
     playButtonStatus: 0,
+    isDisableNextButton: false,
   },
   // 7   Took you a while...
   { // 7
@@ -155,6 +168,7 @@ export const stepsActions = [
     isEnableChooseMenu: false,
     orderItemMove: false,
     playButtonStatus: 0,
+    isDisableNextButton: false,
   },
 ]
 

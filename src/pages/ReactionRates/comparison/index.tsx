@@ -58,6 +58,9 @@ const ReactionComparison = () => {
   } = useFunctions()
 
   const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
+  const [isDisableNextButton, setIsDisableNextButton] = useState<boolean>(false)
+  const [shuffledOrder] = useState([1, 2, 3].sort((a, b) => 0.5 - Math.random()))
+  console.log({ shuffledArray: shuffledOrder })
 
   // *** Setup tutorial actions here
   const tutorials = Array.from(Array(tur_Text.length).keys()).map(idx => {
@@ -71,7 +74,7 @@ const ReactionComparison = () => {
   // *** Tutorial-ACTIONS  - curStep changes
   const curActions = tutorials[curStep]?.actions as any
   useEffect(() => {
-    console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep })
+    console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep, curActions })
     // console.log('curActions: ', { curActions, curStep })
     if (curActions) {
       if (curActions?.canvaTimeState !== undefined) {
@@ -92,11 +95,17 @@ const ReactionComparison = () => {
       if (curActions?.playButtonStatus !== undefined) {
         setPlayButtonStatus(curActions.playButtonStatus)
       }
+      if (curActions?.isDisableNextButton !== undefined) {
+        setIsDisableNextButton(curActions.isDisableNextButton)
+      }
       if (Array.isArray(curActions?.canvaTimeSliderC)) {
         setCanvaTimeSliderC(curActions.canvaTimeSliderC)
       }
       if (Array.isArray(curActions?.canvaTimeSliderT)) {
         setCanvaTimeSliderT(curActions.canvaTimeSliderT)
+      }
+      if (Array.isArray(curActions?.draggableOrder)) {
+        setOrderMatches(curActions.draggableOrder)
       }
     }
   }, [curStep, curActions])
@@ -108,10 +117,12 @@ const ReactionComparison = () => {
     // setParent(over ? over.id : null);
     // setHoverOrder(0)
     if (hoverOrder === dragOrder) {
-      setOrderMatches((matches: number[]) => {
-        matches[hoverOrder - 1] = 1;
-        return [...matches]
-      })
+      const update = [...orderMatches]
+      update[hoverOrder - 1] = 2
+      setOrderMatches(update)
+      if (update.every(v => v === 2)) {
+        setIsDisableNextButton(false)
+      }
     }
   }
 
@@ -222,7 +233,9 @@ const ReactionComparison = () => {
             beakerDotColor={dotColorList[activeDotIndex]}
             beakerState={canvaBeakerState}
             canvasSize={beakerSize}
-            onEndPlay={() => onStepChange(1)}
+            onEndPlay={() => {
+              // onStepChange(1)
+            }}
           />
           <EnergyProfile
             index={'1'}
@@ -242,7 +255,12 @@ const ReactionComparison = () => {
           />
         </div>
         <div className={styles.chartTimeCol}>
-          <Droppable id={1}>
+          <Droppable
+            id={1}
+            style={{
+              order: shuffledOrder[0]
+            }}
+          >
             <div
               id="chartTimeItem0"
               className={styles.chartTimeItem}
@@ -314,7 +332,12 @@ const ReactionComparison = () => {
               </div>}
             </div>
           </Droppable>
-          <Droppable id={2}>
+          <Droppable
+            id={2}
+            style={{
+              order: shuffledOrder[1]
+            }}
+          >
             <div
               id="chartTimeItem1"
               className={styles.chartTimeItem}
@@ -387,7 +410,12 @@ const ReactionComparison = () => {
               </div>}
             </div>
           </Droppable>
-          <Droppable id={3}>
+          <Droppable
+            id={3}
+            style={{
+              order: shuffledOrder[2]
+            }}
+          >
             <div
               id="chartTimeItem2"
               className={styles.chartTimeItem}
@@ -464,7 +492,21 @@ const ReactionComparison = () => {
       <div className={styles.reactionContentContainer}>
         <div className={styles.orderListContainer}>
           {orderListItems.map((item, index) => {
-            if (orderMatches[index]) {
+            if (orderMatches[index] === 1) {
+              return (
+                <Draggable
+                  id={index + 1}
+                  key={index}
+                >
+                <OrderCardItem
+                  key={index}
+                    orderType={index}
+                    {...item}
+                    matches={orderMatches}
+                  />
+                </Draggable>
+              )
+            } else {
               return (
                 <OrderCardItem
                   key={index}
@@ -472,16 +514,6 @@ const ReactionComparison = () => {
                   {...item}
                   matches={orderMatches}
                 />
-              )
-            } else {
-              return (
-                <Draggable id={index + 1} key={index}>
-                  <OrderCardItem
-                    orderType={index}
-                    {...item}
-                    matches={orderMatches}
-                  />
-                </Draggable>
               )
             }
           })}
@@ -499,11 +531,11 @@ const ReactionComparison = () => {
           className={styles.tutorial}
           turText={getTurTextByStep()}
           onStepChange={onStepChange}
-          isDisableNextButton={isEnableChooseMenu}
+          isDisableNextButton={isDisableNextButton}
         />
       </div>
-    </DndContext>
+    </DndContext >
     {isHighlight && <div className='overlay'></div>}
-  </div>
+  </div >
 }
 export default ReactionComparison

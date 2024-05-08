@@ -23,6 +23,8 @@
 
     .chartTimeCol {
       position: relative;
+      display: flex;
+      flex-direction: column;
 
       .chartTimeItem{
         position: relative;

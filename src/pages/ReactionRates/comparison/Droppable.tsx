@@ -8,10 +8,11 @@ const Droppable = (props: any) => {
     const { isOver, setNodeRef } = useDroppable({
         id: props.id,
     });
-    const style: any = {
-        // opacity: isOver ? 1 : 0.5,
-        // position: 'absolute',
-    };
+    const { style } = props
+    // const style: any = {
+    // opacity: isOver ? 1 : 0.5,
+    // position: 'absolute',
+    // };
     useEffect(() => {
         setIsOver(isOver)
     }, [isOver])
