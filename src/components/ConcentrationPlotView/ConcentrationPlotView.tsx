@@ -234,7 +234,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
       onEndPlay?.()
       return
     }
-    setCurrentTime(timeCounter)
+    setCurrentTime(initialTime + timeCounter)
   }, [timeCounter])
 
   return (

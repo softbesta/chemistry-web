@@ -160,7 +160,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
       data.xEquation!,
       settings.yAxis,
       settings.xAxis,
-      initialTime,
+      currentTime,
       offset,
       color,
     )
