@@ -58,6 +58,7 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, textVer
     // console.log({ update })
     if (update[0] < 27) update[0] = 27
     if (update[1] > update[0] - 13) update[1] = update[0] - 13
+    
     setValuesC(update)
   }
 
@@ -70,46 +71,15 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, textVer
   }, [getValueC])
 
   return <div className={styles.container}>
-    {/* <div className={styles.sliceVerticalBar} /> */}
     <div className={styles.sliceVertical}>
       {
         infoC.showCount > 0 &&
         <div style={{ position: 'relative' }}>
-          {/* <ReactSlider
-            className={`${styles['vertical-slider']} ${disabledClass}`}
-            thumbClassName={styles['example-thumb']}
-            trackClassName={styles['example-track']}
-            orientation="vertical"
-            invert
-            value={getValueC()}
-            min={0}
-            max={100}
-            minDistance={13}
-            onChange={(val, index) => {
-              // console.log({ val, index })
-              handleChangeAB(val)
-            }}
-            renderThumb={(props, state) => {
-              // console.log('sliderthumb ===0', {state, showIndexC})
-              const { index } = state
-              let disabledclass = ''
-              if (index === 1 && showIndexC[0] === 1) {
-                disabledclass = styles.disabled
-              }
-              if (index === 0 && showIndexC[1] === 1) {
-                disabledclass = styles.disabled
-              }
-              return <div
-                {...props}
-                className={`${disabledclass} ${props.className}`}
-              ></div>
-            }}
-          /> */}
           <div className={styles.sliderback}></div>
           <MultiRangeSliderVert
             max={100}
             width={178}
-            distance={20}
+            distance={10}
             showThumbIndex={showIndexC}
             values={getValueC()}
             onChange={(val, index) => handleChangeAB(val)}

@@ -82,33 +82,6 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
         {
           infoT.showCount > 0 &&
           <div style={{ position: 'relative' }}>
-            {/* <ReactSlider
-              className={styles['horizontal-slider']}
-              thumbClassName={styles['example-thumb']}
-              trackClassName={styles['example-track']}
-              value={getValueT()}
-              min={0}
-              max={300}
-              step={1}
-              onChange={(val, index) => {
-                // console.log({ val, index })
-                handleChangeVal(val)
-              }}
-              renderThumb={(props, state) => {
-                const { index } = state
-                let disabledclass = ''
-                if (index === 0 && showThumbIndex[0] === 1) {
-                  disabledclass = styles.disabled
-                }
-                if (index === 1 && showThumbIndex[1] === 1) {
-                  disabledclass = styles.disabled
-                }
-                return <div
-                  {...props}
-                  className={`${disabledclass} ${props.className}`}
-                ></div>
-              }}
-            /> */}
             <div className={styles.sliderback}></div>
             <MultiRangeSliderHoriz
               max={200}

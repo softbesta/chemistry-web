@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import classnames from 'classnames'
 import './slider.css'
 
@@ -21,8 +21,25 @@ const MultiRangeSliderVert = ({
   const valLeft = values[0]
   const valRight = values[1]
 
-  const minDisabled = showThumbIndex[0] === 1 ? true : false
-  const maxDisabled = showThumbIndex[1] === 1 ? true : false
+  const [minDisabled, setMinDisabled] = useState<boolean>(false);
+  const [maxDisabled, setMaxDisabled] = useState<boolean>(false);
+
+  useEffect(() => {
+    setMaxDisabled(true);
+    setMinDisabled(true);
+    if (showThumbIndex[0] === 2 && showThumbIndex[1] === 1) {
+      setMaxDisabled(false);
+    } else if (showThumbIndex[1] === 2 && showThumbIndex[0] === 1) {
+      setMinDisabled(false);
+    } else if (showThumbIndex[1] === 2 && showThumbIndex[0] === 0) {
+      setMaxDisabled(false);
+      setMinDisabled(false);
+    } else if (showThumbIndex[0] === 2 && showThumbIndex[1] === 0) { 
+      setMaxDisabled(false);
+      setMinDisabled(false);
+    }
+  }, showThumbIndex)
+
   const isLeftOverlap = maxDisabled || valLeft > max - 10
 
   const onChangeValue = (val: number, index: number) => {
