@@ -396,6 +396,50 @@ export const tur_MathBlanks = [
     { left: 0, top: 248, width: 36 }, //4
     { left: 105, top: 248, width: 32 }, //6
   ],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+
+  // 14
+  [
+    { left: 38, top: 81, width: 33 }, //1
+    { left: 56, top: 112, width: 48 }, //1-1
+    { left: 0, top: 248, width: 36 }, //4
+    { left: 105, top: 248, width: 32 }, //6
+  ],
+  [
+    { left: 0, top: 248, width: 36 }, //4
+    { left: 105, top: 248, width: 32 }, //6
+  ],
+  [],
+  [],
+  [],
+
+  // 19
+  [
+    { left: 38, top: 81, width: 33 }, //1
+    { left: 56, top: 112, width: 48 }, //1-1
+    { left: 0, top: 248, width: 36 }, //4
+    { left: 105, top: 248, width: 32 }, //6
+  ],
+  [
+    { left: 0, top: 248, width: 36 }, //4
+    { left: 105, top: 248, width: 32 }, //6
+  ],
+  [],
+  [],
+  [],
+  [],
+  [],
 ]
 
 export const maxStep_Second = tur_Text.length // 23 steps
