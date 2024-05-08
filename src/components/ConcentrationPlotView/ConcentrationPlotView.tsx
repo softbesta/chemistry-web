@@ -91,10 +91,17 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
       // }
 
       if (includeAxis) {
+        ctx.clearRect(
+          0,
+          0,
+          rect.width,
+          rect.height,
+        );
         verticalIndicator(ctx, initialTime)
         verticalIndicator(ctx, finalTime)
         horizontalIndicator(ctx, concentrationA.getValue(initialTime))
         horizontalIndicator(ctx, concentrationA.getValue(finalTime))
+        console.log(Date.now())
       }
 
       if (includeAxis) {
@@ -103,7 +110,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
     }
 
     // console.log({ concentrationA, concentrationB, initialTime, finalTime })
-  }, [])
+  }, [initialTime, finalTime])
 
   // const rectangleHighlight = (
   //   ctx: CanvasRenderingContext2D,

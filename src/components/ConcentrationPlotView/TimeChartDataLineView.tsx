@@ -146,7 +146,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
         ctx.stroke()
       }
     }
-  }, [data, currentTime, hoverOrder, dragOrder, isOver, order])
+  }, [data, initialTime, currentTime, finalTime, hoverOrder, dragOrder, isOver, order])
 
   const head = (
     ctx: CanvasRenderingContext2D,
@@ -160,7 +160,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
       data.xEquation!,
       settings.yAxis,
       settings.xAxis,
-      currentTime,
+      initialTime,
       offset,
       color,
     )
@@ -185,6 +185,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     const yPosition = yAxis.getPosition(y)
 
     ctx.beginPath()
+    console.log({xPosition,  yPosition})
     ctx.arc(xPosition, yPosition, radius, 0, 2 * Math.PI)
     ctx.fillStyle = color
     ctx.strokeStyle = color
