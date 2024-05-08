@@ -189,6 +189,7 @@ export const stepsActions = [
     canvaTimeSliderC: [2, 0],
     canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
+    canvaBarState: 0,
     canvaBeakerState: 1,
     isEnableChooseMenu: false,
   },
@@ -197,6 +198,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 2],
     canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
+    canvaBarState: 0,
     canvaBeakerState: 1,
   },
   // 2   For this reaction, ...
@@ -204,6 +206,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 1,
+    canvaBarState: 0,
     canvaBeakerState: 1,
   },
   // 3   For a reaction with...
@@ -211,6 +214,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 1,
+    canvaBarState: 0,
     canvaBeakerState: 1,
   },
   // 4   Half-life (t1/2)...
@@ -218,6 +222,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 1,
+    canvaBarState: 0,
     canvaBeakerState: 1,
   },
   // 5   Let's watch how all...
@@ -225,6 +230,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 2,
+    canvaBarState: 1,
     canvaBeakerState: 2,
   },
   // 6   For this second order....
@@ -232,6 +238,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
+    canvaBarState: 2,
     canvaBeakerState: 3,
   },
   // 7   Notice how [A] drops...
@@ -239,6 +246,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
+    canvaBarState: 2,
     canvaBeakerState: 3,
     isEnableChooseMenu: false,
   },
@@ -247,6 +255,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
+    canvaBarState: 2,
     canvaBeakerState: 3,
   },
   // 9   For example, if [A]...
@@ -254,6 +263,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
+    canvaBarState: 2,
     canvaBeakerState: 3,
   },
   // 10   Since 0.1 is less than ...
@@ -261,6 +271,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
+    canvaBarState: 2,
     canvaBeakerState: 3,
   },
   // 11   For this second order...
@@ -268,6 +279,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
+    canvaBarState: 2,
     canvaBeakerState: 3,
   },
   // 12   Amazing! Let's take a...
@@ -275,6 +287,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
+    canvaBarState: 2,
     canvaBeakerState: 3,
     isEnableChooseMenu: false,
   },
@@ -283,6 +296,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
+    canvaBarState: 2,
     canvaBeakerState: 3,
     activeDotIndex: 0,
     isEnableChooseMenu: true,
@@ -292,6 +306,7 @@ export const stepsActions = [
     canvaTimeSliderC: [2, 0],
     canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
+    canvaBarState: 0,
     canvaBeakerState: 1,
     activeDotIndex: 1,
     isEnableChooseMenu: false,
@@ -301,6 +316,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 0],
     canvaTimeSliderT: [1, 2],
     canvaTimeState: 1,
+    canvaBarState: 0,
     canvaBeakerState: 1,
   },
   // 16   Let's watch how all  ...
@@ -308,6 +324,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 0],
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 2,
+    canvaBarState: 1,
     canvaBeakerState: 2,
   },
   // 17   Amazing! Let's take  ...
@@ -315,6 +332,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 0],
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 3,
+    canvaBarState: 2,
     canvaBeakerState: 3,
     isEnableChooseMenu: false,
   },
@@ -323,6 +341,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 0],
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 3,
+    canvaBarState: 2,
     canvaBeakerState: 3,
     activeDotIndex: 1,
     isEnableChooseMenu: true,
@@ -332,6 +351,7 @@ export const stepsActions = [
     canvaTimeSliderC: [2, 0],
     canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
+    canvaBarState: 0,
     canvaBeakerState: 1,
     activeDotIndex: 2,
     isEnableChooseMenu: false,
@@ -341,6 +361,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 2],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 1,
+    canvaBarState: 0,
     canvaBeakerState: 1,
   },
   // 21   Let's watch how all ...
@@ -348,6 +369,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 2,
+    canvaBarState: 1,
     canvaBeakerState: 2,
   },
   // 21   Amazing, let's take another ...
@@ -355,6 +377,7 @@ export const stepsActions = [
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
+    canvaBarState: 2,
     canvaBeakerState: 3,
   },
 ]

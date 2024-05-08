@@ -1,6 +1,6 @@
 import useAppData from "../../../hooks/useAppData"
 import styles from './second.module.scss'
-import { useCallback, useEffect } from "react"
+import { useCallback, useEffect, useState } from "react"
 import EnergyProfile from "../../../components/EnergyProfile"
 import ChartTime from "../../../components/ChartTime/ChartTime"
 import ChartBar from "../../../components/ChartBar"
@@ -45,6 +45,7 @@ const ReactionSecond = () => {
   } = useFunctions()
 
   const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
+  const [chartBarState, setChartBarState] = useState(0)
 
   // *** Setup tutorial actions here
   const tutorials = Array.from(Array(tur_Text.length).keys()).map(idx => {
@@ -72,6 +73,9 @@ const ReactionSecond = () => {
       }
       if (curActions?.activeDotIndex !== undefined) {
         setActiveDotIndex(curActions.activeDotIndex)
+      }
+      if (curActions?.canvaBarState !== undefined) {
+        setChartBarState(curActions.canvaBarState)
       }
       if (Array.isArray(curActions?.canvaTimeSliderC)) {
         setCanvaTimeSliderC(curActions.canvaTimeSliderC)
@@ -210,6 +214,10 @@ const ReactionSecond = () => {
         textHoriz={`Time`}
       />
       <ChartBar
+        valuesC={valuesC}
+        valuesT={valuesT}
+        state={chartBarState}
+        kind={activeDotIndex}
         colors={dotColorList[activeDotIndex]}
       />
     </div>
