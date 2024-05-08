@@ -23,6 +23,7 @@ interface CanvasTimeProps {
   showOneGraph?: boolean
   onTimeframeChange?: (val: number) => void
 }
+
 const CanvasTime = ({
   showTimeGraph,
   c1,
@@ -62,10 +63,8 @@ const CanvasTime = ({
   const startTimer = () => {
     stopTimer()
     timerID.current = setInterval(() => {
-      // console.log('interval', timeOffset)
       setTimeOffset(v => v += 1 / framesPerSecond)
     }, intervalTime)
-    // console.log('started', timerID.current)
   }
 
   const stopTimer = () => {
@@ -149,12 +148,10 @@ const CanvasTime = ({
       ctx.moveTo(pT, height)
       ctx.lineTo(pT, height - tickLength)
     }
-    // console.log('here - ', { pointerC, pointerT })
     ctx.stroke()
   }
 
   const drawAt = (timeAt: number) => {
-    // console.log('drawAt - ', { timeAt })
     if (!canvas.current) return
     const ctx = canvas.current.getContext('2d');
     if (!ctx) return
@@ -194,7 +191,6 @@ const CanvasTime = ({
 
     const ptBlue = { x: sX + offsetPerFrame.current.x * (timeAt * framesPerSecond), y: sY + offsetPerFrame.current.y * (timeAt * framesPerSecond) }
     const ptRed = { x: sX + offsetPerFrame.current.x * (timeAt * framesPerSecond), y: height - offsetPerFrame.current.y * (timeAt * framesPerSecond) }
-    // console.log('drawAt - ', { timeAt })
 
     ctx.lineTo(ptBlue.x, ptBlue.y)
     ctx.strokeStyle = colorA
@@ -227,27 +223,21 @@ const CanvasTime = ({
   }
 
   useEffect(() => {
-    // console.log('canvasTime useEffect -', { sX, sY, eX, eY })
     initAll()
     drawAt(timeOffset)
   }, [showTimeGraph, c1, c2, t1, t2, sX, sY, eX, eY, pointerC, pointerT])
 
   useEffect(() => {
     if (showTimeGraph < 2) {
-      // console.log('stopped', timerID.current)
       stopTimer()
       setTimeOffset(0)
     } else if (showTimeGraph === 2) {
-      // console.log('useEffect -- started')
       setTimeOffset(0)
       startTimer() // call animation play
     }
     if (showTimeGraph > 2) {
-      // console.log('aaa useEffect -- stopTimer', { showTimeGraph })
       stopTimer()
-
       setTimeOffset(maxT_offset)
-      // drawAt(maxTime)
     }
     return () => stopTimer()
   }, [showTimeGraph])

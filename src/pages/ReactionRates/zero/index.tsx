@@ -57,8 +57,7 @@ const ReactionZero = () => {
   // *** Tutorial-ACTIONS  - curStep changes
   const curActions = tutorials[curStep]?.actions
   useEffect(() => {
-    console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep })
-    // console.log('curActions: ', { curActions, curStep })
+    // console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep })
     if (curActions) {
       if (curActions?.canvaTimeState !== undefined) {
         setCanvaTimeState(curActions.canvaTimeState)
@@ -78,6 +77,9 @@ const ReactionZero = () => {
       if (Array.isArray(curActions?.canvaTimeSliderT)) {
         setCanvaTimeSliderT(curActions.canvaTimeSliderT)
       }
+      if (Array.isArray(curActions?.valuesT)) {
+        setValuesT(curActions.valuesT)
+      }
     }
 
   }, [curStep, curActions])
@@ -87,15 +89,6 @@ const ReactionZero = () => {
   }
 
   const getFormula = () => {
-
-    // const expressions = [
-    //   `\\[ Rate = 0.07 = -\\frac{-0.53}{7.28} = -\\frac{0.26 - 0.79}{19.40 - 12.12}\\]`,
-    //   `\\[ t_{1/2} = [A_0]/(2k) \\]`,
-    //   `\\[ 11.46 = 1.68 / (2 x 0.07) \\]`,
-    //   `\\[ Rate = k[A]^0 \\]`,
-    //   `\\[ 0.07 = 0.073(0.60)^0 \\]`,
-    // ]
-
     const c1 = (valuesC[0] ?? 0) / 100
     const c2 = (valuesC[1] ?? 0) / 100
     const t1 = valuesT[0]
@@ -141,7 +134,6 @@ const ReactionZero = () => {
     const a0Numerator = (t1 * c2) - (t2 * c1)
     const A0 = a0Numerator / (t1 - t2)
     const t_12 = A0 / (2 * rateConstant)
-    // console.log({c1, c2, t1, t2, c, t, k, deltaC, deltaT, rateConstant, a0Numerator, A0, t_12})
 
     // turText can be undefined on new page due to curStep(lazy changes of state variable)
     const turTxt = tur_Text[curStep]
@@ -181,11 +173,10 @@ const ReactionZero = () => {
 
     return update
   }
+
   // call when click prev step
   const onStepChange = (step: number) => {
-    console.log('===onStepChange===', { step })
     const nextStep = getNextStep(step)
-    console.log({ nextStep })
     if (nextStep === undefined) return
     if (curStep === nextStep) return
     // Tutorial-Highlight
@@ -202,36 +193,12 @@ const ReactionZero = () => {
     return () => removeHighlightElement(tutorials[curStep]?.highlight)
   }, [])
 
-  const handleTest1 = () => {
-    console.log('===handleTest=== 111')
-    // console.log({ valuesC })
-    // setCanvaTimeState(2)
-  }
-  const handleTest2 = () => {
-    console.log('===handleTest2=== - ')
-    // const res = getStorage('availableMenuList')
-    // console.log({ res })
-    // setCanvaTimeState(1)
-  }
-  const handleTest3 = () => {
-    console.log('===handleTest3=== - ')
-    // console.log(' ', infoC, { isDisabledA, isDisabledB })
-  }
   return <div className={styles.container}>
     <ChapterMenu />
     <ChooseMenu isEnable={isEnableChooseMenu} onClickItem={() => handleClickChooseMenuItem()} />
     <WatchMenu />
-    {/* <p>step: {curStep}</p>
-    <p>showTimeGraph: {canvaTimeState}</p>
-    <p>beakerState: {canvaBeakerState}</p> */}
 
     <div className={styles.reactionDrawContainer}>
-      {/* <div>
-        <button onClick={() => handleTest1()}>111</button>
-        <button onClick={() => handleTest2()}>222</button>
-        <button onClick={() => handleTest3()}>TeST</button>
-      </div> */}
-
       <EnergyProfile
         valuesC={valuesC}
         valuesT={valuesT}

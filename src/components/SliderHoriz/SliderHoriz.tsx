@@ -9,8 +9,9 @@ interface SliderHoriz {
   showThumbIndex: number[]
 }
 
-const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
+const flexibleV = 10;
 
+const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
   const infoT = useMemo(() => {
     let showCount = 0, disabledCount = 0
     showThumbIndex.forEach(item => {
@@ -35,12 +36,13 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
       // console.log('===getValueT===  111', valuesT[1])
       update = [valuesT[1]]
     } else update = []
-    return update.map(item => item * 10)
+    return update.map(item => item * flexibleV)
   }
 
   const handleChangeVal = (val: number[] | number) => {
     // console.log('===handleChangeAB=== ', { values: val, valuesT: valuesT })
-    let update: number[] = [valuesT[0] * 10, valuesT[1] * 10]
+    let update: number[] = [valuesT[0] * flexibleV, valuesT[1] * flexibleV]
+
     if (Array.isArray(val)) {
       if (showThumbIndex[0] === 2) {
         update = [val[0], update[1]]
@@ -56,20 +58,22 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
         update = [update[0], val]
       }
     }
-    // console.log('111 ', update)
-    if (update[1] < 2) update[0] = 2
-    if (update[0] > update[1] - 2) update[0] = update[1] - 1
-    // if (update[1] <= update[0]) update[1] = update[0] <= 200 ? update[0] : 200
-    update = update.map(item => item / 10)
-    // console.log('222 ', update)
+
+    if (update[1] < 2) update[0] = 2;
+
+    if (update[0] >= update[1] - 20) update[0] = update[1] - 20
+
+    update = update.map(item => item / flexibleV)
+
     setValuesT(update)
   }
+
   const textT = useMemo(() => {
     const res = getValueT()[1] ?? getValueT()[0]
     if (!Number.isFinite(res)) {
       return undefined
     }
-    return res / 10
+    return res / flexibleV
   }, [getValueT])
 
 
@@ -78,14 +82,14 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
       <div className={styles.sliceHorizontal}>
         {
           infoT.showCount > 0 &&
-          <>
-            <ReactSlider
+          <div style={{ position: 'relative' }}>
+            {/* <ReactSlider
               className={styles['horizontal-slider']}
               thumbClassName={styles['example-thumb']}
               trackClassName={styles['example-track']}
               value={getValueT()}
               min={0}
-              max={200}
+              max={300}
               step={1}
               onChange={(val, index) => {
                 // console.log({ val, index })
@@ -105,16 +109,17 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
                   className={`${disabledclass} ${props.className}`}
                 ></div>
               }}
-            />
+            /> */}
+            <div className={styles.sliderback}></div>
             <MultiRangeSliderHoriz
               max={200}
-              width={230}
+              width={178}
               distance={20}
               showThumbIndex={showThumbIndex}
               values={getValueT()}
               onChange={(val, index) => handleChangeVal(val)}
             />
-          </>
+          </div>
         }
       </div>
       <div className={styles.textHoriz}>

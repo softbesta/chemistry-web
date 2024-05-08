@@ -71,6 +71,7 @@ const MultiRangeSliderHoriz = ({
               onChangeValue(+val, 0)
             }}
           />
+
           <input
             className={classnames(
               'h-slider-thumb thumb--zindex-4',

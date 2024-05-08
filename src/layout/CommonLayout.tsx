@@ -23,15 +23,14 @@ const CommonLayout = ({
   const scaleX = window.innerWidth / contentSize.width
   const scaleY = window.innerHeight / contentSize.height
   const [scale, setScale] = useState<number | undefined>(Math.min(scaleX, scaleY))
-  console.log({ window })
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 1150 || window.innerHeight < contentSize.height) {
-        console.log('------------resize ---------', window.innerWidth / contentSize.width)
+        // console.log('------------resize ---------', window.innerWidth / contentSize.width)
         const scaleX = window.innerWidth / contentSize.width
         const scaleY = window.innerHeight / contentSize.height
-        console.log({ scaleX, scaleY })
+        // console.log({ scaleX, scaleY })
         setScale(Math.min(scaleX, scaleY))
       } else {
         setScale(undefined)
