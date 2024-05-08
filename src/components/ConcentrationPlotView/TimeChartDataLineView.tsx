@@ -310,6 +310,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     const xValue = xEquation?.getValue(x) ?? x
     const xPosition = settings.xAxis.shift(offset).getPosition(xValue)
     const yPosition = settings.yAxis.shift(offset).getPosition(y)
+    // debugger
     if (isMoveTo) {
       ctx.beginPath()
       ctx.moveTo(xPosition, yPosition)

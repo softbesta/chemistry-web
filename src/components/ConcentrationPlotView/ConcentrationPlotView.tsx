@@ -200,7 +200,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
       setCurrentTime(finalTime)
     }
     return () => stopTimer()
-  }, [timingState])
+  }, [timingState, initialTime])
 
   const [timeCounter, setTimeCounter] = useState<number>(0)
   const maxTime = finalTime - initialTime
@@ -235,7 +235,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
       return
     }
     setCurrentTime(initialTime + timeCounter)
-  }, [timeCounter])
+  }, [timeCounter, initialTime])
 
   return (
     <div style={{ position: 'relative' }}>

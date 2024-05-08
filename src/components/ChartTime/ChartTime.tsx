@@ -20,6 +20,7 @@ interface ChartTimeProps {
   colors: string[]
   textVert?: string
   textHoriz?: string
+  order: number
 }
 
 const ChartTime = ({
@@ -33,6 +34,7 @@ const ChartTime = ({
   onTimeframeChange,
   colors,
   textVert,
+  order,
 }: ChartTimeProps) => {
 
   const chartSize: SizeStyle = { width: 212, height: 212 }
@@ -56,7 +58,7 @@ const ChartTime = ({
       t1: valuesT[0],
       t2: valuesT[1],
     }
-    update.initParams(inputParams)
+    update.initParams(inputParams, order)
     setReaction(update)
 
     console.log({ inputParams })
@@ -83,8 +85,8 @@ const ChartTime = ({
         <ConcentrationPlotView
           {...chartSize}
           settings={reactionSetting}
-          concentrationA={reaction.zeroOrder}
-          concentrationB={reaction.zeroOrderB}
+          concentrationA={order === 0 ? reaction.zeroOrder : (order === 1 ? reaction.firstOrder : reaction.secondOrder)}
+          concentrationB={order === 0 ? reaction.zeroOrderB : (order === 1 ? reaction.firstOrderB : reaction.secondOrderB)}
           initialTime={valuesT[0]}
           finalTime={valuesT[1]}
           canSetCurrentTime={true}
@@ -108,7 +110,7 @@ const ChartTime = ({
           onEndPlay={() => {
             console.log('&&& timer ended &&& ')
           }}
-          order={0}
+          order={order}
         />
 
 

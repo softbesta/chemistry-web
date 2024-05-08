@@ -46,10 +46,12 @@ class ReactionComparisonViewModel {
       this.secondOrderInput = ReactionComparisonDefaults.input
     }
   }
-  initParams(initInput: ReactionInput) {
-    this.zeroOrderInput = initInput
-    this.firstOrderInput = initInput
-    this.secondOrderInput = initInput
+  initParams(initInput: ReactionInput, order: number) {
+    switch(order) {
+      case 0: this.zeroOrderInput = initInput; break;
+      case 1: this.firstOrderInput = initInput; break;
+      case 2: this.secondOrderInput = initInput; break;
+    }
   }
 
   // var navigation: NavigationModel<ReactionComparisonState>?
@@ -150,19 +152,19 @@ class ReactionComparisonViewModel {
   }
 
   get zeroOrderB() {
-    return this.concentrationB(this.zeroOrder)
+    return this.concentrationB(this.zeroOrder, this.zeroOrderInput.c1)
   }
 
   get firstOrderB() {
-    return this.concentrationB(this.firstOrder)
+    return this.concentrationB(this.firstOrder, this.firstOrderInput.c1)
   }
 
   get secondOrderB() {
-    return this.concentrationB(this.secondOrder)
+    return this.concentrationB(this.secondOrder, this.secondOrderInput.c1)
   }
 
-  concentrationB(concentrationA: ZeroOrderConcentration | FirstOrderConcentration | SecondOrderConcentration) {
-    return new ConcentrationBEquation(concentrationA, 1)
+  concentrationB(concentrationA: ZeroOrderConcentration | FirstOrderConcentration | SecondOrderConcentration, initialAConcentration: number) {
+    return new ConcentrationBEquation(concentrationA, initialAConcentration)
   }
 
 }

@@ -234,6 +234,7 @@ class ConcentrationBEquation extends Equation {
   constructor(concentrationA: ZeroOrderConcentration | FirstOrderConcentration | SecondOrderConcentration, initialAConcentration: number) {
     super()
     this.concentrationA = concentrationA
+    // debugger
     this.initialAConcentration = initialAConcentration
   }
 

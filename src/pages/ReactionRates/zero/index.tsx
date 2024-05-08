@@ -222,6 +222,7 @@ const ReactionZero = () => {
         colors={dotColorList[activeDotIndex]}
         textVert={`[${sliderVertText[activeDotIndex]}]`}
         textHoriz={`Time`}
+        order={0}
       />
       <ChartBar
         valuesC={valuesC}
