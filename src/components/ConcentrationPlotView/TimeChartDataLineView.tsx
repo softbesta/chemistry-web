@@ -185,7 +185,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     const yPosition = yAxis.getPosition(y)
 
     ctx.beginPath()
-    console.log({xPosition,  yPosition})
+    // console.log({xPosition,  yPosition})
     ctx.arc(xPosition, yPosition, radius, 0, 2 * Math.PI)
     ctx.fillStyle = color
     ctx.strokeStyle = color
@@ -309,8 +309,9 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     const y = equation.getValue(x)
     const xValue = xEquation?.getValue(x) ?? x
     const xPosition = settings.xAxis.shift(offset).getPosition(xValue)
-    const yPosition = settings.yAxis.shift(offset).getPosition(y)
+    const yPosition = settings.yAxis.getPosition(y)
     // debugger
+    console.log({equation})
     if (isMoveTo) {
       ctx.beginPath()
       ctx.moveTo(xPosition, yPosition)
