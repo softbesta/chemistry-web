@@ -1,7 +1,6 @@
 import styles from './SliderHoriz.module.scss'
 import { useMemo } from "react"
 import MultiRangeSliderHoriz from "../MutiRangeSlider/MultiRangeSliderHoriz"
-import ReactSlider from 'react-slider'
 
 interface SliderHoriz {
   valuesT: number[]

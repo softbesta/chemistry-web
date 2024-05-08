@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react'
+import React from 'react'
 import classnames from 'classnames'
-import PropTypes from 'prop-types'
 import './slider.css'
 
 interface MultiRangeSliderProps {
@@ -20,16 +19,8 @@ const MultiRangeSliderHoriz = ({
   values,
   onChange
 }: MultiRangeSliderProps) => {
-  // const [valLeft, setValLeft] = useState(showThumbIndex[0] === 0 ? 0 : values[0])
-  // const [valRight, setValRight] = useState(showThumbIndex[1] === 0 ? max : values[1])
   const valLeft = values[0]
   const valRight = values[1]
-  // console.log({ valLeft, valRight })
-
-  // // Get min and max values when their state changes
-  // useEffect(() => {
-  //   onChange([valLeft, valRight])
-  // }, [valLeft, valRight])
 
   const minDisabled = showThumbIndex[0] === 1 ? true : false
   const maxDisabled = showThumbIndex[1] === 1 ? true : false

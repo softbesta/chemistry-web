@@ -6,8 +6,9 @@
 // A value slider
 .sliceVertical {
   position: absolute;
-  top: -7px; // position
-  right: 200px;
+  bottom: 94px; // position
+  right: 151px;
+  rotate: -90deg;
 
   .vertical-slider {
     height: 225px; // control this for length of vert
@@ -37,6 +38,18 @@
 
   }
 }
+
+.sliderback {
+  border: 3.5px solid #808080; 
+  border-top: 0px; 
+  border-right: 0px; 
+  border-left: 0px; 
+  position: absolute; 
+  top: 15.7px; 
+  left: 9px; 
+  width: 212px; 
+}
+
 
 .example-track {
   position: relative;

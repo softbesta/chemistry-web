@@ -1,6 +1,6 @@
-import ReactSlider from "react-slider"
 import styles from './SliderVert.module.scss'
 import { useMemo } from "react"
+import MultiRangeSliderVert from "../MutiRangeSlider/MultiRangeSliderVert"
 
 interface SliderVert {
   valuesC: number[]
@@ -21,8 +21,6 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, textVer
       disabledCount
     }
   }, [showIndexC])
-  const disabledClass = infoC.disabledCount === 1 ? styles.disabled1 : infoC.disabledCount === 2 ? styles.disabled2 : ''
-  // console.log({ disabledClass })
 
   const getValueC = () => {
     let update: number[] = []
@@ -38,6 +36,7 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, textVer
     } else update = []
     return update
   }
+
   const handleChangeAB = (val: number[] | number) => {
     // console.log('===handleChangeAB=== ', { values: val, valuesC })
     let update: number[] = valuesC
@@ -61,6 +60,7 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, textVer
     if (update[1] > update[0] - 13) update[1] = update[0] - 13
     setValuesC(update)
   }
+
   const textC = useMemo(() => {
     const res = getValueC()[0] ?? getValueC()[1]
     if (!Number.isFinite(res)) {
@@ -68,45 +68,54 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, textVer
     }
     return res / 100
   }, [getValueC])
+
   return <div className={styles.container}>
-    {/* <div>
-      <button onClick={() => {
-        console.log(getValueC())
-        console.log({ valuesC, showIndexC, infoC })
-      }}>111</button>
-    </div> */}
-    <div className={styles.sliceVerticalBar} />
+    {/* <div className={styles.sliceVerticalBar} /> */}
     <div className={styles.sliceVertical}>
-      {infoC.showCount > 0 && <ReactSlider
-        className={`${styles['vertical-slider']} ${disabledClass}`}
-        thumbClassName={styles['example-thumb']}
-        trackClassName={styles['example-track']}
-        orientation="vertical"
-        invert
-        value={getValueC()}
-        min={0}
-        max={100}
-        minDistance={13}
-        onChange={(val, index) => {
-          // console.log({ val, index })
-          handleChangeAB(val)
-        }}
-        renderThumb={(props, state) => {
-          // console.log('sliderthumb ===0', {state, showIndexC})
-          const { index } = state
-          let disabledclass = ''
-          if (index === 1 && showIndexC[0] === 1) {
-            disabledclass = styles.disabled
-          }
-          if (index === 0 && showIndexC[1] === 1) {
-            disabledclass = styles.disabled
-          }
-          return <div
-            {...props}
-            className={`${disabledclass} ${props.className}`}
-          ></div>
-        }}
-      />}
+      {
+        infoC.showCount > 0 &&
+        <div style={{ position: 'relative' }}>
+          {/* <ReactSlider
+            className={`${styles['vertical-slider']} ${disabledClass}`}
+            thumbClassName={styles['example-thumb']}
+            trackClassName={styles['example-track']}
+            orientation="vertical"
+            invert
+            value={getValueC()}
+            min={0}
+            max={100}
+            minDistance={13}
+            onChange={(val, index) => {
+              // console.log({ val, index })
+              handleChangeAB(val)
+            }}
+            renderThumb={(props, state) => {
+              // console.log('sliderthumb ===0', {state, showIndexC})
+              const { index } = state
+              let disabledclass = ''
+              if (index === 1 && showIndexC[0] === 1) {
+                disabledclass = styles.disabled
+              }
+              if (index === 0 && showIndexC[1] === 1) {
+                disabledclass = styles.disabled
+              }
+              return <div
+                {...props}
+                className={`${disabledclass} ${props.className}`}
+              ></div>
+            }}
+          /> */}
+          <div className={styles.sliderback}></div>
+          <MultiRangeSliderVert
+            max={100}
+            width={178}
+            distance={20}
+            showThumbIndex={showIndexC}
+            values={getValueC()}
+            onChange={(val, index) => handleChangeAB(val)}
+          />
+        </div>
+      }
     </div>
     <div className={styles.textVert}>
       <p>{`${textVert || '[A]'}`}</p>
