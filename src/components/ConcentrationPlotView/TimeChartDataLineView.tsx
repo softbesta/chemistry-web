@@ -130,7 +130,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
         ctx.strokeStyle = 'transparent'
         ctx.rect(0, rectHeight * 0.28, rectWidth * 0.72, rectHeight * (1 - 0.28))
         let color = 'black'
-        console.log({hoverOrder})
+        // console.log({hoverOrder})
         ctx.lineWidth = 1
         if (isOver && hoverOrder === (order + 1)) {
           switch(dragOrder) {          

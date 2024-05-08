@@ -101,16 +101,17 @@ const EnergyProfile = ({
   }, [beakerState])
 
   const [timeCounter, setTimeCounter] = useState<number>(0)
-  const maxTime = Math.abs(valuesT[0] - valuesT[1])
+  const finalTime = Math.abs(valuesT[0] - valuesT[1])
   const framesPerSecond = 3
   const intervalTime = 1000 / framesPerSecond
+
 
   const timerID = useRef<NodeJS.Timer>()
   const startTimer = () => {
     stopTimer()
     setTimeCounter(0)
     timerID.current = setInterval(() => {
-      console.log('interval', timeCounter)
+      // console.log('interval', timeCounter)
       setTimeCounter(v => v += 1 / framesPerSecond)
     }, intervalTime)
     console.log('started', timerID.current)
@@ -125,26 +126,23 @@ const EnergyProfile = ({
 
   // animation play
   useEffect(() => {
-    if (timeCounter > maxTime) {
+    if (timeCounter >= finalTime) {
       // animation ends
       stopTimer()
       const res = generateEnergyArray(energyDotsAnimation.current, (valuesC[1] / valuesC[0] * 100), 2, 1)
       beakerDotsEnd.current = res.items
+      console.log('animation ends', { valuesC, timeCounter, finalTime, energyDotsAnimation: energyDotsAnimation.current, res })
+
       setEnergyDots(res.items)
       onEndPlay?.()
       return
     }
-    const valT = timeCounter / maxTime
-    // const valT = 3 / maxTime
-    const valC = Math.min(...valuesC)
+    const valT = timeCounter / finalTime
+    const valC = Math.abs(valuesC[0] - valuesC[1])
     const curValC = Math.floor(valC * valT)
-    // console.log('zzz animation - 111', { timeCounter, maxTime })
-    // console.log('zzz animation - 222', { valuesC, valT, valC, curValC })
-    // console.log('zzz animation - 333', valuesC[1] / valuesC[0] * 100)
     const res = generateEnergyArray(energyDotsAnimation.current, (curValC / valuesC[0] * 100), 2, 1)
     energyDotsAnimation.current = res.items
     setEnergyDots(energyDotsAnimation.current)
-    // console.log(',,, ', { timeCounter, changedCount: res.changedCount })
   }, [timeCounter])
 
   // render from 'energyDots'
