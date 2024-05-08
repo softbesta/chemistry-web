@@ -146,7 +146,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
         ctx.stroke()
       }
     }
-  }, [currentTime, hoverOrder, dragOrder, isOver, order])
+  }, [data, currentTime, hoverOrder, dragOrder, isOver, order])
 
   const head = (
     ctx: CanvasRenderingContext2D,

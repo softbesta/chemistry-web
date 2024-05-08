@@ -63,6 +63,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
   } = props;
   const canvas = React.useRef<HTMLCanvasElement>(null);
   const [currentTime, setCurrentTime] = useState(initialTime)
+  console.log({concentrationA, concentrationB, initialTime, finalTime})
   React.useEffect(() => {
     const ctx = canvas?.current?.getContext('2d');
     if (ctx) {
@@ -100,6 +101,8 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
         chartAxisShape(ctx, settings.chartAxisShapeSettings, rect)
       }
     }
+
+    // console.log({ concentrationA, concentrationB, initialTime, finalTime })
   }, [])
 
   // const rectangleHighlight = (

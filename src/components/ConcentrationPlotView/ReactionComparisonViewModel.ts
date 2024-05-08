@@ -1,6 +1,6 @@
 import { ConcentrationBEquation, FirstOrderConcentration, SecondOrderConcentration, ZeroOrderConcentration } from "./ConcentrationEquation"
 
-interface ReactionInput {
+export interface ReactionInput {
   c1: number
   c2: number
   t1: number
