@@ -331,5 +331,53 @@ export const tur_MathBlanks = [
     { left: 212, top: 237, width: 43 }, //8
     { left: 344, top: 237, width: 41 }, //10
   ],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [
+    // { left: 73, top: 115, width: 50 }, //0
+    { left: 169, top: 98, width: 60 }, //1
+    { left: 287, top: 98, width: 55 }, //2
+    { left: 169, top: 136, width: 60 }, //3
+    { left: 287, top: 136, width: 55 }, //4
+    // { left: 201, top: 185, width: 50 }, //5
+    // { left: 278, top: 185, width: 45 }, //6
+    // { left: 363, top: 185, width: 43 }, //7
+    { left: 212, top: 237, width: 43 }, //8
+    // { left: 284, top: 237, width: 52 }, //9
+    { left: 344, top: 237, width: 41 }, //10
+  ],
+
+  // 10
+  [
+    { left: 212, top: 237, width: 43 }, //8
+    { left: 344, top: 237, width: 41 }, //10
+  ],
+  [],
+  [],
+  [],
+
+  // 14
+  [
+    { left: 169, top: 98, width: 60 }, //1
+    { left: 287, top: 98, width: 55 }, //2
+    { left: 169, top: 136, width: 60 }, //3
+    { left: 287, top: 136, width: 55 }, //4
+    { left: 212, top: 237, width: 43 }, //8
+    { left: 344, top: 237, width: 41 }, //10
+  ],
+  [
+    { left: 212, top: 237, width: 43 }, //8
+    { left: 344, top: 237, width: 41 }, //10
+  ],
+  [],
+  [],
+  [],
+  [],
+  [],
 ]
 export const maxStep_Zero = tur_Text.length // 18 steps
