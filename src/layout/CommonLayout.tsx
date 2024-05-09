@@ -48,7 +48,20 @@ const CommonLayout = ({
       <div
         style={{
           // transform: `scale(${scaleX})`,
-          ...(scale ? { zoom: `${scale}` } : {}),
+          ...(scale ? {
+            // zoom: `${scale}`,
+            // transformOrigin: 0,
+            '-ms-transform': `scale(${scale})`, /* IE 9 */
+            // '-ms-transform-origin': '0 0',
+            '-moz-transform': `scale(${scale})`, /* Firefox */
+            // '-moz-transform-origin': '0 0',
+            '-o-transform': `scale(${scale})`, /* Opera */
+            // '-o-transform-origin': '0 0',
+            '-webkit-transform': `scale(${scale})`, /* Safari And Chrome */
+            // '-webkit-transform-origin': '0 0',
+            'transform': `scale(${scale})`, /* Standard Property */
+            // 'transform-origin': '0 0',  /* Standard Property */
+          } : {}),
         }}
       >
         {/* <span>{window.innerWidth}</span> and       fasdfasdfdsfds
