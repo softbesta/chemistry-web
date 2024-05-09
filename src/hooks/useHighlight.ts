@@ -16,7 +16,7 @@ export const useHighLight = () => {
     overlay.style.left = `${x}px`;
     overlay.style.position = "absolute";
     elem.classList.add("overlayActive");
-    document.body.appendChild(overlay);
+    // document.body.appendChild(overlay);
   }
   const highlightElement = (targetIDs: any[]) => {
     const elems: any[] = []
