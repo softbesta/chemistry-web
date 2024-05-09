@@ -71,6 +71,8 @@ const MultiRangeSliderVert = ({
             max={max}
             value={valLeft}
             onChange={(event) => {
+              event.preventDefault()
+              event.stopPropagation()
               let val = +event.target.value
               if (valRight) {
                 val = Math.min(val, valRight - distance)
@@ -91,6 +93,8 @@ const MultiRangeSliderVert = ({
             max={max}
             value={valRight}
             onChange={(event) => {
+              event.preventDefault()
+              event.stopPropagation()
               let val = +event.target.value
               if (valLeft) {
                 val = Math.max(val, valLeft + distance)
