@@ -10,8 +10,8 @@ class ChartAxisShapeSettings {
     this.verticalTicks = 10
     this.horizontalTicks = 10
     this.tickSize = 0.04 * chartSize
-    this.gapToTop = 0.24 * chartSize
-    this.gapToSide = 0.24 * chartSize
+    this.gapToTop = 0.2 * chartSize
+    this.gapToSide = 0.2 * chartSize
   }
 }
 
