@@ -82,6 +82,22 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
       }
       ctx.clearRect(0, 0, rectWidth, rectHeight)
 
+      // // draw pointers
+      // ctx.beginPath()
+      // ctx.lineWidth = 4;
+      // ctx.strokeStyle = themeColors.C;
+      // if (pointerC) {
+      //   const pC = Math.abs(1 - pointerC / maxC) * height
+      //   ctx.moveTo(0, pC)
+      //   ctx.lineTo(tickLength, pC)
+      // }
+      // if (pointerT) {
+      //   const pT = (pointerT / maxT) * width
+      //   ctx.moveTo(pT, height)
+      //   ctx.lineTo(pT, height - tickLength)
+      // }
+      // ctx.stroke()
+
       ctx.beginPath()
       if (data.showFilledLine) {
         // dataLine(ctx, finalTime + offset, filledBarColor)
