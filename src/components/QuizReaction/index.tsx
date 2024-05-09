@@ -38,7 +38,7 @@ const QuizReaction = ({ quizKind, quizData }: QuizReactionProps) => {
     setQuizType(quizType)
     setQuizList(quizList)
     setSelectedAnswer(selectedAnswer)
-    setCorrectStep(correctStep)
+    if (quizType > 0) setCorrectStep(100)
   }
   const saveQuizData = () => {
     const quizData = {
@@ -62,14 +62,15 @@ const QuizReaction = ({ quizKind, quizData }: QuizReactionProps) => {
       if (quizType > 0) {
         // show Next Course
         console.log('===handleStep=== 1')
-        updatePageFromMenu(getNextMenu(1))
+        updatePageFromMenu(getNextMenu(1), false)
       }
       return
     } else if (nextStep === quizType + 1) {
       saveQuizData()
+      setCorrectStep(100)
     } else if (nextStep < 0) {
       // show Prev Course
-      updatePageFromMenu(getNextMenu(-1))
+      updatePageFromMenu(getNextMenu(-1), false)
       return
     }
     // console.log('handleStep', { val, nextStep })
@@ -137,7 +138,7 @@ const QuizReaction = ({ quizKind, quizData }: QuizReactionProps) => {
         <div className={styles.skipQuiz}>
           <p
             onClick={() => {
-              updatePageFromMenu(getNextMenu(1), true)
+              updatePageFromMenu(getNextMenu(1), false)
             }}
           >
             Skip Quiz
