@@ -60,7 +60,7 @@ const ReactionComparison = () => {
   const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
   const [isDisableNextButton, setIsDisableNextButton] = useState<boolean>(false)
   const [shuffledOrder] = useState([1, 2, 3].sort((a, b) => 0.5 - Math.random()))
-  console.log({ shuffledArray: shuffledOrder })
+  // console.log({ shuffledArray: shuffledOrder })
 
   // *** Setup tutorial actions here
   const tutorials = Array.from(Array(tur_Text.length).keys()).map(idx => {
@@ -74,7 +74,7 @@ const ReactionComparison = () => {
   // *** Tutorial-ACTIONS  - curStep changes
   const curActions = tutorials[curStep]?.actions as any
   useEffect(() => {
-    console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep, curActions })
+    // console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep, curActions })
     // console.log('curActions: ', { curActions, curStep })
     if (curActions) {
       if (curActions?.canvaTimeState !== undefined) {
@@ -111,7 +111,6 @@ const ReactionComparison = () => {
   }, [curStep, curActions])
 
   const [orderMatches, setOrderMatches] = useState([0, 0, 0])
-  useEffect(() => { console.log({ orderMatches }) }, [orderMatches])
 
   const handleDragEnd = ({ over }: any) => {
     // setParent(over ? over.id : null);

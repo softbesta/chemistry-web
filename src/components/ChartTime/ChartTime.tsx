@@ -3,7 +3,7 @@ import styles from './ChartTime.module.scss'
 import CanvasTime from "../Canvas/CanvasTime"
 import SliderVert from "../SliderVert/SliderVert"
 import SliderHoriz from "../SliderHoriz/SliderHoriz"
-import { ConcentrationPlotView, ReactionRateChartLayoutSettings, TimeChartLayoutSettings } from '../ConcentrationPlotView'
+import { ConcentrationPlotView, FirstOrderConcentration, ReactionRateChartLayoutSettings, SecondOrderConcentration, TimeChartLayoutSettings, ZeroOrderConcentration } from '../ConcentrationPlotView'
 import { SizeStyle } from '../../helper/types'
 import { ReactionSettings, ReactionType } from '../ConcentrationPlotView/constants'
 import { ReactionComparisonViewModel, ReactionInput } from '../ConcentrationPlotView/ReactionComparisonViewModel'
@@ -38,7 +38,10 @@ const ChartTime = ({
 }: ChartTimeProps) => {
 
   const chartSize: SizeStyle = { width: 212, height: 212 }
-  const [reaction, setReaction] = useState<ReactionComparisonViewModel>(new ReactionComparisonViewModel())
+  // const [reaction, setReaction] = useState<ReactionComparisonViewModel>(new ReactionComparisonViewModel())
+  const [concentrationA, setConcentrationA] = useState<any>(new ZeroOrderConcentration() )
+  const [concentrationB, setConcentrationB] = useState<any>(new ZeroOrderConcentration() )
+
   const reactionSetting = new ReactionRateChartLayoutSettings(
     chartSize.width!,
     ReactionSettings.Axis.minC,
@@ -51,7 +54,7 @@ const ChartTime = ({
 
   useEffect(() => {
     const update = new ReactionComparisonViewModel()
-    console.log({valuesC,valuesT})
+    // console.log({valuesC,valuesT})
     const inputParams: ReactionInput = {
       c1: valuesC[0] / 100,
       c2: valuesC[1] / 100,
@@ -59,11 +62,33 @@ const ChartTime = ({
       t2: valuesT[1],
     }
     update.initParams(inputParams, order)
-    setReaction(update)
+    // setReaction(update)
 
-    console.log({ inputParams })
-    console.log({ update })
-  }, [valuesT, valuesC])
+    // console.log({ inputParams })
+    // console.log({ update })
+
+    // let tConcentrationA =
+    switch(order) {
+      case 0:
+        const zeroOrderConcentration = new ZeroOrderConcentration()
+        zeroOrderConcentration.init4Params(inputParams.t1, inputParams.c1, inputParams.t2, inputParams.c2)
+        setConcentrationA(zeroOrderConcentration)
+        setConcentrationB(update.concentrationB(zeroOrderConcentration, inputParams.c1))
+        break;
+      case 1:
+        const firstOrderConcentration = new FirstOrderConcentration()        
+        firstOrderConcentration.init3Params(inputParams.c1, inputParams.t1, firstOrderConcentration.getRate(inputParams.t1, inputParams.c1, inputParams.t2, inputParams.c2))
+        setConcentrationA(firstOrderConcentration)
+        setConcentrationB(update.concentrationB(firstOrderConcentration, inputParams.c1))
+        break;
+      case 2:
+        const secondOrderConcentration = new SecondOrderConcentration()
+        secondOrderConcentration.init3Params(inputParams.c1, inputParams.t1, secondOrderConcentration.getRate(inputParams.t1, inputParams.c1, inputParams.t2, inputParams.c2))
+        setConcentrationA(secondOrderConcentration)
+        setConcentrationB(update.concentrationB(secondOrderConcentration, inputParams.c1))
+        break;
+    }
+  }, [valuesT, valuesC, order])
 
   return (
     <div className={styles.chartTimeContainer}>
@@ -85,8 +110,8 @@ const ChartTime = ({
         <ConcentrationPlotView
           {...chartSize}
           settings={reactionSetting}
-          concentrationA={order === 0 ? reaction.zeroOrder : (order === 1 ? reaction.firstOrder : reaction.secondOrder)}
-          concentrationB={order === 0 ? reaction.zeroOrderB : (order === 1 ? reaction.firstOrderB : reaction.secondOrderB)}
+          concentrationA={concentrationA}
+          concentrationB={concentrationB}
           initialTime={valuesT[0]}
           finalTime={valuesT[1]}
           canSetCurrentTime={true}
@@ -106,7 +131,7 @@ const ChartTime = ({
             }
           }
           includeAxis={true}
-          timingState={0}
+          timingState={canvaTimeState}
           onEndPlay={() => {
             console.log('&&& timer ended &&& ')
           }}

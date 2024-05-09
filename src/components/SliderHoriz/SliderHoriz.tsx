@@ -85,7 +85,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
             <div className={styles.sliderback}></div>
             <MultiRangeSliderHoriz
               max={200}
-              width={178}
+              width={167}
               distance={20}
               showThumbIndex={showThumbIndex}
               values={getValueT()}

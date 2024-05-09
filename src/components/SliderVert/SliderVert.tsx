@@ -79,7 +79,7 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, textVer
           <div className={styles.sliderback}></div>
           <MultiRangeSliderVert
             max={100}
-            width={178}
+            width={167}
             distance={10}
             showThumbIndex={showIndexC}
             values={getValueC()}

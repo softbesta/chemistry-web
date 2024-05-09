@@ -63,7 +63,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
   } = props;
   const canvas = React.useRef<HTMLCanvasElement>(null);
   const [currentTime, setCurrentTime] = useState(initialTime)
-  console.log({concentrationA, concentrationB, initialTime, finalTime})
+  // console.log({concentrationA, concentrationB, initialTime, finalTime})
   React.useEffect(() => {
     const ctx = canvas?.current?.getContext('2d');
     if (ctx) {
@@ -101,7 +101,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
         verticalIndicator(ctx, finalTime)
         horizontalIndicator(ctx, concentrationA.getValue(initialTime))
         horizontalIndicator(ctx, concentrationA.getValue(finalTime))
-        console.log(Date.now())
+        // console.log(Date.now())
       }
 
       if (includeAxis) {
@@ -110,7 +110,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
     }
 
     // console.log({ concentrationA, concentrationB, initialTime, finalTime })
-  }, [initialTime, finalTime])
+  }, [concentrationA, initialTime, finalTime])
 
   // const rectangleHighlight = (
   //   ctx: CanvasRenderingContext2D,
@@ -143,7 +143,8 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
 
     ctx.moveTo(settings.xAxis.getPosition(time), 0)
     ctx.lineTo(settings.xAxis.getPosition(time), settings.chartSize)
-    ctx.lineWidth = 0.3
+    ctx.lineWidth = 0.5
+    ctx.strokeStyle = 'black'
     ctx.stroke()
   }
 
@@ -155,7 +156,8 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
 
     ctx.moveTo(0, settings.yAxis.getPosition(concentration))
     ctx.lineTo(settings.chartSize, settings.yAxis.getPosition(concentration))
-    ctx.lineWidth = 0.3
+    ctx.lineWidth = 0.5
+    ctx.strokeStyle = 'black'
     ctx.stroke()
   }
 
@@ -180,27 +182,10 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
       ctx.moveTo(x, rect.height)
       ctx.lineTo(x, rect.height - settings.tickSize)
     }
+    ctx.lineWidth = 2
+    ctx.strokeStyle = 'black'
     ctx.stroke()
   }
-
-
-  useEffect(() => {
-    if (timingState === 2) {
-      setCurrentTime(initialTime)
-      startTimer()
-      return
-    } else {
-      stopTimer()
-    }
-    if (timingState === 0) {
-      setCurrentTime(initialTime)
-    } else if (timingState === 1) {
-      setCurrentTime(initialTime)
-    } else if (timingState === 3) {
-      setCurrentTime(finalTime)
-    }
-    return () => stopTimer()
-  }, [timingState, initialTime])
 
   const [timeCounter, setTimeCounter] = useState<number>(0)
   const maxTime = finalTime - initialTime
@@ -234,8 +219,29 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
       onEndPlay?.()
       return
     }
+    console.log({ initialTime, timeCounter })
     setCurrentTime(initialTime + timeCounter)
-  }, [timeCounter, initialTime])
+  }, [timeCounter])
+
+
+  useEffect(() => {
+    if (timingState === 2) {
+      setCurrentTime(initialTime)
+      startTimer()
+      return
+    } else {
+      stopTimer()
+    }
+    if (timingState === 0) {
+      setCurrentTime(initialTime)
+    } else if (timingState === 1) {
+      setCurrentTime(initialTime)
+    } else if (timingState === 3) {
+      console.log('999000', { finalTime })
+      setCurrentTime(finalTime)
+    }
+    return () => stopTimer()
+  }, [timingState, initialTime])
 
   return (
     <div style={{ position: 'relative' }}>
@@ -251,50 +257,54 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
         height={width}
         width={height}
       />
-      {concentrationB &&
-        <TimeChartDataLineView
-          width={width}
-          height={height}
-          data={{
-            equation: concentrationB,
-            headColor: display.product.color,
-            headRadius: settings.chartHeadSecondarySize,
-            showFilledLine: true,
-          }}
-          settings={settings.timeChartLayoutSettings}
-          lineWidth={settings.timeChartLayoutSettings.lineWidth}
-          initialTime={initialTime}
-          currentTime={currentTime} //.constant(currentTime),
-          finalTime={finalTime}
-          filledBarColor={'gray'} //Styling.timeAxisCompleteBar,
-          canSetCurrentTime={canSetCurrentTime}
-          highlightLhs={false}
-          highlightRhs={false}
-          order={order}
-        />
+      {timingState > 0 &&
+        <>
+          {concentrationB &&
+            <TimeChartDataLineView
+              width={width}
+              height={height}
+              data={{
+                equation: concentrationB,
+                headColor: display.product.color,
+                headRadius: settings.chartHeadSecondarySize,
+                showFilledLine: true,
+              }}
+              settings={settings.timeChartLayoutSettings}
+              lineWidth={settings.timeChartLayoutSettings.lineWidth}
+              initialTime={initialTime}
+              currentTime={currentTime} //.constant(currentTime),
+              finalTime={finalTime}
+              filledBarColor={'gray'} //Styling.timeAxisCompleteBar,
+              canSetCurrentTime={canSetCurrentTime}
+              highlightLhs={false}
+              highlightRhs={false}
+              order={order}
+            />
+          }
+          <TimeChartDataLineView
+            width={width}
+            height={height}
+            data={{
+              equation: concentrationA,
+              headColor: display.reactant.color,
+              haloColor: Color(display.reactant.color).alpha(0.3).toString(),
+              headRadius: settings.chartHeadPrimarySize,
+              showFilledLine: true,
+            }}
+            settings={settings.timeChartLayoutSettings}
+            lineWidth={settings.timeChartLayoutSettings.lineWidth}
+            initialTime={initialTime}
+            currentTime={currentTime} //$currentTime
+            finalTime={finalTime}
+            filledBarColor={''} //Styling.timeAxisCompleteBar
+            canSetCurrentTime={canSetCurrentTime}
+            highlightLhs={highlightLhsCurve}
+            highlightRhs={highlightRhsCurve}
+            showOnlyView={showOnlyView}
+            order={order}
+          />
+        </>
       }
-      <TimeChartDataLineView
-        width={width}
-        height={height}
-        data={{
-          equation: concentrationA,
-          headColor: display.reactant.color,
-          haloColor: Color(display.reactant.color).alpha(0.3).toString(),
-          headRadius: settings.chartHeadPrimarySize,
-          showFilledLine: true,
-        }}
-        settings={settings.timeChartLayoutSettings}
-        lineWidth={settings.timeChartLayoutSettings.lineWidth}
-        initialTime={initialTime}
-        currentTime={currentTime} //$currentTime
-        finalTime={finalTime}
-        filledBarColor={''} //Styling.timeAxisCompleteBar
-        canSetCurrentTime={canSetCurrentTime}
-        highlightLhs={highlightLhsCurve}
-        highlightRhs={highlightRhsCurve}
-        showOnlyView={showOnlyView}
-        order={order}
-      />
       {/* </div> */}
     </div>
   );

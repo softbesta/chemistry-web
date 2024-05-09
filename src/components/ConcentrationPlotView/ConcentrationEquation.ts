@@ -41,6 +41,7 @@ class ZeroOrderConcentration extends Equation implements ConcentrationEquationIn
 
   init4Params(t1: number, c1: number, t2: number, c2: number) {
     // assert(t1 !== t2)
+    // debugger
     this.rateConstant = this.getRate(t1, c1, t2, c2)
     let a0Numerator = (t1 * c2) - (t2 * c1)
     this.a0 = a0Numerator / (t1 - t2)
