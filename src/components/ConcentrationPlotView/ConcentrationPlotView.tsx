@@ -37,6 +37,8 @@ type ConcentrationPlotViewProps = {
   onEndPlay?: () => void
   showOnlyView?: boolean
   order: number
+  canvaTimeSliderC: number[]
+  canvaTimeSliderT: number[]
 }
 
 type Rect = {
@@ -66,6 +68,8 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
     onEndPlay,
     showOnlyView,
     order,
+    canvaTimeSliderC,
+    canvaTimeSliderT,
   } = props;
   const canvas = React.useRef<HTMLCanvasElement>(null);
   const [currentTime, setCurrentTime] = useState(initialTime)
@@ -97,30 +101,24 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
       //   rectangleHighlight(ctx, (initialTime + finalTime) / 2, finalTime)
       // }
 
+      ctx.clearRect(
+        0,
+        0,
+        rect.width,
+        rect.height,
+      );
       if (tempLine) {
-        ctx.clearRect(
-          0,
-          0,
-          rect.width,
-          rect.height,
-        );
         verticalIndicator(ctx, initialTime)
         verticalIndicator(ctx, finalTime)
         horizontalIndicator(ctx, concentrationA.getValue(initialTime))
         horizontalIndicator(ctx, concentrationA.getValue(finalTime))
         // console.log(Date.now())
       } else {
-        ctx.clearRect(
-          0,
-          0,
-          rect.width,
-          rect.height,
-        );
-        tIndicator(ctx, initialTime)
-        tIndicator(ctx, finalTime)
-        
-        initialConcentration && cIndicatoer(ctx, initialConcentration / 100)
-        finalConcentration && cIndicatoer(ctx, finalConcentration / 100)
+        tIndicator(ctx, initialTime, canvaTimeSliderT[0])
+        tIndicator(ctx, finalTime, canvaTimeSliderT[1])
+
+        initialConcentration && cIndicatoer(ctx, initialConcentration / 100, canvaTimeSliderC[0])
+        finalConcentration && cIndicatoer(ctx, finalConcentration / 100, canvaTimeSliderC[1])
       }
 
       if (includeAxis) {
@@ -129,7 +127,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
     }
 
     // console.log({ concentrationA, concentrationB, initialTime, finalTime })
-  }, [concentrationA, initialTime, finalTime, initialConcentration, finalConcentration, tempLine])
+  }, [concentrationA, initialTime, finalTime, initialConcentration, finalConcentration, tempLine, canvaTimeSliderT, canvaTimeSliderC])
 
   // const rectangleHighlight = (
   //   ctx: CanvasRenderingContext2D,
@@ -169,27 +167,31 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
 
   const tIndicator = (
     ctx: CanvasRenderingContext2D,
-    time: number
+    time: number,
+    state: number,
   ) => {
+    if (state === 0) return
     ctx.beginPath()
 
     ctx.moveTo(settings.xAxis.getPosition(time), settings.chartSize / 10 * 9)
     ctx.lineTo(settings.xAxis.getPosition(time), settings.chartSize)
     ctx.lineWidth = 3
-    ctx.strokeStyle = 'rgb(220, 84, 59)'
+    ctx.strokeStyle = state === 1 ? 'gray' : 'rgb(220, 84, 59)'
     ctx.stroke()
   }
 
   const cIndicatoer = (
     ctx: CanvasRenderingContext2D,
-    concentration: number
+    concentration: number,
+    state: number,
   ) => {
+    if (state === 0) return
     ctx.beginPath()
 
     ctx.moveTo(0, settings.yAxis.getPosition(concentration))
     ctx.lineTo(ctx.canvas.width / 10, settings.yAxis.getPosition(concentration))
     ctx.lineWidth = 3
-    ctx.strokeStyle = 'rgb(220, 84, 59)'
+    ctx.strokeStyle = state === 1 ? 'gray' : 'rgb(220, 84, 59)'
     ctx.stroke()
   }
 
@@ -288,7 +290,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
 
   return (
     <div style={{ position: 'relative' }}>
-    {/* <button
+      {/* <button
     style={{position: 'absolute', top: 80, zIndex: 9099 }}
     onClick={() => {
       console.log({currentTime})

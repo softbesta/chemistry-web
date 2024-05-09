@@ -138,6 +138,8 @@ const ChartTime = ({
           onEndPlay={() => {
             console.log('&&& timer ended &&& ')
           }}
+          canvaTimeSliderC={canvaTimeSliderC}
+          canvaTimeSliderT={canvaTimeSliderT}
           order={order}
         />
 

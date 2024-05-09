@@ -307,6 +307,8 @@ const ReactionComparison = () => {
                   }}
                   showOnlyView={true}
                   order={0}
+                  canvaTimeSliderC={canvaTimeSliderC}
+                  canvaTimeSliderT={canvaTimeSliderT}
                 />
               </div>
               {/* <ChartInA
@@ -386,6 +388,8 @@ const ReactionComparison = () => {
                   }}
                   showOnlyView={true}
                   order={1}
+                  canvaTimeSliderC={canvaTimeSliderC}
+                  canvaTimeSliderT={canvaTimeSliderT}
                 />
               </div>
               {/* <ChartInA
@@ -464,6 +468,8 @@ const ReactionComparison = () => {
                   }}
                   showOnlyView={true}
                   order={2}
+                  canvaTimeSliderC={canvaTimeSliderC}
+                  canvaTimeSliderT={canvaTimeSliderT}
                 />
               </div>
               {/* <ChartInA
