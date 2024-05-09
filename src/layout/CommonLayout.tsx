@@ -17,7 +17,7 @@ const CommonLayout = ({
   children,
 }: CommonLayoutProps) => {
   const contentSize = { width: 1150, height: 650 }
-  const { curMenu } = useAppData()
+  const { curMenu, scrollable } = useAppData()
   const isQuiz = routes[curMenu].type === 'quiz'
   // console.log({ isQuiz, curMenu, curMenuType: routes[curMenu].type })
   const scaleX = window.innerWidth / contentSize.width
@@ -38,8 +38,16 @@ const CommonLayout = ({
     }
     handleResize()
     window.addEventListener('resize', handleResize)
+
+    function preventBehavior(e: { preventDefault: () => void }) {
+      if (scrollable.current) return
+      // e.preventDefault(); 
+    };
+
+    document.addEventListener("touchmove", preventBehavior, {passive: false});
     return () => {
       window.removeEventListener('resize', handleResize)
+      document.addEventListener("touchmove", preventBehavior, {passive: false});
     }
   }, [])
 

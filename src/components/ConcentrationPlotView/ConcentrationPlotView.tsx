@@ -219,7 +219,6 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
       onEndPlay?.()
       return
     }
-    console.log({ initialTime, timeCounter })
     setCurrentTime(initialTime + timeCounter)
   }, [timeCounter])
 
@@ -237,7 +236,6 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
     } else if (timingState === 1) {
       setCurrentTime(initialTime)
     } else if (timingState === 3) {
-      console.log('999000', { finalTime })
       setCurrentTime(finalTime)
     }
     return () => stopTimer()
@@ -245,6 +243,11 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
 
   return (
     <div style={{ position: 'relative' }}>
+    {/* <button
+    style={{position: 'absolute', top: 80, zIndex: 9099 }}
+    onClick={() => {
+      console.log({currentTime})
+    }}>Test</button> */}
       {/* <button onClick={() => {
         const updatedCurrentTime = currentTime + 1
         console.log('aaa 000', { updatedCurrentTime, initialTime, finalTime })

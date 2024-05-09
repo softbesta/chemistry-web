@@ -4,7 +4,7 @@ import { generateEnergyArray } from '../helper/functions'
 import Canvas from './Canvas/Canvas'
 import styles from './EnergyProfile.module.scss'
 import useAppData from '../hooks/useAppData'
-import { themeColors, dotColors, initDots, dotBgColors } from '../constants'
+import { themeColors, dotColors, initDots, dotBgColors, totalDots } from '../constants'
 import { SizeStyle } from '../helper/types'
 
 function beaker(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, radius: number, fillStyle: string, strokeStyle: string, lineWidth: number, offset: number) {
@@ -60,21 +60,24 @@ const EnergyProfile = ({
 
   useEffect(() => {
     // console.log('vvv111')
-    let update = generateEnergyArray(beakerDots.current, valuesC[0], 1, 0).items
+    let update = generateEnergyArray(beakerDots.current, valuesC[0], 0, 1).items
     beakerDots.current = update
     energyDotsAnimation.current = update
-    update = generateEnergyArray(update, (valuesC[1] / valuesC[0] * 100), 2, 1).items
+    const valC = Math.abs(valuesC[0] - valuesC[1])
+    update = generateEnergyArray(update, (valC / valuesC[0] * 100), 1, 2).items
     beakerDotsEnd.current = update
     setEnergyDots(beakerDots.current)
   }, [valuesC[0]])
   useEffect(() => {
     // console.log('vvv222')
-    const update = generateEnergyArray(beakerDotsEnd.current, (valuesC[1] / valuesC[0] * 100), 2, 1).items
+    const valC = Math.abs(valuesC[0] - valuesC[1])
+    const update = generateEnergyArray(beakerDotsEnd.current, (valC / valuesC[0] * 100), 1, 2).items
     beakerDotsEnd.current = update
     if (beakerState === 3) {
+      console.log({ beakerState, beakerDotsEnd })
       setEnergyDots(beakerDotsEnd.current)
     }
-  }, [valuesC[1]])
+  }, [valuesC[1], beakerState])
 
   // // changes while the Animation
   // useEffect(() => {
@@ -126,23 +129,24 @@ const EnergyProfile = ({
 
   // animation play
   useEffect(() => {
+    const valT = Math.min(timeCounter / finalTime, 1)
+    const valC = Math.abs(valuesC[0] - valuesC[1])
     if (timeCounter >= finalTime) {
       // animation ends
       stopTimer()
-      const res = generateEnergyArray(energyDotsAnimation.current, (valuesC[1] / valuesC[0] * 100), 2, 1)
+      const res = generateEnergyArray(energyDotsAnimation.current, (valC / valuesC[0] * 100), 1, 2)
       beakerDotsEnd.current = res.items
       console.log('animation ends', { valuesC, timeCounter, finalTime, energyDotsAnimation: energyDotsAnimation.current, res })
-
       setEnergyDots(res.items)
       onEndPlay?.()
       return
     }
-    const valT = timeCounter / finalTime
-    const valC = Math.abs(valuesC[0] - valuesC[1])
     const curValC = Math.floor(valC * valT)
-    const res = generateEnergyArray(energyDotsAnimation.current, (curValC / valuesC[0] * 100), 2, 1)
+    const res = generateEnergyArray(energyDotsAnimation.current, (curValC / valuesC[0] * 100), 1, 2)
     energyDotsAnimation.current = res.items
+    // console.log({curValC, res})
     setEnergyDots(energyDotsAnimation.current)
+    // console.log({ res, timeCounter })
   }, [timeCounter])
 
   // render from 'energyDots'
@@ -199,9 +203,18 @@ const EnergyProfile = ({
       className={styles.energyContainer}
     >
       {/* <button onClick={() => {
-        console.log('energyDots:', getDotsCounts(energyDots))
-        console.log('energyDotsAnimation:', getDotsCounts(energyDotsAnimation.current))
-        console.log('beakerDotsEnd:', getDotsCounts(beakerDotsEnd.current))
+        console.log({ valuesC, valuesT, beakerState, energyDots, beakerDotsEnd })
+      }}>cccVV</button> */}
+      {/* <button onClick={() => {
+        console.log({ initDots })
+        const iniaaa = Array.from({ length: totalDots }, () => 1)
+        const diff = valuesC[0] - valuesC[1]
+        console.log({ diff, percent: (diff / valuesC[0] * 100) })
+        const aaa = generateEnergyArray(iniaaa, (diff / valuesC[0] * 100), 1, 2)
+        console.log({aaa, infO: getDotsCounts(aaa.items)})
+        const bbb = generateEnergyArray(aaa.items, (diff / valuesC[0] * 100), 2, 1)
+        console.log({ valuesC, diff, bbb })
+        console.log('info: ', getDotsCounts(bbb.items))
       }}>Test</button> */}
       <div style={{ ...canvasSize }}>
         <Canvas draw={drawBeaker} width={230} height={270} />

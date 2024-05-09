@@ -73,10 +73,13 @@ interface IAppContext {
 
   dragOrder: number,
   setDragOrder: React.Dispatch<React.SetStateAction<number>>,
-  
+
   // hover Status
   isOver: boolean,
   setIsOver: React.Dispatch<React.SetStateAction<boolean>>,
+
+
+  scrollable: React.MutableRefObject<boolean>,
 }
 
 const initialState = {
@@ -164,6 +167,7 @@ export const AppDataProvider = (props: any) => {
   const [hoverOrder, setHoverOrder] = useState(0)
   const [dragOrder, setDragOrder] = useState(0)
   const [isOver, setIsOver] = useState(false)
+  const scrollable = useRef<boolean>(false)
 
   // need update, don't use yet
   const updateStepPlay = (step: number) => {
@@ -227,6 +231,8 @@ export const AppDataProvider = (props: any) => {
         // hover Status
         isOver, setIsOver,
         dragOrder, setDragOrder,
+
+        scrollable,
       }}
     >
       {children}

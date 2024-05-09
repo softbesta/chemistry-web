@@ -49,7 +49,7 @@ const ReactionComparison = () => {
     hoverOrder,
     dragOrder,
   } = useAppData()
-  const valuesC = [100, 0]
+  const valuesC = [100, 1]
   const valuesT = [0, 20]
 
   const {
