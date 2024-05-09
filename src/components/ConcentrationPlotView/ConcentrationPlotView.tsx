@@ -107,6 +107,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
         rect.width,
         rect.height,
       );
+      if (showOnlyView) return
       if (tempLine) {
         verticalIndicator(ctx, initialTime)
         verticalIndicator(ctx, finalTime)
