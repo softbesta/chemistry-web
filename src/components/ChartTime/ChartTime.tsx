@@ -122,11 +122,11 @@ const ChartTime = ({
             {
               reactant: {
                 name: ReactionType.reactantName.A,
-                color: ReactionType.reactantColor.A,
+                color: colors[1],
               },
               product: {
                 name: ReactionType.productName.A,
-                color: ReactionType.productColor.A,
+                color: colors[2],
               }
             }
           }

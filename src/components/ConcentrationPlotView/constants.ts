@@ -55,14 +55,14 @@ export const ReactionType = {
     B: "D",
     C: "F",
   },
-  reactantColor: {
-    A: "rgb(8,168,232)",
-    B: "rgb(255,19,19)",
-    C: "rgb(255,132,19)",
-  },
-  productColor: {
-    A: "rgb(213,111,62)",
-    B: "rgb(99,105,209)",
-    C: "rgb(84,35,68)",
-  }
+  reactantColor: [
+    "rgb(8,168,232)",
+    "rgb(255,19,19)",
+    "rgb(255,132,19)",
+  ],
+  productColor: [
+    "rgb(213,111,62)",
+    "rgb(99,105,209)",
+    "rgb(84,35,68)",
+  ]
 }

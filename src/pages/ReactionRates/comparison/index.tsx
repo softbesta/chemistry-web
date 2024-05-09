@@ -257,7 +257,8 @@ const ReactionComparison = () => {
           <Droppable
             id={1}
             style={{
-              order: shuffledOrder[0]
+              order: shuffledOrder[0],
+              // border: '1px solid black'
             }}
           >
             <div
@@ -290,11 +291,11 @@ const ReactionComparison = () => {
                     {
                       reactant: {
                         name: ReactionType.reactantName.A,
-                        color: ReactionType.reactantColor.A,
+                        color: ReactionType.reactantColor[activeDotIndex],
                       },
                       product: {
                         name: ReactionType.productName.A,
-                        color: ReactionType.productColor.A,
+                        color: ReactionType.productColor[activeDotIndex],
                       }
                     }
                   }
@@ -368,11 +369,11 @@ const ReactionComparison = () => {
                     {
                       reactant: {
                         name: ReactionType.reactantName.A,
-                        color: ReactionType.reactantColor.A,
+                        color: ReactionType.reactantColor[activeDotIndex],
                       },
                       product: {
                         name: ReactionType.productName.A,
-                        color: ReactionType.productColor.A,
+                        color: ReactionType.productColor[activeDotIndex],
                       }
                     }
                   }
@@ -445,11 +446,11 @@ const ReactionComparison = () => {
                     {
                       reactant: {
                         name: ReactionType.reactantName.A,
-                        color: ReactionType.reactantColor.A,
+                        color: ReactionType.reactantColor[activeDotIndex],
                       },
                       product: {
                         name: ReactionType.productName.A,
-                        color: ReactionType.productColor.A,
+                        color: ReactionType.productColor[activeDotIndex],
                       }
                     }
                   }
