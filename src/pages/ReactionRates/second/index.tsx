@@ -232,7 +232,7 @@ const ReactionSecond = () => {
           canvaTimeState={canvaTimeState}
           onTimeframeChange={val => setTimeframe(val)}
           colors={dotColorList[activeDotIndex]}
-          textVert={`In(${'A'})`}
+          textVert={`In(${sliderVertText[activeDotIndex]})`}
           textHoriz={`Time`}
         />
       </div>
