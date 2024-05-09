@@ -61,6 +61,7 @@ const CommonLayout = ({
             // '-webkit-transform-origin': '0 0',
             'transform': `scale(${scale})`, /* Standard Property */
             // 'transform-origin': '0 0',  /* Standard Property */
+            '-webkit-transform-origin-y': 0,
           } : {}),
         }}
       >
