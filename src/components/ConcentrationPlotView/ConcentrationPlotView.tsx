@@ -4,6 +4,7 @@ import { Equation } from './Equation';
 import TimeChartDataLineView from './TimeChartDataLineView';
 import { ChartAxisShapeSettings } from './ChartAxisShapeSettings';
 import Color from 'color';
+import useAppData from '../../hooks/useAppData';
 
 type ReactionMoleculeDisplay = {
   name: string,
@@ -23,12 +24,15 @@ type ConcentrationPlotViewProps = {
   concentrationB?: Equation,
   initialTime: number,
   finalTime: number,
+  initialConcentration?: number,
+  finalConcentration?: number,
   canSetCurrentTime: boolean,
   highlightChart: boolean,
   highlightLhsCurve: boolean,
   highlightRhsCurve: boolean,
   display: ReactionPairDisplay,
   includeAxis: boolean
+  tempLine: boolean
   timingState: number
   onEndPlay?: () => void
   showOnlyView?: boolean
@@ -49,13 +53,15 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
     concentrationB,
     initialTime,
     finalTime,
+    initialConcentration,
+    finalConcentration,
     canSetCurrentTime,
     highlightChart,
     highlightLhsCurve,
     highlightRhsCurve,
     display,
     includeAxis,
-
+    tempLine,
     timingState,
     onEndPlay,
     showOnlyView,
@@ -63,6 +69,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
   } = props;
   const canvas = React.useRef<HTMLCanvasElement>(null);
   const [currentTime, setCurrentTime] = useState(initialTime)
+  const { curStep } = useAppData()
   // console.log({concentrationA, concentrationB, initialTime, finalTime})
   React.useEffect(() => {
     const ctx = canvas?.current?.getContext('2d');
@@ -90,7 +97,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
       //   rectangleHighlight(ctx, (initialTime + finalTime) / 2, finalTime)
       // }
 
-      if (includeAxis) {
+      if (tempLine) {
         ctx.clearRect(
           0,
           0,
@@ -102,6 +109,18 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
         horizontalIndicator(ctx, concentrationA.getValue(initialTime))
         horizontalIndicator(ctx, concentrationA.getValue(finalTime))
         // console.log(Date.now())
+      } else {
+        ctx.clearRect(
+          0,
+          0,
+          rect.width,
+          rect.height,
+        );
+        tIndicator(ctx, initialTime)
+        tIndicator(ctx, finalTime)
+        
+        initialConcentration && cIndicatoer(ctx, initialConcentration / 100)
+        finalConcentration && cIndicatoer(ctx, finalConcentration / 100)
       }
 
       if (includeAxis) {
@@ -110,7 +129,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
     }
 
     // console.log({ concentrationA, concentrationB, initialTime, finalTime })
-  }, [concentrationA, initialTime, finalTime])
+  }, [concentrationA, initialTime, finalTime, initialConcentration, finalConcentration, tempLine])
 
   // const rectangleHighlight = (
   //   ctx: CanvasRenderingContext2D,
@@ -145,6 +164,32 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
     ctx.lineTo(settings.xAxis.getPosition(time), settings.chartSize)
     ctx.lineWidth = 0.5
     ctx.strokeStyle = 'black'
+    ctx.stroke()
+  }
+
+  const tIndicator = (
+    ctx: CanvasRenderingContext2D,
+    time: number
+  ) => {
+    ctx.beginPath()
+
+    ctx.moveTo(settings.xAxis.getPosition(time), settings.chartSize / 10 * 9)
+    ctx.lineTo(settings.xAxis.getPosition(time), settings.chartSize)
+    ctx.lineWidth = 3
+    ctx.strokeStyle = 'rgb(220, 84, 59)'
+    ctx.stroke()
+  }
+
+  const cIndicatoer = (
+    ctx: CanvasRenderingContext2D,
+    concentration: number
+  ) => {
+    ctx.beginPath()
+
+    ctx.moveTo(0, settings.yAxis.getPosition(concentration))
+    ctx.lineTo(ctx.canvas.width / 10, settings.yAxis.getPosition(concentration))
+    ctx.lineWidth = 3
+    ctx.strokeStyle = 'rgb(220, 84, 59)'
     ctx.stroke()
   }
 

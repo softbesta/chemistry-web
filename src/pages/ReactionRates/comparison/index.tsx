@@ -300,6 +300,7 @@ const ReactionComparison = () => {
                     }
                   }
                   includeAxis={false}
+                  tempLine={false}
                   timingState={canvaTimeState}
                   onEndPlay={() => {
                     console.log('&&& timer ended &&& ')
@@ -378,6 +379,7 @@ const ReactionComparison = () => {
                     }
                   }
                   includeAxis={false}
+                  tempLine={false}
                   timingState={canvaTimeState}
                   onEndPlay={() => {
                     console.log('&&& timer ended &&& ')
@@ -455,6 +457,7 @@ const ReactionComparison = () => {
                     }
                   }
                   includeAxis={false}
+                  tempLine={false}
                   timingState={canvaTimeState}
                   onEndPlay={() => {
                     console.log('&&& timer ended &&& ')

@@ -114,6 +114,8 @@ const ChartTime = ({
           concentrationB={concentrationB}
           initialTime={valuesT[0]}
           finalTime={valuesT[1]}
+          initialConcentration={valuesC[0]}
+          finalConcentration={valuesC[1]}
           canSetCurrentTime={true}
           highlightChart={false}
           highlightLhsCurve={true}
@@ -131,6 +133,7 @@ const ChartTime = ({
             }
           }
           includeAxis={true}
+          tempLine={canvaTimeState > 0}
           timingState={canvaTimeState}
           onEndPlay={() => {
             console.log('&&& timer ended &&& ')
