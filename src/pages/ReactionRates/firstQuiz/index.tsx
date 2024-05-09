@@ -3,6 +3,6 @@ import { quizData } from "./constants"
 
 // Main page
 const ReactionFirstQuiz = () => {
-  return <QuizReaction quizData={quizData} />
+  return <QuizReaction quizKind={'first'} quizData={quizData} />
 }
 export default ReactionFirstQuiz

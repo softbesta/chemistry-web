@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 import Buttons from '../Buttons/Buttons'
-import { getItemsRandomlyFromArray } from '../../helper/functions'
+import { convertExpToHtml, getItemsRandomlyFromArray, getStorage, setStorage } from '../../helper/functions'
 import useAppData from '../../hooks/useAppData'
 import useFunctions from '../../hooks/useFunctions'
 import { QuizAnswerType, QuizItemType } from '../../helper/types'
@@ -10,9 +10,10 @@ import QuestionDifficulty from './QuestionDifficulty'
 
 // Main page
 interface QuizReactionProps {
+  quizKind: string
   quizData: QuizItemType[]
 }
-const QuizReaction = ({quizData}: QuizReactionProps) => {
+const QuizReaction = ({ quizKind, quizData }: QuizReactionProps) => {
   const [quizType, setQuizType] = useState(0)
   const [quizStep, setQuizStep] = useState(0)
   const [quizList, setQuizList] = useState<QuizItemType[]>([])
@@ -25,18 +26,47 @@ const QuizReaction = ({quizData}: QuizReactionProps) => {
   } = useFunctions()
 
   useEffect(() => {
-  }, [quizType])
+    loadQuizData()
+  }, [])
 
+  const loadQuizData = () => {
+    const quizStored = getStorage(`${quizKind}QuizResult`)
+    if (!quizStored) return
+    // console.log('loadQuizData', { quizStored })
+    const { quizType, quizStep, quizList, selectedAnswer, correctStep } = quizStored
+    setQuizStep(quizStep ?? 0)
+    setQuizType(quizType)
+    setQuizList(quizList)
+    setSelectedAnswer(selectedAnswer)
+    setCorrectStep(correctStep)
+  }
+  const saveQuizData = () => {
+    const quizData = {
+      quizType,
+      quizStep: quizType + 1,
+      quizList,
+      selectedAnswer,
+      correctStep: correctStep + 1,
+    }
+    // console.log('saveQuizData', { quizData })
+    setStorage(`${quizKind}QuizResult`, quizData)
+  }
+
+  const handleInitializeQuiz = () => {
+    setStorage(`${quizKind}QuizResult`, {})
+    loadQuizData()
+  }
   const handleStep = (val: number) => {
     let nextStep = quizStep + val
-    if (nextStep > quizType) {
+    if (nextStep > quizType + 1) {
       if (quizType > 0) {
         // show Next Course
         console.log('===handleStep=== 1')
-        console.log(getNextMenu(1))
         updatePageFromMenu(getNextMenu(1))
       }
       return
+    } else if (nextStep === quizType + 1) {
+      saveQuizData()
     } else if (nextStep < 0) {
       // show Prev Course
       updatePageFromMenu(getNextMenu(-1))
@@ -87,10 +117,17 @@ const QuizReaction = ({quizData}: QuizReactionProps) => {
     <Buttons.StepButton
       onClick={() => handleStep(1)}
       className={styles.nextBtn}
-      disabled={correctStep < quizStep}
+      disabled={!quizType || correctStep < quizStep}
     >
       &#9654;
     </Buttons.StepButton>
+    {quizStep === quizType + 1 && <Buttons.StepButton
+      onClick={() => handleInitializeQuiz()}
+      className={styles.refreshBtn}
+    >
+      &#8634;
+    </Buttons.StepButton>}
+
     {/* </div> */}
     <div className={styles.container}>
       {/* <div className={styles.navMenuDivider}></div> */}
@@ -127,7 +164,7 @@ const QuizReaction = ({quizData}: QuizReactionProps) => {
           />
         </div>
       </div>}
-      {quizStep > 0 && <div className={styles.content}>
+      {quizStep > 0 && quizStep < quizType + 1 && <div className={styles.content}>
         <QuestionStep
           quizItem={quizList[quizStep - 1]}
           selectedAnswers={selectedAnswer[quizStep - 1] ?? []}
@@ -136,7 +173,69 @@ const QuizReaction = ({quizData}: QuizReactionProps) => {
           onCorrectAnswer={(val) => handleCorrectAnswer(val)}
         />
       </div>}
+      {quizStep === quizType + 1 && <>
+
+        <div className={styles.content}>
+          <h1 className={styles.title}>You got {selectedAnswer.filter(a => a.length === 1).length} correct out of {quizType}</h1>
+          <h2 className={styles.description}>Let's review the questions</h2>
+
+          {quizList.map((quizItem, idx) =>
+            <ResultAnswerCard key={idx} quizItem={quizItem} selAnswerOrder={selectedAnswer[idx]} />
+          )}
+        </div>
+      </>
+      }
     </div>
   </>
 }
 export default QuizReaction
+
+interface ResultAnswerCardProps {
+  quizItem: QuizItemType
+  selAnswerOrder: number[]
+  // correctAnswerIndex: number
+}
+const ResultAnswerCard = ({ quizItem, selAnswerOrder }: ResultAnswerCardProps) => {
+  return <div
+    className={`
+    ${styles.quizResultCard} 
+    ${selAnswerOrder.length === 1 ? styles.correctBorder : styles.wrongBorder}
+  `}
+  >
+    <div className={styles.question} dangerouslySetInnerHTML={{ __html: convertExpToHtml(quizItem.question) }} />
+    {selAnswerOrder.length === 1 ?
+      <div className={styles.correctIcon}>
+        <i className="fa fa-check"></i>
+      </div> :
+      <div className={styles.wrongIcon}>
+        <i className="fa fa-close"></i>
+      </div>
+    }
+    {selAnswerOrder.map((sel, index) => {
+      let answer = quizItem?.allAnswerItems ? quizItem?.allAnswerItems[sel]?.answer : ''
+      const explaination = quizItem?.allAnswerItems ? quizItem?.allAnswerItems[sel]?.explanation : ''
+      const isCorrectAnswer = index === selAnswerOrder.length - 1
+      answer = (isCorrectAnswer ? 'Correct Answer: ' : 'Your Answer: ') + answer
+      return <div
+        key={index}
+
+      >
+        <div className={`${isCorrectAnswer ? styles.correctText : styles.wrongText}`}>
+          <div dangerouslySetInnerHTML={{ __html: convertExpToHtml(answer) || '' }} />
+        </div>
+        <ShowExplaination explaination={explaination} />
+      </div>
+    })}
+  </div>
+}
+const ShowExplaination = ({ explaination }: { explaination: string }) => {
+  const [isShow, setIsShow] = useState(false)
+  return <div>
+    <div className={styles.toggleShow}
+      onClick={() => setIsShow(v => !v)}
+    >
+      {!isShow ? 'Show Explaination' : 'Hide Explaination'}
+    </div>
+    {isShow === true && <div className={styles.explanation} dangerouslySetInnerHTML={{ __html: convertExpToHtml(explaination) || '' }} />}
+  </div>
+}
