@@ -7,7 +7,7 @@ import ChartBar from "../../../components/ChartBar"
 import MathContent from "../../../components/MathContent"
 import TutorialControl from "../../../components/TutorialControl"
 import { useHighLight } from "../../../hooks/useHighlight"
-import { maxStep_Zero, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text } from "./constants"
+import { maxStep_Zero, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text, tur_MathBlankArr } from "./constants"
 import useFunctions from "../../../hooks/useFunctions"
 import { ChooseMenu } from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
@@ -86,26 +86,47 @@ const ReactionZero = () => {
         setValuesT(curActions.valuesT)
       }
     }
-    
-    const math = () => {
-      // 
-      const mjxns2: any = jQuery('#tur_math2>span .mjx-n');
-      const mjxnums2: any = jQuery('#tur_math2>span mjx-num');
-      const mjxdboxes2: any = jQuery('#tur_math2>span mjx-den');
-      mjxdboxes2[0].style="border: 1px solid black;color:white;border-style:dashed;min-width: 64px;min-height: 30px;"
-      mjxnums2[0].style="border: 1px solid black;color:white;border-style:dashed;min-width: 64px;min-height: 30px;"
-      mjxns2[1].style="border: 1px solid black;color:white;border-style:dashed;min-width: 64px;min-height: 30px;"
-      mjxns2[9].style="border: 1px solid black;color:white;border-style:dashed;min-width: 64px;min-height: 30px;"
-      mjxns2[12].style="border: 1px solid black;color:white;border-style:dashed;min-width: 64px;min-height: 30px;"
-      // 
-      const mjxmns3: any = jQuery('#tur_math3>span mjx-mn');
-      if (mjxmns3.length) {
-        mjxmns3[12].style="border: 1px solid black;color:white;border-style:dashed;min-width: 64px;min-height: 30px;"
-      }
-    }
-    setTimeout(math, 3000)
+
+    action_turMathBlanks()
   }, [curStep, curActions])
-  
+
+  useEffect(() => {
+    setTimeout(() => {
+      action_turMathBlanks()
+    }, 500);
+  }, [])
+  const action_turMathBlanks = () => {
+    jQuery('.blankMath').removeClass()
+    const curTurMathBlanks = tur_MathBlankArr[curStep]
+
+    console.log({aaa: jQuery('#tur_math4_2')})
+
+    const s1 = '#tur_math3_2>span mjx-msub'
+    const s2 = '#tur_math3_2>span mjx-num'
+    const s3 = '#tur_math3_2>span mjx-den'
+    const s4 = '#tur_math3_2 mjx-math mjx-mn'
+    const a3 = jQuery(s1)
+    const b3 = jQuery(s2)
+    const c3 = jQuery(s3)
+    const d3 = jQuery(s4)
+    
+    // console.log('0', s1, {a3})
+    // console.log('1', s2, {b3})
+    // console.log('2', s3, {c3})
+    // console.log('3', s4, {d3})
+
+    if (!curTurMathBlanks) return
+    curTurMathBlanks.map((blank: any, index) => {
+      const math = jQuery(blank.query)
+      // console.log({ query: blank.query, index, math, nths: blank?.nths })
+      if (!math || !blank?.nths) return
+      blank?.nths.map((nth: any) => {
+        if (!math[nth]) return
+        math[nth].className = 'blankMath'
+      })
+    })
+  }
+
   const handleClickChooseMenuItem = () => {
     onStepChange(1)
   }

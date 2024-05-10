@@ -7,7 +7,7 @@ import ChartBar from "../../../components/ChartBar"
 import MathContent from "../../../components/MathContent"
 import TutorialControl from "../../../components/TutorialControl"
 import { useHighLight } from "../../../hooks/useHighlight"
-import { maxStep_First, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text } from "./constants"
+import { maxStep_First, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text, tur_MathBlankArr } from "./constants"
 import useFunctions from "../../../hooks/useFunctions"
 import { ChooseMenu } from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
@@ -16,6 +16,7 @@ import ChapterMenu from "../../../layout/ChapterMenu"
 import CanvasTime from "../../../components/Canvas/CanvasTime"
 import ChartInA from "../../../components/ChartInA/ChartInA"
 import { convertExpToHtml } from "../../../helper/functions"
+import jQuery from 'jquery';
 
 const ReactionFirst = () => {
   const {
@@ -86,7 +87,45 @@ const ReactionFirst = () => {
       }
     }
 
+    action_turMathBlanks()
   }, [curStep, curActions])
+
+  useEffect(() => {
+    setTimeout(() => {
+      action_turMathBlanks()
+    }, 500);
+  }, [])
+  const action_turMathBlanks = () => {
+    jQuery('.blankMath').removeClass()
+    const curTurMathBlanks = tur_MathBlankArr[curStep]
+
+    console.log({aaa: jQuery('#tur_math4_2')})
+
+    const s1 = '#tur_math2>span mjx-msub'
+    const s2 = '#tur_math2>span mjx-num'
+    const s3 = '#tur_math2>span mjx-den'
+    const s4 = '#tur_math2 mjx-math mjx-mn'
+    const a3 = jQuery(s1)
+    const b3 = jQuery(s2)
+    const c3 = jQuery(s3)
+    const d3 = jQuery(s4)
+    
+    console.log('0', s1, {a3})
+    console.log('1', s2, {b3})
+    console.log('2', s3, {c3})
+    console.log('3', s4, {d3})
+
+    if (!curTurMathBlanks) return
+    curTurMathBlanks.map((blank: any, index) => {
+      const math = jQuery(blank.query)
+      // console.log({ query: blank.query, index, math, nths: blank?.nths })
+      if (!math || !blank?.nths) return
+      blank?.nths.map((nth: any) => {
+        if (!math[nth]) return
+        math[nth].className = 'blankMath'
+      })
+    })
+  }
 
   const handleClickChooseMenuItem = () => {
     onStepChange(1)

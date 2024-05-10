@@ -7,7 +7,7 @@ import ChartBar from "../../../components/ChartBar"
 import MathContent from "../../../components/MathContent"
 import TutorialControl from "../../../components/TutorialControl"
 import { useHighLight } from "../../../hooks/useHighlight"
-import { maxStep_Kinetics, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text, chooseMenuItems, tur_MathHighlights } from "./constants"
+import { maxStep_Kinetics, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text, chooseMenuItems, tur_MathHighlights, tur_MathBlankArr } from "./constants"
 import useFunctions from "../../../hooks/useFunctions"
 import { ChooseMenuSel } from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
@@ -37,6 +37,7 @@ import EnergyProfileRateChart from "../../../components/EnergyProfileRateChart/E
 import { dotKineticsColors } from "../constants"
 import { Mask } from '@reactour/mask'
 import { RectResult } from '@reactour/utils';
+import jQuery from 'jquery';
 
 const log_Kinetics = true
 
@@ -145,7 +146,46 @@ const ReactionKinetics = () => {
         setGasCounts(update)
       }
     }
+    action_turMathBlanks()
   }, [curStep, curActions])
+
+  useEffect(() => {
+    setTimeout(() => {
+      action_turMathBlanks()
+    }, 3000);
+  }, [])
+  const action_turMathBlanks = () => {
+    jQuery('.blankMath').removeClass()
+    const curTurMathBlanks = tur_MathBlankArr[curStep]
+
+    console.log({aaa: jQuery('#tur_math4_2')})
+
+    const s1 = '#tur_math4_1>span mjx-msub'
+    const s2 = '#tur_math4_1>span mjx-num'
+    const s3 = '#tur_math4_1>span mjx-den'
+    const s4 = '#tur_math4_1 mjx-math mjx-mn'
+    const a3 = jQuery(s1)
+    const b3 = jQuery(s2)
+    const c3 = jQuery(s3)
+    const d3 = jQuery(s4)
+    
+    console.log('0', s1, {a3})
+    console.log('1', s2, {b3})
+    console.log('2', s3, {c3})
+    console.log('3', s4, {d3})
+
+    if (!curTurMathBlanks) return
+    curTurMathBlanks.map((blank: any, index) => {
+      const math = jQuery(blank.query)
+      // console.log({ query: blank.query, index, math, nths: blank?.nths })
+      if (!math || !blank?.nths) return
+      blank?.nths.map((nth: any) => {
+        if (!math[nth]) return
+        math[nth].className = 'blankMath'
+      })
+    })
+  }
+
 
   const handleClickChooseMenuItem = (index: number) => {
     setChooseMenuIndex(index)
@@ -419,7 +459,7 @@ const ReactionKinetics = () => {
   }, [chooseMenuIndex])
   const preExponentFactor = useMemo(() => {
     switch (chooseMenuIndex) {
-      case 0: return 20
+      case 0: return 30
       case 1: return 10
       case 2: return 5
       default: return 20

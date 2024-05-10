@@ -375,6 +375,78 @@ export const stepsActions = [
   },
 ]
 
+export const tur_MathBlankArr = [
+  [
+    {
+      query: '#tur_math2>span mjx-mn',
+      nths: [0, 2],
+    },
+    {
+      query: '#tur_math3_2 mjx-math mjx-mn',
+      nths: [0, 2],
+    },
+    {
+      query: '#tur_math4_2 mjx-math mjx-mn',
+      nths: [0, 1, 2],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_2 mjx-math mjx-mn',
+      nths: [0, 2],
+    },
+  ],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+
+  [
+    {
+      query: '#tur_math2>span mjx-mn',
+      nths: [2, 3],
+    },
+    {
+      query: '#tur_math4_2 mjx-math mjx-mn',
+      nths: [0, 2],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_2 mjx-math mjx-mn',
+      nths: [0, 2],
+    },
+  ],
+  [],
+  [],
+  [],
+
+  [
+    {
+      query: '#tur_math2>span mjx-mn',
+      nths: [2, 3],
+    },
+    {
+      query: '#tur_math4_2 mjx-math mjx-mn',
+      nths: [0, 2],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_2 mjx-math mjx-mn',
+      nths: [0, 2],
+    },
+  ],
+]
+
+// old one
 export const tur_MathBlanks = [
   [
     { left: 0, top: 94, width: 32 }, //0

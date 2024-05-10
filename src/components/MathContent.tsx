@@ -59,6 +59,7 @@ const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, highlights, cl
         className={`${styles.mathjaxRow} ${styles.centerAlign}`}
       >
         <MathJax
+          id='tur_math3_1'
           className={styles.mathjax}
           dynamic
         >
@@ -66,6 +67,7 @@ const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, highlights, cl
           {/* {`\\[ t_{1/2} = [A_0]/(2k) \\]`} */}
         </MathJax>
         <MathJax
+          id='tur_math3_2'
           className={styles.mathjax}
           dynamic
         >
@@ -78,6 +80,7 @@ const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, highlights, cl
         className={`${styles.mathjaxRow} ${styles.centerAlign}`}
       >
         <MathJax
+          id='tur_math4_1'
           className={styles.mathjax}
           dynamic
         >
@@ -85,6 +88,7 @@ const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, highlights, cl
           {/* {`\\[ Rate = k[A]^0 \\]`} */}
         </MathJax>
         <MathJax
+          id='tur_math4_2'
           className={styles.mathjax}
           inline
           dynamic

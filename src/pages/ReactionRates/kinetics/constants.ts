@@ -762,6 +762,133 @@ export const stepsActions = [
   },
 ]
 
+export const tur_MathBlankArr = [
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [],
+  [],
+  [],
+  [],
+  [],
+
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_1 mjx-math mjx-mn',
+      nths: [1, 6, 8],
+    },
+  ],
+  [],
+  [],
+  [],
+]
+
+// old one
 export const tur_MathBlanks = [
   [
     { left: 185, top: 198, width: 30 }, //1

@@ -313,6 +313,99 @@ export const stepsActions = [
   },
 ]
 
+export const tur_MathBlankArr = [
+  [
+    {
+      query: '#tur_math2>span mjx-mn',
+      nths: [0, 3, 5],
+    },
+    {
+      query: '#tur_math2>span mjx-num',
+      nths: [0],
+    },
+    {
+      query: '#tur_math2>span mjx-den',
+      nths: [0],
+    },
+    {
+      query: '#tur_math3_2 mjx-math mjx-mn',
+      nths: [0,1,3],
+    },
+    {
+      query: '#tur_math4_2 mjx-math mjx-mn',
+      nths: [0,1,2],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_2 mjx-math mjx-mn',
+      nths: [0,1,2],
+    },
+  ],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  [],
+  
+  [
+    {
+      query: '#tur_math2>span mjx-mn',
+      nths: [3, 5],
+    },
+    {
+      query: '#tur_math2>span mjx-num',
+      nths: [0],
+    },
+    {
+      query: '#tur_math2>span mjx-den',
+      nths: [0],
+    },
+    {
+      query: '#tur_math4_2 mjx-math mjx-mn',
+      nths: [0,1,2],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_2 mjx-math mjx-mn',
+      nths: [0,2],
+    },
+  ],
+  
+  [],
+  [],
+  [],
+  
+  [
+    {
+      query: '#tur_math2>span mjx-mn',
+      nths: [3, 5],
+    },
+    {
+      query: '#tur_math2>span mjx-num',
+      nths: [0],
+    },
+    {
+      query: '#tur_math2>span mjx-den',
+      nths: [0],
+    },
+    {
+      query: '#tur_math4_2 mjx-math mjx-mn',
+      nths: [0,1,2],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_2 mjx-math mjx-mn',
+      nths: [0,2],
+    },
+  ],
+]
+
+// old one
 export const tur_MathBlanks = [
   [
     { left: 73, top: 115, width: 50 }, //0

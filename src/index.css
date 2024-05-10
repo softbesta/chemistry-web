@@ -39,3 +39,11 @@ code {
 .txt-black{
   color: black !important;
 }
+
+.blankMath {
+  color: white;
+  border: 1px solid black;
+  border-style: dashed;
+  min-width: 40px;
+  min-height: 30px;
+}
