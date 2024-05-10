@@ -144,7 +144,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
       if (showOnlyView) {
         ctx.beginPath()
         ctx.strokeStyle = 'transparent'
-        // ctx.rect(0, rectHeight * 0.28, rectWidth * 0.72, rectHeight * (1 - 0.28))
+        ctx.rect(0, rectHeight * 0.27, rectWidth * 0.72, rectHeight * (1 - 0.27))
         let color = 'black'
         // console.log({hoverOrder})
         ctx.lineWidth = 1
@@ -156,7 +156,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
             case 3: color = 'rgb(248, 208, 72)'; break;
             default: color = 'black'
           }
-          ctx.lineWidth = 2
+          ctx.lineWidth = 4
         }
         ctx.strokeStyle = color
         ctx.stroke()
@@ -332,6 +332,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
       ctx.beginPath()
       ctx.moveTo(xPosition, yPosition)
     } else {
+      ctx.lineWidth = 1
       ctx.strokeStyle = data.headColor
       ctx.lineTo(xPosition, yPosition)
       ctx.stroke()
