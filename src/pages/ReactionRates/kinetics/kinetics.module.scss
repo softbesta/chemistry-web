@@ -83,11 +83,11 @@
   .reactionContentRow {
     display: flex;
     justify-content: space-between;
-    gap: 30px;
+    gap: 10px;
 
     .mathContent {
       font-size: 16px;
-      width: 240px;
+      width: 270px;
 
       [class*="mathjaxRow"] {
         flex-direction: column;

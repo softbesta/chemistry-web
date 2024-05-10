@@ -49,7 +49,7 @@ const useFunctions = () => {
     }
     const path = routes[menu]?.path
     if (!path) {
-      navigate('/nopage')
+      navigate('/')
       return
     }
     // setCurMenu(menu)

@@ -206,9 +206,9 @@ export const MenuOrder = [
   MenuList.kinetics,
   MenuList.kineticsQuiz,
   // Todo: need to add more menus
-  MenuList.aqueous,
-  MenuList.introduction,
-  MenuList.balanced,
+  // MenuList.aqueous,
+  // MenuList.introduction,
+  // MenuList.balanced,
 ]
 
 // Colors to be used

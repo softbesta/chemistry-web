@@ -26,6 +26,7 @@ export const ChooseMenu = ({ menuItems = chooseMenuItems, isEnable = false, onCl
 
   useEffect(() => {
     console.log('===ChooseMenu.useEffect===')
+    console.log({chooseMenuItems, isEnable, activeDotIndex})
     console.log({ isEnable })
     setIsActive(isEnable)
   }, [isEnable])
@@ -91,7 +92,7 @@ const ChooseMenuPanel = ({
             ${isActiveItem ? styles.activated : ''} 
           `}
           onClick={() => onItemClick(index)}
-        // disabled={!(activeItemIndex + 1 === index)}
+          disabled={!(activeItemIndex + 1 === index)}
         >
           {item.title}
         </button>

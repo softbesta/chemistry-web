@@ -491,7 +491,7 @@ const ReactionKinetics = () => {
         setCatalystItemStates={(val) => setCatalystItemStates(val)}
         onCatalystMenuItemClick={onCatalystMenuItemClick}
         activeCatIdx={showCatalystMoveItem ? catShakingOrder[curCatShakingOrderIdx] : -1}
-        regionWidth={300}
+        regionWidth={290}
         regionHeight={150}
         maxShakingCount={maxShakingCount}
         onChangeShakingCount={(val, index) => {

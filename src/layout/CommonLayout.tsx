@@ -55,6 +55,7 @@ const CommonLayout = ({
     <div className={styles.wrapper}>
       <div
         style={{
+          padding: '0 30px',
           // transform: `scale(${scaleX})`,
           ...(scale ? {
             // zoom: `${scale}`,
