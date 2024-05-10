@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { themeColors } from "../../constants"
+import useAppData from "../../hooks/useAppData"
 
 
 interface BarChartCanvasProps {
@@ -18,6 +19,7 @@ interface BarChartCanvasProps {
 
 const BarChartCanvas = ({ state, c2, c1, t2, t1, height, width, colorA, colorB, text, onEndPlay }: BarChartCanvasProps) => {
   const canvas = useRef<HTMLCanvasElement>(null);
+  const { dragTime } = useAppData()
   const [sX, setSX] = useState<number>(0);
   const [sY, setSY] = useState<number>(0);
   const [eX, setEX] = useState<number>(0);
@@ -175,6 +177,14 @@ const BarChartCanvas = ({ state, c2, c1, t2, t1, height, width, colorA, colorB, 
       setTimeCounter(finalTime)
     }
   }, [state])
+
+  useEffect(() => {
+    if (state === 2) {
+      initAll()
+      drawAt(Math.abs(dragTime - t2))
+    }
+    console.log({state})
+  }, [state, dragTime])
 
   return (<>
     <canvas ref={canvas} height={height + 62} width={width} />

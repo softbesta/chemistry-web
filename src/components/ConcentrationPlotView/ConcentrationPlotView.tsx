@@ -73,7 +73,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
   } = props;
   const canvas = React.useRef<HTMLCanvasElement>(null);
   const [currentTime, setCurrentTime] = useState(initialTime)
-  const { curStep } = useAppData()
+
   // console.log({concentrationA, concentrationB, initialTime, finalTime})
   React.useEffect(() => {
     const ctx = canvas?.current?.getContext('2d');
@@ -326,7 +326,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
               currentTime={currentTime} //.constant(currentTime),
               finalTime={finalTime}
               filledBarColor={'gray'} //Styling.timeAxisCompleteBar,
-              canSetCurrentTime={canSetCurrentTime}
+              canSetCurrentTime={timingState === 3}
               highlightLhs={false}
               highlightRhs={false}
               order={order}
@@ -348,11 +348,12 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
             currentTime={currentTime} //$currentTime
             finalTime={finalTime}
             filledBarColor={''} //Styling.timeAxisCompleteBar
-            canSetCurrentTime={canSetCurrentTime}
+            canSetCurrentTime={timingState === 3}
             highlightLhs={highlightLhsCurve}
             highlightRhs={highlightRhsCurve}
             showOnlyView={showOnlyView}
             order={order}
+            setCurrentTime={setCurrentTime}
           />
         </>
       }

@@ -39,6 +39,7 @@ type TimeChartDataLineViewProps = {
   showOnlyView?: boolean
   showFullLine?: boolean
   order: number
+  setCurrentTime?: any
 }
 
 type Rect = {
@@ -65,10 +66,56 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     minDragTime = null,
     showOnlyView = false,
     showFullLine = false,
-    order
+    order,
+    setCurrentTime
   } = props;
-  const { hoverOrder, isOver, dragOrder } = useAppData()
+  const { 
+    hoverOrder, 
+    isOver, 
+    dragOrder, 
+    setDragConcentration,
+    setDragTime,
+  } = useAppData()
   const canvas = React.useRef<HTMLCanvasElement>(null);
+  
+  const [isDrag, startDrag] = useState(false)
+  const [x, setX] = useState(0)
+
+  React.useEffect(() => {
+    const ctx = canvas?.current?.getContext('2d');
+    if (ctx) {
+      ctx.canvas.addEventListener('mousedown', function (event: any) {
+        setX(event.offsetX)
+        startDrag(true)
+      });
+
+      ctx.canvas.addEventListener('mouseup', function (event: any) {
+        setX(event.offsetX)
+        startDrag(false)
+      });
+
+      ctx.canvas.addEventListener('mousemove', function (event: any) {
+        isDrag && setX(event.offsetX)
+      });
+    }
+  }, [])
+
+  
+  React.useEffect(() => {
+    const ctx = canvas?.current?.getContext('2d');
+    if (ctx && canSetCurrentTime && setCurrentTime && isDrag) {
+      const dx1Sec = ctx.canvas.width * 0.7 / 20
+      let cTime = x / dx1Sec
+      if (cTime < initialTime) cTime = initialTime
+      if (cTime > finalTime) cTime = finalTime
+      // console.log({x, cTime, currentTime})
+      setCurrentTime(cTime)
+      setDragTime(cTime)
+      const y = data.equation.getValue(cTime)
+      setDragConcentration(y * 100)
+    }
+  }, [isDrag, setCurrentTime, canSetCurrentTime, x, initialTime, finalTime])
+
   React.useEffect(() => {
     const ctx = canvas?.current?.getContext('2d');
     if (ctx) {

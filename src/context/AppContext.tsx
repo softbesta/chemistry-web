@@ -83,6 +83,12 @@ interface IAppContext {
 
   indicatorStep: number,
   setIndicatorStep: React.Dispatch<React.SetStateAction<number>>,
+
+  dragConcentration: number,
+  setDragConcentration: React.Dispatch<React.SetStateAction<number>>,
+
+  dragTime: number,
+  setDragTime: React.Dispatch<React.SetStateAction<number>>,
 }
 
 const initialState = {
@@ -171,6 +177,8 @@ export const AppDataProvider = (props: any) => {
   const [dragOrder, setDragOrder] = useState(0)
   const [isOver, setIsOver] = useState(false)
   const [indicatorStep, setIndicatorStep] = useState<number>(-1)
+  const [dragConcentration, setDragConcentration] = useState(0)
+  const [dragTime, setDragTime] = useState(0)
   const scrollable = useRef<boolean>(false)
 
   // need update, don't use yet
@@ -239,6 +247,8 @@ export const AppDataProvider = (props: any) => {
         scrollable,
 
         indicatorStep, setIndicatorStep,
+        dragConcentration, setDragConcentration,
+        dragTime, setDragTime,
       }}
     >
       {children}

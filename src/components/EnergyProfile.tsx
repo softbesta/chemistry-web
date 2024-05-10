@@ -56,7 +56,7 @@ const EnergyProfile = ({
   //   // console.log({ update })
   // }, [concentrationAB])
 
-  const { beakerDots, beakerDotsEnd } = useAppData()
+  const { beakerDots, beakerDotsEnd, dragConcentration } = useAppData()
 
   useEffect(() => {
     // console.log('vvv111')
@@ -68,6 +68,18 @@ const EnergyProfile = ({
     beakerDotsEnd.current = update
     setEnergyDots(beakerDots.current)
   }, [valuesC[0]])
+
+  useEffect(() => {
+    // console.log('vvv222')
+    const valC = Math.abs(valuesC[0] - dragConcentration)
+    const update = generateEnergyArray(beakerDotsEnd.current, (valC / valuesC[0] * 100), 1, 2).items
+    beakerDotsEnd.current = update
+    if (beakerState === 3) {
+      console.log({ beakerState, beakerDotsEnd })
+      setEnergyDots(beakerDotsEnd.current)
+    }
+  }, [dragConcentration, beakerState])
+
   useEffect(() => {
     // console.log('vvv222')
     const valC = Math.abs(valuesC[0] - valuesC[1])
@@ -100,6 +112,7 @@ const EnergyProfile = ({
     } else if (beakerState === 3) {
       setEnergyDots(beakerDotsEnd.current)
     }
+    console.log(beakerDotsEnd.current)
     return () => stopTimer()
   }, [beakerState])
 
