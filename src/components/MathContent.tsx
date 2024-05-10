@@ -96,7 +96,7 @@ const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, highlights, cl
     </MathJaxContext>
 
 
-    {blanks && blanks.map((item, index) => {
+    {false && blanks && blanks.map((item, index) => {
       if (!item) return null
       const className = `
         ${styles.blank} 

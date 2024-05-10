@@ -14,6 +14,7 @@ import WatchMenu from "../../../layout/WatchMenu"
 import { dotColorList, sliderVertText } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
 import { convertExpToHtml } from "../../../helper/functions"
+import jQuery from 'jquery';
 
 const ReactionZero = () => {
   const {
@@ -85,9 +86,26 @@ const ReactionZero = () => {
         setValuesT(curActions.valuesT)
       }
     }
-
+    
+    const math = () => {
+      // 
+      const mjxns2: any = jQuery('#tur_math2>span .mjx-n');
+      const mjxnums2: any = jQuery('#tur_math2>span mjx-num');
+      const mjxdboxes2: any = jQuery('#tur_math2>span mjx-den');
+      mjxdboxes2[0].style="border: 1px solid black;color:white;border-style:dashed;min-width: 64px;min-height: 30px;"
+      mjxnums2[0].style="border: 1px solid black;color:white;border-style:dashed;min-width: 64px;min-height: 30px;"
+      mjxns2[1].style="border: 1px solid black;color:white;border-style:dashed;min-width: 64px;min-height: 30px;"
+      mjxns2[9].style="border: 1px solid black;color:white;border-style:dashed;min-width: 64px;min-height: 30px;"
+      mjxns2[12].style="border: 1px solid black;color:white;border-style:dashed;min-width: 64px;min-height: 30px;"
+      // 
+      const mjxmns3: any = jQuery('#tur_math3>span mjx-mn');
+      if (mjxmns3.length) {
+        mjxmns3[12].style="border: 1px solid black;color:white;border-style:dashed;min-width: 64px;min-height: 30px;"
+      }
+    }
+    setTimeout(math, 3000)
   }, [curStep, curActions])
-
+  
   const handleClickChooseMenuItem = () => {
     onStepChange(1)
   }
@@ -194,6 +212,8 @@ const ReactionZero = () => {
   }
   // remove highlighted elements when page opens
   useEffect(() => {
+    // @ts-ignore
+    window.jQuery = jQuery;
     return () => removeHighlightElement(tutorials[curStep]?.highlight)
   }, [])
 
