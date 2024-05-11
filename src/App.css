@@ -42,3 +42,20 @@
     transform: rotate(360deg);
   }
 }
+
+@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+  html {
+    overflow: hidden;
+  }
+  body {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    overflow: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding-right: 60px;
+  }
+}

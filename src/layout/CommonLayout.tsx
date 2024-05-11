@@ -30,8 +30,9 @@ const CommonLayout = ({
         // console.log('------------resize ---------', window.innerWidth / contentSize.width)
         const scaleX = window.innerWidth / contentSize.width
         const scaleY = window.innerHeight / contentSize.height
-        // console.log({ scaleX, scaleY })
+        console.log({ scaleX, scaleY })
         setScale(Math.min(scaleX, scaleY))
+        if (scaleX < scaleY) setScale((scaleX + scaleY) * 0.42)
       } else {
         setScale(undefined)
       }
