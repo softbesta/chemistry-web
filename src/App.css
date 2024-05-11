@@ -48,7 +48,7 @@
     overflow: hidden;
   }
   body {
-    transform: rotate(270deg);
+    transform: rotate(-90deg);
     transform-origin: left top;
     width: 100vh;
     height: 100vw;
