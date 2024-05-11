@@ -32,7 +32,7 @@ const CommonLayout = ({
         const scaleY = window.innerHeight / contentSize.height
         console.log({ scaleX, scaleY })
         setScale(Math.min(scaleX, scaleY))
-        if (scaleX < scaleY) setScale((scaleX + scaleY) * 0.42)
+        if (scaleX < scaleY) setScale((scaleX + scaleY) * 0.38)
       } else {
         setScale(undefined)
       }
