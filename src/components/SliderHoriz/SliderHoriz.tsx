@@ -86,7 +86,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
             <MultiRangeSliderHoriz
               max={200}
               width={167}
-              distance={20}
+              distance={25}
               showThumbIndex={showThumbIndex}
               values={getValueT()}
               onChange={(val, index) => handleChangeVal(val)}
