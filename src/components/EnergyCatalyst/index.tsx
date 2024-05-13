@@ -55,7 +55,7 @@ export const EnergyCatalystContainer = ({
   const [dragIndex, setDragIndex] = useState(-1)
   const [dragOffset, setDragOffset] = useState<Point>({ x: 0, y: 0 })
 
-  const shakeThreshold = 30
+  const shakeThreshold = 5
   const [prevPosition, setPrevPosition] = useState<Point>({ x: 0, y: 0 })
   const shakings = useRef<number>(0)  // shaking element count
   // const [shakingDirection, setShakingDirection] = useState(0)
