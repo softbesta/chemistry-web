@@ -7,11 +7,12 @@ interface SliderHoriz {
   valuesT: number[]
   setValuesT: (val: number[]) => void
   showThumbIndex: number[]
+  distance?: number
 }
 
 const flexibleV = 10;
 
-const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
+const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25 }: SliderHoriz) => {
   const infoT = useMemo(() => {
     let showCount = 0, disabledCount = 0
     showThumbIndex.forEach(item => {
@@ -61,7 +62,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
 
     if (update[1] < 2) update[0] = 2;
 
-    if (update[0] >= update[1] - 20) update[0] = update[1] - 20
+    if (update[0] >= update[1] - distance) update[0] = update[1] - distance
 
     update = update.map(item => item / flexibleV)
 
@@ -87,7 +88,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
             <MultiRangeSliderHoriz
               max={200}
               width={167}
-              distance={25}
+              distance={distance}
               showThumbIndex={showThumbIndex}
               values={getValueT()}
               onChange={(val, index) => handleChangeVal(val)}

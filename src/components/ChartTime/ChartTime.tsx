@@ -104,6 +104,7 @@ const ChartTime = ({
         valuesT={valuesT}
         setValuesT={setValuesT}
         showThumbIndex={canvaTimeSliderT}
+        distance={25}
       />
 
       <div className={styles.chartTime}>
