@@ -114,18 +114,18 @@ const CanvasSlider = (props: BeakerTicksProps) => {
         const ctx = canvas?.current?.getContext('2d');
         const maxCtx = maxCanvas?.current?.getContext('2d');
         if (ctx && isDrag && !minDisabled) {
-            drawSlider(ctx, Math.max(9, x), y, true)
             onChange(x, y)
+            drawSlider(ctx, Math.max(9, x), y, true)
         }
         if (maxCtx && isDrag && x > (valLeft + 16) && x < 152) {
             maxCtx.canvas.style.position = "absolute"
             maxCtx.canvas.style.left = "0px"
             console.log({valLeft, x})            
-            drawSlider(maxCtx, Math.max(9, x), y, false)
             onChange(x, y)
+            drawSlider(maxCtx, Math.max(9, x), y, false)
         }
         // console.log({ x, y })
-    }, [x, y, isDrag, minDisabled])
+    }, [x, y, drawSlider, isDrag, minDisabled, maxDisabled])
 
     useEffect(() => {
         const ctx = canvas?.current?.getContext('2d');
@@ -138,7 +138,7 @@ const CanvasSlider = (props: BeakerTicksProps) => {
             maxCtx.canvas.style.left = "0px"
             drawSlider(maxCtx, valRight, y, false)
         }
-    }, [isDrag, minDisabled, maxDisabled])
+    }, [isDrag, drawSlider, minDisabled, maxDisabled])
 
     return (
         <>
