@@ -183,7 +183,7 @@ const BarChartCanvas = ({ state, c2, c1, t2, t1, height, width, colorA, colorB, 
       initAll()
       drawAt(Math.abs(dragTime - t2))
     }
-    console.log({state})
+    // console.log({state})
   }, [state, dragTime])
 
   return (<>

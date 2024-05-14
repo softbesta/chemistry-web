@@ -93,7 +93,7 @@ const ReactionFirst = () => {
   useEffect(() => {
     setTimeout(() => {
       action_turMathBlanks()
-    }, 500);
+    }, 1500);
   }, [])
   const action_turMathBlanks = () => {
     jQuery('.blankMath').removeClass()
@@ -225,7 +225,7 @@ const ReactionFirst = () => {
       highlightElement(tutorials[nextStep].highlight)
     }
 
-    console.log({ curStep })
+    // console.log({ curStep })
     setCurStep(nextStep)
   }
   // remove highlighted elements when page opens

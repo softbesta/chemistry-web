@@ -46,7 +46,7 @@ export const generateEnergyArray = (arr: any, percentage: any, originVal: number
   // console.log({ percentage, expectedCount })
   
   const updateCount = expectedCount - toCount
-  console.log({originCount, toCount, percentage, expectedCount, updateCount})
+  // console.log({originCount, toCount, percentage, expectedCount, updateCount})
   // const updateCount = count - fromCount
 
   // updatedArrIndexes: variable for debug purpose.

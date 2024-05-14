@@ -93,13 +93,13 @@ const ReactionZero = () => {
   useEffect(() => {
     setTimeout(() => {
       action_turMathBlanks()
-    }, 500);
+    }, 1500);
   }, [])
   const action_turMathBlanks = () => {
     jQuery('.blankMath').removeClass()
     const curTurMathBlanks = tur_MathBlankArr[curStep]
 
-    console.log({aaa: jQuery('#tur_math4_2')})
+    // console.log({aaa: jQuery('#tur_math4_2')})
 
     const s1 = '#tur_math3_2>span mjx-msub'
     const s2 = '#tur_math3_2>span mjx-num'
@@ -228,7 +228,7 @@ const ReactionZero = () => {
       highlightElement(tutorials[nextStep].highlight)
     }
 
-    console.log({ curStep })
+    // console.log({ curStep })
     setCurStep(nextStep)
   }
   // remove highlighted elements when page opens

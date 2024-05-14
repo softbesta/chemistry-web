@@ -75,7 +75,7 @@ const EnergyProfile = ({
     const update = generateEnergyArray(beakerDotsEnd.current, (valC / valuesC[0] * 100), 1, 2).items
     beakerDotsEnd.current = update
     if (beakerState === 3) {
-      console.log({ beakerState, beakerDotsEnd })
+      // console.log({ beakerState, beakerDotsEnd })
       setEnergyDots(beakerDotsEnd.current)
     }
   }, [dragConcentration, beakerState])
@@ -86,7 +86,7 @@ const EnergyProfile = ({
     const update = generateEnergyArray(beakerDotsEnd.current, (valC / valuesC[0] * 100), 1, 2).items
     beakerDotsEnd.current = update
     if (beakerState === 3) {
-      console.log({ beakerState, beakerDotsEnd })
+      // console.log({ beakerState, beakerDotsEnd })
       setEnergyDots(beakerDotsEnd.current)
     }
   }, [valuesC[1], beakerState])
@@ -112,7 +112,7 @@ const EnergyProfile = ({
     } else if (beakerState === 3) {
       setEnergyDots(beakerDotsEnd.current)
     }
-    console.log(beakerDotsEnd.current)
+    // console.log(beakerDotsEnd.current)
     return () => stopTimer()
   }, [beakerState])
 
@@ -130,13 +130,13 @@ const EnergyProfile = ({
       // console.log('interval', timeCounter)
       setTimeCounter(v => v += 1 / framesPerSecond)
     }, intervalTime)
-    console.log('started', timerID.current)
+    // console.log('started', timerID.current)
   }
   const stopTimer = () => {
     if (timerID.current) {
       clearInterval(timerID.current)
       timerID.current = undefined
-      console.log('timer end')
+      // console.log('timer end')
     }
   }
 

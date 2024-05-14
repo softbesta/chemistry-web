@@ -26,8 +26,8 @@ export const ChooseMenu = ({ menuItems = chooseMenuItems, isEnable = false, onCl
 
   useEffect(() => {
     console.log('===ChooseMenu.useEffect===')
-    console.log({chooseMenuItems, isEnable, activeDotIndex})
-    console.log({ isEnable })
+    // console.log({chooseMenuItems, isEnable, activeDotIndex})
+    // console.log({ isEnable })
     setIsActive(isEnable)
   }, [isEnable])
 
@@ -113,7 +113,7 @@ export const ChooseMenuSel = ({ selectedIndex = 0, menuItems = chooseMenuItems, 
 
   useEffect(() => {
     console.log('===ChooseMenu.useEffect===')
-    console.log({ isEnable })
+    // console.log({ isEnable })
     if (!isEnable) setIsActive(false)
   }, [isEnable])
 

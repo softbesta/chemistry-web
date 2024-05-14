@@ -1,6 +1,7 @@
 import styles from './SliderHoriz.module.scss'
 import { useMemo } from "react"
 import MultiRangeSliderHoriz from "../MutiRangeSlider/MultiRangeSliderHoriz"
+import CanvasSlider from '../Slider'
 
 interface SliderHoriz {
   valuesT: number[]
@@ -8,7 +9,7 @@ interface SliderHoriz {
   showThumbIndex: number[]
 }
 
-const flexibleV = 10;
+const flexibleV = 150 / 20;
 
 const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
   const infoT = useMemo(() => {
@@ -60,7 +61,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
 
     if (update[1] < 2) update[0] = 2;
 
-    if (update[0] >= update[1] - 20) update[0] = update[1] - 20
+    if (update[0] >= update[1] - 15) update[0] = update[1] - 15
 
     update = update.map(item => item / flexibleV)
 
@@ -82,10 +83,19 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex }: SliderHoriz) => {
         {
           infoT.showCount > 0 &&
           <div style={{ position: 'relative' }}>
-            <div className={styles.sliderback}></div>
-            <MultiRangeSliderHoriz
+            {/* <div className={styles.sliderback}></div> */}
+            {/* <MultiRangeSliderHoriz
               max={200}
               width={167}
+              distance={25}
+              showThumbIndex={showThumbIndex}
+              values={getValueT()}
+              onChange={(val, index) => handleChangeVal(val)}
+            /> */}
+            <CanvasSlider
+              direction='horizontal'
+              max={200}
+              width={200}
               distance={25}
               showThumbIndex={showThumbIndex}
               values={getValueT()}
