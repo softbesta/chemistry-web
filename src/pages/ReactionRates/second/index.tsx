@@ -278,7 +278,7 @@ const ReactionSecond = () => {
       <MathContent
         className={styles.mathContent}
         {...getFormula()}
-        blanks={tur_MathBlanks[curStep]}
+        blanks={tur_MathBlankArr[curStep]}
       />
       <TutorialControl
         turText={getTurTextByStep()}

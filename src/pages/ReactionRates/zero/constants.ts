@@ -339,7 +339,7 @@ export const tur_MathBlankArr = [
   [
     {
       query: '#tur_math4_2 mjx-math mjx-mn',
-      nths: [0,1,2],
+      nths: [0,2],
     },
   ],
   [],

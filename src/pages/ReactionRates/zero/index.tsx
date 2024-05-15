@@ -87,12 +87,12 @@ const ReactionZero = () => {
       }
     }
 
-    action_turMathBlanks()
+    // action_turMathBlanks()
   }, [curStep, curActions])
 
   useEffect(() => {
     setTimeout(() => {
-      action_turMathBlanks()
+      // action_turMathBlanks()
     }, 1500);
   }, [])
   const action_turMathBlanks = () => {
@@ -276,7 +276,7 @@ const ReactionZero = () => {
     <div className={styles.reactionContentContainer}>
       <MathContent
         {...getFormula()}
-        blanks={tur_MathBlanks[curStep]}
+        blanks={tur_MathBlankArr[curStep]}
       />
       <TutorialControl
         turText={getTurTextByStep()}

@@ -627,7 +627,7 @@ const ReactionKinetics = () => {
         <MathContent
           className={styles.mathContent}
           {...getFormula()}
-          blanks={tur_MathBlanks[curStep]}
+          blanks={tur_MathBlankArr[curStep]}
           highlights={tur_MathHighlights[curStep]}
         />
         <TutorialControl
