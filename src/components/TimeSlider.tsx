@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import useAppData from '../hooks/useAppData';
 
 type TimeSliderProps = {
     max?: number
@@ -10,6 +9,8 @@ type TimeSliderProps = {
     onChange: (val: number) => void
 }
 
+// let xx = 0, ratio = 0
+
 const TimeSlider = (props: TimeSliderProps) => {
     const {
         max = 15,
@@ -19,7 +20,7 @@ const TimeSlider = (props: TimeSliderProps) => {
         onChange,
     } = props;
 
-    const {xx, ratio, setXX, setRatio} = useAppData()
+
     const thickness = 80
 
     const rate = 212 / 27.6
@@ -30,22 +31,23 @@ const TimeSlider = (props: TimeSliderProps) => {
     const [isDrag, startDrag] = useState<boolean>(false)
     
     const touchStartEventHandler = function (event: any) {
-        if (event.touches.length) {
-            const rect = event.target.getBoundingClientRect()
-            const currX = event.touches[0].clientX - rect.left
-            setXX(currX)
-        }
+        // if (event.touches.length) {
+        //     const rect = event.target.getBoundingClientRect()
+        //     const currX = event.touches[0].clientX - rect.left
+        //     xx = currX
+        // }
         startDrag(true)
     }
 
+    const ratio = window.innerWidth / 1150
     const touchMoveEventHandler = function (event: any) {
         if (event.touches.length) {
             const rect = event.target.getBoundingClientRect()
             const currX = event.touches[0].clientX - rect.left
             if (min) {
-                setX(Math.max(Math.min(currX * ratio, rate * max), rate * min))
+                setX(Math.max(Math.min(currX / ratio, rate * max), rate * min))
             } else {
-                setX(Math.min(currX * ratio, rate * max))
+                setX(Math.min(currX / ratio, rate * max))
             }
         }
     };
@@ -55,7 +57,7 @@ const TimeSlider = (props: TimeSliderProps) => {
     }
 
     const mouseDownEventHandler = function (event: any) {
-        setRatio(event.offsetX / xx)
+        // ratio = event.offsetX / xx
         if (min) {
             setX(Math.max(Math.min(event.offsetX, rate * max), rate * min))
         } else {
