@@ -78,21 +78,27 @@ const TimeSlider = (props: TimeSliderProps) => {
     }
 
     const addEventListeners = (ctx: CanvasRenderingContext2D) => {
-        ctx.canvas.addEventListener('touchstart', touchStartEventHandler);
-        ctx.canvas.addEventListener('touchend', touchEndEventHandler);
-        ctx.canvas.addEventListener('touchmove', touchMoveEventHandler);
-        ctx.canvas.addEventListener('mousedown', mouseDownEventHandler);
-        ctx.canvas.addEventListener('mouseup', mouseUpEventHandler);
-        ctx.canvas.addEventListener('mousemove', mouseMoveEventHandler);
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            ctx.canvas.addEventListener('touchstart', touchStartEventHandler);
+            ctx.canvas.addEventListener('touchend', touchEndEventHandler);
+            ctx.canvas.addEventListener('touchmove', touchMoveEventHandler);
+        } else {
+            ctx.canvas.addEventListener('mousedown', mouseDownEventHandler);
+            ctx.canvas.addEventListener('mouseup', mouseUpEventHandler);
+            ctx.canvas.addEventListener('mousemove', mouseMoveEventHandler);
+        }
     }
 
     const removeEventListeners = (ctx: CanvasRenderingContext2D) => {
-        ctx.canvas.removeEventListener('touchstart', touchStartEventHandler);
-        ctx.canvas.removeEventListener('touchend', touchEndEventHandler);
-        ctx.canvas.removeEventListener('touchmove', touchMoveEventHandler);
-        ctx.canvas.removeEventListener('mousedown', mouseDownEventHandler);
-        ctx.canvas.removeEventListener('mouseup', mouseUpEventHandler);
-        ctx.canvas.removeEventListener('mousemove', mouseMoveEventHandler);
+        if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+            ctx.canvas.removeEventListener('touchstart', touchStartEventHandler);
+            ctx.canvas.removeEventListener('touchend', touchEndEventHandler);
+            ctx.canvas.removeEventListener('touchmove', touchMoveEventHandler);
+        } else {
+            ctx.canvas.removeEventListener('mousedown', mouseDownEventHandler);
+            ctx.canvas.removeEventListener('mouseup', mouseUpEventHandler);
+            ctx.canvas.removeEventListener('mousemove', mouseMoveEventHandler);
+        }
     }
 
     const drawSlider = (ctx: CanvasRenderingContext2D) => {
