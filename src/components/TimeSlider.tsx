@@ -9,7 +9,10 @@ type TimeSliderProps = {
     onChange: (val: number) => void
 }
 
-let xx = 0, ratio = 0
+// @ts-ignore
+window.xx = 0
+// @ts-ignore
+window.ratio = 0
 
 const TimeSlider = (props: TimeSliderProps) => {
     const {
@@ -34,7 +37,8 @@ const TimeSlider = (props: TimeSliderProps) => {
         if (event.touches.length) {
             const rect = event.target.getBoundingClientRect()
             const currX = event.touches[0].clientX - rect.left
-            xx = currX
+            // @ts-ignore
+            window.xx = currX
         }
         startDrag(true)
     }
@@ -44,9 +48,11 @@ const TimeSlider = (props: TimeSliderProps) => {
             const rect = event.target.getBoundingClientRect()
             const currX = event.touches[0].clientX - rect.left
             if (min) {
-                setX(Math.max(Math.min(currX * ratio, rate * max), rate * min))
+                // @ts-ignore
+                setX(Math.max(Math.min(currX * window.ratio, rate * max), rate * min))
             } else {
-                setX(Math.min(currX * ratio, rate * max))
+                // @ts-ignore
+                setX(Math.min(currX * window.ratio, rate * max))
             }
         }
     };
@@ -56,7 +62,8 @@ const TimeSlider = (props: TimeSliderProps) => {
     }
 
     const mouseDownEventHandler = function (event: any) {
-        ratio = event.offsetX / xx
+        // @ts-ignore
+        window.ratio = event.offsetX / window.xx
         if (min) {
             setX(Math.max(Math.min(event.offsetX, rate * max), rate * min))
         } else {
