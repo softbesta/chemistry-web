@@ -124,7 +124,7 @@ const TimeSlider = (props: TimeSliderProps) => {
             addEventListeners(ctx)
             drawSlider(ctx)
         }
-    }, [])
+    }, [drawSlider])
 
     useEffect(() => {
         const ctx = canvas?.current?.getContext('2d');
@@ -143,7 +143,7 @@ const TimeSlider = (props: TimeSliderProps) => {
             }            
             drawSlider(ctx)
         }
-    }, [disabled])
+    }, [disabled, drawSlider])
 
     useEffect(() => {
         onChange(x / rate)
