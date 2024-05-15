@@ -39,7 +39,7 @@ const TimeSlider = (props: TimeSliderProps) => {
         startDrag(true)
     }
 
-    const ratio = window.innerWidth / 1150
+    const ratio = Math.min(window.innerWidth / 1150, window.innerHeight / 650)
     const touchMoveEventHandler = function (event: any) {
         if (event.touches.length) {
             const rect = event.target.getBoundingClientRect()
