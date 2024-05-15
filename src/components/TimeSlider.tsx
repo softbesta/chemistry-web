@@ -126,7 +126,7 @@ const TimeSlider = (props: TimeSliderProps) => {
             addEventListeners(ctx)
             drawSlider(ctx)
         }
-    }, [])
+    }, [drawSlider])
 
     useEffect(() => {
         const ctx = canvas?.current?.getContext('2d');
