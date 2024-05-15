@@ -50,31 +50,56 @@ const CanvasSlider = (props: BeakerTicksProps) => {
         }
     }, [])
 
-    const mouseDownEventHandler = function (event: any) {
+    const touchStartEventHandler = function (event: any) {
+        if (event.touches.length) {
+            const rect = event.target.getBoundingClientRect();
+            const currX = event.touches[0].clientX - rect.left
+            setX(currX)
+        }
+        startDrag(true)
+    }
+
+    const touchMoveEventHandler = function (event: any) {
+        if (event.touches.length) {
+            const rect = event.target.getBoundingClientRect();
+            const currX = event.touches[0].clientX - rect.left
+            setX(currX)
+        }
+    };
+
+    const touchEndEventHandler = function (event: any) {
+        startDrag(false)
+    }
+
+    const mouseDownEventHandler = function (event: any) {        
         setX(event.offsetX)
-        setY(event.offsetY)
         startDrag(true)
     }
 
     const mouseMoveEventHandler = function (event: any) {
-        startDrag(false)
+        setX(event.offsetX)
     };
 
     const mouseUpEventHandler = function (event: any) {
-        setX(event.offsetX)
-        setY(event.offsetY)
+        startDrag(false)
     }
 
     const addEventListeners = (ctx: CanvasRenderingContext2D) => {
+        ctx.canvas.addEventListener('touchstart', touchStartEventHandler);
+        ctx.canvas.addEventListener('touchend', touchEndEventHandler);
+        ctx.canvas.addEventListener('touchmove', touchMoveEventHandler);
         ctx.canvas.addEventListener('mousedown', mouseDownEventHandler);
-        ctx.canvas.addEventListener('mouseup', mouseMoveEventHandler);
-        ctx.canvas.addEventListener('mousemove', mouseUpEventHandler);
+        ctx.canvas.addEventListener('mouseup', mouseUpEventHandler);
+        ctx.canvas.addEventListener('mousemove', mouseMoveEventHandler);
     }
 
     const removeEventListeners = (ctx: CanvasRenderingContext2D) => {
+        ctx.canvas.removeEventListener('touchstart', touchStartEventHandler);
+        ctx.canvas.removeEventListener('touchend', touchEndEventHandler);
+        ctx.canvas.removeEventListener('touchmove', touchMoveEventHandler);
         ctx.canvas.removeEventListener('mousedown', mouseDownEventHandler);
-        ctx.canvas.removeEventListener('mouseup', mouseMoveEventHandler);
-        ctx.canvas.removeEventListener('mousemove', mouseUpEventHandler);
+        ctx.canvas.removeEventListener('mouseup', mouseUpEventHandler);
+        ctx.canvas.removeEventListener('mousemove', mouseMoveEventHandler);
     }
 
     const drawSlider = (
@@ -112,33 +137,31 @@ const CanvasSlider = (props: BeakerTicksProps) => {
 
     useEffect(() => {
         const ctx = canvas?.current?.getContext('2d');
-        const maxCtx = maxCanvas?.current?.getContext('2d');
-        if (ctx && isDrag && !minDisabled) {
-            onChange(x, y)
-            drawSlider(ctx, Math.max(9, x), y, true)
-        }
-        if (maxCtx && isDrag && x > (valLeft + 16) && x < 152) {
-            maxCtx.canvas.style.position = "absolute"
-            maxCtx.canvas.style.left = "0px"
-            console.log({valLeft, x})            
-            onChange(x, y)
-            drawSlider(maxCtx, Math.max(9, x), y, false)
-        }
+        // const maxCtx = maxCanvas?.current?.getContext('2d');
+        if (ctx && !minDisabled) {
+            if (isDrag) {
+                drawSlider(ctx, Math.max(9, x), y, true)
+                onChange(x, y)
+            } else {            
+                drawSlider(ctx, valLeft, y, true)
+            }
+        } 
+        // if (maxCtx && isDrag && x > (valLeft + 16) && x < 152) {
+        //     maxCtx.canvas.style.position = "absolute"
+        //     maxCtx.canvas.style.left = "0px"
+        //     // console.log({ valLeft, x })
+        //     // onChange(x, y)
+        //     drawSlider(maxCtx, Math.max(9, x), y, false)
+        // }
         // console.log({ x, y })
-    }, [x, y, drawSlider, isDrag, minDisabled, maxDisabled])
+    }, [x, y, isDrag, minDisabled])
 
     useEffect(() => {
         const ctx = canvas?.current?.getContext('2d');
-        const maxCtx = maxCanvas?.current?.getContext('2d');
         if (ctx && !isDrag) {
             drawSlider(ctx, valLeft, y, true)
         }
-        if (maxCtx && !isDrag) {
-            maxCtx.canvas.style.position = "absolute"
-            maxCtx.canvas.style.left = "0px"
-            drawSlider(maxCtx, valRight, y, false)
-        }
-    }, [isDrag, drawSlider, minDisabled, maxDisabled])
+    }, [isDrag])
 
     return (
         <>

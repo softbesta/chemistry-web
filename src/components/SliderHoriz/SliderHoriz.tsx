@@ -84,7 +84,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25 }: Sli
         {
           infoT.showCount > 0 &&
           <div style={{ position: 'relative' }}>
-            <div className={styles.sliderback}></div>
+            {/* <div className={styles.sliderback}></div>
             <MultiRangeSliderHoriz
               max={200}
               width={167}
@@ -92,16 +92,16 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25 }: Sli
               showThumbIndex={showThumbIndex}
               values={getValueT()}
               onChange={(val, index) => handleChangeVal(val)}
-            />
-            {/* <CanvasSlider
+            /> */}
+            <CanvasSlider
               direction='horizontal'
               max={200}
-              width={200}
+              width={150}
               distance={25}
               showThumbIndex={showThumbIndex}
               values={getValueT()}
               onChange={(val, index) => handleChangeVal(val)}
-            /> */}
+            />
           </div>
         }
       </div>

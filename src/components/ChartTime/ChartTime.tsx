@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import styles from './ChartTime.module.scss'
 import CanvasTime from "../Canvas/CanvasTime"
 import SliderVert from "../SliderVert/SliderVert"
@@ -7,6 +7,8 @@ import { ConcentrationPlotView, FirstOrderConcentration, ReactionRateChartLayout
 import { SizeStyle } from '../../helper/types'
 import { ReactionSettings, ReactionType } from '../ConcentrationPlotView/constants'
 import { ReactionComparisonViewModel, ReactionInput } from '../ConcentrationPlotView/ReactionComparisonViewModel'
+import TimeSlider from '../TimeSlider'
+import ConcentrationSlider from '../ConcentrationSlider'
 
 interface ChartTimeProps {
   valuesC: number[]
@@ -89,7 +91,24 @@ const ChartTime = ({
         break;
     }
   }, [valuesT, valuesC, order])
-
+  const {minDisabled, maxDisabled} = useMemo(() => {    
+    const minDisabled = canvaTimeSliderT[0] === 1 ? true : false
+    const maxDisabled = canvaTimeSliderT[1] === 1 ? true : false
+    console.log({minDisabled, maxDisabled})
+    return {minDisabled, maxDisabled}
+  }, [canvaTimeSliderT])
+  const [min, setMin] = useState<number>(0)
+  const [max, setMax] = useState<number>(0)
+  useEffect(() => {
+    const updateT = [...valuesT]
+    updateT[0] = min
+    setValuesT(updateT)
+  }, [min])
+  useEffect(() => {
+    const updateT = [...valuesT]
+    updateT[1] = max
+    setValuesT(updateT)
+  }, [max])
   return (
     <div className={styles.chartTimeContainer}>
       <SliderVert
@@ -97,15 +116,18 @@ const ChartTime = ({
         setValuesC={setValuesC}
         canvaTimeSliderC={canvaTimeSliderC}
         textVert={textVert}
-      // minDistance={[13, 0]}
       />
 
-      <SliderHoriz
+      {/* <SliderHoriz
         valuesT={valuesT}
         setValuesT={setValuesT}
         showThumbIndex={canvaTimeSliderT}
         distance={25}
-      />
+      /> */}
+
+      {/* <ConcentrationSlider disabled={false} /> */}
+      <TimeSlider disabled={minDisabled} onChange={setMin}/>
+      {minDisabled && <TimeSlider min={min + 2} max={20} disabled={maxDisabled} onChange={setMax}/>}
 
       <div className={styles.chartTime}>
         <ConcentrationPlotView

@@ -115,11 +115,11 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
         horizontalIndicator(ctx, concentrationA.getValue(finalTime))
         // console.log(Date.now())
       } else {
-        tIndicator(ctx, initialTime, canvaTimeSliderT[0])
-        tIndicator(ctx, finalTime, canvaTimeSliderT[1])
+        // tIndicator(ctx, initialTime, canvaTimeSliderT[0])
+        // tIndicator(ctx, finalTime, canvaTimeSliderT[1])
 
-        initialConcentration && cIndicatoer(ctx, initialConcentration / 100, canvaTimeSliderC[0])
-        finalConcentration && cIndicatoer(ctx, finalConcentration / 100, canvaTimeSliderC[1])
+        // initialConcentration && cIndicatoer(ctx, initialConcentration / 100, canvaTimeSliderC[0])
+        // finalConcentration && cIndicatoer(ctx, finalConcentration / 100, canvaTimeSliderC[1])
       }
 
       if (includeAxis) {

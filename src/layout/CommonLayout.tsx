@@ -45,10 +45,10 @@ const CommonLayout = ({
       // e.preventDefault(); 
     };
 
-    document.addEventListener("touchmove", preventBehavior, {passive: false});
+    // document.addEventListener("touchmove", preventBehavior, {passive: false});
     return () => {
       window.removeEventListener('resize', handleResize)
-      document.addEventListener("touchmove", preventBehavior, {passive: false});
+      // document.addEventListener("touchmove", preventBehavior, {passive: false});
     }
   }, [])
 
