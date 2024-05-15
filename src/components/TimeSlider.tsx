@@ -25,6 +25,7 @@ const TimeSlider = (props: TimeSliderProps) => {
 
     const rate = 212 / 27.6
     const initialTime = 10
+    const zero = 1.2
 
     const canvas = useRef<HTMLCanvasElement>(null);
     const [x, setX] = useState<number>(rate * (min??initialTime))
@@ -45,9 +46,9 @@ const TimeSlider = (props: TimeSliderProps) => {
             const rect = event.target.getBoundingClientRect()
             const currX = event.touches[0].clientX - rect.left
             if (min) {
-                setX(Math.max(Math.min(currX / ratio, rate * max), rate * min))
+                setX(Math.max(Math.max(Math.min(currX / ratio, rate * max), rate * min), rate * zero))
             } else {
-                setX(Math.min(currX / ratio, rate * max))
+                setX(Math.max(Math.min(currX / ratio, rate * max), rate * zero))
             }
         }
     };
@@ -59,18 +60,18 @@ const TimeSlider = (props: TimeSliderProps) => {
     const mouseDownEventHandler = function (event: any) {
         // ratio = event.offsetX / xx
         if (min) {
-            setX(Math.max(Math.min(event.offsetX, rate * max), rate * min))
+            setX(Math.max(Math.max(Math.min(event.offsetX, rate * max), rate * min), rate * zero))
         } else {
-            setX(Math.min(event.offsetX, rate * max))
+            setX(Math.max(Math.min(event.offsetX, rate * max), rate * zero))
         }
         startDrag(true)
     }
 
     const mouseMoveEventHandler = function (event: any) {
         if (min) {
-            setX(Math.max(Math.min(event.offsetX, rate * max), rate * min))
+            setX(Math.max(Math.max(Math.min(event.offsetX, rate * max), rate * min), rate * zero))
         } else {
-            setX(Math.min(event.offsetX, rate * max))
+            setX(Math.max(Math.min(event.offsetX, rate * max), rate * zero))
         }
     };
 
@@ -79,9 +80,9 @@ const TimeSlider = (props: TimeSliderProps) => {
     }
 
     const addEventListeners = (ctx: CanvasRenderingContext2D) => {
-        ctx.canvas.addEventListener('touchstart', touchStartEventHandler);
-        ctx.canvas.addEventListener('touchend', touchEndEventHandler);
-        ctx.canvas.addEventListener('touchmove', touchMoveEventHandler);
+        ctx.canvas.addEventListener('touchstart', touchStartEventHandler, { passive: false });
+        ctx.canvas.addEventListener('touchend', touchEndEventHandler, { passive: false });
+        ctx.canvas.addEventListener('touchmove', touchMoveEventHandler, { passive: false });
         ctx.canvas.addEventListener('mousedown', mouseDownEventHandler);
         ctx.canvas.addEventListener('mouseup', mouseUpEventHandler);
         ctx.canvas.addEventListener('mousemove', mouseMoveEventHandler);
@@ -125,7 +126,7 @@ const TimeSlider = (props: TimeSliderProps) => {
             addEventListeners(ctx)
             drawSlider(ctx)
         }
-    }, [drawSlider])
+    }, [])
 
     useEffect(() => {
         const ctx = canvas?.current?.getContext('2d');
@@ -141,10 +142,9 @@ const TimeSlider = (props: TimeSliderProps) => {
                 removeEventListeners(ctx)
             } else {
                 addEventListeners(ctx)
-            }            
-            drawSlider(ctx)
+            }
         }
-    }, [disabled, drawSlider])
+    }, [disabled])
 
     useEffect(() => {
         onChange(x / rate)
