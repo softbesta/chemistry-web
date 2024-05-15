@@ -62,9 +62,9 @@ const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, highlights, cl
   }
 
   useEffect(() => {
-    // setTimeout(() => {
-    //   action_turMathBlanks()
-    // }, 0);
+    setTimeout(() => {
+      action_turMathBlanks()
+    }, 0);
   }, [exp0, exp1, exp2, exp3, exp4, exp5, blanks])
 
   // console.log({highlights})
