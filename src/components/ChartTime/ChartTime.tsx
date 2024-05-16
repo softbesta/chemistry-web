@@ -56,7 +56,6 @@ const ChartTime = ({
 
   useEffect(() => {
     const update = new ReactionComparisonViewModel()
-    // console.log({valuesC,valuesT})
     const inputParams: ReactionInput = {
       c1: valuesC[0] / 100,
       c2: valuesC[1] / 100,
@@ -64,12 +63,6 @@ const ChartTime = ({
       t2: valuesT[1],
     }
     update.initParams(inputParams, order)
-    // setReaction(update)
-
-    // console.log({ inputParams })
-    // console.log({ update })
-
-    // let tConcentrationA =
     switch(order) {
       case 0:
         const zeroOrderConcentration = new ZeroOrderConcentration()
@@ -94,7 +87,6 @@ const ChartTime = ({
   const {minDisabled, maxDisabled} = useMemo(() => {    
     const minDisabled = canvaTimeSliderT[0] === 1 ? true : false
     const maxDisabled = canvaTimeSliderT[1] === 1 ? true : false
-    console.log({minDisabled, maxDisabled})
     return {minDisabled, maxDisabled}
   }, [canvaTimeSliderT])
   const [min, setMin] = useState<number>(0)

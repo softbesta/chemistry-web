@@ -80,12 +80,12 @@ const TimeSlider = (props: TimeSliderProps) => {
     }
 
     const addEventListeners = (ctx: CanvasRenderingContext2D) => {
-        ctx.canvas.addEventListener('touchstart', touchStartEventHandler, { passive: false });
-        ctx.canvas.addEventListener('touchend', touchEndEventHandler, { passive: false });
-        ctx.canvas.addEventListener('touchmove', touchMoveEventHandler, { passive: false });
-        ctx.canvas.addEventListener('mousedown', mouseDownEventHandler);
-        ctx.canvas.addEventListener('mouseup', mouseUpEventHandler);
-        ctx.canvas.addEventListener('mousemove', mouseMoveEventHandler);
+        ctx.canvas.addEventListener('touchstart', touchStartEventHandler, { passive: true });
+        ctx.canvas.addEventListener('touchend', touchEndEventHandler, { passive: true });
+        ctx.canvas.addEventListener('touchmove', touchMoveEventHandler, { passive: true });
+        ctx.canvas.addEventListener('mousedown', mouseDownEventHandler, { passive: true });
+        ctx.canvas.addEventListener('mouseup', mouseUpEventHandler, { passive: true });
+        ctx.canvas.addEventListener('mousemove', mouseMoveEventHandler, { passive: true });
     }
 
     const removeEventListeners = (ctx: CanvasRenderingContext2D) => {
@@ -126,12 +126,14 @@ const TimeSlider = (props: TimeSliderProps) => {
             addEventListeners(ctx)
             drawSlider(ctx)
         }
-    }, [drawSlider])
+        // @ts-ignore
+    }, [window.mobileCheck() && drawSlider])
 
     useEffect(() => {
         const ctx = canvas?.current?.getContext('2d');
         if (ctx && isDrag) {
-            drawSlider(ctx)
+            drawSlider(ctx)            
+            onChange(x / rate)
         }
     }, [x, isDrag, drawSlider])
 
@@ -145,10 +147,6 @@ const TimeSlider = (props: TimeSliderProps) => {
             }
         }
     }, [disabled])
-
-    useEffect(() => {
-        onChange(x / rate)
-    }, [x])
 
     return (
         <div style={{width, height: thickness, position: 'absolute', bottom: -30, zIndex: 1}}>
