@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import classnames from 'classnames'
 import './slider.css'
 
@@ -8,7 +8,8 @@ interface MultiRangeSliderProps {
   distance?: number
   showThumbIndex: number[]
   values: number[]
-  onChange: (val: number, index: number) => void
+  // onChange: (val: number, index: number) => void
+  onChange: (vals: number[]) => void
 }
 
 const MultiRangeSliderHoriz = ({
@@ -20,15 +21,23 @@ const MultiRangeSliderHoriz = ({
   onChange
 }: MultiRangeSliderProps) => {
   const valLeft = values[0]
-  const valRight = values[1]
+  // const valRight = values[1]
 
+  const [vals, setVals] = useState(values)
   const minDisabled = showThumbIndex[0] === 1 ? true : false
   const maxDisabled = showThumbIndex[1] === 1 ? true : false
-  const isLeftOverlap = maxDisabled || valLeft > max - max * 0.1
+  const isLeftOverlap = maxDisabled || vals[0] > max - max * 0.1
+
+  useEffect(() => {
+    onChange(vals)
+  }, [vals])
 
   const onChangeValue = (val: number, index: number) => {
     // console.log('ttt', { val, index })
-    onChange(val, index)
+    // onChange(val, index)
+    const update = [...vals]
+    update[index] = val
+    setVals(update)
   }
 
   return (
@@ -53,11 +62,11 @@ const MultiRangeSliderHoriz = ({
             disabled={minDisabled}
             type='range'
             max={max}
-            value={valLeft}
+            value={vals[0]}
             onChange={(event) => {
               let val = +event.target.value
-              if (valRight) {
-                val = Math.min(val, valRight - distance)
+              if (vals[1]) {
+                val = Math.min(val, vals[1] - distance)
               }
               onChangeValue(+val, 0)
             }}
@@ -74,16 +83,36 @@ const MultiRangeSliderHoriz = ({
             disabled={maxDisabled}
             type='range'
             max={max}
-            value={valRight}
+            value={vals[1]}
             onChange={(event) => {
               let val = +event.target.value
-              if (valLeft) {
-                val = Math.max(val, valLeft + distance)
+              if (vals[0]) {
+                val = Math.max(val, vals[0] + distance)
               }
               onChangeValue(+val, 1)
             }}
           />
         </div>
+      </div>
+      <div>
+        {showThumbIndex[0] > 0 && <div
+          className={`
+            h-slider-pointer 
+            ${showThumbIndex[0] === 1 ? 'disabled' : ''}
+          `}
+          style={{
+            left: 9 + 150 / 20 * vals[0] / 10
+          }}
+        />}
+        {showThumbIndex[1] > 0 && <div
+          className={`
+            h-slider-pointer 
+            ${showThumbIndex[1] === 1 ? 'disabled' : ''}
+          `}
+          style={{
+            left: 9 + 150 / 20 * vals[1] / 10
+          }}
+        />}
       </div>
     </div>
   )

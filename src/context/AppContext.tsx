@@ -1,4 +1,4 @@
-import { createContext, useRef, useState } from "react"
+import { createContext, useEffect, useRef, useState } from "react"
 import { MenuList, initDots, routes, themeColors } from "../constants"
 import { PageMenuType } from "../helper/types"
 

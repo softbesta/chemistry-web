@@ -4,47 +4,61 @@ import './slider.css'
 
 interface MultiRangeSliderProps {
   max: number
+  minVal: number
   width?: number
   distance?: number
   showThumbIndex: number[]
   values: number[]
-  onChange: (val: number, index: number) => void
+  onChange: (val: number[]) => void
 }
 const MultiRangeSliderVert = ({
-  max,
+  max: maxRange,
+  minVal = 0,
   width,
   distance = 13,
   showThumbIndex,
   values,
   onChange
 }: MultiRangeSliderProps) => {
-  const valLeft = values[0]
-  const valRight = values[1]
+  // const valLeft = values[0]
+  // const valRight = values[1]
+  console.log({ values })
 
-  const [minDisabled, setMinDisabled] = useState<boolean>(false);
-  const [maxDisabled, setMaxDisabled] = useState<boolean>(false);
+  const [vals, setVals] = useState(values)
+
+  // const [minDisabled, setMinDisabled] = useState<boolean>(false);
+  // const [maxDisabled, setMaxDisabled] = useState<boolean>(false);
+
+  // useEffect(() => {
+  //   setMaxDisabled(true);
+  //   setMinDisabled(true);
+  //   if (showThumbIndex[0] === 2 && showThumbIndex[1] === 1) {
+  //     setMaxDisabled(false);
+  //   } else if (showThumbIndex[1] === 2 && showThumbIndex[0] === 1) {
+  //     setMinDisabled(false);
+  //   } else if (showThumbIndex[1] === 2 && showThumbIndex[0] === 0) {
+  //     setMaxDisabled(false);
+  //     setMinDisabled(false);
+  //   } else if (showThumbIndex[0] === 2 && showThumbIndex[1] === 0) {
+  //     setMaxDisabled(false);
+  //     setMinDisabled(false);
+  //   }
+  // }, showThumbIndex)
+
+  const minDisabled = showThumbIndex[0] === 1 ? true : false
+  const maxDisabled = showThumbIndex[1] === 1 ? true : false
+  const isLeftOverlap = maxDisabled || vals[0] > maxRange - 10
 
   useEffect(() => {
-    setMaxDisabled(true);
-    setMinDisabled(true);
-    if (showThumbIndex[0] === 2 && showThumbIndex[1] === 1) {
-      setMaxDisabled(false);
-    } else if (showThumbIndex[1] === 2 && showThumbIndex[0] === 1) {
-      setMinDisabled(false);
-    } else if (showThumbIndex[1] === 2 && showThumbIndex[0] === 0) {
-      setMaxDisabled(false);
-      setMinDisabled(false);
-    } else if (showThumbIndex[0] === 2 && showThumbIndex[1] === 0) { 
-      setMaxDisabled(false);
-      setMinDisabled(false);
-    }
-  }, showThumbIndex)
+    onChange(vals)
+  }, [vals])
 
-  const isLeftOverlap = maxDisabled || valLeft > max - 10
+  const onChangeValue = (value: number[]) => {
+    console.log('ttt', { value, vals, showThumbIndex, distance })
+    // onChange(val, index)
+    const update = [...value]
 
-  const onChangeValue = (val: number, index: number) => {
-    // console.log('ttt', { val, index })
-    onChange(val, index)
+    setVals(update)
   }
 
   return (
@@ -68,16 +82,20 @@ const MultiRangeSliderVert = ({
             }}
             disabled={minDisabled}
             type='range'
-            max={max}
-            value={valLeft}
+            max={maxRange}
+            value={vals[0]}
             onChange={(event) => {
               event.preventDefault()
               event.stopPropagation()
-              let val = +event.target.value
-              if (valRight) {
-                val = Math.min(val, valRight - distance)
+              const update = [...vals]
+              update[0] = +event.target.value
+              if (update[0] <= minVal + distance) {
+                update[0] = minVal + distance
               }
-              onChangeValue(+val, 0)
+              if (update[1] > update[0] - distance) {
+                update[1] = update[0] - distance
+              }
+              onChangeValue(update)
             }}
           />
           <input
@@ -90,19 +108,43 @@ const MultiRangeSliderVert = ({
             }}
             disabled={maxDisabled}
             type='range'
-            max={max}
-            value={valRight}
+            max={maxRange}
+            value={vals[1]}
             onChange={(event) => {
               event.preventDefault()
               event.stopPropagation()
-              let val = +event.target.value
-              if (valLeft) {
-                val = Math.max(val, valLeft + distance)
+              const update = [...vals]
+              update[1] = +event.target.value
+              if (update[1] >= update[0] - distance) {
+                update[1] = update[0] - distance
               }
-              onChangeValue(+val, 1)
+              if (update[1] <= minVal) {
+                update[1] = minVal
+              }
+              onChangeValue(update)
             }}
           />
         </div>
+      </div>
+      <div>
+        {showThumbIndex[0] > 0 && <div
+          className={`
+            v-slider-pointer 
+            ${showThumbIndex[0] === 1 ? 'disabled' : ''}
+          `}
+          style={{
+            left: 8 + 150 / 100 * vals[0]
+          }}
+        />}
+        {showThumbIndex[1] > 0 && <div
+          className={`
+            v-slider-pointer 
+            ${showThumbIndex[1] === 1 ? 'disabled' : ''}
+          `}
+          style={{
+            left: 8 + 150 / 100 * vals[1]
+          }}
+        />}
       </div>
     </div>
   )

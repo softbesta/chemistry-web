@@ -82,9 +82,9 @@ const ReactionZero = () => {
       if (Array.isArray(curActions?.canvaTimeSliderT)) {
         setCanvaTimeSliderT(curActions.canvaTimeSliderT)
       }
-      if (Array.isArray(curActions?.valuesT)) {
-        setValuesT(curActions.valuesT)
-      }
+      // if (Array.isArray(curActions?.valuesT)) {
+      //   setValuesT(curActions.valuesT)
+      // }
     }
 
     // action_turMathBlanks()
@@ -256,7 +256,9 @@ const ReactionZero = () => {
         setValuesC={val => setValuesC(val)}
         canvaTimeSliderC={canvaTimeSliderC}
         valuesT={valuesT}
-        setValuesT={val => setValuesT(val)}
+        setValuesT={val => {
+          setValuesT(val)
+        }}
         canvaTimeSliderT={canvaTimeSliderT}
         canvaTimeState={canvaTimeState}
         onTimeframeChange={val => setTimeframe(val)}

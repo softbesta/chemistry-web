@@ -159,7 +159,6 @@ export const stepsActions = [
   { // 0
     canvaTimeSliderC: [2, 0],
     canvaTimeSliderT: [2, 0],
-    valuesT: [10, 17],
     canvaTimeState: 0,
     canvaBarState: 0,
     canvaBeakerState: 1,

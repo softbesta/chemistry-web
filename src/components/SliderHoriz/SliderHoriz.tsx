@@ -1,5 +1,5 @@
 import styles from './SliderHoriz.module.scss'
-import { useMemo } from "react"
+import { useEffect, useMemo, useState } from "react"
 import MultiRangeSliderHoriz from "../MutiRangeSlider/MultiRangeSliderHoriz"
 import CanvasSlider from '../Slider'
 
@@ -14,68 +14,40 @@ const flexibleV = 10;
 
 const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25 }: SliderHoriz) => {
   const infoT = useMemo(() => {
-    let showCount = 0, disabledCount = 0
-    showThumbIndex.forEach(item => {
+    let showCount = 0, disabledCount = 0, activeIndex = 0
+    showThumbIndex.forEach((item, index) => {
       item > 0 && showCount++
       item === 1 && disabledCount++
+      if (item === 2) activeIndex = index
     })
     return {
       showCount,
-      disabledCount
+      disabledCount,
+      activeIndex,
     }
   }, [showThumbIndex])
 
   const getValueT = () => {
     let update: number[] = []
-    if (showThumbIndex[0] > 0 && showThumbIndex[1] > 0) {
-      // console.log('===getValueT===', valuesT)
-      update = [valuesT[0], valuesT[1]]
-    } else if (showThumbIndex[0] > 0) {
-      // console.log('===getValueT===  000', valuesT[0])
-      update = [valuesT[0]]
-    } else if (showThumbIndex[1] > 0) {
-      // console.log('===getValueT===  111', valuesT[1])
-      update = [valuesT[1]]
-    } else update = []
+    update = valuesT
     return update.map(item => item * flexibleV)
   }
 
-  const handleChangeVal = (val: number[] | number) => {
-    // console.log('===handleChangeAB=== ', { values: val, valuesT: valuesT })
-    let update: number[] = [valuesT[0] * flexibleV, valuesT[1] * flexibleV]
-
-    if (Array.isArray(val)) {
-      if (showThumbIndex[0] === 2) {
-        update = [val[0], update[1]]
-      }
-      if (showThumbIndex[1] === 2) {
-        update = [update[0], val[1]]
-      }
-    } else {
-      if (showThumbIndex[0] === 2) {
-        update = [val, update[1]]
-      }
-      if (showThumbIndex[1] === 2) {
-        update = [update[0], val]
-      }
-    }
-
-    if (update[1] < 2) update[0] = 2;
-
-    if (update[0] >= update[1] - distance) update[0] = update[1] - distance
-
-    update = update.map(item => item / flexibleV)
-
+  const handleChangeVal = (vals: number[]) => {
+    // console.log('===handleChangeAB=== ', { vals, valuesT: valuesT })
+    let update: number[] = []
+    update = [...vals].map(item => item / flexibleV)
     setValuesT(update)
+
+    const txtT = update[infoT.activeIndex]
+    setTextT(txtT)
   }
 
-  const textT = useMemo(() => {
-    const res = getValueT()[1] ?? getValueT()[0]
-    if (!Number.isFinite(res)) {
-      return undefined
-    }
-    return res / flexibleV
-  }, [getValueT])
+  const [textT, setTextT] = useState<number>()
+
+  useEffect(() => {
+    setTextT(valuesT[infoT.activeIndex])
+  }, [showThumbIndex])
 
   // @ts-ignore
   const isMobile = window.mobileCheck()
@@ -92,7 +64,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25 }: Sli
               distance={distance}
               showThumbIndex={showThumbIndex}
               values={getValueT()}
-              onChange={(val, index) => handleChangeVal(val)}
+              onChange={(vals) => handleChangeVal(vals)}
             />
             {/* <CanvasSlider
               direction='horizontal'

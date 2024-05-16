@@ -90,18 +90,6 @@ const ChartTime = ({
     console.log({ minDisabled, maxDisabled })
     return { minDisabled, maxDisabled }
   }, [canvaTimeSliderT])
-  const [min, setMin] = useState<number>(0)
-  const [max, setMax] = useState<number>(0)
-  useEffect(() => {
-    const updateT = [...valuesT]
-    updateT[0] = min
-    setValuesT(updateT)
-  }, [min])
-  useEffect(() => {
-    const updateT = [...valuesT]
-    updateT[1] = max
-    setValuesT(updateT)
-  }, [max])
 
   // @ts-ignore
   const isMobile = window.mobileCheck()
@@ -122,8 +110,24 @@ const ChartTime = ({
           showThumbIndex={canvaTimeSliderT}
           distance={25}
         /> : <>
-          <TimeSlider disabled={minDisabled} onChange={setMin} />
-          {minDisabled && <TimeSlider min={min + 2} max={20} disabled={maxDisabled} onChange={setMax} />}
+          <TimeSlider
+            disabled={minDisabled}
+            onChange={(min) => {
+              const update = [...valuesT]
+              update[0] = min
+              setValuesT(update)
+            }}
+          />
+          {minDisabled && <TimeSlider
+            min={valuesT[0] + 2}
+            max={20}
+            disabled={maxDisabled}
+            onChange={(max) => {
+              const update = [...valuesT]
+              update[1] = max
+              setValuesT(update)
+            }}
+          />}
         </>}
 
       {/* <ConcentrationSlider disabled={false} /> */}

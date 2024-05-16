@@ -145,3 +145,34 @@ input[type=range]:disabled::-webkit-slider-thumb {
   pointer-events: all;
   position: relative;
 }
+
+
+
+.h-slider-pointer {
+  position: absolute;
+  top: -28px;
+  left: 9px;
+  width: 3px;
+  height: 20px;
+  z-index: 1;
+  background-color: rgb(220, 84, 59);
+
+  &.disabled {
+    background-color: gray;
+  }
+}
+
+.v-slider-pointer {
+  position: absolute;
+  top: 38px;
+  left: 8px;
+  width: 3px;
+  height: 20px;
+  z-index: 1;
+  background-color: rgb(220, 84, 59);
+
+  &.disabled {
+    background-color: gray;
+  }
+}
+
