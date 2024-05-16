@@ -7,6 +7,32 @@
 .sliceHorizontal {
   position: absolute;
   top: 220px; // position
+  left: 49px;
+
+  .horizontal-slider {
+    width: 225px; // control this for length of horiz
+    height: 50px;
+
+    .example-track {
+      top: 13px;
+      height: 0px;
+      // height: 3px;
+    }
+
+    .example-thumb {
+      width: 15px;
+      height: 30px;
+
+      &.disabled {
+        background-color: grey;
+      }
+    }
+  }
+}
+// Time value slider
+.sliceHorizontalMobile {
+  position: absolute;
+  top: 220px; // position
   left: 60px;
 
   .horizontal-slider {

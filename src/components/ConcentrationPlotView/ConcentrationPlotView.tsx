@@ -73,7 +73,8 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
   } = props;
   const canvas = React.useRef<HTMLCanvasElement>(null);
   const [currentTime, setCurrentTime] = useState(initialTime)
-
+  // @ts-ignore
+  const isMobile = window.mobileCheck()
   // console.log({concentrationA, concentrationB, initialTime, finalTime})
   React.useEffect(() => {
     const ctx = canvas?.current?.getContext('2d');
@@ -115,8 +116,10 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
         horizontalIndicator(ctx, concentrationA.getValue(finalTime))
         // console.log(Date.now())
       } else {
-        // tIndicator(ctx, initialTime, canvaTimeSliderT[0])
-        // tIndicator(ctx, finalTime, canvaTimeSliderT[1])
+        if (!isMobile) {
+          tIndicator(ctx, initialTime, canvaTimeSliderT[0])
+          tIndicator(ctx, finalTime, canvaTimeSliderT[1])
+        }
 
         initialConcentration && cIndicatoer(ctx, initialConcentration / 100, canvaTimeSliderC[0])
         finalConcentration && cIndicatoer(ctx, finalConcentration / 100, canvaTimeSliderC[1])

@@ -41,8 +41,8 @@ const ChartTime = ({
 
   const chartSize: SizeStyle = { width: 212, height: 212 }
   // const [reaction, setReaction] = useState<ReactionComparisonViewModel>(new ReactionComparisonViewModel())
-  const [concentrationA, setConcentrationA] = useState<any>(new ZeroOrderConcentration() )
-  const [concentrationB, setConcentrationB] = useState<any>(new ZeroOrderConcentration() )
+  const [concentrationA, setConcentrationA] = useState<any>(new ZeroOrderConcentration())
+  const [concentrationB, setConcentrationB] = useState<any>(new ZeroOrderConcentration())
 
   const reactionSetting = new ReactionRateChartLayoutSettings(
     chartSize.width!,
@@ -63,7 +63,7 @@ const ChartTime = ({
       t2: valuesT[1],
     }
     update.initParams(inputParams, order)
-    switch(order) {
+    switch (order) {
       case 0:
         const zeroOrderConcentration = new ZeroOrderConcentration()
         zeroOrderConcentration.init4Params(inputParams.t1, inputParams.c1, inputParams.t2, inputParams.c2)
@@ -71,7 +71,7 @@ const ChartTime = ({
         setConcentrationB(update.concentrationB(zeroOrderConcentration, inputParams.c1))
         break;
       case 1:
-        const firstOrderConcentration = new FirstOrderConcentration()        
+        const firstOrderConcentration = new FirstOrderConcentration()
         firstOrderConcentration.init3Params(inputParams.c1, inputParams.t1, firstOrderConcentration.getRate(inputParams.t1, inputParams.c1, inputParams.t2, inputParams.c2))
         setConcentrationA(firstOrderConcentration)
         setConcentrationB(update.concentrationB(firstOrderConcentration, inputParams.c1))
@@ -84,11 +84,11 @@ const ChartTime = ({
         break;
     }
   }, [valuesT, valuesC, order])
-  const {minDisabled, maxDisabled} = useMemo(() => {    
+  const { minDisabled, maxDisabled } = useMemo(() => {
     const minDisabled = canvaTimeSliderT[0] === 1 ? true : false
     const maxDisabled = canvaTimeSliderT[1] === 1 ? true : false
-    console.log({minDisabled, maxDisabled})
-    return {minDisabled, maxDisabled}
+    console.log({ minDisabled, maxDisabled })
+    return { minDisabled, maxDisabled }
   }, [canvaTimeSliderT])
   const [min, setMin] = useState<number>(0)
   const [max, setMax] = useState<number>(0)
@@ -102,6 +102,9 @@ const ChartTime = ({
     updateT[1] = max
     setValuesT(updateT)
   }, [max])
+
+  // @ts-ignore
+  const isMobile = window.mobileCheck()
   return (
     <div className={styles.chartTimeContainer}>
       <SliderVert
@@ -111,16 +114,19 @@ const ChartTime = ({
         textVert={textVert}
       />
 
-      {/* <SliderHoriz
-        valuesT={valuesT}
-        setValuesT={setValuesT}
-        showThumbIndex={canvaTimeSliderT}
-        distance={25}
-      /> */}
+
+      {!isMobile ?
+        <SliderHoriz
+          valuesT={valuesT}
+          setValuesT={setValuesT}
+          showThumbIndex={canvaTimeSliderT}
+          distance={25}
+        /> : <>
+          <TimeSlider disabled={minDisabled} onChange={setMin} />
+          {minDisabled && <TimeSlider min={min + 2} max={20} disabled={maxDisabled} onChange={setMax} />}
+        </>}
 
       {/* <ConcentrationSlider disabled={false} /> */}
-      <TimeSlider disabled={minDisabled} onChange={setMin}/>
-      {minDisabled && <TimeSlider min={min + 2} max={20} disabled={maxDisabled} onChange={setMax}/>}
 
       <div className={styles.chartTime}>
         <ConcentrationPlotView

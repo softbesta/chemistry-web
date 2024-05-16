@@ -77,14 +77,15 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25 }: Sli
     return res / flexibleV
   }, [getValueT])
 
-
+  // @ts-ignore
+  const isMobile = window.mobileCheck()
   return (
     <div className={styles.container}>
-      <div className={styles.sliceHorizontal}>
+      <div className={isMobile ? styles.sliceHorizontalMobile : styles.sliceHorizontal}>
         {
           infoT.showCount > 0 &&
           <div style={{ position: 'relative' }}>
-            {/* <div className={styles.sliderback}></div>
+            <div className={styles.sliderback}></div>
             <MultiRangeSliderHoriz
               max={200}
               width={167}
@@ -92,8 +93,8 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25 }: Sli
               showThumbIndex={showThumbIndex}
               values={getValueT()}
               onChange={(val, index) => handleChangeVal(val)}
-            /> */}
-            <CanvasSlider
+            />
+            {/* <CanvasSlider
               direction='horizontal'
               max={200}
               width={150}
@@ -101,7 +102,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25 }: Sli
               showThumbIndex={showThumbIndex}
               values={getValueT()}
               onChange={(val, index) => handleChangeVal(val)}
-            />
+            /> */}
           </div>
         }
       </div>
