@@ -31,7 +31,7 @@ const EnergyProfileRateChart = (props: EnergyProfileRateChartProps) => {
     rateChartState,
   } = props;
   const canvas = React.useRef<HTMLCanvasElement>(null);
-  console.log({settings, equation})
+  // console.log({settings, equation})
   React.useEffect(() => {
     const ctx = canvas?.current?.getContext('2d');
     if (ctx) {

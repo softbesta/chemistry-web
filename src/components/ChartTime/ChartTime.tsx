@@ -87,7 +87,7 @@ const ChartTime = ({
   const { minDisabled, maxDisabled } = useMemo(() => {
     const minDisabled = canvaTimeSliderT[0] === 1 ? true : false
     const maxDisabled = canvaTimeSliderT[1] === 1 ? true : false
-    console.log({ minDisabled, maxDisabled })
+    // console.log({ minDisabled, maxDisabled })
     return { minDisabled, maxDisabled }
   }, [canvaTimeSliderT])
 

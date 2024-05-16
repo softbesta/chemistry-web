@@ -98,7 +98,7 @@ class FirstOrderConcentration extends Equation implements ConcentrationEquationI
 
   init3Params(c1: number, t1: number, rateConstant: number) {
     const a0 = c1 / Math.pow(Math.E, -(rateConstant * t1))
-    console.log({ a0, rateConstant })
+    // console.log({ a0, rateConstant })
     this.init2Params(a0, rateConstant)
   }
 

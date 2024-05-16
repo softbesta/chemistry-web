@@ -203,7 +203,7 @@ const ReactionZero = () => {
     let update = curStep + step
     if (update < 0) {
       update = 0
-      console.log('getNextStep 0', { update })
+      // console.log('getNextStep 0', { update })
       updatePageFromMenu(getNextMenu(-1))
       return
     }

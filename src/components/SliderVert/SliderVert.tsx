@@ -45,7 +45,7 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
   }
 
   const handleChangeAB = (vals: number[]) => {
-    console.log('===handleChangeAB=== ', { vals, valuesC })
+    // console.log('===handleChangeAB=== ', { vals, valuesC })
     // let update: number[] = valuesC
     // if (Array.isArray(val)) {
     //   if (showIndexC[0] === 2) {

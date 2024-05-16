@@ -22,7 +22,6 @@ const MultiRangeSliderVert = ({
 }: MultiRangeSliderProps) => {
   // const valLeft = values[0]
   // const valRight = values[1]
-  console.log({ values })
 
   const [vals, setVals] = useState(values)
 
@@ -54,7 +53,7 @@ const MultiRangeSliderVert = ({
   }, [vals])
 
   const onChangeValue = (value: number[]) => {
-    console.log('ttt', { value, vals, showThumbIndex, distance })
+    // console.log('ttt', { value, vals, showThumbIndex, distance })
     // onChange(val, index)
     const update = [...value]
 

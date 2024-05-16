@@ -9,11 +9,11 @@ interface HandDragOrderItemProps {
 }
 const HandDragOrderItem = ({ isAnimate }: HandDragOrderItemProps) => {
   // const [handIcon, setHandIcon] = 
-  useEffect(() => {
-    setTimeout(function () {
-      console.log('Hello world')
-    }, 1000)
-  }, [isAnimate])
+  // useEffect(() => {
+    // setTimeout(function () {
+      // console.log('Hello world')
+    // }, 1000)
+  // }, [isAnimate])
 
   return <div
     id={'tur_handDragOrderItem'}

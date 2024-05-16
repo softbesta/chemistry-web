@@ -126,7 +126,7 @@ const ReactionComparison = () => {
   }
 
   const handleDragOver = ({ over }: any) => {
-    console.log({ over })
+    // console.log({ over })
     setHoverOrder(over ? over.id : 0);
   }
 

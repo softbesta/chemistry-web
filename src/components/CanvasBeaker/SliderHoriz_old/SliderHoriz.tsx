@@ -37,7 +37,7 @@ const SliderHoriz111 = ({ className, width, values, setValues, showThumbIndex }:
     return update.map(item => item * 10)
   }
   const handleChangeVal = (val: number[] | number) => {
-    console.log('===handleChangeAB=== ', { values: val, valuesT: values })
+    // console.log('===handleChangeAB=== ', { values: val, valuesT: values })
     let update: number[] = [values[0] * 10, values[1] * 10]
     if (Array.isArray(val)) {
       if (showThumbIndex[0] === 2) {

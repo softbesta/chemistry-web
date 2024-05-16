@@ -5,7 +5,7 @@ import Color from 'color';
 import styles from './Chamber.module.scss'
 import { generateBinaryArr, getRandom } from '../../../helper/functions';
 
-const log_ChamberF = true
+const log_ChamberF = false
 
 interface ChamberFProps {
   width: number,

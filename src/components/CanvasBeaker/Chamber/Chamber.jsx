@@ -444,7 +444,7 @@ export default class Chamber extends React.Component {
   }
 
   componentDidMount() {
-    console.log('===Chamber.DidMount===')
+    // console.log('===Chamber.DidMount===')
     const Engine = Matter.Engine,
       Render = Matter.Render,
       Runner = Matter.Runner,
@@ -539,12 +539,12 @@ export default class Chamber extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log('===Chamber.DidUpdate===')
+    // console.log('===Chamber.DidUpdate===')
     if (
       prevProps.activeGases !== this.props.activeGases ||
       prevProps.temperature !== this.props.temperature
     ) {
-      console.log('DidUpdate.111', {prevProps}, this.props)
+      // console.log('DidUpdate.111', {prevProps}, this.props)
       this.refreshScene();
     }
 
@@ -552,12 +552,12 @@ export default class Chamber extends React.Component {
       !this.props.isPlaying &&
       prevProps.gasCounts !== this.props.gasCounts
     ) {
-      console.log('DidUpdate.222')
+      // console.log('DidUpdate.222')
       this.refreshScene();
     }
 
     if (prevProps.isPlaying !== this.props.isPlaying) {
-      console.log('DidUpdate.333')
+      // console.log('DidUpdate.333')
       this.refreshRunner(
         this.runner, this.engine, this.props.isPlaying);
     }
@@ -566,7 +566,7 @@ export default class Chamber extends React.Component {
     if (prevProps.allowEscape !== this.props.allowEscape) {
       // Update all the particles' category to make them ignore
       // the walls.
-      console.log('DidUpdate.444')
+      // console.log('DidUpdate.444')
       this.particles.forEach(function (gasParticles) {
         gasParticles.forEach(function (p) {
           if (!me.props.allowEscape) {
@@ -583,7 +583,7 @@ export default class Chamber extends React.Component {
     if (this.props.allowEscape &&
       prevProps.escapeSpeed !== this.props.escapeSpeed
     ) {
-      console.log('DidUpdate.555')
+      // console.log('DidUpdate.555')
       letParticlesEscape(this.particles, this.props.escapeSpeed);
     }
   }

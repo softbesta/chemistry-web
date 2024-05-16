@@ -39,7 +39,7 @@ import { Mask } from '@reactour/mask'
 import { RectResult } from '@reactour/utils';
 import jQuery from 'jquery';
 
-const log_Kinetics = true
+const log_Kinetics = false
 
 const ReactionKinetics = () => {
   const {
@@ -129,7 +129,7 @@ const ReactionKinetics = () => {
       if (curActions?.valueFire !== undefined) {
         setValueFire(curActions.valueFire)
       }
-      console.log(curActions?.isDisableNextButton)
+      // console.log(curActions?.isDisableNextButton)
       if (curActions?.isDisableNextButton !== undefined) {
         setIsDisableNextButton(curActions.isDisableNextButton)
       }
@@ -158,21 +158,21 @@ const ReactionKinetics = () => {
     jQuery('.blankMath').removeClass()
     const curTurMathBlanks = tur_MathBlankArr[curStep]
 
-    console.log({aaa: jQuery('#tur_math4_2')})
+    // console.log({aaa: jQuery('#tur_math4_2')})
 
-    const s1 = '#tur_math4_1>span mjx-msub'
-    const s2 = '#tur_math4_1>span mjx-num'
-    const s3 = '#tur_math4_1>span mjx-den'
-    const s4 = '#tur_math4_1 mjx-math mjx-mn'
-    const a3 = jQuery(s1)
-    const b3 = jQuery(s2)
-    const c3 = jQuery(s3)
-    const d3 = jQuery(s4)
+    // const s1 = '#tur_math4_1>span mjx-msub'
+    // const s2 = '#tur_math4_1>span mjx-num'
+    // const s3 = '#tur_math4_1>span mjx-den'
+    // const s4 = '#tur_math4_1 mjx-math mjx-mn'
+    // const a3 = jQuery(s1)
+    // const b3 = jQuery(s2)
+    // const c3 = jQuery(s3)
+    // const d3 = jQuery(s4)
     
-    console.log('0', s1, {a3})
-    console.log('1', s2, {b3})
-    console.log('2', s3, {c3})
-    console.log('3', s4, {d3})
+    // console.log('0', s1, {a3})
+    // console.log('1', s2, {b3})
+    // console.log('2', s3, {c3})
+    // console.log('3', s4, {d3})
 
     if (!curTurMathBlanks) return
     curTurMathBlanks.map((blank: any, index) => {
@@ -468,9 +468,6 @@ const ReactionKinetics = () => {
   const k1 = preExponentFactor * Math.pow(Math.E, (-1 * activationEnergy) / (minTemp * gasConstant))
   const slope = (-1 * activationEnergy) / gasConstant
   rateChartEquation.init3Params(slope, 1 / minTemp, Math.log(k1))
-
-
-  console.log({ chooseMenuIndex, val_Ea })
 
   // const rectangle = { id: 1, x: 10, y: 10, width: 50, height: 50 }
 

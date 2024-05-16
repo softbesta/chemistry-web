@@ -152,7 +152,7 @@ const BeakerShape = ({ width, height, waterlevel }: BeakerShapeProps) => {
     const ctx = canvas?.current?.getContext('2d')
     if (!ctx) return
 
-    console.log({ settings })
+    // console.log({ settings })
     beaker(
       ctx,
       settings.lipRadius,
