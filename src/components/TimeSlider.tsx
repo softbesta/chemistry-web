@@ -127,15 +127,14 @@ const TimeSlider = (props: TimeSliderProps) => {
             drawSlider(ctx)
         }
         // @ts-ignore
-    }, [window.mobileCheck() && drawSlider])
+    }, [window.mobileCheck() && drawSlider, disabled])
 
     useEffect(() => {
         const ctx = canvas?.current?.getContext('2d');
         if (ctx && isDrag) {
-            drawSlider(ctx)            
-            onChange(x / rate)
+            drawSlider(ctx)
         }
-    }, [x, isDrag, drawSlider])
+    }, [x, isDrag, drawSlider, disabled])
 
     useEffect(() => {
         const ctx = canvas?.current?.getContext('2d');
@@ -147,6 +146,10 @@ const TimeSlider = (props: TimeSliderProps) => {
             }
         }
     }, [disabled])
+
+    useEffect(() => {        
+        !disabled && onChange(x / rate)
+    }, [x, disabled])
 
     return (
         <div style={{width, height: thickness, position: 'absolute', bottom: -30, zIndex: 1}}>
