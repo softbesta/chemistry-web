@@ -7,7 +7,7 @@ import ChartBar from "../../../components/ChartBar"
 import MathContent from "../../../components/MathContent"
 import TutorialControl from "../../../components/TutorialControl"
 import { useHighLight } from "../../../hooks/useHighlight"
-import { maxStep_Second, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text, tur_MathBlankArr } from "./constants"
+import { maxStep_Second, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text, tur_MathBlankArr, tur_MathText } from "./constants"
 import useFunctions from "../../../hooks/useFunctions"
 import { ChooseMenu } from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
@@ -16,6 +16,7 @@ import ChapterMenu from "../../../layout/ChapterMenu"
 import ChartInA from "../../../components/ChartInA/ChartInA"
 import { convertExpToHtml } from "../../../helper/functions"
 import jQuery from 'jquery';
+import MathExpSecond from "./MathExp"
 
 const ReactionSecond = () => {
   const {
@@ -141,20 +142,26 @@ const ReactionSecond = () => {
     const rate = k * (At * At)
 
     const exp0 = `\\[ k = \\frac{(1/[A_t]) - (1/[A_0])}{t}\\]`
-    const exp1 = `\\[ k = \\frac{${(1 / At).toFixed(2)} - ${(1 / A0).toFixed(2)}}{${t1.toFixed(2)}}\\]`
+    const exp1 = `\\[ ${k.toFixed(2)} = \\frac{${(1 / At).toFixed(2)} - ${(1 / A0).toFixed(2)}}{${t1.toFixed(2)}}\\]`
     const exp2 = `\\[ t_{1/2} = 1/k[A_0] \\]`
     const exp3 = `\\[ ${t_12.toFixed(2)} = 1/${k.toFixed(2)}(${A0.toFixed(2)}) \\]`
     const exp4 = `\\[ Rate = k[A]^2 \\]`
     const exp5 = `\\[ ${rate.toFixed(2)} = ${k.toFixed(3)}(${At.toFixed(2)})^2 \\]`
 
-    return {
-      exp0,
-      exp1,
-      exp2,
-      exp3,
-      exp4,
-      exp5,
-    }
+    return [
+      k.toFixed(2),
+      (1 / At).toFixed(2),
+      (1 / A0).toFixed(2),
+      t1.toFixed(2),
+
+      t_12.toFixed(2),
+      k.toFixed(2),
+      A0.toFixed(2),
+
+      rate.toFixed(2),
+      k.toFixed(3),
+      At.toFixed(2),
+    ]
   }
 
   const getTurTextByStep = useCallback(() => {
@@ -275,10 +282,10 @@ const ReactionSecond = () => {
           textHoriz={`Time`}
         />
       </div>
-      <MathContent
-        className={styles.mathContent}
-        {...getFormula()}
-        blanks={tur_MathBlankArr[curStep]}
+      <MathExpSecond
+        values={getFormula()}
+        blanks={tur_MathText[curStep].blanks}
+        txtRed={tur_MathText[curStep].txtRed}
       />
       <TutorialControl
         turText={getTurTextByStep()}

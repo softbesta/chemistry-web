@@ -1,6 +1,7 @@
-import { MathJax, MathJaxContext } from "better-react-mathjax";
+// import { MathJax, MathJaxContext } from "better-react-mathjax";
 import styles from './MathContent.module.scss'
 import { useEffect } from "react";
+import './customMath.css'
 
 const config = {
   loader: { load: ["[tex]/html"] },
@@ -17,6 +18,15 @@ const config = {
   }
 };
 
+const config1 = {
+  loader: { load: ['input/mml', 'output/chtml'] },
+  input: {
+    mml: {
+      extensions: ['mml']
+    }
+  }
+};
+
 interface MathContentProps {
   exp0: string,
   exp1?: string,
@@ -28,7 +38,7 @@ interface MathContentProps {
   highlights?: (any | undefined)[]
   className?: string
 }
-const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, highlights, className = '' }: MathContentProps) => {
+const MathContent = ({ exp0, exp1, exp2, exp3, exp4, exp5, blanks, highlights, className = '' }: MathContentProps) => {
   const action_turMathBlanks = () => {
     jQuery('.blankMath').removeClass()
     const curTurMathBlanks = blanks
@@ -43,7 +53,7 @@ const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, highlights, cl
     const b3 = jQuery(s2)
     const c3 = jQuery(s3)
     const d3 = jQuery(s4)
-    
+
     // console.log('0', s1, {a3})
     // console.log('1', s2, {b3})
     // console.log('2', s3, {c3})
@@ -69,7 +79,7 @@ const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, highlights, cl
 
   // console.log({highlights})
   return <div className={`${styles.mathContentContainer} ${className}`}>
-    <MathJaxContext config={config}>
+    {/* <MathJaxContext config={config}>
       <div
         id='tur_math1'
         className={styles.mathjaxRow}
@@ -90,7 +100,6 @@ const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, highlights, cl
           dynamic
         >
           {exp1}
-          {/* {`\\[ Rate = 0.07 = -\\frac{-0.53}{7.28} = -\\frac{0.26 - 0.79}{19.40 - 12.12}\\]`} */}
         </MathJax>
       </div>
       <div
@@ -103,7 +112,6 @@ const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, highlights, cl
           dynamic
         >
           {exp2}
-          {/* {`\\[ t_{1/2} = [A_0]/(2k) \\]`} */}
         </MathJax>
         <MathJax
           id='tur_math3_2'
@@ -111,7 +119,6 @@ const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, highlights, cl
           dynamic
         >
           {exp3}
-          {/* {`\\[ 11.46 = 1.68 / (2 x 0.07) \\]`} */}
         </MathJax>
       </div>
       <div
@@ -124,7 +131,6 @@ const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, highlights, cl
           dynamic
         >
           {exp4}
-          {/* {`\\[ Rate = k[A]^0 \\]`} */}
         </MathJax>
         <MathJax
           id='tur_math4_2'
@@ -133,10 +139,9 @@ const MathContent = ({exp0, exp1, exp2, exp3, exp4, exp5, blanks, highlights, cl
           dynamic
         >
           {exp5}
-          {/* {`\\[ 0.07 = 0.073(0.60)^0 \\]`} */}
         </MathJax>
       </div>
-    </MathJaxContext>
+    </MathJaxContext> */}
 
 
     {/* {false && blanks && blanks.map((item, index) => {

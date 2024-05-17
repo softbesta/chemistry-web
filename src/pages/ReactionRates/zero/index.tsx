@@ -7,7 +7,7 @@ import ChartBar from "../../../components/ChartBar"
 import MathContent from "../../../components/MathContent"
 import TutorialControl from "../../../components/TutorialControl"
 import { useHighLight } from "../../../hooks/useHighlight"
-import { maxStep_Zero, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text, tur_MathBlankArr } from "./constants"
+import { maxStep_Zero, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text, tur_MathBlankArr, tur_MathText } from "./constants"
 import useFunctions from "../../../hooks/useFunctions"
 import { ChooseMenu } from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
@@ -15,6 +15,7 @@ import { dotColorList, sliderVertText } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
 import { convertExpToHtml } from "../../../helper/functions"
 import jQuery from 'jquery';
+import MathExpZero from "./MathExp"
 
 const ReactionZero = () => {
   const {
@@ -109,7 +110,7 @@ const ReactionZero = () => {
     const b3 = jQuery(s2)
     const c3 = jQuery(s3)
     const d3 = jQuery(s4)
-    
+
     // console.log('0', s1, {a3})
     // console.log('1', s2, {b3})
     // console.log('2', s3, {c3})
@@ -153,15 +154,56 @@ const ReactionZero = () => {
     const exp4 = `\\[ Rate = k[A]^0 \\]`
     const exp5 = `\\[ ${k.toFixed(2)} = ${k.toFixed(3)}(${c1.toFixed(2)})^0 \\]`
 
-    return {
-      exp0,
-      exp1,
-      exp2,
-      exp3,
-      exp4,
-      exp5,
-    }
+    return [
+      k.toFixed(2),
+      (-c).toFixed(2),
+      t.toFixed(2),
+      c2.toFixed(2),
+      c1.toFixed(2),
+      t2.toFixed(2),
+      t1.toFixed(2),
+
+      t_12.toFixed(2),
+      A0.toFixed(2),
+      k.toFixed(2),
+
+      k.toFixed(2),
+      k.toFixed(3),
+      c1.toFixed(2),
+    ]
   }
+
+  // const getFormula = () => {
+  //   const c1 = (valuesC[0] ?? 0) / 100
+  //   const c2 = (valuesC[1] ?? 0) / 100
+  //   const t1 = valuesT[0]
+  //   const t2 = valuesT[1]
+  //   const c = c2 - c1
+  //   const t = t2 - t1
+  //   const k = -(c / t)
+  //   const deltaT = t2 - t1
+  //   const deltaC = c2 - c1
+  //   const rateConstant = -deltaC / deltaT
+  //   const a0Numerator = (t1 * c2) - (t2 * c1)
+  //   const A0 = a0Numerator / (t1 - t2)
+  //   const t_12 = A0 / (2 * rateConstant)
+
+  //   const exp0 = `\\[ Rate = k = -\\frac{△c}{△t} = -\\frac{c_2 - c_1}{t_2 - t_1}\\]`
+  //   const exp1 = `\\[ Rate = ${k.toFixed(2)} = -\\frac{${c.toFixed(2)}}{${t.toFixed(2)}} = -\\frac{${c2.toFixed(2)} - ${c1.toFixed(2)}}{${t2.toFixed(2)} - ${t1.toFixed(2)}}\\]`
+  //   const exp2 = `\\[ t_{1/2} = [A_0]/(2k) \\]`
+  //   const exp3 = `\\[ ${t_12.toFixed(2)} = ${A0.toFixed(2)} / (2  x  ${k.toFixed(2)}) \\]`
+  //   const exp4 = `\\[ Rate = k[A]^0 \\]`
+  //   const exp5 = `\\[ ${k.toFixed(2)} = ${k.toFixed(3)}(${c1.toFixed(2)})^0 \\]`
+
+  //   return {
+  //     exp0,
+  //     exp1,
+  //     exp2,
+  //     exp3,
+  //     exp4,
+  //     exp5,
+  //   }
+  // }
 
   const getTurTextByStep = useCallback(() => {
     const c1 = (valuesC[0] ?? 0) / 100
@@ -276,10 +318,15 @@ const ReactionZero = () => {
       />
     </div>
     <div className={styles.reactionContentContainer}>
-      <MathContent
+      <MathExpZero
+        values={getFormula()}
+        blanks={tur_MathText[curStep].blanks}
+        txtRed={tur_MathText[curStep].txtRed}
+      />
+      {/* <MathContent
         {...getFormula()}
         blanks={tur_MathBlankArr[curStep]}
-      />
+      /> */}
       <TutorialControl
         turText={getTurTextByStep()}
         onStepChange={onStepChange}

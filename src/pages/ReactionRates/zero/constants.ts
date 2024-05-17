@@ -328,17 +328,17 @@ export const tur_MathBlankArr = [
     },
     {
       query: '#tur_math3_2 mjx-math mjx-mn',
-      nths: [0,1,3],
+      nths: [0, 1, 3],
     },
     {
       query: '#tur_math4_2 mjx-math mjx-mn',
-      nths: [0,1,2],
+      nths: [0, 1, 2],
     },
   ],
   [
     {
       query: '#tur_math4_2 mjx-math mjx-mn',
-      nths: [0,2],
+      nths: [0, 2],
     },
   ],
   [],
@@ -348,36 +348,7 @@ export const tur_MathBlankArr = [
   [],
   [],
   [],
-  
-  [
-    {
-      query: '#tur_math2>span mjx-mn',
-      nths: [3, 5],
-    },
-    {
-      query: '#tur_math2>span mjx-num',
-      nths: [0],
-    },
-    {
-      query: '#tur_math2>span mjx-den',
-      nths: [0],
-    },
-    {
-      query: '#tur_math4_2 mjx-math mjx-mn',
-      nths: [0,1,2],
-    },
-  ],
-  [
-    {
-      query: '#tur_math4_2 mjx-math mjx-mn',
-      nths: [0,2],
-    },
-  ],
-  
-  [],
-  [],
-  [],
-  
+
   [
     {
       query: '#tur_math2>span mjx-mn',
@@ -393,13 +364,42 @@ export const tur_MathBlankArr = [
     },
     {
       query: '#tur_math4_2 mjx-math mjx-mn',
-      nths: [0,1,2],
+      nths: [0, 1, 2],
     },
   ],
   [
     {
       query: '#tur_math4_2 mjx-math mjx-mn',
-      nths: [0,2],
+      nths: [0, 2],
+    },
+  ],
+
+  [],
+  [],
+  [],
+
+  [
+    {
+      query: '#tur_math2>span mjx-mn',
+      nths: [3, 5],
+    },
+    {
+      query: '#tur_math2>span mjx-num',
+      nths: [0],
+    },
+    {
+      query: '#tur_math2>span mjx-den',
+      nths: [0],
+    },
+    {
+      query: '#tur_math4_2 mjx-math mjx-mn',
+      nths: [0, 1, 2],
+    },
+  ],
+  [
+    {
+      query: '#tur_math4_2 mjx-math mjx-mn',
+      nths: [0, 2],
     },
   ],
 ]
@@ -472,4 +472,66 @@ export const tur_MathBlanks = [
   [],
   [],
 ]
+
+
+export const tur_MathText: any[] = [
+  { // 0
+    blanks: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12],
+    txtRed: [5, 6],
+  },
+  { // 1
+    blanks: [10, 12],
+    txtRed: [0, 1, 2, 3, 4, 7, 8, 9, 11],
+  },
+  {},
+  {},
+  {},
+  { // 5
+    txtRed: [10, 12],
+  },
+  { // 6
+    txtRed: [10, 12],
+  },
+  { // 7
+    txtRed: [10, 12],
+  },
+  { // 8
+    txtRed: [10, 12],
+  },
+
+  { // 9
+    blanks: [1, 2, 3, 4, 10, 12],
+    txtRed: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  },
+  { // 10
+    blanks: [10, 12],
+    txtRed: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12],
+  },
+  { // 11
+    txtRed: [10, 12],
+  },
+  { // 12
+    txtRed: [10, 12],
+  },
+  { // 13
+    txtRed: [10, 12],
+  },
+  { // 14
+    blanks: [1, 2, 3, 4, 10, 12],
+    txtRed: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  },
+  { // 15
+    blanks: [10, 12],
+    txtRed: [0, 1, 2, 3, 4, 7, 8, 9, 10, 11, 12],
+  },
+  { // 16
+    txtRed: [10, 12],
+  },
+  { // 17
+    txtRed: [10, 12],
+  },
+]
+
+
+
 export const maxStep_Zero = tur_Text.length // 18 steps

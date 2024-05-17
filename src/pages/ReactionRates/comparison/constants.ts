@@ -150,7 +150,7 @@ export const stepsActions = [
     orderItemMove: false,
     playButtonStatus: 0,
     draggableOrder: [1, 1, 1],
-    isDisableNextButton: true,
+    isDisableNextButton: false,
   },
   // 6   Awesome!...
   { // 6

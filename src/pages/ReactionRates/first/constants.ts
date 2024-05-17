@@ -505,4 +505,78 @@ export const tur_MathBlanks = [
   [],
 ]
 
+
+
+export const tur_MathText: any[] = [
+  { // 0
+    blanks: [0, 2, 4, 5, 6, 7, 8, 9],
+    txtRed: [1, 3],
+  },
+  { // 1
+    blanks: [7, 9],
+    txtRed: [0, 2, 3, 4, 5, 6, 7, 8, 9],
+  },
+  {},
+  {},
+  {},
+  { // 5
+  },
+  { // 6
+    txtRed: [7, 9],
+  },
+  { // 7
+    txtRed: [7, 9],
+  },
+  { // 8
+    txtRed: [7, 9],
+  },
+
+  { // 9
+    txtRed: [7, 9],
+  },
+  { // 10
+    txtRed: [7, 9],
+  },
+  { // 11
+    txtRed: [7, 9],
+  },
+  { // 12
+    txtRed: [7, 9],
+  },
+  { // 13
+    blanks: [2, 3, 7 ,9],
+    txtRed: [0, 1, 2, 3, 4, 6, 7, 8, 9],
+  },
+  { // 14
+    blanks: [7 ,9],
+    txtRed: [0, 2, 3, 4, 6, 7, 8, 9],
+  },
+  { // 15
+    txtRed: [7, 9],
+  },
+  { // 16
+    txtRed: [7, 9],
+  },
+  { // 17
+    txtRed: [7, 9],
+  },
+  { // 18
+    blanks: [2, 3, 7 ,9],
+    txtRed: [0, 1, 2, 3, 4, 6, 7, 8, 9],
+  },
+  { // 19
+    blanks: [7 ,9],
+    txtRed: [0, 2, 3, 4, 6, 7, 8, 9],
+  },
+  { // 20
+    txtRed: [7, 9],
+  },
+  { // 21
+    txtRed: [7, 9],
+  },
+]
+
+
+
+
 export const maxStep_First = tur_Text.length // 22 steps

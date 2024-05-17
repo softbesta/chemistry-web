@@ -7,7 +7,7 @@ import ChartBar from "../../../components/ChartBar"
 import MathContent from "../../../components/MathContent"
 import TutorialControl from "../../../components/TutorialControl"
 import { useHighLight } from "../../../hooks/useHighlight"
-import { maxStep_First, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text, tur_MathBlankArr } from "./constants"
+import { maxStep_First, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text, tur_MathBlankArr, tur_MathText } from "./constants"
 import useFunctions from "../../../hooks/useFunctions"
 import { ChooseMenu } from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
@@ -17,6 +17,7 @@ import CanvasTime from "../../../components/Canvas/CanvasTime"
 import ChartInA from "../../../components/ChartInA/ChartInA"
 import { convertExpToHtml } from "../../../helper/functions"
 import jQuery from 'jquery';
+import MathExpFirst from "./MathExp"
 
 const ReactionFirst = () => {
   const {
@@ -152,14 +153,18 @@ const ReactionFirst = () => {
     const exp4 = `\\[ Rate = k[A]^1 \\]`
     const exp5 = `\\[ ${rate.toFixed(2)} = ${k.toFixed(3)}(${c1.toFixed(2)})^1 \\]`
 
-    return {
-      exp0,
-      exp1,
-      exp2,
-      exp3,
-      exp4,
-      exp5,
-    }
+    return [
+      k.toFixed(2),
+      (-lnA0).toFixed(2),
+      (-lnAt).toFixed(2),
+      t1.toFixed(2),
+      t_12.toFixed(2),
+      Math.log(2).toFixed(2),
+      k.toFixed(2),
+      rate.toFixed(2),
+      k.toFixed(3),
+      c1.toFixed(2),
+    ]
   }
 
   const getTurTextByStep = useCallback(() => {
@@ -282,11 +287,16 @@ const ReactionFirst = () => {
           textHoriz={`Time`}
         />
       </div>
-      <MathContent
+      <MathExpFirst
+        values={getFormula()}
+        blanks={tur_MathText[curStep].blanks}
+        txtRed={tur_MathText[curStep].txtRed}
+      />
+      {/* <MathContent
         className={styles.mathContent}
         {...getFormula()}
         blanks={tur_MathBlankArr[curStep]}
-      />
+      /> */}
       <TutorialControl
         turText={getTurTextByStep()}
         onStepChange={onStepChange}
