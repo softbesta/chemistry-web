@@ -8,6 +8,7 @@ interface MultiRangeSliderProps {
   distance?: number
   showThumbIndex: number[]
   values: number[]
+  hiddePointer?: boolean
   // onChange: (val: number, index: number) => void
   onChange: (vals: number[]) => void
 }
@@ -18,6 +19,7 @@ const MultiRangeSliderHoriz = ({
   distance = 13,
   showThumbIndex,
   values,
+  hiddePointer = false,
   onChange
 }: MultiRangeSliderProps) => {
   const valLeft = values[0]
@@ -94,7 +96,7 @@ const MultiRangeSliderHoriz = ({
           />
         </div>
       </div>
-      <div>
+      {!hiddePointer && <div>
         {showThumbIndex[0] > 0 && <div
           className={`
             h-slider-pointer 
@@ -113,7 +115,7 @@ const MultiRangeSliderHoriz = ({
             left: 9 + 150 / 20 * vals[1] / 10
           }}
         />}
-      </div>
+      </div>}
     </div>
   )
 }

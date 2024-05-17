@@ -84,6 +84,7 @@ const Burner = ({ isActive = false, fireVal, min, max, onChange }: BurnerProps) 
         values={[value, 1000]}
         setValues={(val) => onChangeValue(val[0])}
         showThumbIndex={showThumbIndex}
+        hidePointer={true}
       />
     </div>
   </div>

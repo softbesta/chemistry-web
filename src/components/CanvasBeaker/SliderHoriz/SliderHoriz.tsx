@@ -11,9 +11,10 @@ interface SliderHoriz {
   values: number[]
   setValues: (val: number[]) => void
   showThumbIndex: number[]
+  hidePointer?: boolean
 }
 
-const SliderHoriz = ({ className, width, max = 1000, distance = 0, values, setValues, showThumbIndex }: SliderHoriz) => {
+const SliderHoriz = ({ className, width, max = 1000, distance = 0, values, setValues, showThumbIndex, hidePointer = false }: SliderHoriz) => {
   const handleChangeVal = (vals: number[]) => {
     // console.log('===handleChangeAB=== ', { val, index, valuesT: values, showThumbIndex })
     const update: number[] = [...vals]
@@ -27,6 +28,7 @@ const SliderHoriz = ({ className, width, max = 1000, distance = 0, values, setVa
       showThumbIndex={showThumbIndex}
       values={values}
       onChange={(vals) => handleChangeVal(vals)}
+      hiddePointer={hidePointer}
     />
 }
 export default SliderHoriz
