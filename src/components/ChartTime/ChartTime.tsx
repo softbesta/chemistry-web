@@ -102,8 +102,13 @@ const ChartTime = ({
         textVert={textVert}
       />
 
-
-      {!isMobile ?
+      <SliderHoriz
+        valuesT={valuesT}
+        setValuesT={setValuesT}
+        showThumbIndex={canvaTimeSliderT}
+        distance={25}
+      />
+      {/* {!isMobile ?
         <SliderHoriz
           valuesT={valuesT}
           setValuesT={setValuesT}
@@ -128,7 +133,7 @@ const ChartTime = ({
               setValuesT(update)
             }}
           />}
-        </>}
+        </>} */}
 
       {/* <ConcentrationSlider disabled={false} /> */}
 

@@ -53,7 +53,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25 }: Sli
   const isMobile = window.mobileCheck()
   return (
     <div className={styles.container}>
-      <div className={isMobile ? styles.sliceHorizontalMobile : styles.sliceHorizontal}>
+      <div className={styles.sliceHorizontal}>
         {
           infoT.showCount > 0 &&
           <div style={{ position: 'relative' }}>
