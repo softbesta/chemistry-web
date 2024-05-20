@@ -8,9 +8,11 @@ interface SliderVert {
   canvaTimeSliderC: number[]
   textVert?: string
   distance?: number
+  minValue?: number
+  maxRange?: number
 }
 
-const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distance = 13, textVert }: SliderVert) => {
+const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distance = 13, minValue = 0, maxRange = 100, textVert }: SliderVert) => {
 
   // const [vals, setVals] = useState(valuesC)
 
@@ -32,48 +34,22 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
     let update: number[] = []
     update = valuesC
     return update
-
-    // let update: number[] = []
-    // if (showIndexC[0] > 0 && showIndexC[1] > 0) {
-    //   // console.log('===getValueC===', valuesC)
-    //   update = [valuesC[1], valuesC[0]]
-    // } else if (showIndexC[0] > 0) {
-    //   // console.log('===getValueC===  000', valuesC[0])
-    //   update = [valuesC[0]]
-    // } else if (showIndexC[1] > 0) {
-    //   // console.log('===getValueC===  111', valuesC[1])
-    //   update = [valuesC[1]]
-    // } else update = []
-    // return update
   }
 
   const handleChangeAB = (vals: number[]) => {
-    // console.log('===handleChangeAB=== ', { vals, valuesC })
-    // let update: number[] = valuesC
-    // if (Array.isArray(val)) {
-    //   if (showIndexC[0] === 2) {
-    //     update = [val[1], update[1]]
-    //   }
-    //   if (showIndexC[1] === 2) {
-    //     update = [update[0], val[0]]
-    //   }
-    // } else {
-    //   if (showIndexC[0] === 2) {
-    //     update = [val, update[1]]
-    //   }
-    //   if (showIndexC[1] === 2) {
-    //     update = [update[0], val]
-    //   }
-    // }
-    // // console.log({ update })
-    // if (update[0] < 27) update[0] = 27
-    // if (update[1] < 10) update[1] = 10
-    // if (update[1] > update[0] - 13) update[1] = update[0] - 13
+    let valMax = vals[0]
+    let valMin = vals[1]
 
-
-    const update = [...vals]
-    setTextC(update[infoC.activeIndex] / 100)
+    if (valMin > valMax - distance) {
+      valMin = valMax - distance
+    }
+    valMin = Math.max(valMin, minValue)
+    valMax = Math.max(valMax, valMin + distance)
+    valMax = Math.min(valMax, maxRange)
+    const update = [valMax, valMin]
     setValuesC(update)
+
+    setTextC(update[infoC.activeIndex] / 100)
   }
 
   const [textC, setTextC] = useState<number>()
@@ -81,56 +57,40 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
     setTextC(valuesC[infoC.activeIndex] / 100)
   }, [showIndexC])
 
-  // const textC = useMemo(() => {
-  //   const res = getValueC()[0] ?? getValueC()[1]
-  //   if (!Number.isFinite(res)) {
-  //     return undefined
-  //   }
-  //   return res / 100
-  // }, [getValueC])
+  const [upCounter, setUpCounter] = useState(0)
+  const [downCounter, setDownCounter] = useState(0)
+  const refSpinTimer = useRef<NodeJS.Timer>()
 
-  const [decreaseCounter, setDecreaseCounter] = useState(0)
-  const [increaseCounter, setIncreaseCounter] = useState(0)
-  const refValue = useRef<number>(0)
-  const refIncrement = useRef<NodeJS.Timer>()
-
-  const handleUpDownBtn = (step: number) => {
-    // console.log('value changning - ', { step, decreaseCounter })
-    // setValue(v => v + step)
-    if (step < 0) {
-      setDecreaseCounter(v => v + 1)
-    } else if (step > 0) {
-      setIncreaseCounter(v => v + 1)
+  const startTimer = (isUp: number) => {
+    if (isUp > 0) {
+      setUpCounter(v => v + 1)
+    } else {
+      setDownCounter(v => v + 1)
     }
-
-    // const update = [...valuesC]
-    // update[infoC.activeIndex] += step
-    // handleChangeAB(update)
-  }
-  const startIncrement = (step: number) => {
-    handleUpDownBtn(step)
-    refIncrement.current = setInterval(() => {
-      handleUpDownBtn(step)
+    refSpinTimer.current = setInterval(() => {
+      if (isUp > 0) {
+        setUpCounter(v => v + 1)
+      } else {
+        setDownCounter(v => v + 1)
+      }
     }, 100)
   }
-  const stopIncrement = () => {
-    clearInterval(refIncrement.current)
-    refIncrement.current = undefined
+  const stopTimer = () => {
+    clearInterval(refSpinTimer.current)
+    refSpinTimer.current = undefined
   }
   useEffect(() => {
-    if (decreaseCounter <= 0) return
-    // console.log('value changning - ', { refValue: refValue.current })
-    const update = [...valuesC]
-    update[infoC.activeIndex]--
-    handleChangeAB(update)
-  }, [decreaseCounter])
-  useEffect(() => {
-    if (increaseCounter <= 0) return
-    // console.log('value changning - ', { refValue: refValue.current })
+    if (upCounter <= 0) return
     const update = [...valuesC]
     update[infoC.activeIndex]++
     handleChangeAB(update)
-  }, [increaseCounter])
+  }, [upCounter])
+  useEffect(() => {
+    if (downCounter <= 0) return
+    const update = [...valuesC]
+    update[infoC.activeIndex]--
+    handleChangeAB(update)
+  }, [downCounter])
 
   return <div className={styles.container}>
     <div className={styles.sliceVertical}>
@@ -139,8 +99,8 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
         <div style={{ position: 'relative' }}>
           <div className={styles.sliderback}></div>
           <MultiRangeSliderVert
-            max={100}
             width={167}
+            max={maxRange}
             distance={13}
             minVal={14}
             showThumbIndex={showIndexC}
@@ -166,19 +126,19 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
         /> */}
       <button
         className={styles.btnUp}
-        onMouseDown={() => startIncrement(1)}
-        onMouseUp={() => stopIncrement()}
-        onMouseLeave={() => stopIncrement()}
-        onTouchStart={() => startIncrement(1)}
-        onTouchEnd={() => stopIncrement()}
+        onMouseDown={() => startTimer(1)}
+        onMouseUp={() => stopTimer()}
+        onMouseLeave={() => stopTimer()}
+        onTouchStart={() => startTimer(1)}
+        onTouchEnd={() => stopTimer()}
       >▲</button>
       <button
         className={styles.btnDown}
-        onMouseDown={() => startIncrement(-1)}
-        onMouseUp={() => stopIncrement()}
-        onMouseLeave={() => stopIncrement()}
-        onTouchStart={() => startIncrement(-1)}
-        onTouchEnd={() => stopIncrement()}
+        onMouseDown={() => startTimer(-1)}
+        onMouseUp={() => stopTimer()}
+        onMouseLeave={() => stopTimer()}
+        onTouchStart={() => startTimer(-1)}
+        onTouchEnd={() => stopTimer()}
       >▼</button>
     </div>
   </div>

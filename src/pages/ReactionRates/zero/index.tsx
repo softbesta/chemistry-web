@@ -159,8 +159,8 @@ const ReactionZero = () => {
       (-c).toFixed(2),
       t.toFixed(2),
       c2.toFixed(2),
-      c1.toFixed(2),
       t2.toFixed(2),
+      c1.toFixed(2),
       t1.toFixed(2),
 
       t_12.toFixed(2),

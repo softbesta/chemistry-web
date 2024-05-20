@@ -100,6 +100,7 @@ const ChartTime = ({
         setValuesC={setValuesC}
         canvaTimeSliderC={canvaTimeSliderC}
         textVert={textVert}
+        minValue={14}
       />
 
       <SliderHoriz

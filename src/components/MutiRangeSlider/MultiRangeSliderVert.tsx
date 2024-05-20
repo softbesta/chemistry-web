@@ -69,12 +69,12 @@ const MultiRangeSliderVert = ({
 
       const update = [...values]
       update[0] = val
-      if (update[0] <= minVal + distance) {
-        update[0] = minVal + distance
-      }
-      if (update[1] > update[0] - distance) {
-        update[1] = update[0] - distance
-      }
+      // if (update[0] <= minVal + distance) {
+      //   update[0] = minVal + distance
+      // }
+      // if (update[1] > update[0] - distance) {
+      //   update[1] = update[0] - distance
+      // }
       onChangeValue(update)
     })
   }, 10), [onChangeValue])
@@ -84,12 +84,12 @@ const MultiRangeSliderVert = ({
     refRequest.current = requestAnimationFrame(() => {
       const update = [...values]
       update[1] = val
-      if (update[1] >= update[0] - distance) {
-        update[1] = update[0] - distance
-      }
-      if (update[1] <= minVal) {
-        update[1] = minVal
-      }
+      // if (update[1] >= update[0] - distance) {
+      //   update[1] = update[0] - distance
+      // }
+      // if (update[1] <= minVal) {
+      //   update[1] = minVal
+      // }
       onChangeValue(update)
     })
   }, 10), [onChangeValue])

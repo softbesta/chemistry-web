@@ -43,9 +43,9 @@ const MultiRangeSliderHoriz = ({
   const onChangeValMin = useCallback(debounce((val: number) => {
     cancelAnimationFrame(refRequest.current)
     refRequest.current = requestAnimationFrame(() => {
-      if (values[1]) {
-        val = Math.min(val, values[1] - distance)
-      }
+      // if (values[1]) {
+      //   val = Math.min(val, values[1] - distance)
+      // }
       onChangeValue(+val, 0)
     })
   }, 10), [onChangeValue])
@@ -53,9 +53,9 @@ const MultiRangeSliderHoriz = ({
   const onChangeValMax = useCallback(debounce((val: number) => {
     cancelAnimationFrame(refRequest.current)
     refRequest.current = requestAnimationFrame(() => {
-      if (values[0]) {
-        val = Math.max(val, values[0] + distance)
-      }
+      // if (values[0]) {
+      //   val = Math.max(val, values[0] + distance)
+      // }
       onChangeValue(+val, 1)
     })
   }, 10), [onChangeValue])
