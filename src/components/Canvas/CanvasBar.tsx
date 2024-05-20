@@ -138,13 +138,13 @@ const BarChartCanvas = ({ state, c2, c1, t2, t1, height, width, colorA, colorB, 
       // console.log('interval', timeOffset)
       setTimeCounter(v => v += 1 / framesPerSecond)
     }, intervalTime)
-    console.log('started', timerID.current)
+    // console.log('started', timerID.current)
   }
   const stopTimer = () => {
     if (timerID.current) {
       clearInterval(timerID.current)
       timerID.current = undefined
-      console.log('timer ended')
+      // console.log('timer ended')
     }
   }
   // animation play

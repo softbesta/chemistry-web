@@ -15,7 +15,7 @@ interface MathExpZeroProps {
 
 const MathExpZero = ({ values, blanks, txtRed, className = '' }: MathExpZeroProps) => {
   const [isBlank, setIsBlank] = useState(false)
-  console.log({blanks})
+  // console.log({blanks})
   const width = 460
 
   return <div className={styles.mathContainer}>

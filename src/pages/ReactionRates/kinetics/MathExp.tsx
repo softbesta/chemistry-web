@@ -15,7 +15,7 @@ interface MathExpKineticsProps {
 
 const MathExpKinetics = ({ values, blanks, txtRed, className = '' }: MathExpKineticsProps) => {
   const [isBlank, setIsBlank] = useState(false)
-  console.log({ blanks })
+  // console.log({ blanks })
   const width = 270
 
   return <div className={styles.mathContainer}>

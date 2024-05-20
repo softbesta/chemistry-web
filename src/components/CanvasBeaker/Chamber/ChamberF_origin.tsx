@@ -135,7 +135,7 @@ export const ChamberF = ({
   useEffect(() => {
     if (!elemRef.current) return
 
-    console.log('===ChamberF.useEffect 111===')
+    // console.log('===ChamberF.useEffect 111===')
 
     const Engine = Matter.Engine,
       Render = Matter.Render,
@@ -239,7 +239,7 @@ export const ChamberF = ({
       prevProps.current = { activeGases, temperature, isPlaying, gasCounts }
       return
     }
-    console.log('===ChamberF.useEffect 222===')
+    // console.log('===ChamberF.useEffect 222===')
     if (
       prevProps.current.activeGases !== activeGases ||
       prevProps.current.temperature !== temperature
@@ -533,7 +533,7 @@ export const ChamberF = ({
   }
 
   const refreshScene = () => {
-    console.log('===refreshScene===',)
+    // console.log('===refreshScene===',)
     const me = this;
 
     if (particles.current) {

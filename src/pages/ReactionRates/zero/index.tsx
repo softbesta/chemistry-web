@@ -298,9 +298,7 @@ const ReactionZero = () => {
         setValuesC={val => setValuesC(val)}
         canvaTimeSliderC={canvaTimeSliderC}
         valuesT={valuesT}
-        setValuesT={val => {
-          setValuesT(val)
-        }}
+        setValuesT={val => setValuesT(val)}
         canvaTimeSliderT={canvaTimeSliderT}
         canvaTimeState={canvaTimeState}
         onTimeframeChange={val => setTimeframe(val)}

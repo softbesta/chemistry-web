@@ -1,13 +1,50 @@
 .container {
-  width: 270px;
-  height: 240px;
+  // width: 270px;
+  // height: 240px;
   z-index: 1;
+}
+
+.vertBtnGroup {
+  position: absolute;
+  top: 0px;
+  right: 252px;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  width: 50px;
+  gap: 6px;
+
+  .btnUp {
+    height: 40px;
+    font-size: 30px;
+    border: none;
+    border-radius: 6px;
+    background: #ddd;
+    cursor: pointer;
+    user-select: none;
+    &:active {
+      background: #bbb;
+    }
+  }
+  .btnDown {
+    height: 40px;
+    font-size: 30px;
+    border: none;
+    border-radius: 6px;
+    background: #ddd;
+    cursor: pointer;
+    user-select: none;
+    &:active {
+      background: #bbb;
+    }
+  }
 }
 
 // A value slider
 .sliceVertical {
   position: absolute;
-  bottom: 89px; // position
+  bottom: 87px;
   right: 151px;
   rotate: -90deg;
 

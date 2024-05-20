@@ -80,9 +80,9 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
     initializePage(curMenu)
   }, [curMenu])
   const handleMenuItemClick = (menu: MenuList) => {
-    console.log('===handleMenuItemClick===')
-    console.log({ availableMenuList, menu })
-    console.log('isavailable menu; ', availableMenuList.includes(menu))
+    // console.log('===handleMenuItemClick===')
+    // console.log({ availableMenuList, menu })
+    // console.log('isavailable menu; ', availableMenuList.includes(menu))
     updatePageFromMenu(menu, true)
   }
 

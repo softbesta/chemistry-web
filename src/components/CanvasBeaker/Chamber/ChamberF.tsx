@@ -57,7 +57,7 @@ export const ChamberF = ({
   // const finalGasConvArr: boolean[] = Array.from(Array((gasCounts[0] + gasCounts[1]) || 0).fill(false))
   const gasConvArr = useRef<boolean[]>(initGasConvArr)
 
-  log_ChamberF && console.log({ activeGases, gasSpeed, gasConvPercent: gasConvPercent.current })
+  // log_ChamberF && console.log({ activeGases, gasSpeed, gasConvPercent: gasConvPercent.current })
 
   useEffect(() => {
     gasSpeedRef.current = gasSpeed / 50
@@ -331,16 +331,16 @@ export const ChamberF = ({
 
   // update element counts
   useEffect(() => {
-    log_ChamberF && console.log('----------------')
-    log_ChamberF && console.log('===ChamberF.useEffect 222===')
+    // log_ChamberF && console.log('----------------')
+    // log_ChamberF && console.log('===ChamberF.useEffect 222===')
     try {
       particleCounts.current = gasCounts
 
-      log_ChamberF && console.log({ particleCounts: particleCounts.current, particles: particles.current })
+      // log_ChamberF && console.log({ particleCounts: particleCounts.current, particles: particles.current })
       for (let gasType = 0; gasType < particles.current.length; gasType++) {
         const diffCount = (particleCounts.current[gasType] || 0) - (particles.current[gasType].length || 0)
 
-        log_ChamberF && console.log({ gasType, diffCount }, particleCounts.current[gasType], particles.current[gasType].length)
+        // log_ChamberF && console.log({ gasType, diffCount }, particleCounts.current[gasType], particles.current[gasType].length)
         if (diffCount > 0) {
           f_addParticle(gasType, diffCount)
         } else if (diffCount < 0) {
@@ -363,18 +363,18 @@ export const ChamberF = ({
     timerID.current = setInterval(() => {
       setTimeCounter(v => v += intervalTime)
     }, intervalTime * 1000)
-    log_ChamberF && console.log('started', timerID.current)
+    // log_ChamberF && console.log('started', timerID.current)
   }
   const stopTimer = () => {
     if (timerID.current) {
       clearInterval(timerID.current)
       timerID.current = undefined
-      log_ChamberF && console.log('timer end')
+      // log_ChamberF && console.log('timer end')
     }
   }
 
   useEffect(() => {
-    log_ChamberF && console.log({ beakerState })
+    // log_ChamberF && console.log({ beakerState })
     if (beakerState === 1) {
       // setEnergyDots(beakerDots.current)
       gasConvPercent.current = 0
@@ -415,10 +415,10 @@ export const ChamberF = ({
       onEndPlay?.()
       return
     }
-    log_ChamberF && console.log('timer count', { timeCounter, beakerState })
+    // log_ChamberF && console.log('timer count', { timeCounter, beakerState })
 
     // animation play actions here.
-    log_ChamberF && console.log('timer: ', { timeCounter })
+    // log_ChamberF && console.log('timer: ', { timeCounter })
     if (gasConvPercent.current < 100) {
       gasConvPercent.current = Math.min(gasConvPercent.current + (gasSpeed * gasSpeed) / 15, 100)
       gasConvArr.current = generateBinaryArr(gasConvArr.current, gasConvPercent.current)
@@ -427,7 +427,7 @@ export const ChamberF = ({
 
 
   const removeParticles = () => {
-    log_ChamberF && console.log('===removeParticles===')
+    // log_ChamberF && console.log('===removeParticles===')
     if (particles.current) {
       particles.current.forEach(function (gasParticles) {
         if (!engine.current) return
@@ -436,7 +436,7 @@ export const ChamberF = ({
     }
   }
   const addParticles = () => {
-    log_ChamberF && console.log('===addParticles===')
+    // log_ChamberF && console.log('===addParticles===')
 
     particles.current = drawParticles(
       activeGases,
@@ -451,7 +451,7 @@ export const ChamberF = ({
   }
 
   const f_addParticle = (gasType: number, addCount: number) => {
-    log_ChamberF && console.log('===f_addParticle===', { gasType, addCount })
+    // log_ChamberF && console.log('===f_addParticle===', { gasType, addCount })
     const activeGas = activeGases[gasType]
     const newGases: Matter.Body[] = []
     for (let c = 0; c < addCount; c++) {
@@ -460,17 +460,17 @@ export const ChamberF = ({
     }
     const gasParticles = particles.current[gasType]
     particles.current[gasType] = [...gasParticles, ...newGases]
-    log_ChamberF && console.log({ updatedParticles: particles.current[gasType] })
+    // log_ChamberF && console.log({ updatedParticles: particles.current[gasType] })
     if (!engine.current) return
     Matter.Composite.add(engine.current.world, newGases)
   }
 
   const f_removeParticle = (gasType: number, removeCount: number) => {
-    log_ChamberF && console.log({ gasType, removeCount })
-    log_ChamberF && console.log('===f_removeParticle===', { gasType, removeCount })
+    // log_ChamberF && console.log({ gasType, removeCount })
+    // log_ChamberF && console.log('===f_removeParticle===', { gasType, removeCount })
     if (!particles.current || !particles.current[gasType]) return
     const removeParticle = particles.current[gasType].splice(-removeCount)
-    log_ChamberF && console.log({ updatedParticles: particles.current[gasType] })
+    // log_ChamberF && console.log({ updatedParticles: particles.current[gasType] })
     if (!engine.current) return
     Matter.Composite.remove(engine.current.world, removeParticle)
   }
@@ -617,7 +617,7 @@ export const ChamberF = ({
   }
 
   const chamber111 = () => {
-    log_ChamberF && console.log('start button clicked ')
+    // log_ChamberF && console.log('start button clicked ')
     // if (!runner.current || !engine.current) return
     // const Runner = Matter.Runner
     // Runner.start(runner.current, engine.current)
@@ -627,10 +627,10 @@ export const ChamberF = ({
     // log_ChamberF && console.log(particleCounts.current)
 
 
-    log_ChamberF && console.log(beakerColors)
+    // log_ChamberF && console.log(beakerColors)
   }
   const chamber222 = () => {
-    log_ChamberF && console.log('start button clicked ')
+    // log_ChamberF && console.log('start button clicked ')
     // if (!runner.current) return
     // const Runner = Matter.Runner
     // Runner.stop(runner.current)
@@ -639,10 +639,10 @@ export const ChamberF = ({
     // log_ChamberF && console.log(particles.current)
 
 
-    log_ChamberF && console.log(beakerColors)
+    // log_ChamberF && console.log(beakerColors)
   }
   const chamber333 = () => {
-    log_ChamberF && console.log('effect button clicked ')
+    // log_ChamberF && console.log('effect button clicked ')
 
     // f_addParticle(1, 3)
     // log_ChamberF && console.log(particles.current)

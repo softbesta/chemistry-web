@@ -61,7 +61,7 @@ const ReactionSecond = () => {
   // *** Tutorial-ACTIONS  - curStep changes
   const curActions = tutorials[curStep]?.actions as any
   useEffect(() => {
-    console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep })
+    // console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep })
     // console.log('curActions: ', { curActions, curStep })
     if (curActions) {
       if (curActions?.canvaTimeState !== undefined) {
@@ -200,7 +200,7 @@ const ReactionSecond = () => {
     let update = curStep + step
     if (update < 0) {
       update = 0
-      console.log('getNextStep 0', { update })
+      // console.log('getNextStep 0', { update })
       updatePageFromMenu(getNextMenu(-1))
       return
     }
@@ -214,9 +214,9 @@ const ReactionSecond = () => {
   }
   // call when click prev step
   const onStepChange = (step: number) => {
-    console.log('===onStepChange===', { step })
+    // console.log('===onStepChange===', { step })
     const nextStep = getNextStep(step)
-    console.log({ nextStep })
+    // console.log({ nextStep })
     if (nextStep === undefined) return
     if (curStep === nextStep) return
     // Tutorial-Highlight
