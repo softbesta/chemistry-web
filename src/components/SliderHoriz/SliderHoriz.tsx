@@ -42,6 +42,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
     // update = [...vals].map(item => item / flexibleV)
     // setValuesT(update)
 
+    console.log('ppp',{vals})
     
     let valMin = vals[0]
     let valMax = vals[1]
@@ -88,13 +89,13 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
   }
   useEffect(() => {
     if (upCounter <= 0) return
-    const update = [...valuesT]
+    const update = getValueT()
     update[infoT.activeIndex]++
     handleChangeVal(update)
   }, [upCounter])
   useEffect(() => {
     if (downCounter <= 0) return
-    const update = [...valuesT]
+    const update = getValueT()
     update[infoT.activeIndex]--
     handleChangeVal(update)
   }, [downCounter])
@@ -144,18 +145,18 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
         /> */}
         <button
           className={styles.btnUp}
-          onMouseDown={() => startTimer(1)}
-          onMouseUp={() => stopTimer()}
-          onMouseLeave={() => stopTimer()}
-          onTouchStart={() => startTimer(1)}
-          onTouchEnd={() => stopTimer()}
-        >◀</button>
-        <button
-          className={styles.btnDown}
           onMouseDown={() => startTimer(-1)}
           onMouseUp={() => stopTimer()}
           onMouseLeave={() => stopTimer()}
           onTouchStart={() => startTimer(-1)}
+          onTouchEnd={() => stopTimer()}
+        >◀</button>
+        <button
+          className={styles.btnDown}
+          onMouseDown={() => startTimer(1)}
+          onMouseUp={() => stopTimer()}
+          onMouseLeave={() => stopTimer()}
+          onTouchStart={() => startTimer(1)}
           onTouchEnd={() => stopTimer()}
         >▶</button>
         {/* {value} */}
