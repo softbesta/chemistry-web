@@ -251,13 +251,13 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
       // console.log('interval')
       setTimeCounter(v => v += intervalTime)
     }, intervalTime * 1000)
-    console.log('started', timerID.current)
+    // console.log('started', timerID.current)
   }
   const stopTimer = () => {
     if (timerID.current) {
       clearInterval(timerID.current)
       timerID.current = undefined
-      console.log('timer end')
+      // console.log('timer end')
     }
   }
 

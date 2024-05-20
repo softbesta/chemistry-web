@@ -1,13 +1,57 @@
 .container {
-  width: 270px;
-  height: 240px;
+  // width: 270px;
+  // height: 240px;
+  position: absolute;
+  z-index: 1;
+  width: 220px;
+  top: 220px;
+  right: 0px;
+}
+
+.horizBtnGroup {
+  position: absolute;
+  top: 35px;
+  right: 0px;
+  z-index: 1;
+
+  display: flex;
+  gap: 6px;
+
+  .btnUp {
+    width: 40px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 30px;
+    border: none;
+    border-radius: 6px;
+    background: #ddd;
+    cursor: pointer;
+    user-select: none;
+    &:active {
+      background: #bbb;
+    }
+  }
+  .btnDown {
+    width: 40px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 30px;
+    border: none;
+    border-radius: 6px;
+    background: #ddd;
+    cursor: pointer;
+    user-select: none;
+    &:active {
+      background: #bbb;
+    }
+  }
 }
 
 // Time value slider
 .sliceHorizontal {
-  position: absolute;
-  top: 220px; // position
-  left: 49px;
+  // position: absolute;
+  // top: 220px; // position
+  // right: 10px;
 
   .horizontal-slider {
     width: 225px; // control this for length of horiz
@@ -64,7 +108,7 @@
   position: absolute; 
   top: 16px; 
   left: 9px; 
-  width: 213px; 
+  width: calc(100% - 9px);
 }
 
 .example-track {
@@ -97,8 +141,8 @@
 
 .textHoriz {
   position: absolute;
-  top: 250px;
-  right: 80px;
+  // top: 250px;
+  right: 105px;
   font-weight: 600;
 
   p {

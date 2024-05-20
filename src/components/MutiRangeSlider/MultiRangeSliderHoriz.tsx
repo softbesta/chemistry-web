@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import classnames from 'classnames'
 import './slider.css'
+import { debounce } from '../../helper/functions'
 
 interface MultiRangeSliderProps {
   max: number
@@ -22,25 +23,43 @@ const MultiRangeSliderHoriz = ({
   hiddePointer = false,
   onChange
 }: MultiRangeSliderProps) => {
-  const valLeft = values[0]
+  // const valLeft = values[0]
   // const valRight = values[1]
 
-  const [vals, setVals] = useState(values)
+  // const [vals, setVals] = useState(values)
   const minDisabled = showThumbIndex[0] === 1 ? true : false
   const maxDisabled = showThumbIndex[1] === 1 ? true : false
-  const isLeftOverlap = maxDisabled || vals[0] > max - max * 0.1
+  const isLeftOverlap = maxDisabled || values[0] > max - max * 0.1
 
-  useEffect(() => {
-    onChange(vals)
-  }, [vals])
+  const refRequest = useRef<number>(0)
+
 
   const onChangeValue = (val: number, index: number) => {
-    // console.log('ttt', { val, index })
-    // onChange(val, index)
-    const update = [...vals]
+    const update = [...values]
     update[index] = val
-    setVals(update)
+    onChange(update)
   }
+
+  const onChangeValMin = useCallback(debounce((val: number) => {
+    cancelAnimationFrame(refRequest.current)
+    refRequest.current = requestAnimationFrame(() => {
+      if (values[1]) {
+        val = Math.min(val, values[1] - distance)
+      }
+      onChangeValue(+val, 0)
+    })
+  }, 10), [onChangeValue])
+
+  const onChangeValMax = useCallback(debounce((val: number) => {
+    cancelAnimationFrame(refRequest.current)
+    refRequest.current = requestAnimationFrame(() => {
+      if (values[0]) {
+        val = Math.max(val, values[0] + distance)
+      }
+      onChangeValue(+val, 1)
+    })
+  }, 10), [onChangeValue])
+
 
   return (
     <div
@@ -64,13 +83,9 @@ const MultiRangeSliderHoriz = ({
             disabled={minDisabled}
             type='range'
             max={max}
-            value={vals[0]}
+            value={values[0]}
             onChange={(event) => {
-              let val = +event.target.value
-              if (vals[1]) {
-                val = Math.min(val, vals[1] - distance)
-              }
-              onChangeValue(+val, 0)
+              onChangeValMin(+event.target.value)
             }}
           />
 
@@ -85,13 +100,9 @@ const MultiRangeSliderHoriz = ({
             disabled={maxDisabled}
             type='range'
             max={max}
-            value={vals[1]}
+            value={values[1]}
             onChange={(event) => {
-              let val = +event.target.value
-              if (vals[0]) {
-                val = Math.max(val, vals[0] + distance)
-              }
-              onChangeValue(+val, 1)
+              onChangeValMax(+event.target.value)
             }}
           />
         </div>
@@ -103,7 +114,7 @@ const MultiRangeSliderHoriz = ({
             ${showThumbIndex[0] === 1 ? 'disabled' : ''}
           `}
           style={{
-            left: 9 + 150 / 20 * vals[0] / 10
+            left: 9 + 150 / 20 * values[0] / 10
           }}
         />}
         {showThumbIndex[1] > 0 && <div
@@ -112,7 +123,7 @@ const MultiRangeSliderHoriz = ({
             ${showThumbIndex[1] === 1 ? 'disabled' : ''}
           `}
           style={{
-            left: 9 + 150 / 20 * vals[1] / 10
+            left: 9 + 150 / 20 * values[1] / 10
           }}
         />}
       </div>}

@@ -164,9 +164,9 @@ const ReactionComparison = () => {
   }
   // call when click prev step
   const onStepChange = (step: number) => {
-    console.log('===onStepChange===', { step })
+    // console.log('===onStepChange===', { step })
     const nextStep = getNextStep(step)
-    console.log({ curStep, nextStep })
+    // console.log({ curStep, nextStep })
     if (nextStep === undefined) return
     if (curStep === nextStep) return
     // Tutorial-Highlight
@@ -302,9 +302,9 @@ const ReactionComparison = () => {
                   includeAxis={false}
                   tempLine={false}
                   timingState={canvaTimeState}
-                  onEndPlay={() => {
-                    console.log('&&& timer ended &&& ')
-                  }}
+                  // onEndPlay={() => {
+                  //   console.log('&&& timer ended &&& ')
+                  // }}
                   showOnlyView={true}
                   order={0}
                   canvaTimeSliderC={canvaTimeSliderC}
@@ -383,9 +383,9 @@ const ReactionComparison = () => {
                   includeAxis={false}
                   tempLine={false}
                   timingState={canvaTimeState}
-                  onEndPlay={() => {
-                    console.log('&&& timer ended &&& ')
-                  }}
+                  // onEndPlay={() => {
+                  //   console.log('&&& timer ended &&& ')
+                  // }}
                   showOnlyView={true}
                   order={1}
                   canvaTimeSliderC={canvaTimeSliderC}
@@ -463,9 +463,9 @@ const ReactionComparison = () => {
                   includeAxis={false}
                   tempLine={false}
                   timingState={canvaTimeState}
-                  onEndPlay={() => {
-                    console.log('&&& timer ended &&& ')
-                  }}
+                  // onEndPlay={() => {
+                  //   console.log('&&& timer ended &&& ')
+                  // }}
                   showOnlyView={true}
                   order={2}
                   canvaTimeSliderC={canvaTimeSliderC}

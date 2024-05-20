@@ -1,5 +1,5 @@
 import styles from './SliderVert.module.scss'
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import MultiRangeSliderVert from "../MutiRangeSlider/MultiRangeSliderVert"
 
 interface SliderVert {
@@ -11,6 +11,9 @@ interface SliderVert {
 }
 
 const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distance = 13, textVert }: SliderVert) => {
+
+  // const [vals, setVals] = useState(valuesC)
+
   const infoC = useMemo(() => {
     let showCount = 0, disabledCount = 0, activeIndex = 0
     showIndexC.forEach((item, index) => {
@@ -29,7 +32,7 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
     let update: number[] = []
     update = valuesC
     return update
-    
+
     // let update: number[] = []
     // if (showIndexC[0] > 0 && showIndexC[1] > 0) {
     //   // console.log('===getValueC===', valuesC)
@@ -75,7 +78,7 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
 
   const [textC, setTextC] = useState<number>()
   useEffect(() => {
-    setTextC(valuesC[infoC.activeIndex]/100)
+    setTextC(valuesC[infoC.activeIndex] / 100)
   }, [showIndexC])
 
   // const textC = useMemo(() => {
@@ -85,6 +88,49 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
   //   }
   //   return res / 100
   // }, [getValueC])
+
+  const [decreaseCounter, setDecreaseCounter] = useState(0)
+  const [increaseCounter, setIncreaseCounter] = useState(0)
+  const refValue = useRef<number>(0)
+  const refIncrement = useRef<NodeJS.Timer>()
+
+  const handleUpDownBtn = (step: number) => {
+    // console.log('value changning - ', { step, decreaseCounter })
+    // setValue(v => v + step)
+    if (step < 0) {
+      setDecreaseCounter(v => v + 1)
+    } else if (step > 0) {
+      setIncreaseCounter(v => v + 1)
+    }
+
+    // const update = [...valuesC]
+    // update[infoC.activeIndex] += step
+    // handleChangeAB(update)
+  }
+  const startIncrement = (step: number) => {
+    handleUpDownBtn(step)
+    refIncrement.current = setInterval(() => {
+      handleUpDownBtn(step)
+    }, 100)
+  }
+  const stopIncrement = () => {
+    clearInterval(refIncrement.current)
+    refIncrement.current = undefined
+  }
+  useEffect(() => {
+    if (decreaseCounter <= 0) return
+    // console.log('value changning - ', { refValue: refValue.current })
+    const update = [...valuesC]
+    update[infoC.activeIndex]--
+    handleChangeAB(update)
+  }, [decreaseCounter])
+  useEffect(() => {
+    if (increaseCounter <= 0) return
+    // console.log('value changning - ', { refValue: refValue.current })
+    const update = [...valuesC]
+    update[infoC.activeIndex]++
+    handleChangeAB(update)
+  }, [increaseCounter])
 
   return <div className={styles.container}>
     <div className={styles.sliceVertical}>
@@ -107,6 +153,33 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
     <div className={styles.textVert}>
       <p>{`${textVert || '[A]'}`}</p>
       <p className='txt-red'>{textC?.toFixed(2)} M</p>
+    </div>
+    <div className={styles.vertBtnGroup}>
+      {/* <input
+            type="number"
+            value={value}
+            min={0}
+            max={100}
+            step={1}
+            onChange={(e) => setValue(Number(e.target.value))}
+            style={{ paddingRight: '24px', boxSizing: 'border-box' }}
+        /> */}
+      <button
+        className={styles.btnUp}
+        onMouseDown={() => startIncrement(1)}
+        onMouseUp={() => stopIncrement()}
+        onMouseLeave={() => stopIncrement()}
+        onTouchStart={() => startIncrement(1)}
+        onTouchEnd={() => stopIncrement()}
+      >▲</button>
+      <button
+        className={styles.btnDown}
+        onMouseDown={() => startIncrement(-1)}
+        onMouseUp={() => stopIncrement()}
+        onMouseLeave={() => stopIncrement()}
+        onTouchStart={() => startIncrement(-1)}
+        onTouchEnd={() => stopIncrement()}
+      >▼</button>
     </div>
   </div>
 }

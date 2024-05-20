@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import classnames from 'classnames'
 import './slider.css'
+import { debounce } from '../../helper/functions'
 
 interface MultiRangeSliderProps {
   max: number
@@ -23,7 +24,7 @@ const MultiRangeSliderVert = ({
   // const valLeft = values[0]
   // const valRight = values[1]
 
-  const [vals, setVals] = useState(values)
+  // const [vals, setVals] = useState(values)
 
   // const [minDisabled, setMinDisabled] = useState<boolean>(false);
   // const [maxDisabled, setMaxDisabled] = useState<boolean>(false);
@@ -46,19 +47,53 @@ const MultiRangeSliderVert = ({
 
   const minDisabled = showThumbIndex[0] === 1 ? true : false
   const maxDisabled = showThumbIndex[1] === 1 ? true : false
-  const isLeftOverlap = maxDisabled || vals[0] > maxRange - 10
+  const isLeftOverlap = maxDisabled || values[0] > maxRange - 10
 
-  useEffect(() => {
-    onChange(vals)
-  }, [vals])
+  const refRequest = useRef<number>(0)
+
+  // useEffect(() => {
+  // }, [vals])
 
   const onChangeValue = (value: number[]) => {
     // console.log('ttt', { value, vals, showThumbIndex, distance })
     // onChange(val, index)
     const update = [...value]
 
-    setVals(update)
+    // setVals(update)
+    onChange(update)
   }
+
+  const onChangeValMin = useCallback(debounce((val: number) => {
+    cancelAnimationFrame(refRequest.current)
+    refRequest.current = requestAnimationFrame(() => {
+
+      const update = [...values]
+      update[0] = val
+      if (update[0] <= minVal + distance) {
+        update[0] = minVal + distance
+      }
+      if (update[1] > update[0] - distance) {
+        update[1] = update[0] - distance
+      }
+      onChangeValue(update)
+    })
+  }, 10), [onChangeValue])
+
+  const onChangeValMax = useCallback(debounce((val: number) => {
+    cancelAnimationFrame(refRequest.current)
+    refRequest.current = requestAnimationFrame(() => {
+      const update = [...values]
+      update[1] = val
+      if (update[1] >= update[0] - distance) {
+        update[1] = update[0] - distance
+      }
+      if (update[1] <= minVal) {
+        update[1] = minVal
+      }
+      onChangeValue(update)
+    })
+  }, 10), [onChangeValue])
+
 
   return (
     <div
@@ -82,19 +117,11 @@ const MultiRangeSliderVert = ({
             disabled={minDisabled}
             type='range'
             max={maxRange}
-            value={vals[0]}
+            value={values[0]}
             onChange={(event) => {
               event.preventDefault()
               event.stopPropagation()
-              const update = [...vals]
-              update[0] = +event.target.value
-              if (update[0] <= minVal + distance) {
-                update[0] = minVal + distance
-              }
-              if (update[1] > update[0] - distance) {
-                update[1] = update[0] - distance
-              }
-              onChangeValue(update)
+              onChangeValMin(+event.target.value)
             }}
           />
           <input
@@ -108,19 +135,11 @@ const MultiRangeSliderVert = ({
             disabled={maxDisabled}
             type='range'
             max={maxRange}
-            value={vals[1]}
+            value={values[1]}
             onChange={(event) => {
               event.preventDefault()
               event.stopPropagation()
-              const update = [...vals]
-              update[1] = +event.target.value
-              if (update[1] >= update[0] - distance) {
-                update[1] = update[0] - distance
-              }
-              if (update[1] <= minVal) {
-                update[1] = minVal
-              }
-              onChangeValue(update)
+              onChangeValMax(+event.target.value)
             }}
           />
         </div>
@@ -132,7 +151,7 @@ const MultiRangeSliderVert = ({
             ${showThumbIndex[0] === 1 ? 'disabled' : ''}
           `}
           style={{
-            left: 8 + 150 / 100 * vals[0]
+            left: 8 + 150 / 100 * values[0]
           }}
         />}
         {showThumbIndex[1] > 0 && <div
@@ -141,7 +160,7 @@ const MultiRangeSliderVert = ({
             ${showThumbIndex[1] === 1 ? 'disabled' : ''}
           `}
           style={{
-            left: 8 + 150 / 100 * vals[1]
+            left: 8 + 150 / 100 * values[1]
           }}
         />}
       </div>

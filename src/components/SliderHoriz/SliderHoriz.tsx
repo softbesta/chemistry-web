@@ -1,5 +1,5 @@
 import styles from './SliderHoriz.module.scss'
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import MultiRangeSliderHoriz from "../MutiRangeSlider/MultiRangeSliderHoriz"
 import CanvasSlider from '../Slider'
 
@@ -49,6 +49,23 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25 }: Sli
     setTextT(valuesT[infoT.activeIndex])
   }, [showThumbIndex])
 
+  const [value, setValue] = useState(0)
+  const refIncrement = useRef<NodeJS.Timer>()
+
+  const handleUpDownBtn = (step: number) => {
+    setValue(v => v + step)
+  }
+  const startIncrement = (step: number) => {
+    handleUpDownBtn(step)
+    refIncrement.current = setInterval(() => {
+      handleUpDownBtn(step)
+    }, 100)
+  }
+  const stopIncrement=() => {
+    clearInterval(refIncrement.current)
+    refIncrement.current = undefined
+  }
+
   // @ts-ignore
   const isMobile = window.mobileCheck()
   return (
@@ -80,6 +97,34 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25 }: Sli
       </div>
       <div className={styles.textHoriz}>
         <p>{`Time:`} <span className='txt-red'>{textT?.toFixed(1)} s</span></p>
+      </div>
+      <div className={styles.horizBtnGroup}>
+        {/* <input
+            type="number"
+            value={value}
+            min={0}
+            max={100}
+            step={1}
+            onChange={(e) => setValue(Number(e.target.value))}
+            style={{ paddingRight: '24px', boxSizing: 'border-box' }}
+        /> */}
+        <button
+          className={styles.btnUp}
+          onMouseDown={() => startIncrement(1)}
+          onMouseUp={() => stopIncrement()}
+          onMouseLeave={() => stopIncrement()}
+          onTouchStart={() => startIncrement(1)}
+          onTouchEnd={() => stopIncrement()}
+        >◀</button>
+        <button
+          className={styles.btnDown}
+          onMouseDown={() => startIncrement(-1)}
+          onMouseUp={() => stopIncrement()}
+          onMouseLeave={() => stopIncrement()}
+          onTouchStart={() => startIncrement(-1)}
+          onTouchEnd={() => stopIncrement()}
+        >▶</button>
+        {/* {value} */}
       </div>
     </div>
   )

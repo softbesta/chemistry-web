@@ -112,13 +112,13 @@ export const ChooseMenuSel = ({ selectedIndex = 0, menuItems = chooseMenuItems, 
   const [isActive, setIsActive] = useState(false)
 
   useEffect(() => {
-    console.log('===ChooseMenu.useEffect===')
+    // console.log('===ChooseMenu.useEffect===')
     // console.log({ isEnable })
     if (!isEnable) setIsActive(false)
   }, [isEnable])
 
   const toogleShowChapterPanel = () => {
-    console.log("===ChooseMenu.toogleShowChapterPanel===", { isEnable })
+    // console.log("===ChooseMenu.toogleShowChapterPanel===", { isEnable })
     if (!isEnable) {
       setIsActive(false)
       return
@@ -126,7 +126,7 @@ export const ChooseMenuSel = ({ selectedIndex = 0, menuItems = chooseMenuItems, 
     setIsActive(!isActive)
   }
   const handleItemClick = (index: number) => {
-    console.log('ChooseMenu.handleItemClick', { index })
+    // console.log('ChooseMenu.handleItemClick', { index })
     onClickItem?.(index)
     toogleShowChapterPanel()
   }

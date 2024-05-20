@@ -17,7 +17,7 @@ interface MathExpFirstProps {
 
 const MathExpFirst = ({ values, blanks, txtRed, className = '' }: MathExpFirstProps) => {
   const [isBlank, setIsBlank] = useState(false)
-  console.log({ blanks })
+  // console.log({ blanks })
   const width = 240
 
   return <div className={styles.mathContainer}>

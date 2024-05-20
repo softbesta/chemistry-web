@@ -166,9 +166,9 @@ const ChartTime = ({
           includeAxis={true}
           tempLine={canvaTimeState > 0}
           timingState={canvaTimeState}
-          onEndPlay={() => {
-            console.log('&&& timer ended &&& ')
-          }}
+          // onEndPlay={() => {
+          //   console.log('&&& timer ended &&& ')
+          // }}
           canvaTimeSliderC={canvaTimeSliderC}
           canvaTimeSliderT={canvaTimeSliderT}
           order={order}

@@ -91,7 +91,7 @@ const ReactionKinetics = () => {
   // *** Tutorial-ACTIONS  - curStep changes
   const curActions = tutorials[curStep]?.actions as any
   useEffect(() => {
-    log_Kinetics && console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep, curActions })
+    // log_Kinetics && console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep, curActions })
     // log_Kinetics && console.log('curActions: ', { curActions, curStep })
     if (curActions) {
       if (curActions?.canvaTimeState !== undefined) {
@@ -235,7 +235,7 @@ const ReactionKinetics = () => {
   }
   // call when click prev step
   const onStepChange = (step: number) => {
-    log_Kinetics && console.log('===onStepChange===', { step })
+    // log_Kinetics && console.log('===onStepChange===', { step })
     const nextStep = getNextStep(step)
     if (nextStep === undefined) return
     if (curStep === nextStep) return
@@ -245,7 +245,7 @@ const ReactionKinetics = () => {
       highlightElement(tutorials[nextStep].highlight)
     }
 
-    log_Kinetics && console.log({ curStep, nextStep })
+    // log_Kinetics && console.log({ curStep, nextStep })
     setCurStep(nextStep)
   }
   // remove/init highlighted elements when page opens
@@ -351,7 +351,7 @@ const ReactionKinetics = () => {
   const maxShakingCount = 7
 
   const onCatalystItemShake = (shakingCount: number, itemIndex: number) => {
-    log_Kinetics && console.log('===onCatalystItemShake===', { shakingCount, itemIndex, curCatShakingOrderIdx, catShakingOrder })
+    // log_Kinetics && console.log('===onCatalystItemShake===', { shakingCount, itemIndex, curCatShakingOrderIdx, catShakingOrder })
 
     // const update = [...gasCounts]
     const update = [...gasCounts]
@@ -360,7 +360,7 @@ const ReactionKinetics = () => {
     }
     update[itemIndex + 2] += 1
     setGasCounts(update)
-    console.log({ update })
+    // console.log({ update })
     if (shakingCount >= maxShakingCount) {
       // // if (!shakedOrder.includes(itemIndex)) {
       // const restOrders = catShakingOrder.filter(s => s !== itemIndex)
@@ -376,7 +376,7 @@ const ReactionKinetics = () => {
     }
   }
   const onCatalystMenuItemClick = (index: number) => {
-    log_Kinetics && console.log('error --- 111', { index, catalystItemStates })
+    // log_Kinetics && console.log('error --- 111', { index, catalystItemStates })
 
     const others = [...catalystItemStates]
     others.splice(index, 1)
@@ -392,7 +392,7 @@ const ReactionKinetics = () => {
       index,
       ...restOrders.slice(curCatShakingOrderIdx),
     ]
-    log_Kinetics && console.log({ updatedOrder })
+    // log_Kinetics && console.log({ updatedOrder })
     setCatShakingOrder(updatedOrder)
     onStepChange(1)
   }
