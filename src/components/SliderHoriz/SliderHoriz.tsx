@@ -8,11 +8,13 @@ interface SliderHoriz {
   setValuesT: (val: number[]) => void
   showThumbIndex: number[]
   distance?: number
+  minValue?: number
+  maxRange?: number
 }
 
 const flexibleV = 10;
 
-const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25 }: SliderHoriz) => {
+const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minValue = 0, maxRange = 100 }: SliderHoriz) => {
   const infoT = useMemo(() => {
     let showCount = 0, disabledCount = 0, activeIndex = 0
     showThumbIndex.forEach((item, index) => {
@@ -30,17 +32,30 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25 }: Sli
   const getValueT = () => {
     let update: number[] = []
     update = valuesT
+    console.log({update})
     return update.map(item => item * flexibleV)
   }
 
   const handleChangeVal = (vals: number[]) => {
     // console.log('===handleChangeAB=== ', { vals, valuesT: valuesT })
-    let update: number[] = []
-    update = [...vals].map(item => item / flexibleV)
+    // let update: number[] = []
+    // update = [...vals].map(item => item / flexibleV)
+    // setValuesT(update)
+
+    
+    let valMin = vals[0]
+    let valMax = vals[1]
+
+    valMax = Math.max(valMax, valMin + distance)
+    valMax = Math.min(valMax, maxRange)
+
+    valMin = Math.min(valMin, valMax - distance)
+    valMin = Math.max(valMin, minValue)
+
+    const update = [valMin / flexibleV, valMax / flexibleV]
     setValuesT(update)
 
-    const txtT = update[infoT.activeIndex]
-    setTextT(txtT)
+    setTextT(update[infoT.activeIndex])
   }
 
   const [textT, setTextT] = useState<number>()
@@ -49,22 +64,41 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25 }: Sli
     setTextT(valuesT[infoT.activeIndex])
   }, [showThumbIndex])
 
-  const [value, setValue] = useState(0)
+  const [upCounter, setUpCounter] = useState(0)
+  const [downCounter, setDownCounter] = useState(0)
   const refIncrement = useRef<NodeJS.Timer>()
 
-  const handleUpDownBtn = (step: number) => {
-    setValue(v => v + step)
-  }
-  const startIncrement = (step: number) => {
-    handleUpDownBtn(step)
+  const startTimer = (isUp: number) => {
+    if (isUp > 0) {
+      setUpCounter(v => v + 1)
+    } else {
+      setDownCounter(v => v + 1)
+    }
     refIncrement.current = setInterval(() => {
-      handleUpDownBtn(step)
+      if (isUp > 0) {
+        setUpCounter(v => v + 1)
+      } else {
+        setDownCounter(v => v + 1)
+      }
     }, 100)
   }
-  const stopIncrement=() => {
+  const stopTimer=() => {
     clearInterval(refIncrement.current)
     refIncrement.current = undefined
   }
+  useEffect(() => {
+    if (upCounter <= 0) return
+    const update = [...valuesT]
+    update[infoT.activeIndex]++
+    handleChangeVal(update)
+  }, [upCounter])
+  useEffect(() => {
+    if (downCounter <= 0) return
+    const update = [...valuesT]
+    update[infoT.activeIndex]--
+    handleChangeVal(update)
+  }, [downCounter])
+
 
   // @ts-ignore
   const isMobile = window.mobileCheck()
@@ -76,7 +110,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25 }: Sli
           <div style={{ position: 'relative' }}>
             <div className={styles.sliderback}></div>
             <MultiRangeSliderHoriz
-              max={200}
+              max={maxRange}
               width={167}
               distance={distance}
               showThumbIndex={showThumbIndex}
@@ -110,19 +144,19 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25 }: Sli
         /> */}
         <button
           className={styles.btnUp}
-          onMouseDown={() => startIncrement(1)}
-          onMouseUp={() => stopIncrement()}
-          onMouseLeave={() => stopIncrement()}
-          onTouchStart={() => startIncrement(1)}
-          onTouchEnd={() => stopIncrement()}
+          onMouseDown={() => startTimer(1)}
+          onMouseUp={() => stopTimer()}
+          onMouseLeave={() => stopTimer()}
+          onTouchStart={() => startTimer(1)}
+          onTouchEnd={() => stopTimer()}
         >◀</button>
         <button
           className={styles.btnDown}
-          onMouseDown={() => startIncrement(-1)}
-          onMouseUp={() => stopIncrement()}
-          onMouseLeave={() => stopIncrement()}
-          onTouchStart={() => startIncrement(-1)}
-          onTouchEnd={() => stopIncrement()}
+          onMouseDown={() => startTimer(-1)}
+          onMouseUp={() => stopTimer()}
+          onMouseLeave={() => stopTimer()}
+          onTouchStart={() => startTimer(-1)}
+          onTouchEnd={() => stopTimer()}
         >▶</button>
         {/* {value} */}
       </div>

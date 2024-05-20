@@ -101,6 +101,7 @@ const ChartTime = ({
         canvaTimeSliderC={canvaTimeSliderC}
         textVert={textVert}
         minValue={14}
+        maxRange={100}
       />
 
       <SliderHoriz
@@ -108,6 +109,8 @@ const ChartTime = ({
         setValuesT={setValuesT}
         showThumbIndex={canvaTimeSliderT}
         distance={25}
+        minValue={0}
+        maxRange={200}
       />
       {/* {!isMobile ?
         <SliderHoriz
