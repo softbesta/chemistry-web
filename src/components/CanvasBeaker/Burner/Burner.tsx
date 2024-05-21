@@ -1,3 +1,4 @@
+import { SpinBtnHoriz } from "../../Buttons/SpinBtns"
 import { BurnerFire, BurnerPan } from "../../Images"
 import SliderHoriz from "../SliderHoriz/SliderHoriz"
 import styles from './Burner.module.scss'
@@ -15,6 +16,11 @@ const Burner = ({ isActive = false, fireVal, min, max, onChange }: BurnerProps) 
   const onChangeValue = (val: number) => {
     const update = val * (max - min) / 1000 + min
     onChange(update)
+  }
+  const handleSpinClick = (val: number) => {
+    let update = Math.min(value + val, 1000)
+    update = Math.max(update, 0)
+    onChangeValue(update)
   }
 
   const fireLevel = fireVal > 550 ? 3 : fireVal > 500 ? 2 : fireVal > 450 ? 1 : 0
@@ -85,6 +91,22 @@ const Burner = ({ isActive = false, fireVal, min, max, onChange }: BurnerProps) 
         setValues={(val) => onChangeValue(val[0])}
         showThumbIndex={showThumbIndex}
         hidePointer={true}
+      />
+    </div>
+    <div
+      id='tur_burnerSpinBtns'
+      style={{
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        backgroundColor: 'white',
+      }}
+    >
+      <SpinBtnHoriz
+        className={styles.burnerSpins}
+        isDisabled={!isActive}
+        onClickUp={() => handleSpinClick(125)}
+        onClickDown={() => handleSpinClick(-125)}
       />
     </div>
   </div>

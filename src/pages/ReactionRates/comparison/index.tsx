@@ -222,7 +222,7 @@ const ReactionComparison = () => {
   return <div className={styles.container}>
     <ChapterMenu />
 
-    <DndContext onDragEnd={handleDragEnd} onDragOver={handleDragOver}>
+    {/* <DndContext onDragEnd={handleDragEnd} onDragOver={handleDragOver}> */}
       <div className={styles.reactionDrawContainer}>
         <div className={styles.chartBeakerCol}>
           <EnergyProfile
@@ -549,7 +549,7 @@ const ReactionComparison = () => {
           isDisableNextButton={isDisableNextButton}
         />
       </div>
-    </DndContext >
+    {/* </DndContext > */}
     {isHighlight && <div className='overlay'></div>}
   </div >
 }

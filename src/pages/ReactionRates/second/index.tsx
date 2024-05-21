@@ -17,6 +17,8 @@ import ChartInA from "../../../components/ChartInA/ChartInA"
 import { convertExpToHtml } from "../../../helper/functions"
 import jQuery from 'jquery';
 import MathExpSecond from "./MathExp"
+import SpinSelection from "../../../components/Buttons/SpinSelection"
+import { spinValuesT } from "../constants"
 
 const ReactionSecond = () => {
   const {
@@ -39,6 +41,8 @@ const ReactionSecond = () => {
     setIsEnableChooseMenu,
     activeDotIndex,
     setActiveDotIndex,
+    spinValueT,
+    setSpinValueT,
   } = useAppData()
 
   const {
@@ -259,6 +263,11 @@ const ReactionSecond = () => {
         textVert={`[${sliderVertText[activeDotIndex]}]`}
         textHoriz={`Time`}
         order={2}
+      />
+      <SpinSelection
+        spinValues={spinValuesT}
+        value={spinValueT}
+        onChange={(val) => setSpinValueT(val)}
       />
       <ChartBar
         valuesC={valuesC}

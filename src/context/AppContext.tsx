@@ -89,6 +89,9 @@ interface IAppContext {
 
   dragTime: number,
   setDragTime: React.Dispatch<React.SetStateAction<number>>,
+
+  spinValueT: number,
+  setSpinValueT: React.Dispatch<React.SetStateAction<number>>,
 }
 
 const initialState = {
@@ -181,6 +184,8 @@ export const AppDataProvider = (props: any) => {
   const [dragTime, setDragTime] = useState(0)
   const scrollable = useRef<boolean>(false)
 
+  const [spinValueT, setSpinValueT] = useState<number>(0.5)
+
   // need update, don't use yet
   const updateStepPlay = (step: number) => {
     let update = curStep + step
@@ -249,6 +254,9 @@ export const AppDataProvider = (props: any) => {
         indicatorStep, setIndicatorStep,
         dragConcentration, setDragConcentration,
         dragTime, setDragTime,
+
+        spinValueT: spinValueT,
+        setSpinValueT: setSpinValueT,
       }}
     >
       {children}

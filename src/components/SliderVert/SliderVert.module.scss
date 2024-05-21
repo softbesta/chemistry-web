@@ -4,45 +4,11 @@
   z-index: 1;
 }
 
-.vertBtnGroup {
+.vertSpins {
   position: absolute;
   top: 0px;
   right: 252px;
   z-index: 1;
-
-  display: flex;
-  flex-direction: column;
-  width: 50px;
-  gap: 6px;
-
-  .btnUp {
-    height: 40px;
-    font-size: 30px;
-    border: none;
-    border-radius: 6px;
-    // background: #ddd;
-    background: transparent;
-    cursor: pointer;
-    user-select: none;
-    &:active {
-      // background: #bbb;
-      background: transparent;
-    }
-  }
-  .btnDown {
-    height: 40px;
-    font-size: 30px;
-    border: none;
-    border-radius: 6px;
-    // background: #ddd;
-    background: transparent;
-    cursor: pointer;
-    user-select: none;
-    &:active {
-      // background: #bbb;
-      background: transparent;
-    }
-  }
 }
 
 // A value slider

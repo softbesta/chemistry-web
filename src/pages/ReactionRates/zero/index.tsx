@@ -16,6 +16,8 @@ import ChapterMenu from "../../../layout/ChapterMenu"
 import { convertExpToHtml } from "../../../helper/functions"
 import jQuery from 'jquery';
 import MathExpZero from "./MathExp"
+import SpinSelection from "../../../components/Buttons/SpinSelection"
+import { spinValuesT } from "../constants"
 
 const ReactionZero = () => {
   const {
@@ -38,6 +40,8 @@ const ReactionZero = () => {
     setIsEnableChooseMenu,
     activeDotIndex,
     setActiveDotIndex,
+    spinValueT,
+    setSpinValueT,
   } = useAppData()
 
   const {
@@ -306,6 +310,11 @@ const ReactionZero = () => {
         textVert={`[${sliderVertText[activeDotIndex]}]`}
         textHoriz={`Time`}
         order={0}
+      />
+      <SpinSelection
+        spinValues={spinValuesT}
+        value={spinValueT}
+        onChange={(val) => setSpinValueT(val)}
       />
       <ChartBar
         valuesC={valuesC}

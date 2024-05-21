@@ -1,6 +1,8 @@
 import styles from './SliderVert.module.scss'
 import { useEffect, useMemo, useRef, useState } from "react"
 import MultiRangeSliderVert from "../MutiRangeSlider/MultiRangeSliderVert"
+import useAppData from '../../hooks/useAppData'
+import { SpinBtnVert } from '../Buttons/SpinBtns'
 
 interface SliderVert {
   valuesC: number[]
@@ -13,7 +15,7 @@ interface SliderVert {
 }
 
 const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distance = 13, minValue = 0, maxRange = 100, textVert }: SliderVert) => {
-
+  const { spinValueT } = useAppData()
   // const [vals, setVals] = useState(valuesC)
 
   const infoC = useMemo(() => {
@@ -57,44 +59,9 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
     setTextC(valuesC[infoC.activeIndex] / 100)
   }, [showIndexC])
 
-  const [upCounter, setUpCounter] = useState(0)
-  const [downCounter, setDownCounter] = useState(0)
-  const refSpinTimer = useRef<NodeJS.Timer>()
-
-  const startTimer = (isUp: number) => {
-    if (isUp > 0) {
-      setUpCounter(v => v + 1)
-    } else {
-      setDownCounter(v => v + 1)
-    }
-    refSpinTimer.current = setInterval(() => {
-      if (isUp > 0) {
-        setUpCounter(v => v + 1)
-      } else {
-        setDownCounter(v => v + 1)
-      }
-    }, 100)
-  }
-  const stopTimer = () => {
-    clearInterval(refSpinTimer.current)
-    refSpinTimer.current = undefined
-  }
-  useEffect(() => {
-    if (upCounter <= 0) return
-    const update = [...valuesC]
-    update[infoC.activeIndex]++
-    handleChangeAB(update)
-  }, [upCounter])
-  useEffect(() => {
-    if (downCounter <= 0) return
-    const update = [...valuesC]
-    update[infoC.activeIndex]--
-    handleChangeAB(update)
-  }, [downCounter])
-
   const handleBtnClick = (step: number) => {
     const update = [...valuesC]
-    update[infoC.activeIndex] -= step
+    update[infoC.activeIndex] -= step * 100
     handleChangeAB(update)
   }
 
@@ -120,32 +87,11 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
       <p>{`${textVert || '[A]'}`}</p>
       <p className='txt-red'>{textC?.toFixed(2)} M</p>
     </div>
-    <div className={styles.vertBtnGroup}>
-        <button
-          className={styles.btnUp}
-          onClick={() => handleBtnClick(5)}
-        >▲</button>
-        <button
-          className={styles.btnDown}
-          onClick={() => handleBtnClick(-5)}
-        >▼</button>
-      {/* <button
-        className={styles.btnUp}
-        onMouseDown={() => startTimer(1)}
-        onMouseUp={() => stopTimer()}
-        onMouseLeave={() => stopTimer()}
-        onTouchStart={() => startTimer(1)}
-        onTouchEnd={() => stopTimer()}
-      >▲</button>
-      <button
-        className={styles.btnDown}
-        onMouseDown={() => startTimer(-1)}
-        onMouseUp={() => stopTimer()}
-        onMouseLeave={() => stopTimer()}
-        onTouchStart={() => startTimer(-1)}
-        onTouchEnd={() => stopTimer()}
-      >▼</button> */}
-    </div>
+    <SpinBtnVert
+      className={styles.vertSpins}
+      onClickUp={() => handleBtnClick(-spinValueT)}
+      onClickDown={() => handleBtnClick(spinValueT)}
+    />
   </div>
 }
 export default SliderVert

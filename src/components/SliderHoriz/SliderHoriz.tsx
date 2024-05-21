@@ -2,6 +2,8 @@ import styles from './SliderHoriz.module.scss'
 import { useEffect, useMemo, useRef, useState } from "react"
 import MultiRangeSliderHoriz from "../MutiRangeSlider/MultiRangeSliderHoriz"
 import CanvasSlider from '../Slider'
+import useAppData from '../../hooks/useAppData'
+import { SpinBtnHoriz } from '../Buttons/SpinBtns'
 
 interface SliderHoriz {
   valuesT: number[]
@@ -15,6 +17,7 @@ interface SliderHoriz {
 const flexibleV = 10;
 
 const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minValue = 0, maxRange = 100 }: SliderHoriz) => {
+  const { spinValueT } = useAppData()
   const infoT = useMemo(() => {
     let showCount = 0, disabledCount = 0, activeIndex = 0
     showThumbIndex.forEach((item, index) => {
@@ -32,7 +35,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
   const getValueT = () => {
     let update: number[] = []
     update = valuesT
-    console.log({update})
+    console.log({ update })
     return update.map(item => item * flexibleV)
   }
 
@@ -42,8 +45,8 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
     // update = [...vals].map(item => item / flexibleV)
     // setValuesT(update)
 
-    console.log('ppp',{vals})
-    
+    console.log('ppp', { vals })
+
     let valMin = vals[0]
     let valMax = vals[1]
 
@@ -65,44 +68,9 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
     setTextT(valuesT[infoT.activeIndex])
   }, [showThumbIndex])
 
-  // const [upCounter, setUpCounter] = useState(0)
-  // const [downCounter, setDownCounter] = useState(0)
-  // const refIncrement = useRef<NodeJS.Timer>()
-
-  // const startTimer = (isUp: number) => {
-  //   if (isUp > 0) {
-  //     setUpCounter(v => v + 1)
-  //   } else {
-  //     setDownCounter(v => v + 1)
-  //   }
-  //   refIncrement.current = setInterval(() => {
-  //     if (isUp > 0) {
-  //       setUpCounter(v => v + 1)
-  //     } else {
-  //       setDownCounter(v => v + 1)
-  //     }
-  //   }, 100)
-  // }
-  // const stopTimer=() => {
-  //   clearInterval(refIncrement.current)
-  //   refIncrement.current = undefined
-  // }
-  // useEffect(() => {
-  //   if (upCounter <= 0) return
-  //   const update = getValueT()
-  //   update[infoT.activeIndex]++
-  //   handleChangeVal(update)
-  // }, [upCounter])
-  // useEffect(() => {
-  //   if (downCounter <= 0) return
-  //   const update = getValueT()
-  //   update[infoT.activeIndex]--
-  //   handleChangeVal(update)
-  // }, [downCounter])
-
   const handleBtnClick = (step: number) => {
     const update = getValueT()
-    update[infoT.activeIndex] -= step
+    update[infoT.activeIndex] -= step * 10
     handleChangeVal(update)
   }
 
@@ -138,32 +106,11 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
       <div className={styles.textHoriz}>
         <p>{`Time:`} <span className='txt-red'>{textT?.toFixed(1)} s</span></p>
       </div>
-      <div className={styles.horizBtnGroup}>
-        <button
-          className={styles.btnUp}
-          onClick={() => handleBtnClick(5)}
-        >◀</button>
-        <button
-          className={styles.btnDown}
-          onClick={() => handleBtnClick(-5)}
-        >▶</button>
-        {/* <button
-          className={styles.btnUp}
-          onMouseDown={() => startTimer(-1)}
-          onMouseUp={() => stopTimer()}
-          onMouseLeave={() => stopTimer()}
-          onTouchStart={() => startTimer(-1)}
-          onTouchEnd={() => stopTimer()}
-        >◀</button>
-        <button
-          className={styles.btnDown}
-          onMouseDown={() => startTimer(1)}
-          onMouseUp={() => stopTimer()}
-          onMouseLeave={() => stopTimer()}
-          onTouchStart={() => startTimer(1)}
-          onTouchEnd={() => stopTimer()}
-        >▶</button> */}
-      </div>
+      <SpinBtnHoriz
+        className={styles.horizSpins}
+        onClickUp={() => handleBtnClick(-spinValueT)}
+        onClickDown={() => handleBtnClick(spinValueT)}
+      />
     </div>
   )
 }

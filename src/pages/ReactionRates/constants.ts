@@ -19,3 +19,10 @@ export const dotKineticsColors = [
   [dotColors.D, dotColors.E, dotColors.F],
   [dotColors.G, dotColors.H, dotColors.I],
 ]
+
+export const spinValuesT = [
+  0.1,
+  0.2,
+  0.5,
+  1
+]

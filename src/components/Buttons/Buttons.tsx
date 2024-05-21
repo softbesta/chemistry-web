@@ -59,3 +59,4 @@ export default {
   NextButton,
   PlayButton,
 }
+

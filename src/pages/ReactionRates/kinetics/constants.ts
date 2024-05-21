@@ -255,7 +255,7 @@ export const tur_Hightlights = [
   // ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_chooseMenuIcon'],
 
   // 19   Let's try to produce C....
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_beakerShape', 'tur_burnerSlider'],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_beakerShape', 'tur_burnerSlider', 'tur_burnerSpinBtns'],
 
   // 20   Perfect! Successful collisions ...
   [],
@@ -273,7 +273,7 @@ export const tur_Hightlights = [
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_energyProfileChart'],
 
   // 25   Let's try to produce C ...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_beakerShape', 'tur_burnerSlider'],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_beakerShape', 'tur_burnerSlider', 'tur_burnerSpinBtns'],
 
   // 26   Perfect! Successful collisions ...
   [],
@@ -288,7 +288,7 @@ export const tur_Hightlights = [
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_energyProfileChart'],
 
   // 30   Let's try to produce ...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_beakerShape', 'tur_burnerSlider'],
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_beakerShape', 'tur_burnerSlider', 'tur_burnerSpinBtns'],
 
   // 31   Perfect! Successful collisions ...
   [],
@@ -333,7 +333,7 @@ export const stepsActions = [
     energyProfileChartState: 0,
     isDisableNextButton: false,
     initGasCounts: true,
-    valueFire: 420,
+    valueFire: 425,
     isDisableNext: false,
     // activeDotIndex: 0,
   },
@@ -584,7 +584,7 @@ export const stepsActions = [
     energyProfileChartState: 2,
     isDisableNextButton: true,
     initGasCounts: false,
-    valueFire: 420,
+    valueFire: 425,
   },
   // 20   Perfect! Successful collisions ...
   { // 20
@@ -624,7 +624,7 @@ export const stepsActions = [
     energyProfileChartState: 0,
     isDisableNextButton: false,
     initGasCounts: true,
-    valueFire: 420,
+    valueFire: 425,
   },
   // 23   Perfect! Now shake the ...
   { // 23
@@ -664,7 +664,7 @@ export const stepsActions = [
     energyProfileChartState: 2,
     isDisableNextButton: true,
     initGasCounts: false,
-    valueFire: 420,
+    valueFire: 425,
   },
   // 26   Perfect! Successful collisions ...
   { // 26
@@ -704,7 +704,7 @@ export const stepsActions = [
     energyProfileChartState: 0,
     isDisableNextButton: false,
     initGasCounts: true,
-    valueFire: 420,
+    valueFire: 425,
   },
   // 29   Look! The E__a__ was ...
   { // 29
@@ -718,7 +718,7 @@ export const stepsActions = [
     energyProfileChartState: 2,
     isDisableNextButton: false,
     initGasCounts: false,
-    valueFire: 420,
+    valueFire: 425,
   },
   // 30   Let's try to produce ...
   { // 30
@@ -732,7 +732,7 @@ export const stepsActions = [
     energyProfileChartState: 2,
     isDisableNextButton: true,
     initGasCounts: false,
-    valueFire: 420,
+    valueFire: 425,
   },
   // 31   Perfect! Successful collisions ...
   { // 31
