@@ -14,15 +14,20 @@ export const tur_Text: TurTextType = [
     `On the left, we have 3 beakers with a reaction of **A** to **B** taking place in each one, all paired to an ([A] vs t) graph. Each reaction will represent an order: zero order, first order, and second order.`,
   ],
   [ // 3
-    `<p style='font-size: 16px'>Let's try something out now! We know that plotting an \([A] vs t) graph for each order results in different types of line (straight line, curved line and more accentuated curve). When the reaction starts running, **try dragging the right equations and dropping them into the proper graphs**.</p>`,
+    // `<p style='font-size: 16px'>Let's try something out now! We know that plotting an \([A] vs t) graph for each order results in different types of line (straight line, curved line and more accentuated curve). When the reaction starts running, **try dragging the right equations and dropping them into the proper graphs**.</p>`,
+    `<p style='font-size: 19px'>We know that plotting an \([A] vs t) graph for each order results in different types of line (straight line, curved line and more accentuated curve).</p>`,
   ],
   [ // 4
-    `Tap next or press play on any of the graphs to start the reactions.`,
+    // `Tap next or press play on any of the graphs to start the reactions.`,
+    // `Let's see how long it takes you to guess!`,
+    `Play the button.`,
     `Let's see how long it takes you to guess!`,
   ],
   [ // 5
-    `Let's see how long it takes you to guess!`,
-    `**Drag and drop the equations to the graph of the corresponding order**.`,
+    // `Let's see how long it takes you to guess!`,
+    // `**Drag and drop the equations to the graph of the corresponding order**.`,
+    `Can you guess what order the reactions are in?`,
+    // `**Click the orders of reactions**.`,
   ],
   [ // 6
     `Awesome!`,

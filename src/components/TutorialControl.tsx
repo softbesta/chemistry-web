@@ -1,5 +1,6 @@
 import styles from './TutorialControl.module.scss'
 import ImgBeacky from '../assets/ReactionRates/reaction_boxes/beaky.png'
+import ImgTurtorialBk from '../assets/ReactionRates/reaction_boxes/turtorialbk.png'
 import Buttons from './Buttons/Buttons'
 import SpeechBubble from './SpeechBubble'
 
@@ -21,10 +22,18 @@ const TutorialControl = ({
       id='tur_tutorialText'
       className={styles.tutorialTextContainer}
     >
-      <SpeechBubble
+      {/* <SpeechBubble
         width={300}
         height={250}
-      />
+      /> */}
+      <div className={styles.tutorialBk}>
+        <img
+          // className={styles.tutorialBk}
+          src={ImgTurtorialBk}
+          width={350}
+          height={250}
+        />
+      </div>
       <div className={styles.tutorialText}>
         {turText?.map((val, index) => <div
           key={index}

@@ -92,6 +92,12 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
     handleChangeAB(update)
   }, [downCounter])
 
+  const handleBtnClick = (step: number) => {
+    const update = [...valuesC]
+    update[infoC.activeIndex] -= step
+    handleChangeAB(update)
+  }
+
   return <div className={styles.container}>
     <div className={styles.sliceVertical}>
       {
@@ -115,16 +121,15 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
       <p className='txt-red'>{textC?.toFixed(2)} M</p>
     </div>
     <div className={styles.vertBtnGroup}>
-      {/* <input
-            type="number"
-            value={value}
-            min={0}
-            max={100}
-            step={1}
-            onChange={(e) => setValue(Number(e.target.value))}
-            style={{ paddingRight: '24px', boxSizing: 'border-box' }}
-        /> */}
-      <button
+        <button
+          className={styles.btnUp}
+          onClick={() => handleBtnClick(5)}
+        >▲</button>
+        <button
+          className={styles.btnDown}
+          onClick={() => handleBtnClick(-5)}
+        >▼</button>
+      {/* <button
         className={styles.btnUp}
         onMouseDown={() => startTimer(1)}
         onMouseUp={() => stopTimer()}
@@ -139,7 +144,7 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
         onMouseLeave={() => stopTimer()}
         onTouchStart={() => startTimer(-1)}
         onTouchEnd={() => stopTimer()}
-      >▼</button>
+      >▼</button> */}
     </div>
   </div>
 }

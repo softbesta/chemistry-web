@@ -502,19 +502,25 @@ const ReactionComparison = () => {
         <div className={styles.orderListContainer}>
           {orderListItems.map((item, index) => {
             if (orderMatches[index] === 1) {
-              return (
-                <Draggable
-                  id={index + 1}
-                  key={index}
-                >
-                <OrderCardItem
-                  key={index}
-                    orderType={index}
-                    {...item}
-                    matches={orderMatches}
-                  />
-                </Draggable>
-              )
+              return <OrderCardItem
+                key={index}
+                orderType={index}
+                {...item}
+                matches={orderMatches}
+              />
+              // return (
+              //   <Draggable
+              //     id={index + 1}
+              //     key={index}
+              //   >
+              //   <OrderCardItem
+              //     key={index}
+              //       orderType={index}
+              //       {...item}
+              //       matches={orderMatches}
+              //     />
+              //   </Draggable>
+              // )
             } else {
               return (
                 <OrderCardItem
@@ -527,9 +533,9 @@ const ReactionComparison = () => {
             }
           })}
 
-          {isOrderItemMove && <HandDragOrderItem
+          {/* {isOrderItemMove && <HandDragOrderItem
             isAnimate={isOrderItemMove}
-          />}
+          />} */}
           {/* <button onClick={() => {
             console.log({ isOrderItemMove })
             console.log({ valuesC, valuesT })

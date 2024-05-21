@@ -65,41 +65,46 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
     setTextT(valuesT[infoT.activeIndex])
   }, [showThumbIndex])
 
-  const [upCounter, setUpCounter] = useState(0)
-  const [downCounter, setDownCounter] = useState(0)
-  const refIncrement = useRef<NodeJS.Timer>()
+  // const [upCounter, setUpCounter] = useState(0)
+  // const [downCounter, setDownCounter] = useState(0)
+  // const refIncrement = useRef<NodeJS.Timer>()
 
-  const startTimer = (isUp: number) => {
-    if (isUp > 0) {
-      setUpCounter(v => v + 1)
-    } else {
-      setDownCounter(v => v + 1)
-    }
-    refIncrement.current = setInterval(() => {
-      if (isUp > 0) {
-        setUpCounter(v => v + 1)
-      } else {
-        setDownCounter(v => v + 1)
-      }
-    }, 100)
-  }
-  const stopTimer=() => {
-    clearInterval(refIncrement.current)
-    refIncrement.current = undefined
-  }
-  useEffect(() => {
-    if (upCounter <= 0) return
-    const update = getValueT()
-    update[infoT.activeIndex]++
-    handleChangeVal(update)
-  }, [upCounter])
-  useEffect(() => {
-    if (downCounter <= 0) return
-    const update = getValueT()
-    update[infoT.activeIndex]--
-    handleChangeVal(update)
-  }, [downCounter])
+  // const startTimer = (isUp: number) => {
+  //   if (isUp > 0) {
+  //     setUpCounter(v => v + 1)
+  //   } else {
+  //     setDownCounter(v => v + 1)
+  //   }
+  //   refIncrement.current = setInterval(() => {
+  //     if (isUp > 0) {
+  //       setUpCounter(v => v + 1)
+  //     } else {
+  //       setDownCounter(v => v + 1)
+  //     }
+  //   }, 100)
+  // }
+  // const stopTimer=() => {
+  //   clearInterval(refIncrement.current)
+  //   refIncrement.current = undefined
+  // }
+  // useEffect(() => {
+  //   if (upCounter <= 0) return
+  //   const update = getValueT()
+  //   update[infoT.activeIndex]++
+  //   handleChangeVal(update)
+  // }, [upCounter])
+  // useEffect(() => {
+  //   if (downCounter <= 0) return
+  //   const update = getValueT()
+  //   update[infoT.activeIndex]--
+  //   handleChangeVal(update)
+  // }, [downCounter])
 
+  const handleBtnClick = (step: number) => {
+    const update = getValueT()
+    update[infoT.activeIndex] -= step
+    handleChangeVal(update)
+  }
 
   // @ts-ignore
   const isMobile = window.mobileCheck()
@@ -134,16 +139,15 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
         <p>{`Time:`} <span className='txt-red'>{textT?.toFixed(1)} s</span></p>
       </div>
       <div className={styles.horizBtnGroup}>
-        {/* <input
-            type="number"
-            value={value}
-            min={0}
-            max={100}
-            step={1}
-            onChange={(e) => setValue(Number(e.target.value))}
-            style={{ paddingRight: '24px', boxSizing: 'border-box' }}
-        /> */}
         <button
+          className={styles.btnUp}
+          onClick={() => handleBtnClick(5)}
+        >◀</button>
+        <button
+          className={styles.btnDown}
+          onClick={() => handleBtnClick(-5)}
+        >▶</button>
+        {/* <button
           className={styles.btnUp}
           onMouseDown={() => startTimer(-1)}
           onMouseUp={() => stopTimer()}
@@ -158,8 +162,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
           onMouseLeave={() => stopTimer()}
           onTouchStart={() => startTimer(1)}
           onTouchEnd={() => stopTimer()}
-        >▶</button>
-        {/* {value} */}
+        >▶</button> */}
       </div>
     </div>
   )

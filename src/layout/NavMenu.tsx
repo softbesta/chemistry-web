@@ -14,6 +14,7 @@ import IconCircle from '../assets/ReactionRates/navpanel/circle.png'
 import IconMessage from '../assets/ReactionRates/navpanel/message.png'
 import IconShare from '../assets/ReactionRates/navpanel/share.png'
 import IconInfomation from '../assets/ReactionRates/navpanel/information.png'
+import ImgPanelBk from '../assets/ReactionRates/navpanel/navpan.png'
 
 import { useLocation, useNavigate } from 'react-router-dom'
 import { MenuList, MenuOrder, routes } from '../constants'
@@ -88,11 +89,18 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
 
   return <div className={`${styles.navPanel} ${visible ? styles.active : ''}`}>
     
-    <PanelShape
+    <div className={styles.navPanBk}>
+      <img
+        src={ImgPanelBk}
+        width={405}
+        height={440}
+      />
+    </div>
+    {/* <PanelShape
       tabWidth={60}
       tabHeight={60}
       cornerRadius={20}
-    />
+    /> */}
     <div
       className={`${styles.closeIcon}`}
       onClick={() => onClose()}

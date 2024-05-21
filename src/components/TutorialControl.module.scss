@@ -5,6 +5,12 @@
     position: relative;
     background-color: transparent;
 
+    .tutorialBk {
+      position: absolute;
+      width: 300px;
+      height: 250px;
+    }
+
     .tutorialText {
       // background-color: rgb(232, 232, 232);
       padding: 15px 15px 20px 15px;

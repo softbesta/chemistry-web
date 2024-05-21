@@ -24,11 +24,14 @@
     font-size: 30px;
     border: none;
     border-radius: 6px;
-    background: #ddd;
+    // background: #ddd;
+    background: transparent;
     cursor: pointer;
     user-select: none;
+    color: black;
     &:active {
-      background: #bbb;
+      // background: #bbb;
+      background: transparent;
     }
   }
   .btnDown {
@@ -38,11 +41,14 @@
     font-size: 30px;
     border: none;
     border-radius: 6px;
-    background: #ddd;
+    // background: #ddd;
+    background: transparent;
     cursor: pointer;
     user-select: none;
+    color: black;
     &:active {
-      background: #bbb;
+      // background: #bbb;
+      background: transparent;
     }
   }
 }
