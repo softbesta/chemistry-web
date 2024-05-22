@@ -79,7 +79,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
   return (
     <div className={styles.container}>
       <div className={styles.sliceHorizontal}>
-        {
+        {/* {
           infoT.showCount > 0 &&
           <div style={{ position: 'relative' }}>
             <div className={styles.sliderback}></div>
@@ -91,7 +91,9 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
               values={getValueT()}
               onChange={(vals) => handleChangeVal(vals)}
             />
-            {/* <CanvasSlider
+          </div>
+        } */}
+        {/* <CanvasSlider
               direction='horizontal'
               max={200}
               width={150}
@@ -100,16 +102,38 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
               values={getValueT()}
               onChange={(val, index) => handleChangeVal(val)}
             /> */}
-          </div>
-        }
+
+
+        <div>
+          {showThumbIndex[0] > 0 && <div
+            className={`
+              h-slider-pointer 
+              ${showThumbIndex[0] === 1 ? 'disabled' : ''}
+            `}
+            style={{
+              left: 9 + 150 / 20 * getValueT()[0] / 10
+            }}
+          />}
+          {showThumbIndex[1] > 0 && <div
+            className={`
+              h-slider-pointer 
+              ${showThumbIndex[1] === 1 ? 'disabled' : ''}
+            `}
+            style={{
+              left: 9 + 150 / 20 * getValueT()[1] / 10
+            }}
+          />}
+        </div>
+
+        
       </div>
       <div className={styles.textHoriz}>
         <p>{`Time:`} <span className='txt-red'>{textT?.toFixed(1)} s</span></p>
       </div>
       <SpinBtnHoriz
         className={styles.horizSpins}
-        onClickUp={() => handleBtnClick(-spinValueT)}
-        onClickDown={() => handleBtnClick(spinValueT)}
+        onClickUp={() => handleBtnClick(-1)}
+        onClickDown={() => handleBtnClick(1)}
       />
     </div>
   )

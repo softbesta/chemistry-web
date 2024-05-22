@@ -164,7 +164,7 @@ input[type=range]:disabled::-webkit-slider-thumb {
 
 .v-slider-pointer {
   position: absolute;
-  top: 38px;
+  top: 23px;
   left: 8px;
   width: 3px;
   height: 20px;

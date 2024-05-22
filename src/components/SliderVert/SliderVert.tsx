@@ -67,7 +67,7 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
 
   return <div className={styles.container}>
     <div className={styles.sliceVertical}>
-      {
+      {/* {
         infoC.showCount > 0 &&
         <div style={{ position: 'relative' }}>
           <div className={styles.sliderback}></div>
@@ -81,7 +81,32 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
             onChange={(vals) => handleChangeAB(vals)}
           />
         </div>
-      }
+      } */}
+
+      <div className='v-slider-container' style={{ width: 167 }}>
+        <div style={{ position: 'relative'}}>
+          {showIndexC[0] > 0 && <div
+            className={`
+            v-slider-pointer 
+            ${showIndexC[0] === 1 ? 'disabled' : ''}
+          `}
+            style={{
+              left: 8 + 150 / 100 * getValueC()[0]
+            }}
+          />}
+          {showIndexC[1] > 0 && <div
+            className={`
+            v-slider-pointer 
+            ${showIndexC[1] === 1 ? 'disabled' : ''}
+          `}
+            style={{
+              left: 8 + 150 / 100 * getValueC()[1]
+            }}
+          />}
+        </div>
+      </div>
+
+
     </div>
     <div className={styles.textVert}>
       <p>{`${textVert || '[A]'}`}</p>
@@ -89,8 +114,8 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
     </div>
     <SpinBtnVert
       className={styles.vertSpins}
-      onClickUp={() => handleBtnClick(-spinValueT)}
-      onClickDown={() => handleBtnClick(spinValueT)}
+      onClickUp={() => handleBtnClick(-0.1)}
+      onClickDown={() => handleBtnClick(0.1)}
     />
   </div>
 }

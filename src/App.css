@@ -44,7 +44,7 @@
   }
 }
 
-@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+/* @media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
   html {
     overflow: hidden;
   }
@@ -59,4 +59,4 @@
     left: 0;
     padding-right: 60px;
   }
-}
+} */

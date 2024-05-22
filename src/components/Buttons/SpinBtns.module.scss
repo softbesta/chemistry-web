@@ -4,7 +4,7 @@
   width: 86px;
 
   .btnUp {
-    width: calc(50% - 3px);
+    width: calc(35% - 3px);
     height: 50px;
     line-height: 50px;
     font-size: 30px;
@@ -27,7 +27,7 @@
   }
 
   .btnDown {
-    width: calc(50% - 3px);
+    width: calc(35% - 3px);
     height: 50px;
     line-height: 50px;
     font-size: 30px;
@@ -53,11 +53,12 @@
 .vertBtnGroup {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 50px;
   gap: 6px;
 
   .btnUp {
-    height: 40px;
+    height: calc(35% - 3px);
     font-size: 30px;
     border: none;
     border-radius: 6px;
@@ -74,7 +75,7 @@
   }
 
   .btnDown {
-    height: 40px;
+    height: calc(35% - 3px);
     font-size: 30px;
     border: none;
     border-radius: 6px;

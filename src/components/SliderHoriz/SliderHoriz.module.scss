@@ -10,8 +10,9 @@
 
 .horizSpins {
   position: absolute;
-  top: 35px;
+  top: -8px;
   right: 0px;
+  width: 212px;
   z-index: 1;
 }
 
@@ -109,8 +110,8 @@
 
 .textHoriz {
   position: absolute;
-  // top: 250px;
-  right: 105px;
+  top: 6px;
+  right: 67px;
   font-weight: 600;
 
   p {
