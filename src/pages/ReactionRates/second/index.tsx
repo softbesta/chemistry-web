@@ -264,11 +264,11 @@ const ReactionSecond = () => {
         textHoriz={`Time`}
         order={2}
       />
-      <SpinSelection
+      {/* <SpinSelection
         spinValues={spinValuesT}
         value={spinValueT}
         onChange={(val) => setSpinValueT(val)}
-      />
+      /> */}
       <ChartBar
         valuesC={valuesC}
         valuesT={valuesT}
