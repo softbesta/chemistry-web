@@ -1,4 +1,4 @@
-import ReactSlider from "react-slider"
+// import ReactSlider from "react-slider"
 import styles from './SliderHoriz.module.scss'
 import { useMemo } from "react"
 
@@ -77,7 +77,7 @@ const SliderHoriz111 = ({ className, width, values, setValues, showThumbIndex }:
   >
     <div className={styles.sliceHorizontalBar} />
     <div className={styles.sliceHorizontal}>
-      {infoT.showCount > 0 && <ReactSlider
+      {/* {infoT.showCount > 0 && <ReactSlider
         className={styles['horizontal-slider']}
 
         thumbClassName={styles['example-thumb']}
@@ -106,7 +106,7 @@ const SliderHoriz111 = ({ className, width, values, setValues, showThumbIndex }:
         }}
       // disabled
       // renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
-      />}
+      />} */}
     </div>
     <div className={styles.textHoriz}>
       <p>{`Time:`} <span className='txt-red'>{textT?.toFixed(1)} s</span></p>

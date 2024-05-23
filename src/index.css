@@ -41,12 +41,12 @@ code {
 }
 
 .blankMath {
-  color: white;
+  /* color: white;
   border: 1px solid black;
   border-style: dashed;
   min-width: 40px;
+  min-height: 28px; */
   /* min-height: 25px;
   top: 5px;
   position: relative; */
-  min-height: 28px;
 }

@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import classnames from 'classnames'
 import './slider.css'
 import { debounce } from '../../helper/functions'
 
@@ -106,11 +105,11 @@ const MultiRangeSliderVert = ({
       <div className='v-slider-thumbs'>
         <div className='v-slider-inputs'>
           <input
-            className={classnames(
-              'v-slider-thumb thumb--zindex-3',
-              { 'thumb--zindex-5': isLeftOverlap },
-              { 'v-slider-thumb-hidden': showThumbIndex[0] === 0 },
-            )}
+            className={`
+              v-slider-thumb thumb--zindex-3 
+              ${isLeftOverlap ? 'thumb--zindex-5' : ''} 
+              ${showThumbIndex[0] === 0 ? 'v-slider-thumb-hidden' : ''}
+            `}
             style={{
               ...(width ? { width } : { width: '100%' })
             }}
@@ -125,10 +124,10 @@ const MultiRangeSliderVert = ({
             }}
           />
           <input
-            className={classnames(
-              'v-slider-thumb thumb--zindex-4',
-              { 'thumb-hidden': showThumbIndex[1] === 0 },
-            )}
+            className={`
+              v-slider-thumb thumb--zindex-4 
+              ${showThumbIndex[1] === 0 ? 'thumb-hidden' : ''} 
+            `}
             style={{
               ...(width ? { width } : { width: '100%' })
             }}

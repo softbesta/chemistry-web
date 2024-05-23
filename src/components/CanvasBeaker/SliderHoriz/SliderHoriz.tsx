@@ -1,4 +1,4 @@
-import ReactSlider from "react-slider"
+// import ReactSlider from "react-slider"
 import styles from './SliderHoriz.module.scss'
 import { useMemo, useState } from "react"
 import MultiRangeSliderHoriz from "../../MutiRangeSlider/MultiRangeSliderHoriz"

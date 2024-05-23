@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-import classnames from 'classnames'
 import './slider.css'
 import { debounce } from '../../helper/functions'
 
@@ -72,11 +71,11 @@ const MultiRangeSliderHoriz = ({
       <div className='h-slider-thumbs'>
         <div className='h-slider-inputs'>
           <input
-            className={classnames(
-              'h-slider-thumb thumb--zindex-3',
-              { 'thumb--zindex-5': isLeftOverlap },
-              { 'h-slider-thumb-hidden': showThumbIndex[0] === 0 },
-            )}
+            className={`
+              h-slider-thumb thumb--zindex-3 
+              ${isLeftOverlap ? 'thumb--zindex-5' : ''} 
+              ${showThumbIndex[0] === 0 ? 'h-slider-thumb-hidden' : ''}
+            `}
             style={{
               ...(width ? { width } : { width: '100%' })
             }}
@@ -90,10 +89,10 @@ const MultiRangeSliderHoriz = ({
           />
 
           <input
-            className={classnames(
-              'h-slider-thumb thumb--zindex-4',
-              { 'thumb-hidden': showThumbIndex[1] === 0 },
-            )}
+            className={`
+              h-slider-thumb thumb--zindex-4 
+              ${showThumbIndex[1] === 0 ? 'thumb-hidden' : ''} 
+            `}
             style={{
               ...(width ? { width } : { width: '100%' })
             }}

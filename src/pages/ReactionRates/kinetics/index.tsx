@@ -37,7 +37,6 @@ import EnergyProfileRateChart from "../../../components/EnergyProfileRateChart/E
 import { dotKineticsColors } from "../constants"
 import { Mask } from '@reactour/mask'
 import { RectResult } from '@reactour/utils';
-import jQuery from 'jquery';
 import MathExpKinetics from "./MathExp"
 
 const log_Kinetics = false
