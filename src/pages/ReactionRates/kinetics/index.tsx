@@ -39,7 +39,7 @@ import { Mask } from '@reactour/mask'
 import { RectResult } from '@reactour/utils';
 import MathExpKinetics from "./MathExp"
 
-const log_Kinetics = false
+const log_Kinetics = true
 
 const ReactionKinetics = () => {
   const {

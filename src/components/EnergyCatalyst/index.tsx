@@ -101,6 +101,7 @@ export const EnergyCatalystContainer = ({
   const onItemDragStart = (index: number) => {
     // log_EnergyCatalyst && console.log('===handleMouseUp=== drag start')
     setDragIndex(index)
+    shakings.current++
     startTimer()
   }
   const onItemDragEnd = () => {
@@ -126,6 +127,8 @@ export const EnergyCatalystContainer = ({
   const [isDroppingMultiple, setIsDroppingMultiple] = useState<boolean>(false)
   const onMovableItemClick = async () => {
     // log_EnergyCatalyst && console.log('===onItemClick===', { shakingCount })
+    // shakings.current++
+    setCurShakingCount(v => v + 1)
 
     const currentTime = new Date().getTime();
     setLastClickTime(currentTime);
@@ -234,6 +237,7 @@ export const EnergyCatalystContainer = ({
         position={position}
         onClick={() => onMovableItemClick()}
         onDragStart={() => onItemDragStart(activeCatIdx)}
+        // onDragStart={() => {}}
         setDragOffset={setDragOffset}
       />
       <div className={styles.textShake}>
