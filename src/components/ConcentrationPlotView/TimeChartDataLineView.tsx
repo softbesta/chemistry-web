@@ -80,22 +80,38 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
   
   const [isDrag, startDrag] = useState(false)
   const [x, setX] = useState(0)
-
+  // @ts-ignore
+  const isMobile = window.mobileCheck()
   React.useEffect(() => {
     const ctx = canvas?.current?.getContext('2d');
     if (ctx) {
-      ctx.canvas.addEventListener('mousedown', function (event: any) {
-        setX(event.offsetX)
-        startDrag(true)
-      });
-
-      ctx.canvas.addEventListener('mouseup', function (event: any) {
-        startDrag(false)
-      });
-
-      ctx.canvas.addEventListener('touchmove', function (event: any) {
-        setX(event.offsetX)
-      });
+      if (isMobile) {
+        ctx.canvas.addEventListener('mousedown', function (event: any) {
+          setX(event.offsetX)
+          startDrag(true)
+        });
+  
+        ctx.canvas.addEventListener('mouseup', function (event: any) {
+          startDrag(false)
+        });
+  
+        ctx.canvas.addEventListener('mousemove', function (event: any) {
+          setX(event.offsetX)
+        });
+      } else {
+        ctx.canvas.addEventListener('touchstart', function (event: any) {
+          setX(event.offsetX)
+          startDrag(true)
+        });
+  
+        ctx.canvas.addEventListener('touchend', function (event: any) {
+          startDrag(false)
+        });
+  
+        ctx.canvas.addEventListener('touchmove', function (event: any) {
+          setX(event.offsetX)
+        });
+      }
     }
   }, [])
 
