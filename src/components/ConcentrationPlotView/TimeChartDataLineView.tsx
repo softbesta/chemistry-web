@@ -93,7 +93,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
         startDrag(false)
       });
 
-      ctx.canvas.addEventListener('mousemove', function (event: any) {
+      ctx.canvas.addEventListener('touchmove', function (event: any) {
         setX(event.offsetX)
       });
     }
