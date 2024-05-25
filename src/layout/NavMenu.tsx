@@ -166,8 +166,7 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
           />
           <div onClick={() => {
             handleMenuItemClick(MenuList.zeroQuiz)
-          }
-          }>
+          }}>
             <SvgQuiz
               fillColor={'rgb(68, 150, 247)'}
               width={40}
@@ -175,7 +174,9 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
               isActive={curMenu === MenuList.zeroQuiz}
             />
           </div>
-          <div>
+          <div onClick={() => {
+            updatePageFromMenu(MenuList.zeroReview)
+          }}>
             <SvgArchive
               fillColor={'rgb(68, 150, 247)'}
               width={40}

@@ -113,7 +113,7 @@ const MultiRangeSliderHoriz = ({
             ${showThumbIndex[0] === 1 ? 'disabled' : ''}
           `}
           style={{
-            left: 9 + 150 / 20 * values[0] / 10
+            left: 7 + 152 / 20 * values[0] / 10
           }}
         />}
         {showThumbIndex[1] > 0 && <div
@@ -122,7 +122,7 @@ const MultiRangeSliderHoriz = ({
             ${showThumbIndex[1] === 1 ? 'disabled' : ''}
           `}
           style={{
-            left: 9 + 150 / 20 * values[1] / 10
+            left: 7 + 152 / 20 * values[1] / 10
           }}
         />}
       </div>}

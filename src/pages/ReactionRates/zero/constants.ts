@@ -229,6 +229,7 @@ export const stepsActions = [
     canvaBarState: 2,
     canvaBeakerState: 3,
     activeDotIndex: 0,
+    saveDotIndex: 0,
     isEnableChooseMenu: true,
   },
   // 9   Great! You picked a...
@@ -274,6 +275,7 @@ export const stepsActions = [
     canvaBarState: 2,
     canvaBeakerState: 3,
     activeDotIndex: 1,
+    saveDotIndex: 1,
     isEnableChooseMenu: true,
   },
   // 14   Great! You picked a ...
@@ -309,6 +311,7 @@ export const stepsActions = [
     canvaTimeState: 3,
     canvaBarState: 2,
     canvaBeakerState: 3,
+    saveDotIndex: 2,
   },
 ]
 

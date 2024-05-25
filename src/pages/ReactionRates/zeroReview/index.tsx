@@ -13,7 +13,7 @@ import { ChooseMenu } from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
 import { dotColorList, sliderVertText } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
-import { convertExpToHtml } from "../../../helper/functions"
+import { convertExpToHtml, getStorage } from "../../../helper/functions"
 import MathExpZero from "./MathExp"
 import SpinSelection from "../../../components/Buttons/SpinSelection"
 import { spinValuesT } from "../constants"
@@ -89,6 +89,17 @@ const ReactionZeroReview = () => {
       // if (Array.isArray(curActions?.valuesT)) {
       //   setValuesT(curActions.valuesT)
       // }
+      // if (Array.isArray(curActions?.valuesC)) {
+      //   setValuesC(curActions.valuesC)
+      // }
+      if (curActions?.activeDotIndex !== undefined) {
+        const values = getStorage(`zeroReview-order${curActions?.activeDotIndex}`)
+        // debugger
+        console.log({values, activeDotIndex: curActions?.activeDotIndex})
+        const {valuesC, valuesT} = values
+        setValuesT(valuesT)
+        setValuesC(valuesC)
+      }
     }
 
     // action_turMathBlanks()
@@ -226,10 +237,9 @@ const ReactionZeroReview = () => {
     // turText can be undefined on new page due to curStep(lazy changes of state variable)
     const turTxt = tur_Text[curStep]
     const turVal = [
-      k.toFixed(3),   // val[0]
-      t_12.toFixed(2),// val[1]
-      k.toFixed(2),   // val[2]
+      rateConstant.toFixed(2), // val[0]
     ]
+    console.log({turVal})
     const update = turTxt?.map((item) => {
       // const update: string[] = []
       let res = ''
@@ -241,7 +251,7 @@ const ReactionZeroReview = () => {
       return convertExpToHtml(res)
     }) ?? []
     return update
-  }, [curStep])
+  }, [curStep, valuesC, valuesT])
 
   // get available next step number
   const getNextStep = (step: number) => {
@@ -339,6 +349,9 @@ const ReactionZeroReview = () => {
         isDisableNextButton={isEnableChooseMenu}
       />
     </div>
+    <button onClick={() => {
+      console.log({valuesC, valuesT})
+    }}>TEST</button>
     {isHighlight && <div className='overlay'></div>}
   </div>
 }

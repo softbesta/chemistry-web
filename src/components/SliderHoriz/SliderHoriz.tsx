@@ -35,7 +35,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
   const getValueT = () => {
     let update: number[] = []
     update = valuesT
-    console.log({ update })
+    // console.log({ update })
     return update.map(item => item * flexibleV)
   }
 
@@ -45,7 +45,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
     // update = [...vals].map(item => item / flexibleV)
     // setValuesT(update)
 
-    console.log('ppp', { vals })
+    // console.log('ppp', { vals })
 
     let valMin = vals[0]
     let valMax = vals[1]
@@ -111,7 +111,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
               ${showThumbIndex[0] === 1 ? 'disabled' : ''}
             `}
             style={{
-              left: 9 + 150 / 20 * getValueT()[0] / 10
+              left: 7 + 152 / 20 * getValueT()[0] / 10
             }}
           />}
           {showThumbIndex[1] > 0 && <div
@@ -120,7 +120,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
               ${showThumbIndex[1] === 1 ? 'disabled' : ''}
             `}
             style={{
-              left: 9 + 150 / 20 * getValueT()[1] / 10
+              left: 7 + 152 / 20 * getValueT()[1] / 10
             }}
           />}
         </div>

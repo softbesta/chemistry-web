@@ -13,7 +13,7 @@ import { ChooseMenu } from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
 import { dotColorList, sliderVertText } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
-import { convertExpToHtml } from "../../../helper/functions"
+import { convertExpToHtml, setStorage } from "../../../helper/functions"
 import MathExpZero from "./MathExp"
 import SpinSelection from "../../../components/Buttons/SpinSelection"
 import { spinValuesT } from "../constants"
@@ -93,6 +93,12 @@ const ReactionZero = () => {
 
     // action_turMathBlanks()
   }, [curStep, curActions])
+
+  useEffect(() => {
+    if (curActions?.saveDotIndex === undefined) return
+    console.log('zeroReview-order', { valuesC, valuesT })
+    setStorage(`zeroReview-order${activeDotIndex}`, { valuesC, valuesT })
+  }, [curActions?.saveDotIndex])
 
   // useEffect(() => {
   //   setTimeout(() => {

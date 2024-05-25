@@ -290,7 +290,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
       setCurrentTime(finalTime)
     }
     return () => stopTimer()
-  }, [timingState, initialTime])
+  }, [timingState, initialTime, finalTime])
 
   return (
     <div style={{ position: 'relative' }}>
