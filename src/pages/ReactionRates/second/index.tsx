@@ -49,6 +49,11 @@ const ReactionSecond = () => {
     getNextMenu,
   } = useFunctions()
 
+  const [curValT, setCurValT] = useState<number>(valuesT[0])
+  const [curValC, setCurValC] = useState<number>(valuesC[0])
+  const onChangeCurValC = (valC: number) => {
+    setCurValC(valC)
+  }
   const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
   const [chartBarState, setChartBarState] = useState(0)
 
@@ -169,7 +174,7 @@ const ReactionSecond = () => {
 
       rate.toFixed(2),
       k.toFixed(3),
-      At.toFixed(2),
+      curValC.toFixed(2),
     ]
   }
 
@@ -261,6 +266,9 @@ const ReactionSecond = () => {
         canvaTimeSliderC={canvaTimeSliderC}
         valuesT={valuesT}
         setValuesT={val => setValuesT(val)}
+        curValT={curValT}
+        setCurValT={(val) => setCurValT(val)}
+        onChangeCurValC={onChangeCurValC}
         canvaTimeSliderT={canvaTimeSliderT}
         canvaTimeState={canvaTimeState}
         onTimeframeChange={val => setTimeframe(val)}

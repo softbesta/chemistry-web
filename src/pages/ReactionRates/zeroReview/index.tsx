@@ -48,6 +48,8 @@ const ReactionZeroReview = () => {
     getNextMenu,
   } = useFunctions()
 
+  const [curValT, setCurValT] = useState<number>(valuesT[0])
+
   const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
   const [chartBarState, setChartBarState] = useState(0)
 
@@ -278,6 +280,8 @@ const ReactionZeroReview = () => {
         canvaTimeSliderC={canvaTimeSliderC}
         valuesT={valuesT}
         setValuesT={val => setValuesT(val)}
+        curValT={curValT}
+        setCurValT={(val) => setCurValT(val)}
         canvaTimeSliderT={canvaTimeSliderT}
         canvaTimeState={canvaTimeState}
         onTimeframeChange={val => setTimeframe(val)}

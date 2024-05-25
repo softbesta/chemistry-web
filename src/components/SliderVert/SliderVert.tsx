@@ -12,10 +12,13 @@ interface SliderVert {
   distance?: number
   minValue?: number
   maxRange?: number
+  canvaTimeState?: number
+  curValT?: number
+  setCurValT?: (val: number) => void
 }
 
-const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distance = 13, minValue = 0, maxRange = 100, textVert }: SliderVert) => {
-  const { spinValueT } = useAppData()
+const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distance = 13, minValue = 0, maxRange = 100, textVert, canvaTimeState = 0, curValT, setCurValT }: SliderVert) => {
+  const { valuesT } = useAppData()
   // const [vals, setVals] = useState(valuesC)
 
   const infoC = useMemo(() => {
@@ -60,9 +63,17 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
   }, [showIndexC])
 
   const handleBtnClick = (step: number) => {
-    const update = [...valuesC]
-    update[infoC.activeIndex] -= step * 100
-    handleChangeAB(update)
+    if (canvaTimeState !== 3) {
+      const update = [...valuesC]
+      update[infoC.activeIndex] -= step * 100
+      handleChangeAB(update)
+    }
+    else {
+      let update = (curValT ?? valuesT[0]) - (step > 0 ? 1 : -1)
+      if (update < valuesT[0]) update = valuesT[0]
+      else if (update > valuesT[1]) update = valuesT[1]
+      setCurValT?.(update)
+    }
   }
 
   return <div className={styles.container}>
@@ -84,7 +95,7 @@ const SliderVert = ({ valuesC, setValuesC, canvaTimeSliderC: showIndexC, distanc
       } */}
 
       <div className='v-slider-container' style={{ width: 167 }}>
-        <div style={{ position: 'relative'}}>
+        <div style={{ position: 'relative' }}>
           {showIndexC[0] > 0 && <div
             className={`
             v-slider-pointer 

@@ -57,6 +57,8 @@ const ReactionComparison = () => {
     getNextMenu,
   } = useFunctions()
 
+  const [curValT, setCurValT] = useState<number>(valuesT[0])
+
   const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
   const [isDisableNextButton, setIsDisableNextButton] = useState<boolean>(false)
   const [shuffledOrder] = useState([1, 2, 3].sort((a, b) => 0.5 - Math.random()))
@@ -283,6 +285,8 @@ const ReactionComparison = () => {
                   concentrationB={reaction.zeroOrderB}
                   initialTime={reaction.initialTime}
                   finalTime={reaction.finalTime0}
+                  curValT={curValT}
+                  setCurValT={(val) => setCurValT(val)}
                   canSetCurrentTime={true}
                   highlightChart={false}
                   highlightLhsCurve={true}
@@ -364,6 +368,8 @@ const ReactionComparison = () => {
                   concentrationB={reaction.firstOrderB}
                   initialTime={reaction.initialTime}
                   finalTime={reaction.finalTime1}
+                  curValT={curValT}
+                  setCurValT={(val) => setCurValT(val)}
                   canSetCurrentTime={true}
                   highlightChart={false}
                   highlightLhsCurve={true}
@@ -444,6 +450,8 @@ const ReactionComparison = () => {
                   concentrationB={reaction.secondOrderB}
                   initialTime={reaction.initialTime}
                   finalTime={reaction.finalTime2}
+                  curValT={curValT}
+                  setCurValT={(val) => setCurValT(val)}
                   canSetCurrentTime={true}
                   highlightChart={false}
                   highlightLhsCurve={true}

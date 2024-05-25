@@ -54,7 +54,7 @@ export const tur_Text: TurTextType = [
   ],
   [ // 12
     `Amazing! Let's take a snapshot!`,
-    `Try <span>dragging the time indicator</span> to scrub through the reaction time.`,
+    `Try <span>changing the time indicator</span> to scrub through the reaction time.`,
   ],
   [ // 13
     `Now, let's try choosing a different reaction, which has a fixed rate constant, <span>k</span>.`,
@@ -75,7 +75,7 @@ export const tur_Text: TurTextType = [
   ],
   [ // 17
     `Amazing! Let's take a snapshot!`,
-    `Try <span>dragging the time indicator</span> to scrub through the reaction time.`,
+    `Try <span>changing the time indicator</span> to scrub through the reaction time.`,
   ],
   [ // 18
     `Now, let's try choosing a different reaction, which has a fixed rate constant, <span>k</span>.`,
@@ -96,7 +96,7 @@ export const tur_Text: TurTextType = [
   ],
   [ // 22
     `Amazing, let's take another snapshot!`,
-    `Try <span>dragging the time indicator</span> to scrub through the reaction time.`,
+    `Try <span>changing the time indicator</span> to scrub through the reaction time.`,
     `Then, let's take a quiz to review what we've learnt.`,
   ],
   // open Quiz

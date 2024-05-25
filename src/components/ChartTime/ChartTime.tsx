@@ -15,6 +15,9 @@ interface ChartTimeProps {
   setValuesC: (val: number[]) => void
   valuesT: number[]
   setValuesT: (val: number[]) => void
+  curValT: number
+  setCurValT: (valT: number) => void
+  onChangeCurValC?: (valC: number) => void
   canvaTimeSliderC: number[]
   canvaTimeSliderT: number[]
   canvaTimeState: number   //  0; show Frame,  1; show Graph, 2; show Animation, 3; show end of Animation
@@ -30,8 +33,11 @@ const ChartTime = ({
   setValuesC,
   canvaTimeSliderC,
   valuesT,
-  canvaTimeSliderT,
   setValuesT,
+  curValT,
+  setCurValT,
+  onChangeCurValC,
+  canvaTimeSliderT,
   canvaTimeState,
   onTimeframeChange,
   colors,
@@ -63,27 +69,38 @@ const ChartTime = ({
       t2: valuesT[1],
     }
     update.initParams(inputParams, order)
+    let updateA: any
     switch (order) {
       case 0:
         const zeroOrderConcentration = new ZeroOrderConcentration()
         zeroOrderConcentration.init4Params(inputParams.t1, inputParams.c1, inputParams.t2, inputParams.c2)
+        updateA = zeroOrderConcentration
         setConcentrationA(zeroOrderConcentration)
         setConcentrationB(update.concentrationB(zeroOrderConcentration, inputParams.c1))
         break;
       case 1:
         const firstOrderConcentration = new FirstOrderConcentration()
         firstOrderConcentration.init3Params(inputParams.c1, inputParams.t1, firstOrderConcentration.getRate(inputParams.t1, inputParams.c1, inputParams.t2, inputParams.c2))
+        updateA = firstOrderConcentration
         setConcentrationA(firstOrderConcentration)
         setConcentrationB(update.concentrationB(firstOrderConcentration, inputParams.c1))
         break;
       case 2:
         const secondOrderConcentration = new SecondOrderConcentration()
         secondOrderConcentration.init3Params(inputParams.c1, inputParams.t1, secondOrderConcentration.getRate(inputParams.t1, inputParams.c1, inputParams.t2, inputParams.c2))
+        updateA = secondOrderConcentration
         setConcentrationA(secondOrderConcentration)
         setConcentrationB(update.concentrationB(secondOrderConcentration, inputParams.c1))
         break;
     }
+    updateA.getValue(curValT)
   }, [valuesT, valuesC, order])
+
+  useEffect(() => {
+    const update = concentrationA.getValue(curValT)
+    onChangeCurValC?.(update)
+  }, [curValT])
+
   const { minDisabled, maxDisabled } = useMemo(() => {
     const minDisabled = canvaTimeSliderT[0] === 1 ? true : false
     const maxDisabled = canvaTimeSliderT[1] === 1 ? true : false
@@ -102,6 +119,9 @@ const ChartTime = ({
         textVert={textVert}
         minValue={14}
         maxRange={100}
+        canvaTimeState={canvaTimeState}
+        curValT={curValT}
+        setCurValT={setCurValT}
       />
 
       <SliderHoriz
@@ -111,6 +131,9 @@ const ChartTime = ({
         distance={25}
         minValue={0}
         maxRange={200}
+        canvaTimeState={canvaTimeState}
+        curValT={curValT}
+        setCurValT={setCurValT}
       />
       {/* {!isMobile ?
         <SliderHoriz
@@ -176,6 +199,8 @@ const ChartTime = ({
           canvaTimeSliderC={canvaTimeSliderC}
           canvaTimeSliderT={canvaTimeSliderT}
           order={order}
+          curValT={curValT}
+          setCurValT={setCurValT}
         />
 
 

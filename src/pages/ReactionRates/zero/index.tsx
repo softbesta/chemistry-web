@@ -1,6 +1,6 @@
 import useAppData from "../../../hooks/useAppData"
 import styles from './zero.module.scss'
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import EnergyProfile from "../../../components/EnergyProfile"
 import ChartTime from "../../../components/ChartTime/ChartTime"
 import ChartBar from "../../../components/ChartBar"
@@ -47,6 +47,12 @@ const ReactionZero = () => {
     updatePageFromMenu,
     getNextMenu,
   } = useFunctions()
+
+  const [curValT, setCurValT] = useState<number>(valuesT[0])
+  const [curValC, setCurValC] = useState<number>(valuesC[0])
+  const onChangeCurValC = (valC: number) => {
+    setCurValC(valC)
+  }
 
   const { highlightElement, removeHighlightElement, isHighlight } = useHighLight()
   const [chartBarState, setChartBarState] = useState(0)
@@ -96,7 +102,6 @@ const ReactionZero = () => {
 
   useEffect(() => {
     if (curActions?.saveDotIndex === undefined) return
-    console.log('zeroReview-order', { valuesC, valuesT })
     setStorage(`zeroReview-order${activeDotIndex}`, { valuesC, valuesT })
   }, [curActions?.saveDotIndex])
 
@@ -178,7 +183,7 @@ const ReactionZero = () => {
 
       k.toFixed(2),
       k.toFixed(3),
-      c1.toFixed(2),
+      curValC.toFixed(2),
     ]
   }
 
@@ -308,6 +313,9 @@ const ReactionZero = () => {
         canvaTimeSliderC={canvaTimeSliderC}
         valuesT={valuesT}
         setValuesT={val => setValuesT(val)}
+        curValT={curValT}
+        setCurValT={(val) => setCurValT(val)}
+        onChangeCurValC={onChangeCurValC}
         canvaTimeSliderT={canvaTimeSliderT}
         canvaTimeState={canvaTimeState}
         onTimeframeChange={val => setTimeframe(val)}

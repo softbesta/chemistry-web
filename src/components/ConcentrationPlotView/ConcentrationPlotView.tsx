@@ -39,6 +39,8 @@ type ConcentrationPlotViewProps = {
   order: number
   canvaTimeSliderC: number[]
   canvaTimeSliderT: number[]
+  curValT: number,
+  setCurValT: (val: number) => void,
 }
 
 type Rect = {
@@ -70,9 +72,11 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
     order,
     canvaTimeSliderC,
     canvaTimeSliderT,
+    curValT,
+    setCurValT,
   } = props;
   const canvas = React.useRef<HTMLCanvasElement>(null);
-  const [currentTime, setCurrentTime] = useState(initialTime)
+  // const [curValT, setCurValT] = useState(initialTime)
   // @ts-ignore
   const isMobile = window.mobileCheck()
   // console.log({concentrationA, concentrationB, initialTime, finalTime})
@@ -265,29 +269,29 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
   useEffect(() => {
     if (timeCounter > maxTime) {
       // animation ends
-      setCurrentTime(finalTime)
+      setCurValT(finalTime)
       stopTimer()
       onEndPlay?.()
       return
     }
-    setCurrentTime(initialTime + timeCounter)
+    setCurValT(initialTime + timeCounter)
   }, [timeCounter])
 
 
   useEffect(() => {
     if (timingState === 2) {
-      setCurrentTime(initialTime)
+      setCurValT(initialTime)
       startTimer()
       return
     } else {
       stopTimer()
     }
     if (timingState === 0) {
-      setCurrentTime(initialTime)
+      setCurValT(initialTime)
     } else if (timingState === 1) {
-      setCurrentTime(initialTime)
+      setCurValT(initialTime)
     } else if (timingState === 3) {
-      setCurrentTime(finalTime)
+      setCurValT(finalTime)
     }
     return () => stopTimer()
   }, [timingState, initialTime, finalTime])
@@ -326,7 +330,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
               settings={settings.timeChartLayoutSettings}
               lineWidth={settings.timeChartLayoutSettings.lineWidth}
               initialTime={initialTime}
-              currentTime={currentTime} //.constant(currentTime),
+              currentTime={curValT} //.constant(currentTime),
               finalTime={finalTime}
               filledBarColor={'gray'} //Styling.timeAxisCompleteBar,
               canSetCurrentTime={timingState === 3}
@@ -348,7 +352,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
             settings={settings.timeChartLayoutSettings}
             lineWidth={settings.timeChartLayoutSettings.lineWidth}
             initialTime={initialTime}
-            currentTime={currentTime} //$currentTime
+            currentTime={curValT} //$currentTime
             finalTime={finalTime}
             filledBarColor={''} //Styling.timeAxisCompleteBar
             canSetCurrentTime={timingState === 3}
@@ -356,7 +360,7 @@ const ConcentrationPlotView = (props: ConcentrationPlotViewProps) => {
             highlightRhs={highlightRhsCurve}
             showOnlyView={showOnlyView}
             order={order}
-            setCurrentTime={setCurrentTime}
+            setCurrentTime={setCurValT}
           />
         </>
       }

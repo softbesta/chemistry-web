@@ -12,11 +12,14 @@ interface SliderHoriz {
   distance?: number
   minValue?: number
   maxRange?: number
+  canvaTimeState?: number
+  curValT?: number
+  setCurValT?: (val: number) => void
 }
 
 const flexibleV = 10;
 
-const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minValue = 0, maxRange = 100 }: SliderHoriz) => {
+const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minValue = 0, maxRange = 100, canvaTimeState = 0, curValT, setCurValT }: SliderHoriz) => {
   const { spinValueT } = useAppData()
   const infoT = useMemo(() => {
     let showCount = 0, disabledCount = 0, activeIndex = 0
@@ -35,7 +38,6 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
   const getValueT = () => {
     let update: number[] = []
     update = valuesT
-    // console.log({ update })
     return update.map(item => item * flexibleV)
   }
 
@@ -44,8 +46,6 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
     // let update: number[] = []
     // update = [...vals].map(item => item / flexibleV)
     // setValuesT(update)
-
-    // console.log('ppp', { vals })
 
     let valMin = vals[0]
     let valMax = vals[1]
@@ -69,9 +69,17 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
   }, [showThumbIndex])
 
   const handleBtnClick = (step: number) => {
-    const update = getValueT()
-    update[infoT.activeIndex] -= step * 10
-    handleChangeVal(update)
+    if (canvaTimeState !== 3) {
+      const update = getValueT()
+      update[infoT.activeIndex] -= step * 10
+      handleChangeVal(update)
+    }
+    else {
+      let update = (curValT ?? valuesT[0]) - (step > 0 ? 1 : -1)
+      if (update < valuesT[0]) update = valuesT[0]
+      else if (update > valuesT[1]) update = valuesT[1]
+      setCurValT?.(update)
+    }
   }
 
   // @ts-ignore
@@ -125,7 +133,7 @@ const SliderHoriz = ({ valuesT, setValuesT, showThumbIndex, distance = 25, minVa
           />}
         </div>
 
-        
+
       </div>
       <div className={styles.textHoriz}>
         <p>{`Time:`} <span className='txt-red'>{textT?.toFixed(1)} s</span></p>
