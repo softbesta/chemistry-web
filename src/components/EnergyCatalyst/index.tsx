@@ -240,11 +240,11 @@ export const EnergyCatalystContainer = ({
         // onDragStart={() => {}}
         setDragOffset={setDragOffset}
       />
-      <div className={styles.textShake}>
+      {/* <div className={styles.textShake}>
         <span>&#9650;</span>
         <span>shake</span>
         <span>&#9660;</span>
-      </div>
+      </div> */}
     </>}
     {/* <button onClick={() => animationStart()}>start</button>
     <button onClick={() => animationEnd()}>end</button> */}

@@ -16,6 +16,7 @@ import ReactionComparison from './pages/ReactionRates/comparison';
 import ReactionComparisonQuiz from './pages/ReactionRates/comparisonQuiz';
 import ReactionKinetics from './pages/ReactionRates/kinetics';
 import ReactionKineticsQuiz from './pages/ReactionRates/kineticsQuiz';
+import ReactionZeroReview from './pages/ReactionRates/zeroReview';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path={routes.zero.path} index element={<ReactionZero />} />
         <Route path={routes.zeroQuiz.path} index element={<ReactionZeroQuiz />} />
+        <Route path={routes.zeroReview.path} index element={<ReactionZeroReview />} />
         <Route path={routes.first.path} element={<ReactionFirst />} />
         <Route path={routes.firstQuiz.path} element={<ReactionFirstQuiz />} />
         <Route path={routes.second.path} element={<ReactionSecond />} />
