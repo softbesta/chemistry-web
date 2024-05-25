@@ -95,7 +95,6 @@ const ReactionZeroReview = () => {
       if (curActions?.activeDotIndex !== undefined) {
         const values = getStorage(`zeroReview-order${curActions?.activeDotIndex}`)
         // debugger
-        console.log({values, activeDotIndex: curActions?.activeDotIndex})
         const { valuesC, valuesT } = values ?? { valuesC: [70, 35], valuesT: [10, 15] }
         setValuesC(valuesC)
         setValuesT(valuesT)
@@ -316,9 +315,6 @@ const ReactionZeroReview = () => {
         isDisableNextButton={isEnableChooseMenu}
       />
     </div>
-    <button onClick={() => {
-      console.log({valuesC, valuesT})
-    }}>TEST</button>
     {isHighlight && <div className='overlay'></div>}
   </div>
 }

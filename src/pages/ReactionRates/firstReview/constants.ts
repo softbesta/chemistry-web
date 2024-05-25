@@ -92,13 +92,13 @@ export const tur_MathBlanks = [
 
 export const tur_MathText: any[] = [
   { // 7
-    txtRed: [10, 12],
+    txtRed: [7, 9],
   },
   { // 8
-    txtRed: [10, 12],
+    txtRed: [7, 9],
   },
   { // 8
-    txtRed: [10, 12],
+    txtRed: [7, 9],
   },
 ]
 

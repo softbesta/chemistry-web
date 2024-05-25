@@ -170,7 +170,7 @@ const ReactionFirstReview = () => {
       return convertExpToHtml(res)
     }) ?? []
     return update
-  }, [curStep])
+  }, [curStep, valuesC, valuesT])
 
   // get available next step number
   const getNextStep = (step: number) => {

@@ -23,7 +23,6 @@ export const tur_Hightlights = [
   [],
   [],
   [],
-
 ]
 
 export const stepsActions = [

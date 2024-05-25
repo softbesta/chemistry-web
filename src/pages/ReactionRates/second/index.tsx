@@ -14,7 +14,7 @@ import WatchMenu from "../../../layout/WatchMenu"
 import { dotColorList, sliderVertText } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
 import ChartInA from "../../../components/ChartInA/ChartInA"
-import { convertExpToHtml } from "../../../helper/functions"
+import { convertExpToHtml, setStorage } from "../../../helper/functions"
 import MathExpSecond from "./MathExp"
 import SpinSelection from "../../../components/Buttons/SpinSelection"
 import { spinValuesT } from "../constants"
@@ -92,6 +92,12 @@ const ReactionSecond = () => {
 
     // action_turMathBlanks()
   }, [curStep, curActions])
+
+  useEffect(() => {
+    if (curActions?.saveDotIndex === undefined) return
+    console.log('secondReview-order', { valuesC, valuesT })
+    setStorage(`secondReview-order${activeDotIndex}`, { valuesC, valuesT })
+  }, [curActions?.saveDotIndex])
 
   // useEffect(() => {
   //   setTimeout(() => {

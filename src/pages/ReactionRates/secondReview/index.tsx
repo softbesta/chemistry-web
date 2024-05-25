@@ -14,12 +14,12 @@ import WatchMenu from "../../../layout/WatchMenu"
 import { dotColorList, sliderVertText } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
 import ChartInA from "../../../components/ChartInA/ChartInA"
-import { convertExpToHtml } from "../../../helper/functions"
+import { convertExpToHtml, getStorage } from "../../../helper/functions"
 import MathExpSecond from "./MathExp"
 import SpinSelection from "../../../components/Buttons/SpinSelection"
 import { spinValuesT } from "../constants"
 
-const ReactionSecond = () => {
+const ReactionSecondReview = () => {
   const {
     curStep,
     valuesC,
@@ -88,47 +88,17 @@ const ReactionSecond = () => {
       if (Array.isArray(curActions?.canvaTimeSliderT)) {
         setCanvaTimeSliderT(curActions.canvaTimeSliderT)
       }
+      if (curActions?.activeDotIndex !== undefined) {
+        const values = getStorage(`secondReview-order${curActions?.activeDotIndex}`)
+        // debugger
+        const { valuesC, valuesT } = values ?? { valuesC: [70, 35], valuesT: [10, 15] }
+        setValuesC(valuesC)
+        setValuesT(valuesT)
+      }
     }
 
     // action_turMathBlanks()
   }, [curStep, curActions])
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     action_turMathBlanks()
-  //   }, 1500);
-  // }, [])
-  // const action_turMathBlanks = () => {
-  //   jQuery('.blankMath').removeClass()
-  //   const curTurMathBlanks = tur_MathBlankArr[curStep]
-
-  //   // console.log({aaa: jQuery('#tur_math4_2')})
-
-  //   // const s1 = '#tur_math2>span mjx-msub'
-  //   // const s2 = '#tur_math2>span mjx-num'
-  //   // const s3 = '#tur_math2>span mjx-den'
-  //   // const s4 = '#tur_math2 mjx-math mjx-mn'
-  //   // const a3 = jQuery(s1)
-  //   // const b3 = jQuery(s2)
-  //   // const c3 = jQuery(s3)
-  //   // const d3 = jQuery(s4)
-    
-  //   // console.log('0', s1, {a3})
-  //   // console.log('1', s2, {b3})
-  //   // console.log('2', s3, {c3})
-  //   // console.log('3', s4, {d3})
-
-  //   if (!curTurMathBlanks) return
-  //   curTurMathBlanks.map((blank: any, index) => {
-  //     const math = jQuery(blank.query)
-  //     // console.log({ query: blank.query, index, math, nths: blank?.nths })
-  //     if (!math || !blank?.nths) return
-  //     blank?.nths.map((nth: any) => {
-  //       if (!math[nth]) return
-  //       math[nth].className = 'blankMath'
-  //     })
-  //   })
-  // }
 
   const handleClickChooseMenuItem = () => {
     onStepChange(1)
@@ -181,9 +151,7 @@ const ReactionSecond = () => {
     // turText can be undefined on new page due to curStep(lazy changes of state variable)
     const turTxt = tur_Text[curStep]
     const turVal = [
-      k.toFixed(3),   // val[0]
-      t_12.toFixed(2),// val[1]
-      k.toFixed(2),   // val[2]
+      rate.toFixed(2), // val[0]
     ]
     const update = turTxt?.map((item) => {
       // const update: string[] = []
@@ -196,7 +164,7 @@ const ReactionSecond = () => {
       return convertExpToHtml(res)
     }) ?? []
     return update
-  }, [curStep])
+  }, [curStep, valuesC, valuesT])
 
   // get available next step number
   const getNextStep = (step: number) => {
@@ -204,12 +172,12 @@ const ReactionSecond = () => {
     if (update < 0) {
       update = 0
       // console.log('getNextStep 0', { update })
-      updatePageFromMenu(getNextMenu(-1))
+      // updatePageFromMenu(getNextMenu(-1))
       return
     }
     else if (update >= maxStep_Second) {
       update = maxStep_Second - 1
-      updatePageFromMenu(getNextMenu(1))
+      // updatePageFromMenu(getNextMenu(1))
       return
     }
 
@@ -304,4 +272,4 @@ const ReactionSecond = () => {
     {isHighlight && <div className='overlay'></div>}
   </div>
 }
-export default ReactionSecond
+export default ReactionSecondReview

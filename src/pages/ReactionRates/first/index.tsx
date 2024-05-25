@@ -15,7 +15,7 @@ import { dotColorList, sliderVertText } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
 import CanvasTime from "../../../components/Canvas/CanvasTime"
 import ChartInA from "../../../components/ChartInA/ChartInA"
-import { convertExpToHtml } from "../../../helper/functions"
+import { convertExpToHtml, setStorage } from "../../../helper/functions"
 import MathExpFirst from "./MathExp"
 import SpinSelection from "../../../components/Buttons/SpinSelection"
 import { spinValuesT } from "../constants"
@@ -93,6 +93,12 @@ const ReactionFirst = () => {
 
     // action_turMathBlanks()
   }, [curStep, curActions])
+
+  useEffect(() => {
+    if (curActions?.saveDotIndex === undefined) return
+    console.log('firstReview-order', { valuesC, valuesT })
+    setStorage(`firstReview-order${activeDotIndex}`, { valuesC, valuesT })
+  }, [curActions?.saveDotIndex])
 
   // useEffect(() => {
   //   setTimeout(() => {
