@@ -85,7 +85,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
   React.useEffect(() => {
     const ctx = canvas?.current?.getContext('2d');
     if (ctx) {
-      if (isMobile) {
+      if (!isMobile) {
         ctx.canvas.addEventListener('mousedown', function (event: any) {
           setX(event.offsetX)
           startDrag(true)
@@ -113,7 +113,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
         });
       }
     }
-  }, [])
+  }, [isMobile])
 
   
   React.useEffect(() => {
