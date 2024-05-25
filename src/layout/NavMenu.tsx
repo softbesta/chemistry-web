@@ -206,7 +206,9 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
               isActive={curMenu === MenuList.firstQuiz}
             />
           </div>
-          <div>
+          <div onClick={() => {
+            updatePageFromMenu(MenuList.firstReview)
+          }}>
             <SvgArchive
               fillColor={'rgb(68, 150, 247)'}
               width={40}
@@ -236,7 +238,9 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
               isActive={curMenu === MenuList.secondQuiz}
             />
           </div>
-          <div>
+          <div onClick={() => {
+            updatePageFromMenu(MenuList.secondReview)
+          }}>
             <SvgArchive
               fillColor={'rgb(68, 150, 247)'}
               width={40}
@@ -289,7 +293,9 @@ const NavPanel = ({ visible = false, onClose }: NavPanelProps) => {
               isActive={curMenu === MenuList.kineticsQuiz}
             />
           </div>
-          <div>
+          <div onClick={() => {
+            updatePageFromMenu(MenuList.kineticsReview)
+          }}>
             <SvgArchive
               fillColor={'rgb(68, 150, 247)'}
               width={40}

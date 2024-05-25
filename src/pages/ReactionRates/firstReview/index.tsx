@@ -1,5 +1,5 @@
 import useAppData from "../../../hooks/useAppData"
-import styles from './zero.module.scss'
+import styles from './first.module.scss'
 import { useCallback, useEffect, useState } from "react"
 import EnergyProfile from "../../../components/EnergyProfile"
 import ChartTime from "../../../components/ChartTime/ChartTime"
@@ -7,18 +7,20 @@ import ChartBar from "../../../components/ChartBar"
 import MathContent from "../../../components/MathContent"
 import TutorialControl from "../../../components/TutorialControl"
 import { useHighLight } from "../../../hooks/useHighlight"
-import { maxStep_Zero, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text, tur_MathBlankArr, tur_MathText } from "./constants"
+import { maxStep_First, stepsActions, tur_MathBlanks, tur_Hightlights, tur_Text, tur_MathBlankArr, tur_MathText } from "./constants"
 import useFunctions from "../../../hooks/useFunctions"
 import { ChooseMenu } from "../../../layout/ChooseMenu"
 import WatchMenu from "../../../layout/WatchMenu"
 import { dotColorList, sliderVertText } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
+import CanvasTime from "../../../components/Canvas/CanvasTime"
+import ChartInA from "../../../components/ChartInA/ChartInA"
 import { convertExpToHtml, getStorage } from "../../../helper/functions"
-import MathExpZero from "./MathExp"
+import MathExpFirst from "./MathExp"
 import SpinSelection from "../../../components/Buttons/SpinSelection"
 import { spinValuesT } from "../constants"
 
-const ReactionZeroReview = () => {
+const ReactionFirstReview = () => {
   const {
     curStep,
     valuesC,
@@ -61,9 +63,10 @@ const ReactionZeroReview = () => {
   })
 
   // *** Tutorial-ACTIONS  - curStep changes
-  const curActions = tutorials[curStep]?.actions
+  const curActions = tutorials[curStep]?.actions as any
   useEffect(() => {
     // console.log('*** Tutorial-ACTIONS  - curStep changes', { curStep })
+    // console.log('curActions: ', { curActions, curStep })
     if (curActions) {
       if (curActions?.canvaTimeState !== undefined) {
         setCanvaTimeState(curActions.canvaTimeState)
@@ -86,16 +89,10 @@ const ReactionZeroReview = () => {
       if (Array.isArray(curActions?.canvaTimeSliderT)) {
         setCanvaTimeSliderT(curActions.canvaTimeSliderT)
       }
-      // if (Array.isArray(curActions?.valuesT)) {
-      //   setValuesT(curActions.valuesT)
-      // }
-      // if (Array.isArray(curActions?.valuesC)) {
-      //   setValuesC(curActions.valuesC)
-      // }
       if (curActions?.activeDotIndex !== undefined) {
-        const values = getStorage(`zeroReview-order${curActions?.activeDotIndex}`)
+        const values = getStorage(`firstReview-order${curActions?.activeDotIndex}`)
         // debugger
-        console.log({values, activeDotIndex: curActions?.activeDotIndex})
+        console.log({ values, activeDotIndex: curActions?.activeDotIndex })
         const { valuesC, valuesT } = values ?? { valuesC: [70, 35], valuesT: [10, 15] }
         setValuesC(valuesC)
         setValuesT(valuesT)
@@ -104,43 +101,6 @@ const ReactionZeroReview = () => {
 
     // action_turMathBlanks()
   }, [curStep, curActions])
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     action_turMathBlanks()
-  //   }, 1500);
-  // }, [])
-  // const action_turMathBlanks = () => {
-  //   jQuery('.blankMath').removeClass()
-  //   const curTurMathBlanks = tur_MathBlankArr[curStep]
-
-  //   // console.log({aaa: jQuery('#tur_math4_2')})
-
-  //   const s1 = '#tur_math3_2>span mjx-msub'
-  //   const s2 = '#tur_math3_2>span mjx-num'
-  //   const s3 = '#tur_math3_2>span mjx-den'
-  //   const s4 = '#tur_math3_2 mjx-math mjx-mn'
-  //   const a3 = jQuery(s1)
-  //   const b3 = jQuery(s2)
-  //   const c3 = jQuery(s3)
-  //   const d3 = jQuery(s4)
-
-  //   // console.log('0', s1, {a3})
-  //   // console.log('1', s2, {b3})
-  //   // console.log('2', s3, {c3})
-  //   // console.log('3', s4, {d3})
-
-  //   if (!curTurMathBlanks) return
-  //   curTurMathBlanks.map((blank: any, index) => {
-  //     const math = jQuery(blank.query)
-  //     // console.log({ query: blank.query, index, math, nths: blank?.nths })
-  //     if (!math || !blank?.nths) return
-  //     blank?.nths.map((nth: any) => {
-  //       if (!math[nth]) return
-  //       math[nth].className = 'blankMath'
-  //     })
-  //   })
-  // }
 
   const handleClickChooseMenuItem = () => {
     onStepChange(1)
@@ -151,37 +111,31 @@ const ReactionZeroReview = () => {
     const c2 = (valuesC[1] ?? 0) / 100
     const t1 = valuesT[0]
     const t2 = valuesT[1]
-    const c = c2 - c1
-    const t = t2 - t1
-    const k = -(c / t)
-    const deltaT = t2 - t1
-    const deltaC = c2 - c1
-    const rateConstant = -deltaC / deltaT
-    const a0Numerator = (t1 * c2) - (t2 * c1)
-    const A0 = a0Numerator / (t1 - t2)
-    const t_12 = A0 / (2 * rateConstant)
 
-    const exp0 = `\\[ Rate = k = -\\frac{△c}{△t} = -\\frac{c_2 - c_1}{t_2 - t_1}\\]`
-    const exp1 = `\\[ Rate = ${k.toFixed(2)} = -\\frac{${c.toFixed(2)}}{${t.toFixed(2)}} = -\\frac{${c2.toFixed(2)} - ${c1.toFixed(2)}}{${t2.toFixed(2)} - ${t1.toFixed(2)}}\\]`
-    const exp2 = `\\[ t_{1/2} = [A_0]/(2k) \\]`
-    const exp3 = `\\[ ${t_12.toFixed(2)} = ${A0.toFixed(2)} / (2  x  ${k.toFixed(2)}) \\]`
-    const exp4 = `\\[ Rate = k[A]^0 \\]`
-    const exp5 = `\\[ ${k.toFixed(2)} = ${k.toFixed(3)}(${c1.toFixed(2)})^0 \\]`
+    const lnA0 = Math.log(c1)
+    const lnAt = Math.log(c2)
+    const k = (lnA0 - lnAt) / t1
+    const t_12 = Math.log(2) / k
+    const rate = k * c1
+
+    // console.log({ c1, c2, lnA0, lnAt, t1 })
+
+    const exp0 = `\\[ k = \\frac{In[A_0] - In[A_t]}{t}\\]`
+    const exp1 = `\\[ ${k.toFixed(2)} = \\frac{(${lnA0.toFixed(2)}) - (${lnAt.toFixed(2)})}{${t1.toFixed(2)}}\\]`
+    const exp2 = `\\[ t_{1/2} = In(2)/k \\]`
+    const exp3 = `\\[ ${t_12.toFixed(2)} = ${Math.log(2).toFixed(2)} / ${k.toFixed(2)} \\]`
+    const exp4 = `\\[ Rate = k[A]^1 \\]`
+    const exp5 = `\\[ ${rate.toFixed(2)} = ${k.toFixed(3)}(${c1.toFixed(2)})^1 \\]`
 
     return [
       k.toFixed(2),
-      (-c).toFixed(2),
-      t.toFixed(2),
-      c2.toFixed(2),
-      t2.toFixed(2),
-      c1.toFixed(2),
+      (-lnA0).toFixed(2),
+      (-lnAt).toFixed(2),
       t1.toFixed(2),
-
       t_12.toFixed(2),
-      A0.toFixed(2),
+      Math.log(2).toFixed(2),
       k.toFixed(2),
-
-      k.toFixed(2),
+      rate.toFixed(2),
       k.toFixed(3),
       c1.toFixed(2),
     ]
@@ -192,20 +146,18 @@ const ReactionZeroReview = () => {
     const c2 = (valuesC[1] ?? 0) / 100
     const t1 = valuesT[0]
     const t2 = valuesT[1]
-    const c = c2 - c1
-    const t = t2 - t1
-    const k = -(c / t)
-    const deltaT = t2 - t1
-    const deltaC = c2 - c1
-    const rateConstant = -deltaC / deltaT
-    const a0Numerator = (t1 * c2) - (t2 * c1)
-    const A0 = a0Numerator / (t1 - t2)
-    const t_12 = A0 / (2 * rateConstant)
+
+    const lnA0 = Math.log(c1)
+    const lnAt = Math.log(c2)
+    const k = (lnA0 - lnAt) / t1
+    const t_12 = Math.log(2) / k
+    const rate = k * c1
+    // console.log({c1, c2, t1, t2, lnA0, lnAt, k, t_12, rate})
 
     // turText can be undefined on new page due to curStep(lazy changes of state variable)
     const turTxt = tur_Text[curStep]
     const turVal = [
-      rateConstant.toFixed(2), // val[0]
+      k.toFixed(2),   // val[2]
     ]
     const update = turTxt?.map((item) => {
       // const update: string[] = []
@@ -218,7 +170,7 @@ const ReactionZeroReview = () => {
       return convertExpToHtml(res)
     }) ?? []
     return update
-  }, [curStep, valuesC, valuesT])
+  }, [curStep])
 
   // get available next step number
   const getNextStep = (step: number) => {
@@ -229,18 +181,17 @@ const ReactionZeroReview = () => {
       // updatePageFromMenu(getNextMenu(-1))
       return
     }
-    // else if (update > stepPlayCount[activeMenu]) update = stepPlayCount[activeMenu]
-    else if (update >= maxStep_Zero) {
-      update = maxStep_Zero - 1
+    else if (update >= maxStep_First) {
+      update = maxStep_First - 1
       // updatePageFromMenu(getNextMenu(1))
       return
     }
 
     return update
   }
-
   // call when click prev step
   const onStepChange = (step: number) => {
+    // console.log('===onStepChange===', { step })
     const nextStep = getNextStep(step)
     if (nextStep === undefined) return
     if (curStep === nextStep) return
@@ -250,13 +201,10 @@ const ReactionZeroReview = () => {
       highlightElement(tutorials[nextStep].highlight)
     }
 
-    // console.log({ curStep })
     setCurStep(nextStep)
   }
   // remove highlighted elements when page opens
   useEffect(() => {
-    // @ts-ignore
-    // window.jQuery = jQuery;
     return () => removeHighlightElement(tutorials[curStep]?.highlight)
   }, [])
 
@@ -285,7 +233,7 @@ const ReactionZeroReview = () => {
         colors={dotColorList[activeDotIndex]}
         textVert={`[${sliderVertText[activeDotIndex]}]`}
         textHoriz={`Time`}
-        order={0}
+        order={1}
       />
       {/* <SpinSelection
         spinValues={spinValuesT}
@@ -301,12 +249,26 @@ const ReactionZeroReview = () => {
       />
     </div>
     <div className={styles.reactionContentContainer}>
-      <MathExpZero
+      <div className={styles.chartInA}>
+        <ChartInA
+          valuesC={valuesC}
+          canvaTimeSliderC={canvaTimeSliderC}
+          valuesT={valuesT}
+          canvaTimeSliderT={canvaTimeSliderT}
+          canvaTimeState={canvaTimeState}
+          onTimeframeChange={val => setTimeframe(val)}
+          colors={dotColorList[activeDotIndex]}
+          textVert={`In(${sliderVertText[activeDotIndex]})`}
+          textHoriz={`Time`}
+        />
+      </div>
+      <MathExpFirst
         values={getFormula()}
         blanks={tur_MathText[curStep]?.blanks ?? []}
         txtRed={tur_MathText[curStep].txtRed}
       />
       {/* <MathContent
+        className={styles.mathContent}
         {...getFormula()}
         blanks={tur_MathBlankArr[curStep]}
       /> */}
@@ -316,10 +278,7 @@ const ReactionZeroReview = () => {
         isDisableNextButton={isEnableChooseMenu}
       />
     </div>
-    <button onClick={() => {
-      console.log({valuesC, valuesT})
-    }}>TEST</button>
     {isHighlight && <div className='overlay'></div>}
   </div>
 }
-export default ReactionZeroReview
+export default ReactionFirstReview

@@ -4,32 +4,32 @@ export const tur_Text: TurTextType = [
   // display.reactant.name; A
   // display.product.name;  B
   [ // 7
-    `This is the zero order reaction you created earlier.`,
+    `This is the first order reaction you created earlier.`,
     `<span>Try dragging the time indicator to scrub through the reaction time.</span>`,
     `Swipe left or press next to see another reaction type.`,
   ],
   [ // 8
-    (val: string[]) => `This is the zero order reaction you created earlier, which has a fixed rate constant of ${val[0]}.`,
+    (val: string[]) => `This is the first order reaction you created earlier, which has a fixed rate constant of ${val[0]}.`,
     `<span>Try dragging the time indicator to scrub through the reaction time.</span>`,
     `Swipe left or press next to see another reaction type.`,
   ],
   [ // 9
-    (val: string[]) => `This is the zero order reaction you created earlier, which has a fixed rate constant of ${val[0]}.`,
+    (val: string[]) => `This is the first order reaction you created earlier, which has a fixed rate constant of ${val[0]}.`,
     `<span>Try dragging the time indicator to scrub through the reaction time.</span>`,
   ],
+  // open Quiz
 ]
 
 export const tur_Hightlights = [
   [],
   [],
   [],
-
 ]
 
 export const stepsActions = [
   // energyAB;          (A - 0, B - 1), (C - 2, D - 3), (E - 4, F - 5)
   // valuesC, canvaTimeSliderC, canvaTimeSliderT;
-  //                    index-0: A index-1: B
+  //                    index-0: A,  index-1: B
   // canvaTimeSliderC;  0 - hidden, 1 - disabled, 2 - active
   // canvaTimeSliderT;  0 - hidden, 1 - disabled, 2 - active
   // valuesC;           0 ~ 100
@@ -39,6 +39,7 @@ export const stepsActions = [
   // canvaTimeState;    0 - show Frame only, 1 - show Graph
   //                    2 - Animation,       3 - show End
 
+  // 0   This is a first...
   { // 7
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 1],
@@ -99,9 +100,9 @@ export const tur_MathText: any[] = [
   { // 8
     txtRed: [10, 12],
   },
-
 ]
 
 
 
-export const maxStep_Zero = tur_Text.length // 3 steps
+
+export const maxStep_First = tur_Text.length // 3 steps

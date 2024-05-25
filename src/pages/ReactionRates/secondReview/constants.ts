@@ -4,100 +4,98 @@ export const tur_Text: TurTextType = [
   // display.reactant.name; A
   // display.product.name;  B
   [ // 0
-    `This is a first order reaction.`,
+    `This is a second order reaction.`,
     `Why don't you set the <span>initial concentration of A [A__0__]</span>, the reactant?.`,
   ],
   [ // 1
     `Great! Now you can set the <span>concentration of A at the end of the reaction [A<span class='sm-botom'>t</span>]</span> and the <span>time the reaction will last (t)</span>.`,
   ],
   [ // 2
-    `The rate constant <span>k</span> is a value on which the <span>rate</span> depends. This dependency is often represented with the rate law or the rate equation.`,
+    (val: string[]) => `For this reaction, **k=${val[0]}**.`,
   ],
   [ // 3
-    (val: string[]) => `Rate laws or rate equations are mathematical expressions that describe the relationship \
-    between the <span>rate</span> of a chemical reaction and the concentration of its reactants. \
-    For this reaction, <span>k=${val[0]}</span>.`,
+    `For a reaction with one reactant it's usually written as **rate=k[A]^order^**.`,
+    `For this reaction then, **rate=k[A]^2^**.`,
   ],
   [ // 4
-    `<p>For a reaction with one reactant it's usually written as <span>rate=k[A]</span><span class='sm-top'>order</span>.`,
-    `For this reaction then, <span>rate=k[A]</span><span class='sm-top'>1</span>.</p>`,
+    `<p style='font-size: 17px'>**Half-life (t__1/2__)** is an expression to easily calculate the time at which the concentration of the reactant, in this case **A**, is half of what the initial concentration was.</p>`,
+    `<p style='font-size: 17px'>For this reaction,</p>`,
+    (val: string[]) => `<p style='font-size: 17px'>**t__1/2__=1/k[A__0__]=${val[1]}s**.</p>`,
   ],
-  [ // 5 here goes next step automatically after action
-    `<p style='font-size: 17px'><span>Half-life (t<span class='sm-botom'>1/2</span>)</span> is an expression to easily calculate the point in time at which the concentration of the reactant, in this case <span>A</span>, is half of what the \
-    initial concentration was. For this reaction,</p>`,
-    (val: string[]) => `<p style='font-size: 17px'> <span>t<span class='sm-botom'>1/2</span>=\
-    In(1)/k=${val[1]}</span>.</p>`,
-  ],
-  [ // 6
+  [ // 5
     `<p>Let's watch how all the molecules are all changing!</p>`,
     `<p>As A disappears, B is being produced.</p>`,
     `<p>This happens at a variable <span>rate (in units of M/s)</span>, which is dependent on <span>k</span> and <span>[A]</span>.</p>`,
   ],
+  [ // 6
+    `For this second order reaction, **rate=k[A]^2^**, that's why a graph <br/> plotting([A] vs t) is a steeper curve, given how the **rate** is proportional to the \
+    concentration of **A** squared.`,
+  ],
   [ // 7
-    `For the previous zero order reaction, <span>rate</span> was constant because it was independent \
-    of <span>[A]</span>, since <span>rate=k[A]<span class='sm-top'>0</span></span> is equivalent to <span>rate=k</span>, which is the rate constant.`,
+    `Notice how **[A]** drops a lot faster at the beginning of the reaction because there's more of **A** present, making the **rate** much higher.`,
   ],
   [ // 8
-    `For this first order reaction, <span>rate=k[A]<span class='sm-top'>1</span></span>. That's why a graph plotting \
-    \([A] vs t]) is a curve, given how the <span>rate</span> is proportional to the concentration \
-    of <span>A</span>`,
+    `Subsequently, towards the end of the reaction, there's much less **[A]** present, so the **rate** of the reaction is a lot lower, making **[A]** drop significantly slower at this point.`,
   ],
   [ // 9
-    `<p style='font-size: 17px'>Notice how <span>[A]</span> drops faster at the beginning because there's more of <span>A</span> present, making \
-    the <span>rate</span> higher.</p>`,
-    `<p style='font-size: 17px'>Towards the end of the reaction there's much less <span>[A]</span> present, so the <span>rate</span> of the \
-    reaction is lower, making <span>[A]</span> drop slower.</p>`,
+    `For example, if **[A]=0.9**, then **[A]^2^=0.81**. And if **[A]=0.8**, then **[A]^2^=0.64**.`,
+    ``,
+    `You see that dropping **[A]** by 0.1 would make a first order reaction drop its **rate** by 0.1, and a second order reaction drop its **rate** by 0.17.`,
   ],
   [ // 10
-    `<p style='font-size: 17px'>For simplification purposes, when integrating the rate law or the rate equation, we get \
-    the <span>integrated rate law</span>.</p>`,
-    `<p style='font-size: 17px'>This is a form of the rate law that makes it simpler to make calculations and graphs from \
-    the original rate law equation.</p>`,
+    `<p style='font-size: 14px'>Since 0.1 is less than 0.17, it's noticeable how for a second order reaction the **rate** would drop faster.</p>`,
+    `<p style='font-size: 14px'>In other words, the rate of the reaction will drop **more drastically for a second order reaction at first**, and slowly reduce to a point at which the rate drops **slower than in a first order reaction towards the end**.</p>`,
   ],
   [ // 11
+    `<p style='font-size: 17px'>For this second order reaction, the resultant integrated rate law is  **k=(1/[A]-1/[A__0__])/t**. \
+    That's why a graph plotting ([A] vs t) is a straight line.</p>`,
+    `<p style='font-size: 17px'>1/[A]**(y)**=kt**(mx)**+1/[A__0__]**(b)</p>`,
+    `<p style='font-size: 17px'>Where the slope is **k**.</p>`,
+  ],
+  [ // 12
     `Amazing! Let's take a snapshot!`,
     `Try <span>dragging the time indicator</span> to scrub through the reaction time.`,
   ],
-  [ // 12
+  [ // 13
     `Now, let's try choosing a different reaction, which has a fixed rate constant, <span>k</span>.`,
     `<span>Choose a reaction above</span>.`,
   ],
-  [ // 13
+  [ // 14
     (val: string[]) => `Great! You picked a reaction with a rate constant ${val[2]}.`,
     `Why don't you <span>set the initial concentration and initial time</span>?`,
   ],
-  [ // 14
+  [ // 15
     `Awesome! Now set the time the reaction ends.`,
     `Notice how the final concentration varies as you adjust the final time.`,
   ],
-  [ // 15
+  [ // 16
     `<p>Let's watch how all the molecules are all changing!</p>`,
     `<p>As C disappears, D is being produced.</p>`,
     `<p>This happens at a variable <span>rate (in units of M/s)</span>, which is dependent on <span>k</span> and <span>[C]</span>.</p>`,
   ],
-  [ // 16
+  [ // 17
     `Amazing! Let's take a snapshot!`,
     `Try <span>dragging the time indicator</span> to scrub through the reaction time.`,
   ],
-  [ // 17
+  [ // 18
     `Now, let's try choosing a different reaction, which has a fixed rate constant, <span>k</span>.`,
     `<span>Choose a reaction above</span>.`,
   ],
-  [ // 18
+  [ // 19
     (val: string[]) => `Great! You picked a reaction with a rate constant ${val[2]}.`,
     `Why don't you <span>set the initial concentration and initial time</span>?`,
   ],
-  [ // 19
+  [ // 20
     `Awesome! Now set the time the reaction ends.`,
     `Notice how the final concentration varies as you adjust the final time.`,
   ],
-  [ // 20
-    `<p>Let's watch how all the molecules are all changing!</p>`,
-    `<p>As E disappears, F is being produced.</p>`,
-    `<p>This happens at a variable <span>rate (in units of M/s)</span>, which is dependent on <span>k</span> and <span>[E]</span>.</p>`,
-  ],
   [ // 21
-    `Amazing! Let's take a snapshot!`,
+    `<p style='font-size: 17px'>Let's watch how all the molecules are all changing!</p>`,
+    `<p style='font-size: 17px'>As E disappears, F is being produced.</p>`,
+    `<p style='font-size: 17px'>This happens at a variable <span>rate (in units of M/s)</span>, which is dependent on <span>k</span> and <span>[E]</span>.</p>`,
+  ],
+  [ // 22
+    `Amazing, let's take another snapshot!`,
     `Try <span>dragging the time indicator</span> to scrub through the reaction time.`,
     `Then, let's take a quiz to review what we've learnt.`,
   ],
@@ -105,70 +103,70 @@ export const tur_Text: TurTextType = [
 ]
 
 export const tur_Hightlights = [
-  // 0   This is a first...
+  // 0   This is a second ...
   [],
 
   // 1   Great! Now you ...
   [],
 
-  // 2   The rate constant...
+  // 2   For this reaction, ...
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math1', 'tur_math2'],
 
-  // 3   Rate laws or rate ...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math1', 'tur_math2'],
+  // 3   For a reaction with...
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime', 'tur_math4'],
 
-  // 4   For a reaction...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math4', 'tur_canvasTime'],
+  // 4   Half-life (t1/2)...
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math3'],
 
-  // 5   Half-life t1/2 ...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_math3'], // +
+  // 5   Let's watch how all...
+  [], // +
 
-  // 6   Let's watch how all....
-  [], // Choose reaction 'C to D'
+  // 6   For this second order....
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'], // Choose reaction 'C to D'
 
-  // 7   For the previous zero...
+  // 7   Notice how [A] drops...
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
 
-  // 8   For this first order...
+  // 8   Subsequently, towards the...
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
 
-  // 9   Notice how [A] drops...
-  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton'],
-
-  // 10   For simplification purposes ...
+  // 9   For example, if [A]...
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
 
-  // 11   Amazing! Let's take...
+  // 10   Since 0.1 is less than ...
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
+
+  // 11   For this second order...
+  ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_canvasTime'],
+
+  // 12   Amazing! Let's take a...
   [],
 
-  // 12   Now, let's try choosing...
+  // 13   Now, let's try choosing... 
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_chooseMenuIcon'],
 
-  // 13   Great! You picked a... CD
+  // 14   Great! You picked a reaction ... CD
   [],
 
-  // 14   Awesome! Now set the ...
+  // 15   Awesome! Now set the ...
   [],
 
-  // 15   Let's watch how ...
+  // 16   Let's watch how all  ...
   [],
 
-  // 16   Amazing! Let's take ...
+  // 17   Amazing! Let's take  ...
   [],
 
-  // 17   Now, let's try choosing ...
+  // 18   Now, let's try choosing ...
   ['tur_tutorialText', 'tur_stepPrevButton', 'tur_stepNextButton', 'tur_chooseMenuIcon'],
 
-  // 18   Great! You picked a ...
+  // 19   Great! You picked a reaction... EF
   [],
 
-  // 19   Awesome! Now set the ...
+  // 20   Awesome! Now set the ...
   [],
 
-  // 20   Let's watch how all ...
-  [],
-
-  // 21   Amazing! Let's take a ...
+  // 21   Let's watch how all ...
   [],
   // here goes to Quiz
 ]
@@ -186,7 +184,7 @@ export const stepsActions = [
   // canvaTimeState;    0 - show Frame only, 1 - show Graph
   //                    2 - Animation,       3 - show End
 
-  // 0   This is a first...
+  // 0   This is a second ...
   { // 0
     canvaTimeSliderC: [2, 0],
     canvaTimeSliderT: [2, 0],
@@ -203,7 +201,7 @@ export const stepsActions = [
     canvaBarState: 0,
     canvaBeakerState: 1,
   },
-  // 2   The rate constant...
+  // 2   For this reaction, ...
   { // 2
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
@@ -211,7 +209,7 @@ export const stepsActions = [
     canvaBarState: 0,
     canvaBeakerState: 1,
   },
-  // 3   Rate laws or rate ...
+  // 3   For a reaction with...
   { // 3
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
@@ -219,7 +217,7 @@ export const stepsActions = [
     canvaBarState: 0,
     canvaBeakerState: 1,
   },
-  // 4   For a reaction...
+  // 4   Half-life (t1/2)...
   { // 4
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
@@ -227,56 +225,24 @@ export const stepsActions = [
     canvaBarState: 0,
     canvaBeakerState: 1,
   },
-  // 5   Half-life t1/2 ...
+  // 5   Let's watch how all...
   { // 5
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
-    canvaTimeState: 1,
-    canvaBarState: 0,
-    canvaBeakerState: 1,
-  },
-  // 6   Let's watch how all....
-  { // 6
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 2,
     canvaBarState: 1,
     canvaBeakerState: 2,
   },
-  // 7   For the previous zero...
+  // 6   For this second order....
+  { // 6
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBarState: 2,
+    canvaBeakerState: 3,
+  },
+  // 7   Notice how [A] drops...
   { // 7
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 1],
-    canvaTimeState: 3,
-    canvaBarState: 2,
-    canvaBeakerState: 3,
-  },
-  // 8   For this first order...
-  { // 8
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
-    canvaTimeState: 3,
-    canvaBarState: 2,
-    canvaBeakerState: 3,
-  },
-  // 9   Notice how [A] drops...
-  { // 9
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
-    canvaTimeState: 3,
-    canvaBarState: 2,
-    canvaBeakerState: 3,
-  },
-  // 10   For simplification purposes ...
-  { // 10
-    canvaTimeSliderC: [1, 1],
-    canvaTimeSliderT: [1, 0],
-    canvaTimeState: 3,
-    canvaBarState: 2,
-    canvaBeakerState: 3,
-  },
-  // 11   Amazing! Let's take...
-  { // 11
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
@@ -284,19 +250,59 @@ export const stepsActions = [
     canvaBeakerState: 3,
     isEnableChooseMenu: false,
   },
-  // 12   Now, let's try choosing...
+  // 8   Subsequently, towards the...
+  { // 8
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBarState: 2,
+    canvaBeakerState: 3,
+  },
+  // 9   For example, if [A]...
+  { // 9
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBarState: 2,
+    canvaBeakerState: 3,
+  },
+  // 10   Since 0.1 is less than ...
+  { // 10
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBarState: 2,
+    canvaBeakerState: 3,
+  },
+  // 11   For this second order...
+  { // 11
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBarState: 2,
+    canvaBeakerState: 3,
+  },
+  // 12   Amazing! Let's take a...
   { // 12
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBarState: 2,
     canvaBeakerState: 3,
+    isEnableChooseMenu: false,
+  },
+  // 13   Now, let's try choosing... 
+  { // 13
+    canvaTimeSliderC: [1, 1],
+    canvaTimeSliderT: [1, 0],
+    canvaTimeState: 3,
+    canvaBarState: 2,
+    canvaBeakerState: 3,
     activeDotIndex: 0,
-    saveDotIndex: 0,
     isEnableChooseMenu: true,
   },
-  // 13   Great! You picked a... CD
-  { // 13
+  // 14   Great! You picked a reaction ... CD
+  { // 14
     canvaTimeSliderC: [2, 0],
     canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
@@ -305,24 +311,24 @@ export const stepsActions = [
     activeDotIndex: 1,
     isEnableChooseMenu: false,
   },
-  // 14   Awesome! Now set the ...
-  { // 14
+  // 15   Awesome! Now set the ...
+  { // 15
     canvaTimeSliderC: [1, 0],
     canvaTimeSliderT: [1, 2],
     canvaTimeState: 1,
     canvaBarState: 0,
     canvaBeakerState: 1,
   },
-  // 15   Let's watch how ...
-  { // 15
+  // 16   Let's watch how all  ...
+  { // 16
     canvaTimeSliderC: [1, 0],
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 2,
     canvaBarState: 1,
     canvaBeakerState: 2,
   },
-  // 16   Amazing! Let's take ...
-  { // 16
+  // 17   Amazing! Let's take  ...
+  { // 17
     canvaTimeSliderC: [1, 0],
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 3,
@@ -330,19 +336,18 @@ export const stepsActions = [
     canvaBeakerState: 3,
     isEnableChooseMenu: false,
   },
-  // 17   Now, let's try choosing ...
-  { // 17
+  // 18   Now, let's try choosing ...
+  { // 18
     canvaTimeSliderC: [1, 0],
     canvaTimeSliderT: [1, 1],
     canvaTimeState: 3,
     canvaBarState: 2,
     canvaBeakerState: 3,
     activeDotIndex: 1,
-    saveDotIndex: 1,
     isEnableChooseMenu: true,
   },
-  // 18   Great! You picked a ... EF
-  { // 18
+  // 19   Great! You picked a reaction... EF
+  { // 19
     canvaTimeSliderC: [2, 0],
     canvaTimeSliderT: [2, 0],
     canvaTimeState: 0,
@@ -351,38 +356,41 @@ export const stepsActions = [
     activeDotIndex: 2,
     isEnableChooseMenu: false,
   },
-  // 19   Awesome! Now set the ...
-  { // 19
+  // 20   Awesome! Now set the ...
+  { // 20
     canvaTimeSliderC: [1, 2],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 1,
     canvaBarState: 0,
     canvaBeakerState: 1,
   },
-  // 20   Let's watch how all ...
-  { // 20
+  // 21   Let's watch how all ...
+  { // 21
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 2,
     canvaBarState: 1,
     canvaBeakerState: 2,
   },
-  // 21   Amazing! Let's take a ...
+  // 21   Amazing, let's take another ...
   { // 21
     canvaTimeSliderC: [1, 1],
     canvaTimeSliderT: [1, 0],
     canvaTimeState: 3,
     canvaBarState: 2,
     canvaBeakerState: 3,
-    saveDotIndex: 2,
   },
 ]
 
 export const tur_MathBlankArr = [
   [
     {
+      query: '#tur_math2>span mjx-mi',
+      nths: [0],
+    },
+    {
       query: '#tur_math2>span mjx-mn',
-      nths: [0, 2],
+      nths: [0],
     },
     {
       query: '#tur_math3_2 mjx-math mjx-mn',
@@ -410,11 +418,12 @@ export const tur_MathBlankArr = [
   [],
   [],
   [],
+  [],
 
   [
     {
       query: '#tur_math2>span mjx-mn',
-      nths: [2, 3],
+      nths: [0, 2],
     },
     {
       query: '#tur_math4_2 mjx-math mjx-mn',
@@ -434,7 +443,7 @@ export const tur_MathBlankArr = [
   [
     {
       query: '#tur_math2>span mjx-mn',
-      nths: [2, 3],
+      nths: [0, 2],
     },
     {
       query: '#tur_math4_2 mjx-math mjx-mn',
@@ -452,10 +461,10 @@ export const tur_MathBlankArr = [
 // old one
 export const tur_MathBlanks = [
   [
-    { left: 0, top: 94, width: 32 }, //0
-    { left: 148, top: 81, width: 48 }, //1
+    { left: -12, top: 94, width: 27 }, //0
+    { left: 38, top: 81, width: 33 }, //1
     { left: 0, top: 180, width: 42 }, //2
-    { left: 106, top: 180, width: 42 }, //3
+    { left: 84, top: 180, width: 33 }, //3
     { left: 0, top: 248, width: 36 }, //4
     { left: 57, top: 248, width: 41 }, //5
     { left: 105, top: 248, width: 32 }, //6
@@ -475,26 +484,12 @@ export const tur_MathBlanks = [
   [],
   [],
   [],
-
-  // 13
-  [
-    { left: 148, top: 81, width: 48 }, //1
-    { left: 110, top: 111, width: 48 }, //1-1
-    { left: 0, top: 248, width: 36 }, //4
-    { left: 105, top: 248, width: 32 }, //6
-  ],
-  [
-    { left: 0, top: 248, width: 36 }, //4
-    { left: 105, top: 248, width: 32 }, //6
-  ],
-  [],
-  [],
   [],
 
-  // 18
+  // 14
   [
-    { left: 148, top: 81, width: 48 }, //1
-    { left: 110, top: 111, width: 48 }, //1-1
+    { left: 38, top: 81, width: 33 }, //1
+    { left: 56, top: 112, width: 48 }, //1-1
     { left: 0, top: 248, width: 36 }, //4
     { left: 105, top: 248, width: 32 }, //6
   ],
@@ -502,6 +497,22 @@ export const tur_MathBlanks = [
     { left: 0, top: 248, width: 36 }, //4
     { left: 105, top: 248, width: 32 }, //6
   ],
+  [],
+  [],
+  [],
+
+  // 19
+  [
+    { left: 38, top: 81, width: 33 }, //1
+    { left: 56, top: 112, width: 48 }, //1-1
+    { left: 0, top: 248, width: 36 }, //4
+    { left: 105, top: 248, width: 32 }, //6
+  ],
+  [
+    { left: 0, top: 248, width: 36 }, //4
+    { left: 105, top: 248, width: 32 }, //6
+  ],
+  [],
   [],
   [],
   [],
@@ -509,20 +520,20 @@ export const tur_MathBlanks = [
 ]
 
 
-
 export const tur_MathText: any[] = [
   { // 0
-    blanks: [0, 2, 4, 5, 6, 7, 8, 9],
-    txtRed: [1, 3],
+    blanks: [0, 1, 4, 5, 6, 7, 8, 9],
+    txtRed: [0, 2, 3, 4, 5, 6, 7, 8, 9],
   },
   { // 1
     blanks: [7, 9],
-    txtRed: [0, 2, 3, 4, 5, 6, 7, 8, 9],
+    txtRed: [0, 1, 3, 4, 5, 7, 8, 9],
   },
   {},
   {},
   {},
   { // 5
+    txtRed: [7, 9],
   },
   { // 6
     txtRed: [7, 9],
@@ -547,15 +558,15 @@ export const tur_MathText: any[] = [
     txtRed: [7, 9],
   },
   { // 13
-    blanks: [2, 3, 7 ,9],
-    txtRed: [0, 1, 2, 3, 4, 6, 7, 8, 9],
+    txtRed: [7, 9],
   },
   { // 14
-    blanks: [7 ,9],
-    txtRed: [0, 2, 3, 4, 6, 7, 8, 9],
+    blanks: [1, 3, 7, 9],
+    txtRed: [0, 1, 2, 3, 4, 5, 7, 8, 9],
   },
   { // 15
-    txtRed: [7, 9],
+    blanks: [7, 9],
+    txtRed: [0, 1,  3, 4, 5, 7, 8, 9],
   },
   { // 16
     txtRed: [7, 9],
@@ -564,22 +575,23 @@ export const tur_MathText: any[] = [
     txtRed: [7, 9],
   },
   { // 18
-    blanks: [2, 3, 7 ,9],
-    txtRed: [0, 1, 2, 3, 4, 6, 7, 8, 9],
-  },
-  { // 19
-    blanks: [7 ,9],
-    txtRed: [0, 2, 3, 4, 6, 7, 8, 9],
-  },
-  { // 20
     txtRed: [7, 9],
   },
+  { // 19
+    blanks: [1, 3, 7, 9],
+    txtRed: [0, 1, 2, 3, 4, 5, 7, 8, 9],
+  },
+  { // 20
+    blanks: [7, 9],
+    txtRed: [0, 1,  3, 4, 5, 7, 8, 9],
+  },
   { // 21
+    txtRed: [7, 9],
+  },
+  { // 22
     txtRed: [7, 9],
   },
 ]
 
 
-
-
-export const maxStep_First = tur_Text.length // 22 steps
+export const maxStep_Second = tur_Text.length // 23 steps
