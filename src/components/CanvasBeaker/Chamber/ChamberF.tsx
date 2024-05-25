@@ -109,10 +109,13 @@ export const ChamberF = ({
     const baseSpeed = p.molecularSpeed * gasSpeedRef.current;
     let speedMultiplier = baseSpeed / p.speed;
 
-    Matter.Body.setVelocity(p, {
-      x: p.velocity.x * speedMultiplier,
-      y: p.velocity.y * speedMultiplier
-    });
+    try {
+      Matter.Body.setVelocity(p, {
+        x: p.velocity.x * speedMultiplier,
+        y: p.velocity.y * speedMultiplier
+      });
+    } catch (error) {
+    }
   };
 
 
@@ -437,42 +440,51 @@ export const ChamberF = ({
   }
   const addParticles = () => {
     // log_ChamberF && console.log('===addParticles===')
+    try {
 
-    particles.current = drawParticles(
-      activeGases,
-      gasCounts,
-    );
+      particles.current = drawParticles(
+        activeGases,
+        gasCounts,
+      );
 
-    if (!particles.current) return
-    particles.current.forEach(function (gasParticles) {
-      if (!engine.current) return
-      Matter.Composite.add(engine.current.world, gasParticles);
-    });
+      if (!particles.current) return
+      particles.current.forEach(function (gasParticles) {
+        if (!engine.current) return
+        Matter.Composite.add(engine.current.world, gasParticles);
+      });
+    } catch (error) {
+    }
   }
 
   const f_addParticle = (gasType: number, addCount: number) => {
-    // log_ChamberF && console.log('===f_addParticle===', { gasType, addCount })
-    const activeGas = activeGases[gasType]
-    const newGases: Matter.Body[] = []
-    for (let c = 0; c < addCount; c++) {
-      const newGas = makeParticle(activeGas, 21, true)
-      newGases.push(newGas)
+    try {
+      // log_ChamberF && console.log('===f_addParticle===', { gasType, addCount })
+      const activeGas = activeGases[gasType]
+      const newGases: Matter.Body[] = []
+      for (let c = 0; c < addCount; c++) {
+        const newGas = makeParticle(activeGas, 21, true)
+        newGases.push(newGas)
+      }
+      const gasParticles = particles.current[gasType]
+      particles.current[gasType] = [...gasParticles, ...newGases]
+      // log_ChamberF && console.log({ updatedParticles: particles.current[gasType] })
+      if (!engine.current) return
+      Matter.Composite.add(engine.current.world, newGases)
+    } catch (error) {
     }
-    const gasParticles = particles.current[gasType]
-    particles.current[gasType] = [...gasParticles, ...newGases]
-    // log_ChamberF && console.log({ updatedParticles: particles.current[gasType] })
-    if (!engine.current) return
-    Matter.Composite.add(engine.current.world, newGases)
   }
 
   const f_removeParticle = (gasType: number, removeCount: number) => {
-    // log_ChamberF && console.log({ gasType, removeCount })
-    // log_ChamberF && console.log('===f_removeParticle===', { gasType, removeCount })
-    if (!particles.current || !particles.current[gasType]) return
-    const removeParticle = particles.current[gasType].splice(-removeCount)
-    // log_ChamberF && console.log({ updatedParticles: particles.current[gasType] })
-    if (!engine.current) return
-    Matter.Composite.remove(engine.current.world, removeParticle)
+    try {
+      // log_ChamberF && console.log({ gasType, removeCount })
+      // log_ChamberF && console.log('===f_removeParticle===', { gasType, removeCount })
+      if (!particles.current || !particles.current[gasType]) return
+      const removeParticle = particles.current[gasType].splice(-removeCount)
+      // log_ChamberF && console.log({ updatedParticles: particles.current[gasType] })
+      if (!engine.current) return
+      Matter.Composite.remove(engine.current.world, removeParticle)
+    } catch (error) {
+    }
   }
 
   const drawWalls = () => {

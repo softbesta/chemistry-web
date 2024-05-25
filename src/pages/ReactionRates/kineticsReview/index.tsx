@@ -14,7 +14,7 @@ import WatchMenu from "../../../layout/WatchMenu"
 import { dotCatalystColors, dotColorList, sliderVertText } from "../../../constants"
 import ChapterMenu from "../../../layout/ChapterMenu"
 import ChartInA from "../../../components/ChartInA/ChartInA"
-import { convertExpToHtml } from "../../../helper/functions"
+import { convertExpToHtml, setStorage } from "../../../helper/functions"
 import { EnergyCatalystContainer, EnergyCatalystMoveableItem } from "../../../components/EnergyCatalyst"
 import { BeakerSettings, BeakerShape } from "../../../components/CanvasBeaker/BeakerShape"
 import BeakerWater from "../../../components/CanvasBeaker/BeakerShape/BeakerWater"
@@ -41,7 +41,7 @@ import MathExpKinetics from "./MathExp"
 
 const log_Kinetics = true
 
-const ReactionKinetics = () => {
+const ReactionKineticsReview = () => {
   const {
     curStep,
     valuesC,
@@ -147,7 +147,6 @@ const ReactionKinetics = () => {
     }
   }, [curStep, curActions])
 
-
   const handleClickChooseMenuItem = (index: number) => {
     setChooseMenuIndex(index)
   }
@@ -162,9 +161,8 @@ const ReactionKinetics = () => {
     const lnA = (Math.exp(tmp) * ln_below) ?? 0
     
 
-    console.log({t1, t2, vR, tmp, lnA, ln_below})
+    console.log({t1, t2, vR, tmp, lnA})
 
-    console.log({catShakingOrder, curCatShakingOrderIdx})
     return [
       (lnA ?? 0).toFixed(1),
       (ln_below ?? 0).toFixed(1),
@@ -215,12 +213,12 @@ const ReactionKinetics = () => {
     if (update < 0) {
       update = 0
       // log_Kinetics && console.log('getNextStep 0', { update })
-      updatePageFromMenu(getNextMenu(-1))
+      // updatePageFromMenu(getNextMenu(-1))
       return
     }
     else if (update >= maxStep_Kinetics) {
       update = maxStep_Kinetics - 1
-      updatePageFromMenu(getNextMenu(1))
+      // updatePageFromMenu(getNextMenu(1))
       return
     }
 
@@ -343,8 +341,8 @@ const ReactionKinetics = () => {
   const [showCatalystMoveItem, setShowCatalystMoveItem] = useState<boolean>(false)
   const maxShakingCount = 7
 
-  const val_Ea = [9, 8, 6][chooseMenuIndex]
-  const ln_below = [1.8, 1.8, 2.1, 3.7][curCatShakingOrderIdx]
+  const val_Ea = [9, 8, 6][catShakingOrder[curCatShakingOrderIdx - 1]]
+  const ln_below = [1.8, 2.1, 3.7][catShakingOrder[curCatShakingOrderIdx - 1]]
 
   const onCatalystItemShake = (shakingCount: number, itemIndex: number) => {
     // log_Kinetics && console.log('===onCatalystItemShake===', { shakingCount, itemIndex, curCatShakingOrderIdx, catShakingOrder })
@@ -358,16 +356,6 @@ const ReactionKinetics = () => {
     setGasCounts(update)
     // console.log({ update })
     if (shakingCount >= maxShakingCount) {
-      // // if (!shakedOrder.includes(itemIndex)) {
-      // const restOrders = catShakingOrder.filter(s => s !== itemIndex)
-      // const update = [
-      //   ...restOrders.slice(0, curCatShakingOrderIdx),
-      //   itemIndex,
-      //   ...restOrders.slice(curCatShakingOrderIdx),
-      // ]
-      // log_Kinetics && console.log({ update })
-      // setCatShakingOrder(update)
-      // // }
       onStepChange(1)
     }
   }
@@ -396,12 +384,12 @@ const ReactionKinetics = () => {
   // ! important to use 'useMemo' to avoid re-renderting and show animation.
   const curCatalystItemState = useMemo(() => {
     return catalystItemStates.map((state, index) => {
-      // hide menu item for shaking.
-      if (showCatalystMoveItem && index === catShakingOrder[curCatShakingOrderIdx]) {
-        return 1
-      }
-      // hide menu item which is completed shaking.
-      if (catShakingOrder.slice(0, curCatShakingOrderIdx).includes(index)) return 0
+      // // hide menu item for shaking.
+      // if (showCatalystMoveItem && index === catShakingOrder[curCatShakingOrderIdx]) {
+      //   return 1
+      // }
+      // // hide menu item which is completed shaking.
+      // if (catShakingOrder.slice(0, curCatShakingOrderIdx).includes(index)) return 0
       return state
     })
   }, [catalystItemStates])
@@ -499,20 +487,7 @@ const ReactionKinetics = () => {
             setValueFire(val)
           }}
         />
-
-        {/* <EnergyProfile
-          valuesC={valuesC}
-          valuesT={valuesT}
-          beakerDotColor={dotColorList[activeDotIndex]}
-          beakerState={canvaBeakerState}
-          onEndPlay={() => onStepChange(1)}
-        /> */}
       </div>
-      {/* <div style={{ position: 'relative', top: 80 }}>
-        <button onClick={handleGasIncrease}>GasDecrease</button>
-        <button onClick={handleGasDecrease}>GasDecrease</button>
-        <button onClick={handleTest}>Test</button>
-      </div> */}
     </div>
     <div className={styles.reactionContentContainer}>
       <div className={styles.reactionChartRow}>
@@ -533,45 +508,6 @@ const ReactionKinetics = () => {
             <span className={styles.txtT}> 1/T </span>
             {rateChartState !== 0 && <span className={styles.txtSlope}> Slope=-Ea/R </span>}
           </div>
-          {/* <ConcentrationPlotView
-            {...graphChartSize}
-            settings={
-              new ReactionRateChartLayoutSettings(
-                graphChartSize.width,
-                ReactionSettings.Axis.minC,
-                ReactionSettings.Axis.maxC,
-                ReactionSettings.Axis.minT,
-                ReactionSettings.Axis.maxT,
-                true,
-                {} as TimeChartLayoutSettings
-              )
-            }
-            concentrationA={concentrationA}
-            concentrationB={concentrationB}
-            initialTime={5}
-            finalTime={10}
-            canSetCurrentTime={true}
-            highlightChart={false}
-            highlightLhsCurve={true}
-            highlightRhsCurve={false}
-            display={
-              {
-                reactant: {
-                  name: ReactionType.reactantName.A,
-                  color: ReactionType.reactantColor.A,
-                },
-                product: {
-                  name: ReactionType.productName.A,
-                  color: ReactionType.productColor.A,
-                }
-              }
-            }
-            includeAxis={true}
-            timingState={chartTimingState}
-            onEndPlay={() => {
-              log_Kinetics && console.log('&&& timer ended &&& ')
-            }}
-          /> */}
         </div>
         <div className={styles.chartInA}>
           <EnergyProfileChart
@@ -603,57 +539,10 @@ const ReactionKinetics = () => {
         />
       </div>
     </div>
-    {/* <div
-      style={{
-        position: 'absolute',
-        width: 300,
-        height: 300,
-        backgroundColor: 'rgb(0, 0, 0, 0.5)',
-        overflow: 'hidden',
-      }}
-    >
-      <div
-        style={{
-          position: 'absolute',
-          top: 10,
-          left: 10,
-          width: 50,
-          height: 50,
-          backgroundColor: 'transparent',
-          border: '2px solid black',
-          clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 0% 0%)',
-        }}
-      />
-      <div className="content">
-        <p>This is the underlying content.</p>
-      </div>
-      <div
-        style={{
-          backgroundColor: 'white'
-        }}
-      >
-        dsfkljdasfkljdaskfjklsdfjdklsfjklsdfj
-      </div>
-    </div> */}
-    {/* <div
-      style={{
-        position: 'relative',
-      }}
-    >
-      
-      <Mask
-        highlightedAreaClassName={'kinetics_reactionDrawContainer__R8mSu'}
-        sizes={{
-          width: 150,
-          height: 50,
-          left: 100,
-          top: 100,
-        } as RectResult}
-        // wrapperPadding={0}
-        padding={0}
-      />
-    </div> */}
+    <button onClick={() => {
+      console.log({ val_Ea, chooseMenuIndex, catShakingOrder, curCatShakingOrderIdx })
+    }}>TEST</button>
     {isHighlight && <div className='overlay'></div>}
   </div>
 }
-export default ReactionKinetics
+export default ReactionKineticsReview

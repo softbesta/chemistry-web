@@ -334,7 +334,6 @@ export const stepsActions = [
     isDisableNextButton: false,
     initGasCounts: true,
     valueFire: 425,
-    isDisableNext: false,
     // activeDotIndex: 0,
   },
   // 1   We now know that the concentration ...
