@@ -99,9 +99,14 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
           setX(event.offsetX)
         });
       } else {
+        const ratio = Math.min(window.innerWidth / 1150, window.innerHeight / 650)
         ctx.canvas.addEventListener('touchstart', function (event: any) {
-          setX(event.offsetX)
-          startDrag(true)
+          if (event.touches.length) {
+            const rect = event.target.getBoundingClientRect()
+            const currX = event.touches[0].clientX - rect.left
+            setX(currX / ratio)
+            startDrag(true)
+          }
         });
   
         ctx.canvas.addEventListener('touchend', function (event: any) {
@@ -109,7 +114,11 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
         });
   
         ctx.canvas.addEventListener('touchmove', function (event: any) {
-          setX(event.offsetX)
+          if (event.touches.length) {
+            const rect = event.target.getBoundingClientRect()
+            const currX = event.touches[0].clientX - rect.left
+            setX(currX / ratio)
+          }
         });
       }
     }
