@@ -90,12 +90,11 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
       });
 
       ctx.canvas.addEventListener('mouseup', function (event: any) {
-        setX(event.offsetX)
         startDrag(false)
       });
 
       ctx.canvas.addEventListener('mousemove', function (event: any) {
-        isDrag && setX(event.offsetX)
+        setX(event.offsetX)
       });
     }
   }, [])
