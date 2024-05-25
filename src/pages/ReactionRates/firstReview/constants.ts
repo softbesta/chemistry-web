@@ -5,17 +5,17 @@ export const tur_Text: TurTextType = [
   // display.product.name;  B
   [ // 7
     `This is the first order reaction you created earlier.`,
-    `<span>Try dragging the time indicator to scrub through the reaction time.</span>`,
+    `<span>Try changing the time indicator to scrub through the reaction time.</span>`,
     `Swipe left or press next to see another reaction type.`,
   ],
   [ // 8
     (val: string[]) => `This is the first order reaction you created earlier, which has a fixed rate constant of ${val[0]}.`,
-    `<span>Try dragging the time indicator to scrub through the reaction time.</span>`,
+    `<span>Try changing the time indicator to scrub through the reaction time.</span>`,
     `Swipe left or press next to see another reaction type.`,
   ],
   [ // 9
     (val: string[]) => `This is the first order reaction you created earlier, which has a fixed rate constant of ${val[0]}.`,
-    `<span>Try dragging the time indicator to scrub through the reaction time.</span>`,
+    `<span>Try changing the time indicator to scrub through the reaction time.</span>`,
   ],
   // open Quiz
 ]
