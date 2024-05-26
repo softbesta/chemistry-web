@@ -539,9 +539,6 @@ const ReactionKineticsReview = () => {
         />
       </div>
     </div>
-    <button onClick={() => {
-      console.log({ val_Ea, chooseMenuIndex, catShakingOrder, curCatShakingOrderIdx })
-    }}>TEST</button>
     {isHighlight && <div className='overlay'></div>}
   </div>
 }
