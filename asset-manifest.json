@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/chemistry-web/static/css/main.473acb8c.css",
-    "main.js": "/chemistry-web/static/js/main.1c8aebe9.js",
+    "main.js": "/chemistry-web/static/js/main.92bea123.js",
     "static/js/453.93cadc8d.chunk.js": "/chemistry-web/static/js/453.93cadc8d.chunk.js",
     "static/media/pentagon-pink.png": "/chemistry-web/static/media/pentagon-pink.74ad90021fd36cb345e8.png",
     "static/media/pentagon-yellow.png": "/chemistry-web/static/media/pentagon-yellow.f46b5e86625dbb938775.png",
@@ -15,11 +15,11 @@
     "static/media/burnerPan.png": "/chemistry-web/static/media/burnerPan.277c568406d1c3e80c6e.png",
     "index.html": "/chemistry-web/index.html",
     "main.473acb8c.css.map": "/chemistry-web/static/css/main.473acb8c.css.map",
-    "main.1c8aebe9.js.map": "/chemistry-web/static/js/main.1c8aebe9.js.map",
+    "main.92bea123.js.map": "/chemistry-web/static/js/main.92bea123.js.map",
     "453.93cadc8d.chunk.js.map": "/chemistry-web/static/js/453.93cadc8d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.473acb8c.css",
-    "static/js/main.1c8aebe9.js"
+    "static/js/main.92bea123.js"
   ]
 }
