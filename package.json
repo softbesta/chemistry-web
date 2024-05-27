@@ -1,5 +1,6 @@
 {
   "name": "leaarningchemistry",
+  "homepage": "https://softbesta.github.io/chemistry-web/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
