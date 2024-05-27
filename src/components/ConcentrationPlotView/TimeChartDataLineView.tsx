@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Equation } from './Equation';
 import { LinearAxis } from './LinearAxis';
 import useAppData from '../../hooks/useAppData';
@@ -73,6 +73,7 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
     hoverOrder, 
     isOver, 
     dragOrder, 
+    dragConcentration,
     setDragConcentration,
     setDragTime,
   } = useAppData()
@@ -138,7 +139,13 @@ const TimeChartDataLineView = (props: TimeChartDataLineViewProps) => {
       const y = data.equation.getValue(cTime)
       setDragConcentration(y * 100)
     }
-  }, [isDrag, setCurrentTime, canSetCurrentTime, x, initialTime, finalTime])
+  }, [isDrag, dragConcentration, setCurrentTime, canSetCurrentTime, x, initialTime, finalTime])
+
+  useEffect(() => {
+    setDragTime(currentTime)
+    const y = data.equation.getValue(currentTime)
+    setDragConcentration(y * 100)
+  }, [currentTime])
 
   React.useEffect(() => {
     const ctx = canvas?.current?.getContext('2d');
